@@ -1,0 +1,1 @@
+/Users/pranavsonawane/Desktop/SOBER ANIMAL/my-custom-theme/gold-berg/AGENTS.md
