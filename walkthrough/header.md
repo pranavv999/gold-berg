@@ -32,10 +32,16 @@ The merchant can customize the following settings directly inside the Shopify Th
 
 ## Mobile Behavior
 
+* **Layout Elements**:
+  * **Left Column**: Contains the hamburger menu button and the search icon (positioned adjacent to each other for symmetry).
+  * **Center Column**: Contains the centered logo.
+  * **Right Column**: Contains the profile icon and the cart icon.
+  * **Button Styles**:
+    * **Hamburger Menu Button**: Plain outlines (no round bubble background, border, or spacing).
+    * **Cart Button**: Plain shopping bag symbol (no pill background, border, or "Cart (x)" text).
 * **Unscrolled State (At the Top)**:
   * The header spans full width (touching top, left, right edges) to maximize screen area.
-  * The height is slightly slimmer (`64px`) with a horizontal padding of `16px`.
+  * The height is fixed at `64px` with a horizontal padding of `16px`.
 * **Scrolled State**:
   * Upon scrolling past `10px`, the margins transition smoothly: `10px` from the top, and `12px` from the left and right.
   * The header height scales down to `56px` with custom rounded corners based on the **Scrolled Border Radius** settings.
-  * Cart pill text scales down to maintain space efficiency.
