@@ -1,5 +1,46 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
+{%- style -%}
+  .banner-custom-btn {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid currentColor !important;
+    border-radius: 0 !important;
+    padding: 0 0 4px 0 !important;
+    margin: 0 !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    box-shadow: none !important;
+    color: currentColor !important;
+    line-height: 1.2 !important;
+    height: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    font-family: var(--font-heading-family) !important;
+    font-weight: var(--font-heading-weight) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease !important;
+  }
+  
+  .banner-custom-btn:hover {
+    opacity: 0.8 !important;
+    transform: translateY(-2px) !important;
+  }
+  
+  .banner-custom-btn:active {
+    transform: translateY(0) !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .banner__content.banner__content--bottom-center {
+      align-items: flex-end !important;
+      justify-content: center !important;
+      padding: 3rem 2rem !important;
+    }
+  }
+{%- endstyle -%}
+
 {%- if section.settings.image_height == 'adapt' and section.settings.image != blank -%}
   {%- style -%}
     @media screen and (max-width: 749px) {
@@ -117,6 +158,13 @@
   {%- endif -%}
   <div class="banner__content banner__content--{{ section.settings.desktop_content_position }} page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     <div class="banner__box content-container content-container--full-width-mobile color-{{ section.settings.color_scheme }} gradient">
+      {%- assign heading_size = 'h1' -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'heading' -%}
+          {%- assign heading_size = block.settings.heading_size -%}
+        {%- endif -%}
+      {%- endfor -%}
+
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'heading' -%}
@@ -142,7 +190,8 @@
                   {% else %}
                     href="{{ block.settings.button_link_1 }}"
                   {% endif %}
-                  class="button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"
+                  class="banner-custom-btn"
+                  style="font-size: {{ block.settings.button_font_size | default: 15 }}px !important;"
                 >
                   {{- block.settings.button_label_1 | escape -}}
                 </a>
@@ -154,7 +203,8 @@
                   {% else %}
                     href="{{ block.settings.button_link_2 }}"
                   {% endif %}
-                  class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
+                  class="banner-custom-btn"
+                  style="font-size: {{ block.settings.button_font_size | default: 15 }}px !important;"
                 >
                   {{- block.settings.button_label_2 | escape -}}
                 </a>
@@ -292,7 +342,7 @@
           "label": "t:sections.image-banner.settings.desktop_content_position.options__9.label"
         }
       ],
-      "default": "middle-center",
+      "default": "bottom-center",
       "label": "t:sections.image-banner.settings.desktop_content_position.label"
     },
     {
@@ -401,7 +451,7 @@
               "label": "t:sections.all.heading_size.options__5.label"
             }
           ],
-          "default": "h1",
+          "default": "h2",
           "label": "t:sections.all.heading_size.label"
         }
       ]
@@ -483,10 +533,14 @@
           "label": "t:sections.image-banner.blocks.buttons.settings.button_link_2.label"
         },
         {
-          "type": "checkbox",
-          "id": "button_style_secondary_2",
-          "default": false,
-          "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
+          "type": "range",
+          "id": "button_font_size",
+          "min": 12,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 15,
+          "label": "Button font size"
         }
       ]
     }
