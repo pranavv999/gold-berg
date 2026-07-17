@@ -1,0 +1,523 @@
+{%- style -%}
+  .custom-collection-outer {
+    background: #f5f5f7;
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .custom-collection-container {
+    background: #ffffff;
+    border-radius: var(--container-radius, 24px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.02);
+    width: 100%;
+    max-width: 1200px;
+    padding: 4rem;
+    box-sizing: border-box;
+  }
+  
+  /* HEADER */
+  .custom-collection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3.5rem;
+  }
+  
+  .custom-collection-name {
+    font-family: var(--font-heading-family);
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  
+  .custom-collection-more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.8rem 2.2rem;
+    border-radius: 30px;
+    transition: opacity 0.3s ease;
+  }
+  
+  .custom-collection-more-btn:hover {
+    opacity: 0.8;
+  }
+  
+  /* GRID / ROW */
+  .custom-collection-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+  }
+  
+  /* PRODUCT CARD */
+  .custom-product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+  }
+  
+  /* IMAGE SLIDER */
+  .card-image-slider-wrapper {
+    position: relative;
+    background: #f2f2f4;
+    border-radius: 18px;
+    aspect-ratio: 0.85;
+    overflow: hidden;
+    width: 100%;
+  }
+  
+  .card-image-slider-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  
+  .card-slider-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .card-slider-slide img, .card-slider-slide svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+  
+  /* Hover Arrows */
+  .card-slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    color: #1d1d1f;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s, background-color 0.2s;
+  }
+  
+  .card-slider-arrow:hover {
+    background: #ffffff;
+    transform: translateY(-50%) scale(1.05);
+  }
+  
+  .card-image-slider-wrapper:hover .card-slider-arrow {
+    opacity: 1;
+  }
+  
+  .card-slider-arrow--prev {
+    left: 12px;
+  }
+  
+  .card-slider-arrow--next {
+    right: 12px;
+  }
+  
+  /* Slider Indicators */
+  .card-slider-dots {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.6rem;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+  }
+  
+  .slider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #d1d1d6;
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  .slider-dot.active {
+    background: #8e8e93;
+    transform: scale(1.2);
+  }
+  
+  /* Sold Out Badge */
+  .card-badge-soldout {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    color: #6e6e73;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    z-index: 8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Product Metadata */
+  .custom-product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 0.5rem;
+  }
+  
+  .custom-product-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+    margin-right: 1rem;
+  }
+  
+  .custom-product-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin: 0;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .custom-product-price-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  
+  .custom-product-price {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #6e6e73;
+  }
+  
+  .custom-product-compare {
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-decoration: line-through;
+    color: #aeaeaf;
+  }
+  
+  /* Plus Button */
+  .custom-product-add {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #8e8e93;
+    padding: 0.5rem;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  
+  .custom-product-add:hover {
+    color: #1d1d1f;
+    transform: scale(1.1);
+  }
+  
+  /* RESPONSIVE BREAKPOINTS */
+  @media screen and (max-width: 989px) {
+    .custom-collection-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+  
+  @media screen and (max-width: 749px) {
+    .custom-collection-container {
+      padding: 2.5rem;
+    }
+    .custom-collection-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .custom-collection-header {
+      margin-bottom: 2.5rem;
+    }
+    .custom-collection-name {
+      font-size: 1.8rem;
+    }
+    .custom-collection-more-btn {
+      font-size: 1.1rem;
+      padding: 0.6rem 1.6rem;
+    }
+  }
+{%- endstyle -%}
+
+{%- assign featured_collection = section.settings.collection -%}
+{%- assign collection_title = section.settings.title | default: featured_collection.title | default: "iPhone Case" -%}
+{%- assign collection_url = featured_collection.url | default: "#" -%}
+
+<div class="custom-collection-outer">
+  <div class="custom-collection-container" style="--container-radius: {{ section.settings.container_radius }}px">
+    
+    <div class="custom-collection-header">
+      <h3 class="custom-collection-name">{{ collection_title }}</h3>
+      <a href="{{ collection_url }}" class="custom-collection-more-btn">Discover more</a>
+    </div>
+    
+    <div class="custom-collection-grid">
+      {%- if featured_collection != blank and featured_collection.all_products_count > 0 -%}
+        <!-- REAL PRODUCTS -->
+        {%- for product in featured_collection.products limit: 4 -%}
+          <div class="custom-product-card">
+            <div class="card-image-slider-wrapper">
+              {%- if product.available == false -%}
+                <span class="card-badge-soldout">Sold Out</span>
+              {%- endif -%}
+              
+              <div class="card-image-slider-track">
+                {%- if product.images.size > 0 -%}
+                  {%- for image in product.images -%}
+                    <div class="card-slider-slide">
+                      {{ image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
+                    </div>
+                  {%- endfor -%}
+                {%- else -%}
+                  <div class="card-slider-slide">
+                    {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
+                  </div>
+                {%- endif -%}
+              </div>
+              
+              {%- if product.images.size > 1 -%}
+                <button class="card-slider-arrow card-slider-arrow--prev" aria-label="Previous image">
+                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                  </svg>
+                </button>
+                <button class="card-slider-arrow card-slider-arrow--next" aria-label="Next image">
+                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </button>
+                
+                <div class="card-slider-dots">
+                  {%- for image in product.images -%}
+                    <span class="slider-dot{% if forloop.first %} active{% endif %}"></span>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </div>
+            
+            <div class="custom-product-footer">
+              <div class="custom-product-meta">
+                <h4 class="custom-product-title">{{ product.title }}</h4>
+                <div class="custom-product-price-row">
+                  <span class="custom-product-price">From {{ product.price | money }}</span>
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="custom-product-compare">{{ product.compare_at_price | money }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+              <button class="custom-product-add" aria-label="Add to cart">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        {%- endfor -%}
+        
+      {%- else -%}
+        <!-- MOCK PRODUCTS -->
+        {%- for i in (1..4) -%}
+          {%- assign product_title = "Product Title" -%}
+          {%- assign is_sold_out = false -%}
+          {%- assign current_price = "Rs. 3,500" -%}
+          {%- assign compare_price = "Rs. 4,500" -%}
+          
+          {%- if i == 1 -%}
+            {%- assign product_title = "Bg Bluornd Case" -%}
+          {%- elsif i == 2 -%}
+            {%- assign product_title = "Blu Favourite Child Case" -%}
+            {%- assign compare_price = nil -%}
+          {%- elsif i == 3 -%}
+            {%- assign product_title = "Red Birds Of Paradise Case" -%}
+            {%- assign is_sold_out = true -%}
+          {%- elsif i == 4 -%}
+            {%- assign product_title = "Maximum Spend Case" -%}
+            {%- assign compare_price = nil -%}
+          {%- endif -%}
+          
+          <div class="custom-product-card">
+            <div class="card-image-slider-wrapper">
+              {%- if is_sold_out -%}
+                <span class="card-badge-soldout">Sold Out</span>
+              {%- endif -%}
+              
+              <div class="card-image-slider-track">
+                <div class="card-slider-slide">
+                  {{ 'product-' | append: i | placeholder_svg_tag }}
+                </div>
+                <!-- Add a dummy second slide for mockup slider visuals -->
+                <div class="card-slider-slide">
+                  {{ 'product-' | append: 5 | placeholder_svg_tag }}
+                </div>
+              </div>
+              
+              <!-- Dummy Slider Navigation -->
+              <button class="card-slider-arrow card-slider-arrow--prev" aria-label="Previous image">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button class="card-slider-arrow card-slider-arrow--next" aria-label="Next image">
+                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+              
+              <div class="card-slider-dots">
+                <span class="slider-dot active"></span>
+                <span class="slider-dot"></span>
+              </div>
+            </div>
+            
+            <div class="custom-product-footer">
+              <div class="custom-product-meta">
+                <h4 class="custom-product-title">{{ product_title }}</h4>
+                <div class="custom-product-price-row">
+                  <span class="custom-product-price">From {{ current_price }}</span>
+                  {%- if compare_price != nil -%}
+                    <span class="custom-product-compare">{{ compare_price }}</span>
+                  {%- endif -%}
+                </div>
+              </div>
+              <button class="custom-product-add" aria-label="Add to cart">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+    
+  </div>
+</div>
+
+{%- javascript -%}
+  function initCollectionCardSliders() {
+    document.querySelectorAll('.card-image-slider-wrapper:not(.slider-initialized)').forEach(wrapper => {
+      wrapper.classList.add('slider-initialized');
+      const track = wrapper.querySelector('.card-image-slider-track');
+      const prev = wrapper.querySelector('.card-slider-arrow--prev');
+      const next = wrapper.querySelector('.card-slider-arrow--next');
+      const dots = wrapper.querySelectorAll('.slider-dot');
+      const slides = track.querySelectorAll('.card-slider-slide');
+      const total = slides.length;
+      let index = 0;
+      
+      if (!prev || !next || total <= 1) return;
+      
+      function updateSlider() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((dot, idx) => {
+          if (idx === index) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+      
+      prev.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        index = (index - 1 + total) % total;
+        updateSlider();
+      });
+      
+      next.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        index = (index + 1) % total;
+        updateSlider();
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initCollectionCardSliders);
+  document.addEventListener('shopify:section:load', initCollectionCardSliders);
+{%- endjavascript -%}
+
+{% schema %}
+{
+  "name": "Custom Collection Row",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Custom Collection Name Override",
+      "info": "Leave blank to use Selected Collection's actual title"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "container_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 24,
+      "label": "Container corner radius"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Collection Row"
+    }
+  ]
+}
+{% endschema %}
