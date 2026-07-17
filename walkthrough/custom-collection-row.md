@@ -20,6 +20,7 @@ The merchant can customize the following settings directly inside the Shopify Th
 
 ### Container
 * **White Panel**: Renders as a white panel block overlaying the background, wrapping the product row.
+* **Margins**: Stretches horizontally to keep a constant horizontal margin of exactly **24px** from the browser edges on all screens, preventing wasted space.
 * **Rounded Corners**: Controllable from the Customizer via range slider setting `--container-radius`.
 
 ### Header Area
@@ -28,6 +29,7 @@ The merchant can customize the following settings directly inside the Shopify Th
 
 ### Product Card Layout (Desktop View)
 * Displays a row of **4 equal-sized product cards**.
+* **Tall Aspect Ratio**: Built with a 3:4 aspect ratio (`0.75` height proportion) to ensure product cards look elegant and tall as the container expands.
 * **Hover Image Slider**:
   * Hovering over any card reveals navigation arrows (Left/Right) on the side edges of the image box.
   * Clicking these arrows slides through the product's available images.
