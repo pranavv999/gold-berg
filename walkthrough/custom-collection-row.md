@@ -32,11 +32,13 @@ The merchant can customize the following settings directly inside the Shopify Th
 * **Tall Aspect Ratio**: Built with a 3:4 aspect ratio (`0.75` height proportion) to ensure product cards look elegant and tall as the container expands.
 * **Hover Image Slider**:
   * Hovering over any card reveals navigation arrows (Left/Right) on the side edges of the image box.
+  * Nav arrows feature a premium glassmorphic background (`rgba(255, 255, 255, 0.1)` with `blur(4px)` backdrop-filter) and white icons.
   * Clicking these arrows slides through the product's available images.
 * **Pagination Dots**:
   * Tiny indicators at the bottom-center of the image box display active states.
+  * The indicator background is styled with a matching glassmorphic design (`rgba(255, 255, 255, 0.1)` with `blur(4px)` backdrop-filter).
   * The active slide dot is styled as a filled gray dot.
 * **Card Details**:
   * Product Name: Left-aligned beneath the image.
   * Pricing: Left-aligned under the name, displaying "From $[Price]" and a struck-through comparison price if it is on sale.
-  * Add Button: Clean quick-add `+` icon positioned at the bottom-right.
+
