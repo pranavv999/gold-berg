@@ -44,3 +44,9 @@ The merchant can customize the following settings directly inside the Shopify Th
   * Product Name: Left-aligned beneath the image.
   * Pricing: Left-aligned under the name, displaying "From $[Price]" and a struck-through comparison price if it is on sale.
 
+### Mobile Typography & Scaling
+On mobile screen widths (`max-width: 749px`), sizes scale down:
+* **Collection Title**: Reduced to **10px** (`font-size: 10px !important`).
+* **Discover More Button**: Reduced to **8px** with a compact padding of `2px 10px`.
+* **Product Name**: Reduced to **10px** (`font-size: 10px !important`).
+* **Product Prices**: Both actual and comparison prices are reduced to **8px** (`font-size: 8px !important`).
