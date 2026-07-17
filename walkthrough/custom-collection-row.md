@@ -20,7 +20,9 @@ The merchant can customize the following settings directly inside the Shopify Th
 
 ### Container
 * **White Panel**: Renders as a white panel block overlaying the background, wrapping the product row.
-* **Margins**: Stretches horizontally to keep a constant horizontal margin of exactly **24px** from the browser edges on all screens, preventing wasted space.
+* **Margins**: Stretches horizontally to keep a constant margin from the browser edges:
+  * **Desktop**: Spaced exactly **24px** from the left and right browser edges.
+  * **Mobile**: Spaced exactly **12px** from the left and right browser edges to maximize display size on small screens.
 * **Rounded Corners**: Controllable from the Customizer via range slider setting `--container-radius`.
 
 ### Header Area
