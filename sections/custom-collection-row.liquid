@@ -302,37 +302,50 @@
 {%- assign collection_title = section.settings.title | default: featured_collection.title | default: "iPhone Case" -%}
 {%- assign collection_url = featured_collection.url | default: "#" -%}
 
+{%- assign products_to_render = nil -%}
+{%- if section.settings.product_source == 'related_products' and product != nil -%}
+  {%- assign products_to_render = product.metafields.shopify--discovery--product_recommendation.related_products.value -%}
+{%- endif -%}
+
+{%- if products_to_render == blank -%}
+  {%- assign products_to_render = featured_collection.products -%}
+{%- endif -%}
+
 <div class="custom-collection-outer">
   <div class="custom-collection-container" style="--container-radius: {{ section.settings.container_radius }}px">
     
     <div class="custom-collection-header">
       <h3 class="custom-collection-name">{{ collection_title }}</h3>
-      <a href="{{ collection_url }}" class="custom-collection-more-btn">Discover more</a>
+      {%- unless section.settings.hide_discover_more -%}
+        <a href="{{ collection_url }}" class="custom-collection-more-btn">Discover more</a>
+      {%- endunless -%}
     </div>
     
     <div class="custom-collection-grid">
-      {%- if featured_collection != blank and featured_collection.all_products_count > 0 -%}
+      {%- if products_to_render != blank and products_to_render.size > 0 -%}
         <!-- REAL PRODUCTS -->
-        {%- for product in featured_collection.products limit: 4 -%}
+        {%- for product in products_to_render limit: 4 -%}
           <div class="custom-product-card">
             <div class="card-image-slider-wrapper">
               {%- if product.available == false -%}
                 <span class="card-badge-soldout">Sold Out</span>
               {%- endif -%}
               
-              <div class="card-image-slider-track">
-                {%- if product.images.size > 0 -%}
-                  {%- for image in product.images -%}
+              <a href="{{ product.url }}" style="display: block; width: 100%; height: 100%; text-decoration: none; color: inherit;">
+                <div class="card-image-slider-track">
+                  {%- if product.images.size > 0 -%}
+                    {%- for image in product.images -%}
+                      <div class="card-slider-slide">
+                        {{ image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
+                      </div>
+                    {%- endfor -%}
+                  {%- else -%}
                     <div class="card-slider-slide">
-                      {{ image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
+                      {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
                     </div>
-                  {%- endfor -%}
-                {%- else -%}
-                  <div class="card-slider-slide">
-                    {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
-                  </div>
-                {%- endif -%}
-              </div>
+                  {%- endif -%}
+                </div>
+              </a>
               
               {%- if product.images.size > 1 -%}
                 <button class="card-slider-arrow card-slider-arrow--prev" aria-label="Previous image">
@@ -355,15 +368,17 @@
             </div>
             
             <div class="custom-product-footer">
-              <div class="custom-product-meta">
-                <h4 class="custom-product-title">{{ product.title }}</h4>
-                <div class="custom-product-price-row">
-                  <span class="custom-product-price">From {{ product.price | money }}</span>
-                  {%- if product.compare_at_price > product.price -%}
-                    <span class="custom-product-compare">{{ product.compare_at_price | money }}</span>
-                  {%- endif -%}
+              <a href="{{ product.url }}" style="display: block; width: 100%; text-decoration: none; color: inherit;">
+                <div class="custom-product-meta">
+                  <h4 class="custom-product-title">{{ product.title }}</h4>
+                  <div class="custom-product-price-row">
+                    <span class="custom-product-price">From {{ product.price | money }}</span>
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="custom-product-compare">{{ product.compare_at_price | money }}</span>
+                    {%- endif -%}
+                  </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         {%- endfor -%}
@@ -506,6 +521,28 @@
       "type": "collection",
       "id": "collection",
       "label": "Collection"
+    },
+    {
+      "type": "select",
+      "id": "product_source",
+      "label": "Product Source",
+      "default": "collection",
+      "options": [
+        {
+          "value": "collection",
+          "label": "Selected Collection"
+        },
+        {
+          "value": "related_products",
+          "label": "Dynamic Related Products (Metafield)"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_discover_more",
+      "label": "Hide \"Discover more\" button",
+      "default": false
     },
     {
       "type": "range",

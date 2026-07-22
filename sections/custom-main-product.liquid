@@ -1,0 +1,659 @@
+{%- style -%}
+  .custom-product-outer {
+    background: #f5f5f7;
+    padding: 120px 24px 40px 24px !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .custom-product-container {
+    display: grid;
+    grid-template-columns: 65fr 35fr;
+    gap: 40px;
+    width: 100%;
+    margin: 0 auto;
+    align-items: start;
+    position: relative;
+  }
+
+  /* MEDIA SECTION (LEFT SIDE) */
+  .custom-product-media-column {
+    position: sticky;
+    top: 100px;
+    width: 100%;
+    aspect-ratio: var(--product-image-aspect, 1);
+    height: auto !important;
+    max-height: calc(100vh - 140px);
+    overflow: hidden;
+    display: flex;
+    gap: 8px;
+    border-radius: 24px;
+    align-self: start !important;
+  }
+
+  .media-track-left,
+  .media-track-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 150%;
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+  }
+
+  .media-slide {
+    width: 100%;
+    height: 33.333%;
+    flex-shrink: 0;
+    border-radius: 18px;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .media-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* PURCHASING CONTROLS (RIGHT SIDE) */
+  .custom-product-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .product-info-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    box-sizing: border-box;
+  }
+
+  .product-info-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+
+  .product-info-title {
+    font-family: var(--font-heading-family);
+    font-size: 20px;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .product-save-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #8e8e93;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+  }
+
+  .product-save-btn:hover {
+    color: #1d1d1f;
+  }
+
+  .product-info-price {
+    font-size: 16px;
+    font-weight: 500;
+    color: #6e6e73;
+    margin-bottom: 24px;
+  }
+
+  .variant-selector-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .variant-selector-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1d1d1f;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .size-guide-btn {
+    font-size: 11px;
+    font-weight: 500;
+    color: #6e6e73;
+    background: #f2f2f4;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .size-guide-btn:hover {
+    background: #e5e5e7;
+    color: #1d1d1f;
+  }
+
+  .variants-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .variant-pill {
+    background: #ffffff;
+    border: 1px solid #d1d1d6;
+    color: #1d1d1f;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 10px 0;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+
+  .variant-pill:hover {
+    border-color: #1d1d1f;
+  }
+
+  .variant-pill.selected {
+    background: #1d1d1f;
+    border-color: #1d1d1f;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .cta-buttons-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .cta-btn {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 16px 0;
+    border-radius: 30px;
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .cta-btn--outline {
+    background: #ffffff;
+    border: 1px solid #1d1d1f;
+    color: #1d1d1f;
+  }
+
+  .cta-btn--outline:hover {
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  .cta-btn--solid {
+    background: #000000;
+    border: 1px solid #000000;
+    color: #ffffff;
+  }
+
+  .cta-btn--solid:hover {
+    background: #1d1d1f;
+    border-color: #1d1d1f;
+  }
+
+  /* DETAILED INFORMATION CARD */
+  .tab-navigation {
+    display: flex;
+    border-bottom: 1px solid #e5e5e7;
+    margin-bottom: 24px;
+    gap: 32px;
+  }
+
+  .tab-header-btn {
+    background: transparent;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    color: #8e8e93;
+    padding: 12px 0;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+  }
+
+  .tab-header-btn:hover {
+    color: #1d1d1f;
+  }
+
+  .tab-header-btn.active {
+    color: #1d1d1f;
+    font-weight: 600;
+  }
+
+  .tab-header-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #8e8e93;
+    border-radius: 2px;
+  }
+
+  .tab-pane {
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+
+  .tab-pane.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .specs-section {
+    margin-bottom: 24px;
+  }
+
+  .specs-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #1d1d1f;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 12px 0;
+  }
+
+  .specs-title-wash {
+    font-size: 11px;
+    font-weight: 600;
+    color: #1d1d1f;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 12px 0;
+  }
+
+  .specs-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .specs-list li {
+    font-size: 11px;
+    color: #6e6e73;
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .specs-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #8e8e93;
+  }
+
+  .description-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #1d1d1f;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 12px 0;
+  }
+
+  .description-content p {
+    font-size: 11px;
+    color: #6e6e73;
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+  }
+
+  .description-content a {
+    color: #0066cc;
+    text-decoration: none;
+    transition: text-decoration 0.2s;
+  }
+
+  .description-content a:hover {
+    text-decoration: underline;
+  }
+
+  /* RESPONSIVE LAYOUT */
+  @media screen and (max-width: 989px) {
+    .custom-product-container {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    
+    .custom-product-media-column {
+      position: relative;
+      top: 0;
+      height: 60vh;
+    }
+    
+    .media-slide {
+      height: 60vh;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .custom-product-outer {
+      padding: 90px 12px 24px 12px !important;
+    }
+    .product-info-card {
+      padding: 20px;
+    }
+    .variants-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+{%- endstyle -%}
+
+{%- assign product_images = product.media | where: "media_type", "image" -%}
+{%- assign I1 = product_images[0] -%}
+{%- assign I2 = product_images[1] | default: product_images[0] -%}
+{%- assign I3 = product_images[2] | default: product_images[0] -%}
+{%- assign I4 = product_images[3] | default: product_images[1] | default: product_images[0] -%}
+
+<div class="custom-product-outer">
+  <div class="custom-product-container">
+    
+    <!-- LEFT SIDE: Sticky Parallax Media Tracks -->
+    <div class="custom-product-media-column" style="--product-image-aspect: {{ product.featured_image.aspect_ratio | default: 1.0 }}">
+      
+      <!-- LEFT TRACK (Scrolls Normal / Downward) -->
+      <div class="media-track-left">
+        <div class="media-slide">
+          {%- if I1 != blank -%}
+            {{ I1 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div class="media-slide">
+          {%- if I2 != blank -%}
+            {{ I2 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div class="media-slide">
+          {%- if I1 != blank -%}
+            {{ I1 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </div>
+      
+      <!-- RIGHT TRACK (Scrolls Inverted / Upward) -->
+      <div class="media-track-right">
+        <div class="media-slide">
+          {%- if I3 != blank -%}
+            {{ I3 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div class="media-slide">
+          {%- if I4 != blank -%}
+            {{ I4 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div class="media-slide">
+          {%- if I3 != blank -%}
+            {{ I3 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- RIGHT SIDE: Product Purchasing and Detailed Info Cards -->
+    <div class="custom-product-info-column">
+      
+      <!-- Purchasing Controls Card -->
+      <div class="product-info-card" style="--container-radius: {{ section.settings.container_radius }}px">
+        {%- form 'product', product, id: 'product-form-custom' -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          
+          <div class="product-info-header-row">
+            <h1 class="product-info-title">{{ product.title }}</h1>
+            <button type="button" class="product-save-btn" aria-label="Save to bookmarks">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="product-info-price">
+            {{ product.price | money }}
+          </div>
+          
+          <div class="variant-selector-wrapper">
+            <div class="variant-selector-header">
+              <span class="variant-selector-label">Select Size</span>
+              <button type="button" class="size-guide-btn">Size Guide</button>
+            </div>
+            
+            <div class="variants-grid">
+              {%- assign mock_sizes = "XXXS,XXS,XS,S,M,L,XL,XXL,XXXL" | split: "," -%}
+              {%- for size in mock_sizes -%}
+                <button type="button" class="variant-pill{% if forloop.first %} selected{% endif %}" data-value="{{ size }}">
+                  {{ size }}
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+          
+          <div class="cta-buttons-row">
+            <button type="submit" name="add" class="cta-btn cta-btn--outline">Add to bag</button>
+            <button type="button" class="cta-btn cta-btn--solid" onclick="location.href='/checkout'">Buy now</button>
+          </div>
+        {%- endform -%}
+      </div>
+      
+      <!-- Product Details and Tabbed Card -->
+      <div class="product-info-card" style="--container-radius: {{ section.settings.container_radius }}px">
+        <div class="tab-navigation">
+          <button type="button" class="tab-header-btn active" data-tab="details">Details & Description</button>
+          <button type="button" class="tab-header-btn" data-tab="washcare">Washcare</button>
+          <button type="button" class="tab-header-btn" data-tab="shipping">Shipping</button>
+        </div>
+        
+        <div class="tabs-contents">
+          <!-- DETAILS TAB -->
+          <div class="tab-pane active" id="tab-details">
+            <div class="specs-section">
+              <h3 class="specs-title">Details</h3>
+              <ul class="specs-list">
+                <li>100% cotton</li>
+                <li>Weight - 260 gsm</li>
+                <li>Puff screen print</li>
+                <li>Oversize fit</li>
+              </ul>
+            </div>
+            <div class="description-section">
+              <h3 class="description-section-title">Description</h3>
+              <div class="description-content">
+                {{ product.description | default: "<p>The orange tiger fury t-shirt is made for bold, everyday style. It comes in a vibrant orange color that stands out and adds a striking touch to any streetwear look.</p><p>This oversized orange puff screen printed tee features a fierce tiger graphic with puff and screen print details. The bold tiger artwork is paired with eye catching branding across the front. Some parts feel slightly raised, giving it a cool textured look, while the rest stays smooth and sharp, making it a standout tiger printed orange t-shirt for everyday wear.</p><p>You can style this orange tiger fury t-shirt with <a href='/collections/jeans'>baggy jeans</a> or <a href='/collections/cargo-pants'>cargo pants</a> or a street ready look. Explore more <a href='/collections/streetwear'>streetwear t-shirts</a> and <a href='/collections/tees'>oversized puff printed t-shirts</a> to complete your collection.</p>" }}
+              </div>
+            </div>
+          </div>
+          
+          <!-- WASHCARE TAB -->
+          <div class="tab-pane" id="tab-washcare">
+            <div class="specs-section">
+              <h3 class="specs-title-wash">Washcare Instructions</h3>
+              <ul class="specs-list">
+                <li>Reverse wash only</li>
+                <li>Do not iron on the print</li>
+                <li>Steam iron recommended</li>
+                <li>Dry in shade</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- SHIPPING TAB -->
+          <div class="tab-pane" id="tab-shipping">
+            <div class="specs-section">
+              <h3 class="specs-title-wash">Shipping & Returns</h3>
+              <ul class="specs-list">
+                <li>Standard delivery: 3-5 business days</li>
+                <li>Free shipping on orders over RS. 4,999</li>
+                <li>Easy 7-day hassle-free returns</li>
+                <li>Cash on delivery available</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{%- javascript -%}
+  // Synchronized Scrolling Logic
+  function initInvertedScroll() {
+    const section = document.querySelector('.custom-product-outer');
+    const trackLeft = document.querySelector('.media-track-left');
+    const trackRight = document.querySelector('.media-track-right');
+    const mediaColumn = document.querySelector('.custom-product-media-column');
+    
+    if (!section || !trackLeft || !trackRight || window.innerWidth < 990) return;
+    
+    function handleScroll() {
+      const sectionRect = section.getBoundingClientRect();
+      const viewHeight = window.innerHeight;
+      
+      const start = 100;
+      const end = viewHeight - sectionRect.height;
+      const range = start - end;
+      
+      if (range <= 0) return;
+      
+      let progress = (start - sectionRect.top) / range;
+      progress = Math.max(0, Math.min(1, progress));
+      
+      // Translate the tracks in opposite directions (33.333% of track height, since we have 3 slides)
+      const transLeft = progress * 33.333;
+      const transRight = (1 - progress) * 33.333;
+      
+      trackLeft.style.transform = `translateY(-${transLeft}%)`;
+      trackRight.style.transform = `translateY(-${transRight}%)`;
+    }
+    
+    // Add scroll listener
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Init position
+    
+    // Support mouse wheel scrolling on sticky media column itself
+    if (mediaColumn) {
+      mediaColumn.addEventListener('wheel', function(e) {
+        window.scrollBy({
+          top: e.deltaY,
+          behavior: 'auto'
+        });
+      });
+    }
+  }
+
+  // Variant selector selection logic
+  function initVariantSelector() {
+    const pills = document.querySelectorAll('.variant-pill');
+    pills.forEach(pill => {
+      pill.addEventListener('click', function() {
+        pills.forEach(p => p.classList.remove('selected'));
+        pill.classList.add('selected');
+      });
+    });
+  }
+
+  // Tab Switching Logic
+  function initTabSwitching() {
+    const tabBtns = document.querySelectorAll('.tab-header-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const tabId = btn.getAttribute('data-tab');
+        
+        // Toggle tabs
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Toggle panes
+        tabPanes.forEach(pane => {
+          if (pane.id === `tab-${tabId}`) {
+            pane.classList.add('active');
+          } else {
+            pane.classList.remove('active');
+          }
+        });
+      });
+    });
+  }
+
+  // Run initialization on loads
+  document.addEventListener('DOMContentLoaded', () => {
+    initInvertedScroll();
+    initVariantSelector();
+    initTabSwitching();
+  });
+  
+  document.addEventListener('shopify:section:load', () => {
+    initInvertedScroll();
+    initVariantSelector();
+    initTabSwitching();
+  });
+{%- endjavascript -%}
+
+{% schema %}
+{
+  "name": "Custom Product Main",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "container_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 24,
+      "label": "Card corner radius"
+    }
+  ]
+}
+{% endschema %}
