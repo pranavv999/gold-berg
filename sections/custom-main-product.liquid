@@ -550,42 +550,60 @@
     const trackRight = document.querySelector('.media-track-right');
     const mediaColumn = document.querySelector('.custom-product-media-column');
     
-    if (!section || !trackLeft || !trackRight || window.innerWidth < 990) return;
+    if (!section || !trackLeft || !trackRight || !mediaColumn || window.innerWidth < 990) return;
+
+    // Internal progress: 0 = first images, 1 = second images
+    let progress = 0;
+    let isAnimating = false;
     
-    function handleScroll() {
-      const sectionRect = section.getBoundingClientRect();
-      const viewHeight = window.innerHeight;
-      
-      const start = 100;
-      const end = viewHeight - sectionRect.height;
-      const range = start - end;
-      
-      if (range <= 0) return;
-      
-      let progress = (start - sectionRect.top) / range;
-      progress = Math.max(0, Math.min(1, progress));
-      
-      // Translate the tracks in opposite directions (33.333% of track height, since we have 3 slides)
+    function setProgress(p) {
+      progress = Math.max(0, Math.min(1, p));
       const transLeft = progress * 33.333;
       const transRight = (1 - progress) * 33.333;
-      
       trackLeft.style.transform = `translateY(-${transLeft}%)`;
       trackRight.style.transform = `translateY(-${transRight}%)`;
     }
-    
-    // Add scroll listener
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Init position
-    
-    // Support mouse wheel scrolling on sticky media column itself
-    if (mediaColumn) {
-      mediaColumn.addEventListener('wheel', function(e) {
-        window.scrollBy({
-          top: e.deltaY,
-          behavior: 'auto'
-        });
-      });
-    }
+
+    // Initialize at start position
+    setProgress(0);
+
+    let scrollAccum = 0;
+    const SCROLL_THRESHOLD = 800; // total wheel delta needed to transition
+
+    mediaColumn.addEventListener('wheel', function(e) {
+      const atStart = progress <= 0;
+      const atEnd = progress >= 1;
+
+      // If scrolling down and already at end, let page scroll
+      if (e.deltaY > 0 && atEnd) return;
+      // If scrolling up and already at start, let page scroll
+      if (e.deltaY < 0 && atStart) return;
+
+      // Otherwise capture the scroll - prevent page scrolling
+      e.preventDefault();
+      e.stopPropagation();
+
+      scrollAccum += e.deltaY;
+      const newProgress = Math.max(0, Math.min(1, scrollAccum / SCROLL_THRESHOLD));
+      setProgress(newProgress);
+    }, { passive: false });
+
+    // Reset accumulator if user scrolls page past the section
+    window.addEventListener('scroll', function() {
+      const rect = section.getBoundingClientRect();
+      // If section is fully above viewport, reset to end
+      if (rect.bottom < 0) {
+        progress = 1;
+        scrollAccum = SCROLL_THRESHOLD;
+        setProgress(1);
+      }
+      // If section is fully below viewport, reset to start
+      if (rect.top > window.innerHeight) {
+        progress = 0;
+        scrollAccum = 0;
+        setProgress(0);
+      }
+    });
   }
 
   // Variant selector selection logic
