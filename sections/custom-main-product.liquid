@@ -49,6 +49,9 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+    position: sticky;
+    top: 120px;
+    align-self: start;
   }
 
   .product-info-card {
@@ -337,6 +340,11 @@
       gap: 32px;
     }
     
+    .custom-product-info-column {
+      position: static;
+      top: auto;
+    }
+    
     .custom-product-media-column {
       position: relative;
       top: 0;
@@ -360,19 +368,6 @@
     }
   }
 
-  .media-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-  }
-
-  /* PURCHASING CONTROLS (RIGHT SIDE) */
-  .custom-product-info-column {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
 {%- endstyle -%}
 
 {%- assign product_images = product.media | where: "media_type", "image" -%}

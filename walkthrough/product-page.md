@@ -15,7 +15,9 @@ This manual details the sections, customizer settings, and visual layouts of the
   * Every image element is styled with `width: 100%; height: auto; display: block;` with no fixed height capping or overflow clipping, guaranteeing 100% complete, uncropped product photos across both columns.
 * **Standard Scroll Behavior**: Both columns scroll naturally together in the standard document scroll flow.
 
-### Right-Side: Product Information Cards
+### Right-Side: Sticky Product Information Cards
+* **Sticky Positioning**: Styled with `position: sticky; top: 120px; align-self: start;` so the purchasing card remains pinned in view on desktop as the user scrolls past the left media images.
+* **Seamless Un-sticking**: Once the scroll reaches the end of the left media images, the right info column un-sticks and scrolls up together with the page to reveal the recommendations section and footer.
 
 #### Top Card (Purchasing Controls)
 * **Title & Save Icon**: Displays product title on the left and an interactive save/bookmark toggle SVG icon on the right.
