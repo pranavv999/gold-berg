@@ -18,17 +18,9 @@
 
   /* MEDIA SECTION (LEFT SIDE) */
   .custom-product-media-column {
-    position: sticky;
-    top: 100px;
-    width: 100%;
-    aspect-ratio: var(--product-image-aspect, 1);
-    height: auto !important;
-    max-height: calc(100vh - 140px);
-    overflow: hidden;
     display: flex;
     gap: 8px;
-    border-radius: 24px;
-    align-self: start !important;
+    width: 100%;
   }
 
   .media-track-left,
@@ -36,15 +28,11 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    height: 150%;
-    transition: transform 0.1s ease-out;
-    will-change: transform;
+    gap: 8px;
   }
 
   .media-slide {
     width: 100%;
-    height: 33.333%;
-    flex-shrink: 0;
     border-radius: 18px;
     overflow: hidden;
     background: transparent;
@@ -52,8 +40,7 @@
 
   .media-slide img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
   }
 
@@ -372,13 +359,24 @@
       grid-template-columns: repeat(4, 1fr);
     }
   }
+
+  .media-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* PURCHASING CONTROLS (RIGHT SIDE) */
+  .custom-product-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 {%- endstyle -%}
 
 {%- assign product_images = product.media | where: "media_type", "image" -%}
-{%- assign I1 = product_images[0] -%}
-{%- assign I2 = product_images[1] | default: product_images[0] -%}
-{%- assign I3 = product_images[2] | default: product_images[0] -%}
-{%- assign I4 = product_images[3] | default: product_images[1] | default: product_images[0] -%}
+{%- assign image_count = product_images.size -%}
 
 <div class="custom-product-outer">
   <div class="custom-product-container">
@@ -386,54 +384,40 @@
     <!-- LEFT SIDE: Sticky Parallax Media Tracks -->
     <div class="custom-product-media-column" style="--product-image-aspect: {{ product.featured_image.aspect_ratio | default: 1.0 }}">
       
-      <!-- LEFT TRACK (Scrolls Normal / Downward) -->
+      <!-- LEFT TRACK (Images I1 -> IN) -->
       <div class="media-track-left">
-        <div class="media-slide">
-          {%- if I1 != blank -%}
-            {{ I1 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
-          {%- else -%}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-          {%- endif -%}
-        </div>
-        <div class="media-slide">
-          {%- if I2 != blank -%}
-            {{ I2 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
-          {%- else -%}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-          {%- endif -%}
-        </div>
-        <div class="media-slide">
-          {%- if I1 != blank -%}
-            {{ I1 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
-          {%- else -%}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-          {%- endif -%}
-        </div>
+        {%- if image_count > 0 -%}
+          {%- for img in product_images -%}
+            <div class="media-slide">
+              {{ img | image_url: width: 1000 | image_tag: loading: 'lazy', alt: product.title }}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..4) -%}
+            <div class="media-slide">
+              {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
       </div>
       
-      <!-- RIGHT TRACK (Scrolls Inverted / Upward) -->
+      <!-- RIGHT TRACK (Images IN -> I1 Reversed) -->
       <div class="media-track-right">
-        <div class="media-slide">
-          {%- if I3 != blank -%}
-            {{ I3 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
-          {%- else -%}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-          {%- endif -%}
-        </div>
-        <div class="media-slide">
-          {%- if I4 != blank -%}
-            {{ I4 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
-          {%- else -%}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-          {%- endif -%}
-        </div>
-        <div class="media-slide">
-          {%- if I3 != blank -%}
-            {{ I3 | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
-          {%- else -%}
-            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-          {%- endif -%}
-        </div>
+        {%- if image_count > 0 -%}
+          {%- for i in (1..image_count) -%}
+            {%- assign rev_idx = image_count | minus: i -%}
+            {%- assign img = product_images[rev_idx] -%}
+            <div class="media-slide">
+              {{ img | image_url: width: 1000 | image_tag: loading: 'lazy', alt: product.title }}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..4) -%}
+            <div class="media-slide">
+              {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
       </div>
       
     </div>
@@ -543,68 +527,8 @@
 </div>
 
 {%- javascript -%}
-  // Synchronized Scrolling Logic
-  function initInvertedScroll() {
-    const section = document.querySelector('.custom-product-outer');
-    const trackLeft = document.querySelector('.media-track-left');
-    const trackRight = document.querySelector('.media-track-right');
-    const mediaColumn = document.querySelector('.custom-product-media-column');
-    
-    if (!section || !trackLeft || !trackRight || !mediaColumn || window.innerWidth < 990) return;
-
-    // Internal progress: 0 = first images, 1 = second images
-    let progress = 0;
-    let isAnimating = false;
-    
-    function setProgress(p) {
-      progress = Math.max(0, Math.min(1, p));
-      const transLeft = progress * 33.333;
-      const transRight = (1 - progress) * 33.333;
-      trackLeft.style.transform = `translateY(-${transLeft}%)`;
-      trackRight.style.transform = `translateY(-${transRight}%)`;
-    }
-
-    // Initialize at start position
-    setProgress(0);
-
-    let scrollAccum = 0;
-    const SCROLL_THRESHOLD = 800; // total wheel delta needed to transition
-
-    mediaColumn.addEventListener('wheel', function(e) {
-      const atStart = progress <= 0;
-      const atEnd = progress >= 1;
-
-      // If scrolling down and already at end, let page scroll
-      if (e.deltaY > 0 && atEnd) return;
-      // If scrolling up and already at start, let page scroll
-      if (e.deltaY < 0 && atStart) return;
-
-      // Otherwise capture the scroll - prevent page scrolling
-      e.preventDefault();
-      e.stopPropagation();
-
-      scrollAccum += e.deltaY;
-      const newProgress = Math.max(0, Math.min(1, scrollAccum / SCROLL_THRESHOLD));
-      setProgress(newProgress);
-    }, { passive: false });
-
-    // Reset accumulator if user scrolls page past the section
-    window.addEventListener('scroll', function() {
-      const rect = section.getBoundingClientRect();
-      // If section is fully above viewport, reset to end
-      if (rect.bottom < 0) {
-        progress = 1;
-        scrollAccum = SCROLL_THRESHOLD;
-        setProgress(1);
-      }
-      // If section is fully below viewport, reset to start
-      if (rect.top > window.innerHeight) {
-        progress = 0;
-        scrollAccum = 0;
-        setProgress(0);
-      }
-    });
-  }
+  // Parallax scrolling discarded - standard document scrolling active
+  function initInvertedScroll() {}
 
   // Variant selector selection logic
   function initVariantSelector() {

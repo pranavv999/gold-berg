@@ -6,16 +6,14 @@ This manual details the sections, customizer settings, and visual layouts of the
 
 ## 1. MAIN SECTION (`custom-main-product.liquid`)
 
-### Left-Side: Parallax Media Scroll Columns
-* **Grid Proportion**: Occupies exactly **65%** of the product grid container width, leaving the remaining **35%** (minus gutters) to the right-side information columns.
-* **Crop Prevention (Adaptive Heights)**: The aspect ratio of the main media column is dynamically computed in CSS as exactly the native aspect ratio of the product's featured photo:
-  `aspect-ratio: var(--product-image-aspect, 1);`
-  Combined with tracks sized to `150%` of container height, slides sized to `33.333%` (exactly `50%` of container height), a narrow **`8px` gap**, and **`object-fit: cover`** image scaling, this shows exactly **two rows of images side-by-side** that are perfectly aligned on the top and bottom with zero crop margins.
-* **Layout Grid**: The media column is sticky on desktop (`100vh` height minus header offset) and divided into two equal-width columns.
-* **Opposite Scrolling Parallax**:
-  * Displays a 3-slide track on each column (Left track loops I1 -> I2 -> I1; Right track loops I3 -> I4 -> I3) for a seamless vertical loop.
-  * Symmetrically translates Left track UP (0% to -33.333% of track height) and Right track DOWN (-33.333% to 0% of track height) as the user scrolls, showing dynamic opposite parallax movements while keeping the rows perfectly aligned at the endpoints.
-* **Hover Interaction**: Hovering and scrolling inside the media container propagates the scroll events to the viewport naturally.
+### Left-Side: 2-Column Product Media Grid
+* **Grid Proportion**: Occupies exactly **65%** of the product grid container width, leaving the remaining **35%** (minus gutters) to the right-side purchasing column.
+* **Image Arrangement**:
+  * **Column 1 (Left)**: Displays all product images in sequential order (`I1, I2, I3, I4 ... IN`).
+  * **Column 2 (Right)**: Displays all product images in reverse order (`IN ... I4, I3, I2, I1`).
+* **Zero Cropping Guarantee**:
+  * Every image element is styled with `width: 100%; height: auto; display: block;` with no fixed height capping or overflow clipping, guaranteeing 100% complete, uncropped product photos across both columns.
+* **Standard Scroll Behavior**: Both columns scroll naturally together in the standard document scroll flow.
 
 ### Right-Side: Product Information Cards
 
