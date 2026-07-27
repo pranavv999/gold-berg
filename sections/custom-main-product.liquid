@@ -72,7 +72,7 @@
 
   .product-info-title {
     font-family: var(--font-heading-family);
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 600;
     color: #1d1d1f;
     margin: 0;
@@ -88,20 +88,20 @@
   }
 
   .product-info-price {
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 600;
     color: #1d1d1f;
   }
 
   .product-compare-price {
-    font-size: 15px;
+    font-size: 12px;
     font-weight: 400;
     color: #8e8e93;
     text-decoration: line-through;
   }
 
   .product-discount-badge {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
     color: #e02020;
     background: rgba(224, 32, 32, 0.08);
@@ -119,7 +119,7 @@
   }
 
   .variant-selector-label {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     color: #1d1d1f;
     text-transform: uppercase;
@@ -127,7 +127,7 @@
   }
 
   .size-guide-btn {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     color: #6e6e73;
     background: #f2f2f4;
@@ -155,7 +155,7 @@
     background: #ffffff;
     border: 1px solid #d1d1d6;
     color: #1d1d1f;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     padding: 10px 0;
     border-radius: 30px;
@@ -182,7 +182,7 @@
   }
 
   .cta-btn {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     padding: 16px 0;
     border-radius: 30px;
@@ -228,7 +228,7 @@
   .tab-header-btn {
     background: transparent;
     border: none;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 500;
     color: #8e8e93;
     padding: 12px 0;
@@ -275,22 +275,16 @@
     margin-bottom: 24px;
   }
 
-  .specs-title {
-    font-size: 11px;
-    font-weight: 600;
-    color: #1d1d1f;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0 0 12px 0;
-  }
-
-  .specs-title-wash {
-    font-size: 11px;
-    font-weight: 600;
-    color: #1d1d1f;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0 0 12px 0;
+  .specs-title,
+  .specs-title-wash,
+  .description-section-title {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #1d1d1f !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin: 0 0 12px 0 !important;
+    font-family: inherit !important;
   }
 
   .specs-list {
@@ -303,10 +297,11 @@
   }
 
   .specs-list li {
-    font-size: 11px;
-    color: #6e6e73;
+    font-size: 11px !important;
+    color: #6e6e73 !important;
     padding-left: 12px;
     position: relative;
+    font-family: inherit !important;
   }
 
   .specs-list li::before {
@@ -316,30 +311,66 @@
     color: #8e8e93;
   }
 
-  .description-section-title {
-    font-size: 11px;
-    font-weight: 600;
-    color: #1d1d1f;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0 0 12px 0;
+  /* Force all description & tab content elements (headings, paragraphs, lists) to 11px and same font-family */
+  .description-content,
+  .description-content *,
+  .tab-pane,
+  .tab-pane * {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  }
+
+  .description-content h1,
+  .description-content h2,
+  .description-content h3,
+  .description-content h4,
+  .description-content h5,
+  .description-content h6 {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #1d1d1f !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin: 16px 0 12px 0 !important;
+  }
+
+  .description-content h1:first-child,
+  .description-content h2:first-child,
+  .description-content h3:first-child {
+    margin-top: 0 !important;
+  }
+
+  .description-content p,
+  .description-content li,
+  .description-content span,
+  .description-content div {
+    font-size: 11px !important;
+    color: #6e6e73 !important;
+    line-height: 1.6 !important;
   }
 
   .description-content p {
-    font-size: 11px;
-    color: #6e6e73;
-    line-height: 1.6;
-    margin: 0 0 16px 0;
+    margin: 0 0 16px 0 !important;
+  }
+
+  .description-content ul,
+  .description-content ol {
+    padding-left: 16px !important;
+    margin: 0 0 16px 0 !important;
+  }
+
+  .description-content li {
+    margin-bottom: 6px !important;
   }
 
   .description-content a {
-    color: #0066cc;
-    text-decoration: none;
+    color: #0066cc !important;
+    text-decoration: none !important;
+    font-size: 11px !important;
     transition: text-decoration 0.2s;
   }
 
   .description-content a:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
   }
 
   /* RESPONSIVE LAYOUT */

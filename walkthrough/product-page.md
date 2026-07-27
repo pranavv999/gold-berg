@@ -20,18 +20,18 @@ This manual details the sections, customizer settings, and visual layouts of the
 * **Seamless Un-sticking**: Once the scroll reaches the end of the left media images, the right info column un-sticks and scrolls up together with the page to reveal the recommendations section and footer.
 
 #### Top Card (Purchasing Controls)
-* **Title**: Displays the clean product title `<h1>` (save bookmark icon removed).
+* **Title**: Product title set to **15px** (`.product-info-title`).
 * **Pricing & Discount Badge**:
-  * **Actual Price**: Rendered in bold primary text (`{{ price | money }}`).
-  * **Compare-At Price**: Displayed in strikethrough text beside the actual price whenever `compare_at_price > price`.
-  * **Percentage Discount Badge**: Dynamically calculated in Liquid and rendered as a red badge pill (`44% OFF`) whenever the discount percentage is $\ge 1\%$.
+  * **Actual Price**: Rendered in **12px** bold primary text (`{{ price | money }}`).
+  * **Compare-At Price**: Displayed in **12px** strikethrough text beside the actual price (`<s>{{ compare_at_price | money }}</s>`).
+  * **Percentage Discount Badge**: Rendered as a **10px** red badge pill (`38% OFF`) whenever the discount percentage is $\ge 1\%$.
 * **Variant Size Selector**:
-  * Displays a grid of pill buttons mapping sizes (XXXS, XXS, XS, S, M, L, XL, XXL, XXXL).
-  * Clicking any pill marks it as selected (dark background fill with white text) and updates the active state.
-  * A "Size Guide" text button on the right opens size measurements.
-* **CTA Buttons**:
-  * Outline CTA button "ADD TO BAG" (asynchronously submits cart form).
-  * Solid dark CTA button "BUY NOW" (links to checkout).
+  * "SELECT SIZE" label and "Size Guide" button set to **10px**.
+  * Size variant pills (XXXS to XXXL) set to **10px**.
+* **CTA Buttons**: "ADD TO BAG" and "BUY NOW" buttons set to **10px** (`.cta-btn`).
+* **Tab Headers & Content**:
+  * "Details & Description", "Washcare", and "Shipping" tab headers set to **11px**.
+  * All inner tab content (headings, paragraphs, lists, links) forced to **11px** with a consistent font-family (`var(--font-body-family)`).
 
 #### Bottom Card (Tabbed Specifications)
 * **Horizontal Tabs Navigation**: Features three tab headers: "Details & Description", "Washcare", and "Shipping". The active tab is styled with bold text and a bottom underline.
