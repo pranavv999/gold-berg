@@ -79,27 +79,36 @@
     letter-spacing: -0.01em;
   }
 
-  .product-save-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    color: #8e8e93;
-    padding: 4px;
+  .product-price-row {
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: color 0.2s;
-  }
-
-  .product-save-btn:hover {
-    color: #1d1d1f;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
   }
 
   .product-info-price {
-    font-size: 16px;
-    font-weight: 500;
-    color: #6e6e73;
-    margin-bottom: 24px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1d1d1f;
+  }
+
+  .product-compare-price {
+    font-size: 15px;
+    font-weight: 400;
+    color: #8e8e93;
+    text-decoration: line-through;
+  }
+
+  .product-discount-badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: #e02020;
+    background: rgba(224, 32, 32, 0.08);
+    padding: 3px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
 
   .variant-selector-header {
@@ -425,17 +434,28 @@
         {%- form 'product', product, id: 'product-form-custom' -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
           
+          {%- assign current_variant = product.selected_or_first_available_variant -%}
+          {%- assign compare_at_price = current_variant.compare_at_price -%}
+          {%- assign price = current_variant.price -%}
+          {%- if compare_at_price > price -%}
+            {%- assign saving = compare_at_price | minus: price -%}
+            {%- assign discount_percentage = saving | times: 100.0 | divided_by: compare_at_price | round -%}
+          {%- else -%}
+            {%- assign discount_percentage = 0 -%}
+          {%- endif -%}
+
           <div class="product-info-header-row">
             <h1 class="product-info-title">{{ product.title }}</h1>
-            <button type="button" class="product-save-btn" aria-label="Save to bookmarks">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-              </svg>
-            </button>
           </div>
           
-          <div class="product-info-price">
-            {{ product.price | money }}
+          <div class="product-price-row">
+            <span class="product-info-price">{{ price | money }}</span>
+            {%- if compare_at_price > price -%}
+              <s class="product-compare-price">{{ compare_at_price | money }}</s>
+              {%- if discount_percentage >= 1 -%}
+                <span class="product-discount-badge">{{ discount_percentage }}% OFF</span>
+              {%- endif -%}
+            {%- endif -%}
           </div>
           
           <div class="variant-selector-wrapper">
