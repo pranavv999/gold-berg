@@ -13,7 +13,11 @@ This manual details the sections, customizer settings, and visual layouts of the
   * **Column 2 (Right)**: Displays all product images in reverse order (`IN ... I4, I3, I2, I1`).
 * **Zero Cropping Guarantee**:
   * Every image element is styled with `width: 100%; height: auto; display: block;` with no fixed height capping or overflow clipping, guaranteeing 100% complete, uncropped product photos across both columns.
-* **Standard Scroll Behavior**: Both columns scroll naturally together in the standard document scroll flow.
+* **Mobile Media Slider (Single Image & Bubble Dots)**:
+  * On mobile screens (`< 990px`), the 2-column desktop grid is hidden (`display: none !important`).
+  * A single-image touch slider (`.custom-product-media-mobile`) displays only **1 image at a time**.
+  * Features horizontal swipe navigation (`scroll-snap-type: x mandatory`).
+  * Includes pagination bubble dots (`.mobile-media-dots`) underneath the image that dynamically highlight the active image as the user swipes. Clicking any dot scrolls to that image.
 
 ### Right-Side: Sticky Product Information Cards
 * **Sticky Positioning**: Styled with `position: sticky; top: 120px; align-self: start;` so the purchasing card remains pinned in view on desktop as the user scrolls past the left media images.
