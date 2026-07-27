@@ -49,6 +49,16 @@
     ]
   },
   {
+    "name": "About Us Page",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "about_image",
+        "label": "About Page Main Image (Left Column)"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.colors.name",
     "settings": [
       {
