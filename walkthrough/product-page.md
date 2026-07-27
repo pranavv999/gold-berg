@@ -29,9 +29,11 @@ This manual details the sections, customizer settings, and visual layouts of the
   * **Actual Price**: Rendered in **12px** bold primary text (`{{ price | money }}`).
   * **Compare-At Price**: Displayed in **12px** strikethrough text beside the actual price (`<s>{{ compare_at_price | money }}</s>`).
   * **Percentage Discount Badge**: Rendered as a **10px** red badge pill (`38% OFF`) whenever the discount percentage is $\ge 1\%$.
-* **Variant Size Selector**:
+* **Dynamic Variant Size Selector**:
   * "SELECT SIZE" label and "Size Guide" button set to **10px**.
-  * Size variant pills (XXXS to XXXL) set to **10px**.
+  * Size variant pills (`.variant-pill`) are dynamically fetched directly from `product.options_with_values` / `product.variants` for each individual product in Shopify.
+  * Out-of-stock sizes render with a `.disabled` strikethrough state.
+  * Selecting a size pill dynamically updates the hidden `input[name="id"]` for cart submission and updates variant prices dynamically.
 * **CTA Buttons**: "ADD TO BAG" and "BUY NOW" buttons set to **10px** (`.cta-btn`).
 * **Tab Headers & Content**:
   * "Details & Description", "Washcare", and "Shipping" tab headers set to **11px**.
