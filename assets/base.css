@@ -3610,3 +3610,134 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+/* ==========================================================================
+   CUSTOM ENHANCED POLICY PAGES STYLING (SOBER ANIMAL)
+   ========================================================================== */
+
+/* Outer wrapper container for policy pages */
+.custom-policy-page-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 80vh;
+  overflow-x: hidden;
+  background: #ffffff;
+}
+
+/* Policy Content Container */
+.shopify-policy__container,
+.custom-policy-content-box {
+  position: relative;
+  z-index: 2;
+  max-width: 760px !important;
+  margin: 0 auto !important;
+  padding: 120px 40px 80px 40px !important;
+  text-align: left !important;
+  box-sizing: border-box;
+}
+
+/* 1. Policy Title: 18px font size */
+.shopify-policy__title,
+.shopify-policy__title h1,
+.policy-title-heading {
+  font-family: var(--font-heading-family), var(--font-body-family), sans-serif !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #1d1d1f !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin-bottom: 36px !important;
+  text-align: left !important;
+}
+
+/* 2. Section Headers: 15px font size */
+.shopify-policy__body h2,
+.shopify-policy__body h3,
+.shopify-policy__body h4,
+.shopify-policy__container h2,
+.shopify-policy__container h3,
+.shopify-policy__container h4,
+.policy-section-header {
+  font-family: var(--font-heading-family), var(--font-body-family), sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #1d1d1f !important;
+  margin-top: 32px !important;
+  margin-bottom: 12px !important;
+  line-height: 1.4 !important;
+  text-transform: none;
+}
+
+/* 3. Body Text & Paragraphs & Lists: 12px font size */
+.shopify-policy__body,
+.shopify-policy__body p,
+.shopify-policy__body li,
+.shopify-policy__body span,
+.shopify-policy__body div,
+.shopify-policy__body td,
+.shopify-policy__body th,
+.shopify-policy__container p,
+.shopify-policy__container li,
+.policy-body-text {
+  font-family: var(--font-body-family), sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  color: #3a3a3c !important;
+  line-height: 1.8 !important;
+  margin-bottom: 16px !important;
+}
+
+.shopify-policy__body a,
+.shopify-policy__container a {
+  color: #1d1d1f !important;
+  text-decoration: underline !important;
+}
+
+/* Mobile View Scaling (< 750px) */
+@media screen and (max-width: 749px) {
+  /* Hide SOBER and ANIMAL side watermarks on mobile */
+  .policy-watermark {
+    display: none !important;
+  }
+
+  .shopify-policy__container,
+  .custom-policy-content-box {
+    padding: 90px 20px 40px 20px !important;
+    max-width: 100% !important;
+  }
+
+  /* Automatically scaled down font sizes for mobile */
+  .shopify-policy__title,
+  .shopify-policy__title h1,
+  .policy-title-heading {
+    font-size: 16px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .shopify-policy__body h2,
+  .shopify-policy__body h3,
+  .shopify-policy__body h4,
+  .shopify-policy__container h2,
+  .shopify-policy__container h3,
+  .shopify-policy__container h4,
+  .policy-section-header {
+    font-size: 14px !important;
+    margin-top: 24px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .shopify-policy__body,
+  .shopify-policy__body p,
+  .shopify-policy__body li,
+  .shopify-policy__body span,
+  .shopify-policy__body div,
+  .shopify-policy__body td,
+  .shopify-policy__body th,
+  .shopify-policy__container p,
+  .shopify-policy__container li,
+  .policy-body-text {
+    font-size: 11px !important;
+    line-height: 1.75 !important;
+    margin-bottom: 14px !important;
+  }
+}
