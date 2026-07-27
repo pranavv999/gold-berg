@@ -3750,13 +3750,11 @@ details-disclosure>details {
 /* 3. Body Text & Paragraphs & Lists: 12px font size */
 .shopify-policy__body,
 .shopify-policy__body p,
-.shopify-policy__body li,
 .shopify-policy__body span,
 .shopify-policy__body div,
 .shopify-policy__body td,
 .shopify-policy__body th,
 .shopify-policy__container p,
-.shopify-policy__container li,
 .policy-body-text {
   font-family: var(--font-body-family), sans-serif !important;
   font-size: 12px !important;
@@ -3764,6 +3762,48 @@ details-disclosure>details {
   color: #3a3a3c !important;
   line-height: 1.8 !important;
   margin-bottom: 16px !important;
+}
+
+/* 4. Policy Lists (UL / OL / LI) Reset & Bullet Alignment */
+.shopify-policy__body ul,
+.shopify-policy__body ol,
+.shopify-policy__container ul,
+.shopify-policy__container ol {
+  margin: 12px 0 20px 24px !important;
+  padding-left: 12px !important;
+  list-style-position: outside !important;
+}
+
+.shopify-policy__body ul,
+.shopify-policy__container ul {
+  list-style-type: disc !important;
+}
+
+.shopify-policy__body ol,
+.shopify-policy__container ol {
+  list-style-type: decimal !important;
+}
+
+.shopify-policy__body li,
+.shopify-policy__container li {
+  font-family: var(--font-body-family), sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  color: #3a3a3c !important;
+  line-height: 1.6 !important;
+  margin-bottom: 8px !important;
+  display: list-item !important;
+}
+
+/* Reset P tag inside LI so bullets and text stay inline on the same line without breaking */
+.shopify-policy__body li > p,
+.shopify-policy__container li > p {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: inherit !important;
+  font-size: inherit !important;
+  color: inherit !important;
 }
 
 .shopify-policy__body a,
