@@ -298,17 +298,21 @@
   }
 {%- endstyle -%}
 
-{%- assign featured_collection = section.settings.collection -%}
-{%- assign collection_title = section.settings.title | default: featured_collection.title | default: "iPhone Case" -%}
-{%- assign collection_url = featured_collection.url | default: "#" -%}
+{%- assign featured_collection = section.settings.collection | default: collections['all'] | default: collections.first -%}
+{%- assign collection_title = section.settings.title | default: featured_collection.title | default: "PEOPLE ALSO BUY" -%}
+{%- assign collection_url = featured_collection.url | default: "/collections/all" -%}
 
 {%- assign products_to_render = nil -%}
 {%- if section.settings.product_source == 'related_products' and product != nil -%}
   {%- assign products_to_render = product.metafields.shopify--discovery--product_recommendation.related_products.value -%}
 {%- endif -%}
 
-{%- if products_to_render == blank -%}
+{%- if products_to_render == blank and featured_collection != blank -%}
   {%- assign products_to_render = featured_collection.products -%}
+{%- endif -%}
+
+{%- if products_to_render == blank -%}
+  {%- assign products_to_render = collections['all'].products -%}
 {%- endif -%}
 
 <div class="custom-collection-outer">
@@ -324,63 +328,70 @@
     <div class="custom-collection-grid">
       {%- if products_to_render != blank and products_to_render.size > 0 -%}
         <!-- REAL PRODUCTS -->
-        {%- for product in products_to_render limit: 4 -%}
-          <div class="custom-product-card">
-            <div class="card-image-slider-wrapper">
-              {%- if product.available == false -%}
-                <span class="card-badge-soldout">Sold Out</span>
-              {%- endif -%}
-              
-              <a href="{{ product.url }}" style="display: block; width: 100%; height: 100%; text-decoration: none; color: inherit;">
-                <div class="card-image-slider-track">
-                  {%- if product.images.size > 0 -%}
-                    {%- for image in product.images -%}
-                      <div class="card-slider-slide">
-                        {{ image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
-                      </div>
-                    {%- endfor -%}
-                  {%- else -%}
-                    <div class="card-slider-slide">
-                      {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
-                    </div>
-                  {%- endif -%}
-                </div>
-              </a>
-              
-              {%- if product.images.size > 1 -%}
-                <button class="card-slider-arrow card-slider-arrow--prev" aria-label="Previous image">
-                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
-                    <polyline points="15 18 9 12 15 6"></polyline>
-                  </svg>
-                </button>
-                <button class="card-slider-arrow card-slider-arrow--next" aria-label="Next image">
-                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
-                    <polyline points="9 18 15 12 9 6"></polyline>
-                  </svg>
-                </button>
+        {%- assign rendered_count = 0 -%}
+        {%- for item in products_to_render -%}
+          {%- if item.id != product.id -%}
+            {%- assign rendered_count = rendered_count | plus: 1 -%}
+            <div class="custom-product-card">
+              <div class="card-image-slider-wrapper">
+                {%- if item.available == false -%}
+                  <span class="card-badge-soldout">Sold Out</span>
+                {%- endif -%}
                 
-                <div class="card-slider-dots">
-                  {%- for image in product.images -%}
-                    <span class="slider-dot{% if forloop.first %} active{% endif %}"></span>
-                  {%- endfor -%}
-                </div>
-              {%- endif -%}
-            </div>
-            
-            <div class="custom-product-footer">
-              <a href="{{ product.url }}" style="display: block; width: 100%; text-decoration: none; color: inherit;">
-                <div class="custom-product-meta">
-                  <h4 class="custom-product-title">{{ product.title }}</h4>
-                  <div class="custom-product-price-row">
-                    <span class="custom-product-price">From {{ product.price | money }}</span>
-                    {%- if product.compare_at_price > product.price -%}
-                      <span class="custom-product-compare">{{ product.compare_at_price | money }}</span>
+                <a href="{{ item.url }}" style="display: block; width: 100%; height: 100%; text-decoration: none; color: inherit;">
+                  <div class="card-image-slider-track">
+                    {%- if item.images.size > 0 -%}
+                      {%- for image in item.images -%}
+                        <div class="card-slider-slide">
+                          {{ image | image_url: width: 600 | image_tag: loading: 'lazy', alt: item.title }}
+                        </div>
+                      {%- endfor -%}
+                    {%- else -%}
+                      <div class="card-slider-slide">
+                        {{ 'product-' | append: forloop.index | placeholder_svg_tag }}
+                      </div>
                     {%- endif -%}
                   </div>
-                </div>
-              </a>
+                </a>
+                
+                {%- if item.images.size > 1 -%}
+                  <button class="card-slider-arrow card-slider-arrow--prev" aria-label="Previous image">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                      <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                  </button>
+                  <button class="card-slider-arrow card-slider-arrow--next" aria-label="Next image">
+                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                  </button>
+                  
+                  <div class="card-slider-dots">
+                    {%- for image in item.images -%}
+                      <span class="slider-dot{% if forloop.first %} active{% endif %}"></span>
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+              </div>
+              
+              <div class="custom-product-footer">
+                <a href="{{ item.url }}" style="display: block; width: 100%; text-decoration: none; color: inherit;">
+                  <div class="custom-product-meta">
+                    <h4 class="custom-product-title">{{ item.title }}</h4>
+                    <div class="custom-product-price-row">
+                      <span class="custom-product-price">From {{ item.price | money }}</span>
+                      {%- if item.compare_at_price > item.price -%}
+                        <span class="custom-product-compare">{{ item.compare_at_price | money }}</span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </a>
+              </div>
             </div>
-          </div>
+            {%- if rendered_count >= 4 -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endif -%}
         {%- endfor -%}
         
       {%- else -%}

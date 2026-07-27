@@ -49,3 +49,34 @@ This manual details the sections, customizer settings, and visual layouts of the
   * `Dynamic Related Products (Metafield)`: Loads dynamically from the product's metafield reference (`shopify--discovery--product_recommendation.related_products.value`).
   * If the metafield is unconfigured or empty for the current product, it falls back to the collection selected in settings.
 * **No Discover More Button**: The "Discover more" button on the top-right is disabled inside `templates/product.json` to keep the layout focused on shopping recommendations.
+
+### Merchant Setup Guide for "PEOPLE ALSO BUY"
+
+#### 1. How to Setup Custom Related Products / Collection for a Specific Product
+To show hand-picked recommended products for a specific product (e.g. showing matching cargo pants or jackets for a specific T-shirt):
+
+* **Method A: Via Shopify Search & Discovery App (Recommended)**
+  1. In Shopify Admin, go to **Apps** $\rightarrow$ **Shopify Search & Discovery**.
+  2. Click **Recommendations** $\rightarrow$ **Product recommendations**.
+  3. Search and select the target product (e.g. *Ascent T-Shirt*).
+  4. Under **Complementary products** / **Related products**, click **Edit** and select the specific products you want to feature.
+  5. Click **Save**.
+
+* **Method B: Via Product Metafields in Shopify Admin**
+  1. In Shopify Admin, go to **Products** and click the product you wish to customize.
+  2. Scroll down to the **Metafields** section at the bottom of the product details page.
+  3. Click on the **Related Products** metafield (`shopify--discovery--product_recommendation.related_products`).
+  4. Select the custom products to display in the section.
+  5. Click **Save**.
+
+#### 2. How to Setup Default Collection for All Products (Fallback)
+To set a global default collection (e.g. *All Products*, *Streetwear*, or *Best Sellers*) that automatically displays on any product page where no custom recommendations have been configured:
+
+1. In Shopify Admin, go to **Online Store** $\rightarrow$ **Themes**.
+2. Click **Customize** on your active theme (*gold-berg*).
+3. In the top page selector dropdown, choose **Products** $\rightarrow$ **Default product**.
+4. In the left-hand section panel, click on **`PEOPLE ALSO BUY`** (`Custom Collection Row`).
+5. In the right-hand settings sidebar:
+   - Under **Collection**, click **Select collection** and choose your default collection (e.g. *All Products* or *Featured Collection*).
+   - Ensure **Product Source** is set to `Dynamic Related Products (Metafield)`. *(This tells the theme to check for product-specific custom recommendations first, and automatically fall back to your default collection if none are set).*
+6. Click **Save** in the top-right corner.
