@@ -176,6 +176,8 @@
       "show_cart_note": false,
       "cart_drawer_collection": "",
       "cart_color_scheme": "scheme-1",
+      "policy_left_image": "shopify://shop_images/35941274714270",
+      "policy_right_image": "shopify://shop_images/35941274747038",
       "sections": {
         "main-password-header": {
           "type": "main-password-header",

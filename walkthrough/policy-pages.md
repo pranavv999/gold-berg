@@ -25,8 +25,12 @@ This document details the layout architecture, typography scale, and responsive 
 
 ## 3. Desktop View (Side Watermarks & Margins)
 
-* **Side Watermark Removal**:
-  * Side text elements (`SOBER` and `ANIMAL`) have been completely removed from policy pages for a clean, distraction-free reading experience.
+* **Left Policy Side Image (SOBER)**:
+  * Fixed on the left margin (`left: 40px; top: 100px; bottom: 40px;`). Displays Image #1 (`SOBER`).
+* **Right Policy Side Image (ANIMAL)**:
+  * Fixed on the right margin (`right: 40px; top: 100px; bottom: 40px;`). Displays Image #2 (`ANIMAL`).
+* **Merchant Theme Customizer Setup**:
+  * Added image pickers `Left Policy Side Image (SOBER)` and `Right Policy Side Image (ANIMAL)` in **Theme Customizer -> Theme Settings -> Policy Pages Side Images** so merchants can update or change the side images at any time.
 * **Center Policy Container**:
   * `max-width: 760px` with equal left and right margins (`margin: 0 auto`).
   * Content is left-aligned (`text-align: left`) with `padding: 120px 40px 80px 40px`.

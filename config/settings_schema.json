@@ -34,6 +34,21 @@
     ]
   },
   {
+    "name": "Policy Pages Side Images",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "policy_left_image",
+        "label": "Left Policy Side Image (SOBER)"
+      },
+      {
+        "type": "image_picker",
+        "id": "policy_right_image",
+        "label": "Right Policy Side Image (ANIMAL)"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.colors.name",
     "settings": [
       {
