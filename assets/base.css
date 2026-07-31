@@ -3627,15 +3627,16 @@ details-disclosure>details {
 .custom-policy-page-wrapper {
   position: relative;
   width: 100%;
-  min-height: 80vh;
+  min-height: calc(100vh - 40px);
   background: #ffffff;
+  box-sizing: border-box;
 }
 
 /* Side Brand Column Container (spans from top to bottom of main policy section) */
 .policy-side-column {
   position: absolute;
   top: 40px;
-  bottom: 140px;
+  bottom: 40px;
   z-index: 1;
   pointer-events: none;
   user-select: none;
@@ -3656,7 +3657,8 @@ details-disclosure>details {
 .policy-side-sticky-inner {
   position: sticky;
   top: 80px;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 120px);
+  max-height: calc(100vh - 120px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
