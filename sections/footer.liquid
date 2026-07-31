@@ -143,7 +143,7 @@
                 {%- endfor -%}
               {%- else -%}
                 <li><a href="/pages/track-order" class="footer-nav-link">Track Order</a></li>
-                <li><a href="/pages/contact" class="footer-nav-link">Contact Us</a></li>
+                <li><a href="{{ shop.policies.contact_information.url | default: '/policies/contact-information' }}" class="footer-nav-link">Contact Us</a></li>
                 <li><a href="/policies/refund-policy" class="footer-nav-link">Return / Exchange</a></li>
                 <li><a href="/pages/get-hired" class="footer-nav-link">Get Hired</a></li>
               {%- endif -%}
