@@ -1,14 +1,24 @@
+.main-page-content-wrapper {
+  padding-top: 105px !important;
+}
+
+@media screen and (min-width: 750px) {
+  .main-page-content-wrapper {
+    padding-top: 120px !important;
+  }
+}
+
 .page-title {
   margin-top: 0;
 }
 
 .main-page-title {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 @media screen and (min-width: 750px) {
   .main-page-title {
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
   }
 }
 
