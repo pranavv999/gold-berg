@@ -15,7 +15,8 @@
 .custom-footer-outer-wrapper {
   position: relative;
   z-index: 2;
-  max-width: 1320px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   padding-left: 24px;
   padding-right: 24px;
