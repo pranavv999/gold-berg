@@ -240,22 +240,32 @@
   text-align: center;
   overflow: hidden;
   line-height: 0.75;
-  margin-top: -30px;
+  margin-top: -40px;
   pointer-events: none;
   user-select: none;
   z-index: 1;
 }
 
 .custom-footer-watermark-text {
-  display: inline-block;
+  display: block;
+  width: 100%;
+  text-align: center;
   font-family: var(--font-heading-family), var(--font-body-family), sans-serif !important;
-  font-size: clamp(120px, 22vw, 340px) !important;
+  font-size: clamp(160px, 28vw, 440px) !important;
   font-weight: 900 !important;
-  color: #ececee !important;
-  letter-spacing: -0.04em !important;
+  letter-spacing: -0.03em !important;
   text-transform: none !important;
-  transform: translateY(22%);
   white-space: nowrap;
+  transform: translateY(18%);
+  
+  /* Gradient text fill + Bottom Fade Mask */
+  background: linear-gradient(180deg, #e4e4e7 0%, #eeeeef 45%, rgba(240, 240, 243, 0) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Smooth fade out mask towards bottom */
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.4) 65%, rgba(0, 0, 0, 0) 98%);
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.4) 65%, rgba(0, 0, 0, 0) 98%);
 }
 
 /* Mobile View Responsiveness */
