@@ -10,6 +10,7 @@
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
         "newsletter_heading": "SUBSCRIBE TO OUR NEWSLETTER",
+        "show_footer_logo": true,
         "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": true,

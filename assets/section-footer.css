@@ -48,6 +48,33 @@
   max-width: 440px;
 }
 
+/* Optional Middle Column: Brand Logo */
+.custom-footer-middle-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.custom-footer-logo-link {
+  display: inline-block;
+  text-decoration: none;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.custom-footer-logo-link:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+.custom-footer-logo-img {
+  height: auto;
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 .footer-newsletter-heading {
   font-family: var(--font-heading-family), var(--font-body-family), sans-serif !important;
   font-size: 14px !important;
