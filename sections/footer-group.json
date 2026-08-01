@@ -4,8 +4,34 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "blocks": {},
-      "block_order": [],
+      "blocks": {
+        "social_instagram": {
+          "type": "social_link",
+          "settings": {
+            "platform": "instagram",
+            "url": "https://instagram.com"
+          }
+        },
+        "social_x": {
+          "type": "social_link",
+          "settings": {
+            "platform": "x",
+            "url": "https://x.com"
+          }
+        },
+        "social_youtube": {
+          "type": "social_link",
+          "settings": {
+            "platform": "youtube",
+            "url": "https://youtube.com"
+          }
+        }
+      },
+      "block_order": [
+        "social_instagram",
+        "social_x",
+        "social_youtube"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
