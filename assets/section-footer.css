@@ -297,28 +297,41 @@
 
 /* Mobile View Responsiveness */
 @media screen and (max-width: 768px) {
+  .custom-footer-outer-wrapper {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
   .custom-footer-card {
-    padding: 32px 20px 20px 20px;
+    padding: 28px 20px 20px 20px;
     border-radius: 24px;
   }
 
   .custom-footer-content-grid {
-    flex-direction: column;
-    gap: 28px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
   }
 
-  .custom-footer-left {
-    max-width: 100%;
-  }
-
-  /* Single row, 2-column layout for Customer Support & Information & Policies */
+  /* 1. Re-order: Move 2 columns to top, logo in middle, newsletter & social to bottom */
   .custom-footer-right {
+    order: 1 !important;
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
     align-items: flex-start !important;
     gap: 16px !important;
     width: 100% !important;
+  }
+
+  .custom-footer-middle-logo {
+    order: 2 !important;
+  }
+
+  .custom-footer-left {
+    order: 3 !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .custom-footer-nav-col {
@@ -346,13 +359,66 @@
     margin-bottom: 8px !important;
   }
 
+  /* 2 & 3. Newsletter input box: reduced height (36px), full length width (100%) */
+  .custom-footer-newsletter {
+    width: 100% !important;
+  }
+
+  .newsletter-form__field-wrapper,
+  .footer-newsletter-form .field {
+    width: 100% !important;
+  }
+
   .newsletter-field__input {
-    height: 42px !important;
-    padding: 0 42px 0 16px !important;
+    height: 36px !important;
+    padding: 0 36px 0 16px !important;
+    width: 100% !important;
+    border-radius: 20px !important;
+  }
+
+  /* 4. Reduce size of the arrow button in newsletter */
+  .newsletter-form__button {
+    width: 28px !important;
+    height: 28px !important;
+    right: 4px !important;
+  }
+
+  .newsletter-form__button svg {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  /* 5 & 6. Reduce size of social icons & align horizontally to center */
+  .custom-footer-social {
+    margin-top: 20px !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  .footer-social-list {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .footer-social-icon-link {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .footer-social-logo-img,
+  .footer-social-icon-link svg {
+    width: 15px !important;
+    height: 15px !important;
+    max-width: 15px !important;
+    max-height: 15px !important;
   }
 
   .custom-footer-bottom-bar {
-    margin-top: 32px;
+    margin-top: 28px;
     padding-top: 16px;
   }
 
