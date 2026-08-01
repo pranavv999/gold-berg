@@ -38,7 +38,7 @@
 .custom-footer-content-grid {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 64px;
 }
 
@@ -46,6 +46,7 @@
 .custom-footer-left {
   flex: 1;
   max-width: 440px;
+  align-self: flex-start;
 }
 
 /* Optional Middle Column: Brand Logo */
@@ -53,6 +54,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
   padding: 0 16px;
   box-sizing: border-box;
   text-align: center;
@@ -208,6 +210,7 @@
 .custom-footer-right {
   display: flex;
   gap: 80px;
+  align-self: flex-start;
 }
 
 .custom-footer-nav-col {
