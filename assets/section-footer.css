@@ -313,9 +313,18 @@
     gap: 28px !important;
   }
 
-  /* 1. Re-order: Move 2 columns to top, logo in middle, newsletter & social to bottom */
-  .custom-footer-right {
+  /* Mobile Flex Order: 1. Newsletter (Top) -> 2. Nav Columns (Middle) -> 3. Logo -> 4. Social Icons (Bottom) */
+  .custom-footer-left {
+    display: contents !important;
+  }
+
+  .custom-footer-newsletter {
     order: 1 !important;
+    width: 100% !important;
+  }
+
+  .custom-footer-right {
+    order: 2 !important;
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
@@ -325,13 +334,15 @@
   }
 
   .custom-footer-middle-logo {
-    order: 2 !important;
+    order: 3 !important;
   }
 
-  .custom-footer-left {
-    order: 3 !important;
+  .custom-footer-social {
+    order: 4 !important;
+    margin-top: 8px !important;
+    display: flex !important;
+    justify-content: center !important;
     width: 100% !important;
-    max-width: 100% !important;
   }
 
   .custom-footer-nav-col {
