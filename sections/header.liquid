@@ -916,17 +916,12 @@
       }
     }, { passive: true });
 
-    // Mobile Sub-category Accordion Toggle
+    // Mobile Sub-category Accordion Toggle (triggers on click of sub-category title or arrow)
     const subHeaders = document.querySelectorAll('.mega-menu-sub-header');
     subHeaders.forEach(header => {
       header.addEventListener('click', (e) => {
         // Only run accordion toggle on mobile screens (< 750px)
         if (window.innerWidth >= 750) return;
-
-        // If user clicked directly on title link, navigate naturally
-        const linkElem = e.target.closest('a');
-        const btnElem = e.target.closest('.mega-menu-toggle-btn');
-        if (linkElem && !btnElem) return;
 
         e.preventDefault();
         e.stopPropagation();
