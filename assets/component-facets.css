@@ -1314,6 +1314,23 @@ input.mobile-facets__checkbox {
   vertical-align: middle !important;
 }
 
+.facets__summary,
+.facets__summary:hover,
+.facets__summary:focus,
+.facets__summary-label,
+.facets__summary:hover .facets__summary-label,
+.facets__summary:focus .facets__summary-label,
+.facets__summary span,
+.facets__summary:hover span,
+.facets__summary:focus span,
+details[open] > .facets__summary .facets__summary-label,
+details[open] > .facets__summary span {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
 .facets__summary:hover {
   background: #eaeaea !important;
 }
