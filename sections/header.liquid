@@ -288,6 +288,63 @@
       max-width: 120px !important;
     }
   }
+
+  /* ==========================================================================
+     MEGA MENU DROPDOWN PANEL STYLES
+     ========================================================================== */
+  .custom-mega-menu-panel {
+    pointer-events: auto !important;
+    width: 100% !important;
+    background: rgba(var(--color-background), var(--glass-opacity)) !important;
+    backdrop-filter: blur(20px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+    border: 1px solid rgba(var(--color-foreground), 0.12) !important;
+    border-radius: var(--glass-radius) !important;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08) !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) scale(0.99) !important;
+    max-height: 0 !important;
+    margin-top: 8px !important;
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                margin 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                border-radius 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  /* Non-scrolled state (Top of page): match nav-bar length and seamless attachment */
+  .custom-glass-header-wrapper:not(.is-scrolled) .custom-mega-menu-panel {
+    margin-top: 0 !important;
+    border-top: none !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+
+  /* Scrolled state: rounded float matching navbar shape */
+  .custom-glass-header-wrapper.is-scrolled .custom-mega-menu-panel {
+    margin-top: 8px !important;
+    border-radius: var(--glass-radius) !important;
+  }
+
+  /* Open Active State */
+  .custom-glass-header-wrapper.mega-menu-open .custom-mega-menu-panel {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) scale(1) !important;
+    max-height: 80vh !important;
+  }
+
+  /* Inner Empty Structure */
+  .custom-mega-menu-inner {
+    padding: 32px !important;
+    box-sizing: border-box !important;
+    min-height: 240px !important;
+    width: 100% !important;
+  }
 </style>
 
 <div 
@@ -369,6 +426,13 @@
     </div>
     
   </header>
+
+  <!-- Mega Menu Dropdown Panel (Desktop & Mobile Structure) -->
+  <div class="custom-mega-menu-panel" id="custom-mega-menu-panel">
+    <div class="custom-mega-menu-inner" id="custom-mega-menu-inner">
+      {% comment %} Empty structure ready for menu content {% endcomment %}
+    </div>
+  </div>
 </div>
 
 
@@ -377,7 +441,30 @@
 {% javascript %}
   document.addEventListener('DOMContentLoaded', () => {
     const headerWrapper = document.getElementById('custom-glass-header-wrapper');
+    const hamburgerBtn = document.getElementById('header-hamburger-menu-btn');
     if (!headerWrapper) return;
+
+    // Toggle Mega Menu on Hamburger Click
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        headerWrapper.classList.toggle('mega-menu-open');
+      });
+    }
+
+    // Close Mega Menu when clicking outside header wrapper
+    document.addEventListener('click', (e) => {
+      if (headerWrapper.classList.contains('mega-menu-open') && !headerWrapper.contains(e.target)) {
+        headerWrapper.classList.remove('mega-menu-open');
+      }
+    });
+
+    // Close Mega Menu on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && headerWrapper.classList.contains('mega-menu-open')) {
+        headerWrapper.classList.remove('mega-menu-open');
+      }
+    });
 
     const threshold = 10; // Scroll threshold in pixels
 
