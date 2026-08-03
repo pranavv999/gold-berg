@@ -473,6 +473,18 @@
     color: rgb(var(--color-foreground)) !important;
     transform: translateX(3px) !important;
   }
+
+  /* Mobile Layout Adjustment (Placed at end of stylesheet to guarantee cascade override) */
+  @media screen and (max-width: 749px) {
+    .custom-mega-menu-inner {
+      padding: 24px 20px !important;
+    }
+
+    .custom-mega-menu-grid {
+      grid-template-columns: 1fr !important;
+      gap: 28px !important;
+    }
+  }
 </style>
 
 <div 
