@@ -469,12 +469,47 @@
     display: inline-block !important;
   }
 
-  .mega-menu-collection-link:hover {
-    color: rgb(var(--color-foreground)) !important;
-    transform: translateX(3px) !important;
+  /* Sub Category Header & Toggle Chevron Button */
+  .mega-menu-sub-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
   }
 
-  /* Mobile Layout Adjustment (Placed at end of stylesheet to guarantee cascade override) */
+  .mega-menu-toggle-btn {
+    display: none !important; /* Hidden on desktop view */
+    align-items: center !important;
+    justify-content: center !important;
+    width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    color: rgba(var(--color-foreground), 0.65) !important;
+    cursor: pointer !important;
+    outline: none !important;
+  }
+
+  .chevron-icon {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: block !important;
+  }
+
+  /* Desktop View Default: Collection List is always expanded */
+  @media screen and (min-width: 750px) {
+    .mega-menu-collection-list {
+      display: flex !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      max-height: none !important;
+      margin-top: 6px !important;
+    }
+  }
+
+  /* Mobile Layout Adjustment & Accordion (max-width: 749px) */
   @media screen and (max-width: 749px) {
     .custom-mega-menu-inner {
       padding: 24px 20px !important;
@@ -483,6 +518,45 @@
     .custom-mega-menu-grid {
       grid-template-columns: 1fr !important;
       gap: 28px !important;
+    }
+
+    .mega-menu-toggle-btn {
+      display: inline-flex !important; /* Visible on mobile */
+    }
+
+    .mega-menu-sub-header {
+      cursor: pointer !important;
+    }
+
+    /* Collapsed collection list on mobile */
+    .mega-menu-collection-list {
+      max-height: 0 !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      overflow: hidden !important;
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.25s ease,
+                  visibility 0.25s ease,
+                  margin 0.35s ease,
+                  padding 0.35s ease !important;
+    }
+
+    /* Expanded collection list on mobile when .is-open */
+    .mega-menu-sub-group.is-open .mega-menu-collection-list {
+      max-height: 500px !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      margin-top: 8px !important;
+      padding-top: 4px !important;
+    }
+
+    /* Rotate Chevron Down Arrow to Up Arrow when .is-open */
+    .mega-menu-sub-group.is-open .chevron-icon {
+      transform: rotate(180deg) !important;
+      color: rgb(var(--color-foreground)) !important;
     }
   }
 </style>
@@ -591,9 +665,18 @@
                 <div class="mega-menu-subcategories">
                   {%- for sub_cat in block_menu.links -%}
                     <div class="mega-menu-sub-group">
-                      <h4 class="mega-menu-sub-title">
-                        <a href="{{ sub_cat.url }}">{{ sub_cat.title | escape }}</a>
-                      </h4>
+                      <div class="mega-menu-sub-header">
+                        <h4 class="mega-menu-sub-title">
+                          <a href="{{ sub_cat.url }}">{{ sub_cat.title | escape }}</a>
+                        </h4>
+                        {%- if sub_cat.links.size > 0 -%}
+                          <button type="button" class="mega-menu-toggle-btn" aria-label="Toggle {{ sub_cat.title | escape }}" aria-expanded="false">
+                            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                              <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                          </button>
+                        {%- endif -%}
+                      </div>
 
                       {%- if sub_cat.links.size > 0 -%}
                         <ul class="mega-menu-collection-list">
@@ -625,9 +708,18 @@
                 <div class="mega-menu-subcategories">
                   {%- for sub_cat in main_cat.links -%}
                     <div class="mega-menu-sub-group">
-                      <h4 class="mega-menu-sub-title">
-                        <a href="{{ sub_cat.url }}">{{ sub_cat.title | escape }}</a>
-                      </h4>
+                      <div class="mega-menu-sub-header">
+                        <h4 class="mega-menu-sub-title">
+                          <a href="{{ sub_cat.url }}">{{ sub_cat.title | escape }}</a>
+                        </h4>
+                        {%- if sub_cat.links.size > 0 -%}
+                          <button type="button" class="mega-menu-toggle-btn" aria-label="Toggle {{ sub_cat.title | escape }}" aria-expanded="false">
+                            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                              <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                          </button>
+                        {%- endif -%}
+                      </div>
 
                       {%- if sub_cat.links.size > 0 -%}
                         <ul class="mega-menu-collection-list">
@@ -653,15 +745,30 @@
             <h3 class="mega-menu-main-title"><a href="/collections/all">TOP WEAR</a></h3>
             <div class="mega-menu-subcategories">
               <div class="mega-menu-sub-group">
-                <h4 class="mega-menu-sub-title"><a href="/collections/t-shirts">Oversized T-Shirts</a></h4>
+                <div class="mega-menu-sub-header">
+                  <h4 class="mega-menu-sub-title"><a href="/collections/t-shirts">Oversized T-Shirts</a></h4>
+                  <button type="button" class="mega-menu-toggle-btn" aria-label="Toggle Oversized T-Shirts" aria-expanded="false">
+                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                </div>
                 <ul class="mega-menu-collection-list">
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Anime</a></li>
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Minimalist Graphic</a></li>
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Vintage Wash</a></li>
                 </ul>
               </div>
+
               <div class="mega-menu-sub-group">
-                <h4 class="mega-menu-sub-title"><a href="/collections/shirts">Shirts</a></h4>
+                <div class="mega-menu-sub-header">
+                  <h4 class="mega-menu-sub-title"><a href="/collections/shirts">Shirts</a></h4>
+                  <button type="button" class="mega-menu-toggle-btn" aria-label="Toggle Shirts" aria-expanded="false">
+                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                </div>
                 <ul class="mega-menu-collection-list">
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Resort Collar</a></li>
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Oversized Linen</a></li>
@@ -674,15 +781,30 @@
             <h3 class="mega-menu-main-title"><a href="/collections/all">BOTTOM WEAR</a></h3>
             <div class="mega-menu-subcategories">
               <div class="mega-menu-sub-group">
-                <h4 class="mega-menu-sub-title"><a href="/collections/all">Denims</a></h4>
+                <div class="mega-menu-sub-header">
+                  <h4 class="mega-menu-sub-title"><a href="/collections/all">Denims</a></h4>
+                  <button type="button" class="mega-menu-toggle-btn" aria-label="Toggle Denims" aria-expanded="false">
+                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                </div>
                 <ul class="mega-menu-collection-list">
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Barrel Denims</a></li>
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Baggy Wide Fit</a></li>
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Distressed Vintage</a></li>
                 </ul>
               </div>
+
               <div class="mega-menu-sub-group">
-                <h4 class="mega-menu-sub-title"><a href="/collections/all">Cargo Pants</a></h4>
+                <div class="mega-menu-sub-header">
+                  <h4 class="mega-menu-sub-title"><a href="/collections/all">Cargo Pants</a></h4>
+                  <button type="button" class="mega-menu-toggle-btn" aria-label="Toggle Cargo Pants" aria-expanded="false">
+                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                </div>
                 <ul class="mega-menu-collection-list">
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Parachute Cargos</a></li>
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Tactical Multi-pocket</a></li>
@@ -695,7 +817,14 @@
             <h3 class="mega-menu-main-title"><a href="/collections/all">OUTERWEAR</a></h3>
             <div class="mega-menu-subcategories">
               <div class="mega-menu-sub-group">
-                <h4 class="mega-menu-sub-title"><a href="/collections/all">Jackets & Hoodies</a></h4>
+                <div class="mega-menu-sub-header">
+                  <h4 class="mega-menu-sub-title"><a href="/collections/all">Jackets & Hoodies</a></h4>
+                  <button type="button" class="mega-menu-toggle-btn" aria-label="Toggle Jackets & Hoodies" aria-expanded="false">
+                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                </div>
                 <ul class="mega-menu-collection-list">
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Heavyweight Hoodies</a></li>
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Bomber Jackets</a></li>
@@ -709,7 +838,14 @@
             <h3 class="mega-menu-main-title"><a href="/collections/all">ACCESSORIES</a></h3>
             <div class="mega-menu-subcategories">
               <div class="mega-menu-sub-group">
-                <h4 class="mega-menu-sub-title"><a href="/collections/all">Headwear & Gear</a></h4>
+                <div class="mega-menu-sub-header">
+                  <h4 class="mega-menu-sub-title"><a href="/collections/all">Headwear & Gear</a></h4>
+                  <button type="button" class="mega-menu-toggle-btn" aria-label="Toggle Headwear & Gear" aria-expanded="false">
+                    <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                </div>
                 <ul class="mega-menu-collection-list">
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Embroidered Caps</a></li>
                   <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Knit Beanies</a></li>
@@ -779,6 +915,42 @@
         ticking = true;
       }
     }, { passive: true });
+
+    // Mobile Sub-category Accordion Toggle
+    const subHeaders = document.querySelectorAll('.mega-menu-sub-header');
+    subHeaders.forEach(header => {
+      header.addEventListener('click', (e) => {
+        // Only run accordion toggle on mobile screens (< 750px)
+        if (window.innerWidth >= 750) return;
+
+        // If user clicked directly on title link, navigate naturally
+        const linkElem = e.target.closest('a');
+        const btnElem = e.target.closest('.mega-menu-toggle-btn');
+        if (linkElem && !btnElem) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const currentSubGroup = header.closest('.mega-menu-sub-group');
+        if (!currentSubGroup) return;
+
+        const isAlreadyOpen = currentSubGroup.classList.contains('is-open');
+
+        // Behavior 1: Close all other open sub-categories on mobile
+        document.querySelectorAll('.mega-menu-sub-group.is-open').forEach(group => {
+          group.classList.remove('is-open');
+          const toggleBtn = group.querySelector('.mega-menu-toggle-btn');
+          if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
+        });
+
+        // Behavior 2: Toggle clicked sub-category (expand if closed, contract if already open)
+        if (!isAlreadyOpen) {
+          currentSubGroup.classList.add('is-open');
+          const toggleBtn = currentSubGroup.querySelector('.mega-menu-toggle-btn');
+          if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
   });
 {% endjavascript %}
 
