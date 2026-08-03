@@ -361,15 +361,117 @@
     opacity: 1 !important;
     visibility: visible !important;
     transform: translateY(0) scale(1) !important;
-    max-height: 80vh !important;
+    max-height: 85vh !important;
+    overflow-y: auto !important;
   }
 
-  /* Inner Empty Structure */
+  /* Inner Structure & Desktop 4-Column Grid */
   .custom-mega-menu-inner {
-    padding: 32px !important;
+    padding: 40px 48px !important;
     box-sizing: border-box !important;
-    min-height: 240px !important;
+    height: auto !important;
     width: 100% !important;
+  }
+
+  .custom-mega-menu-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 40px 36px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Main Category Column (A) */
+  .mega-menu-col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    min-width: 0 !important;
+  }
+
+  .mega-menu-main-title {
+    font-family: var(--font-heading-family), sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    color: rgb(var(--color-foreground)) !important;
+    margin: 0 0 4px 0 !important;
+    padding-bottom: 8px !important;
+    border-bottom: 1.5px solid rgba(var(--color-foreground), 0.12) !important;
+  }
+
+  .mega-menu-main-title a {
+    color: inherit !important;
+    text-decoration: none !important;
+    transition: opacity 0.2s ease !important;
+  }
+
+  .mega-menu-main-title a:hover {
+    opacity: 0.65 !important;
+  }
+
+  /* Sub Categories Container (B) */
+  .mega-menu-subcategories {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+
+  .mega-menu-sub-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .mega-menu-sub-title {
+    font-family: var(--font-body-family), sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    color: rgba(var(--color-foreground), 0.85) !important;
+    margin: 0 !important;
+  }
+
+  .mega-menu-sub-title a {
+    color: inherit !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+  }
+
+  .mega-menu-sub-title a:hover {
+    color: rgb(var(--color-foreground)) !important;
+  }
+
+  /* Collection Name Links List (C) */
+  .mega-menu-collection-list {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 0 0 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    border-left: 1.5px solid rgba(var(--color-foreground), 0.1) !important;
+  }
+
+  .mega-menu-collection-item {
+    margin: 0 !important;
+  }
+
+  .mega-menu-collection-link {
+    font-family: var(--font-body-family), sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 400 !important;
+    color: rgba(var(--color-foreground), 0.65) !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease, transform 0.2s ease !important;
+    display: inline-block !important;
+  }
+
+  .mega-menu-collection-link:hover {
+    color: rgb(var(--color-foreground)) !important;
+    transform: translateX(3px) !important;
   }
 </style>
 
@@ -453,10 +555,159 @@
     
   </header>
 
-  <!-- Mega Menu Dropdown Panel (Desktop & Mobile Structure) -->
+  <!-- Mega Menu Dropdown Panel (Desktop 4-Column Structure) -->
   <div class="custom-mega-menu-panel" id="custom-mega-menu-panel">
     <div class="custom-mega-menu-inner" id="custom-mega-menu-inner">
-      {% comment %} Empty structure ready for menu content {% endcomment %}
+      {%- liquid
+        assign mega_menu = section.settings.menu | default: linklists['main-menu']
+        assign main_category_blocks = section.blocks | where: 'type', 'main_category'
+      -%}
+
+      <div class="custom-mega-menu-grid">
+        {%- if main_category_blocks.size > 0 -%}
+          {% comment %} 1. Customizer Blocks Mode: Render section.blocks added directly in Theme Customizer {% endcomment %}
+          {%- for block in main_category_blocks -%}
+            <div class="mega-menu-col" {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}
+                <h3 class="mega-menu-main-title">
+                  <a href="{{ block.settings.url | default: '#' }}">{{ block.settings.title | escape }}</a>
+                </h3>
+              {%- endif -%}
+
+              {%- assign block_menu = block.settings.menu -%}
+              {%- if block_menu != blank and block_menu.links.size > 0 -%}
+                <div class="mega-menu-subcategories">
+                  {%- for sub_cat in block_menu.links -%}
+                    <div class="mega-menu-sub-group">
+                      <h4 class="mega-menu-sub-title">
+                        <a href="{{ sub_cat.url }}">{{ sub_cat.title | escape }}</a>
+                      </h4>
+
+                      {%- if sub_cat.links.size > 0 -%}
+                        <ul class="mega-menu-collection-list">
+                          {%- for coll_item in sub_cat.links -%}
+                            <li class="mega-menu-collection-item">
+                              <a href="{{ coll_item.url }}" class="mega-menu-collection-link">
+                                {{ coll_item.title | escape }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+
+        {%- elsif mega_menu != blank and mega_menu.links.size > 0 -%}
+          {% comment %} 2. Shopify Navigation Menu Mode: Render 3-level menu from Shopify Admin -> Navigation {% endcomment %}
+          {%- for main_cat in mega_menu.links -%}
+            <div class="mega-menu-col">
+              <h3 class="mega-menu-main-title">
+                <a href="{{ main_cat.url }}">{{ main_cat.title | escape }}</a>
+              </h3>
+
+              {%- if main_cat.links.size > 0 -%}
+                <div class="mega-menu-subcategories">
+                  {%- for sub_cat in main_cat.links -%}
+                    <div class="mega-menu-sub-group">
+                      <h4 class="mega-menu-sub-title">
+                        <a href="{{ sub_cat.url }}">{{ sub_cat.title | escape }}</a>
+                      </h4>
+
+                      {%- if sub_cat.links.size > 0 -%}
+                        <ul class="mega-menu-collection-list">
+                          {%- for coll_item in sub_cat.links -%}
+                            <li class="mega-menu-collection-item">
+                              <a href="{{ coll_item.url }}" class="mega-menu-collection-link">
+                                {{ coll_item.title | escape }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+
+        {%- else -%}
+          {% comment %} 3. Rich Default Demo Menu Structure (Top wear, Bottom wear, Outerwear, Accessories) {% endcomment %}
+          <div class="mega-menu-col">
+            <h3 class="mega-menu-main-title"><a href="/collections/all">TOP WEAR</a></h3>
+            <div class="mega-menu-subcategories">
+              <div class="mega-menu-sub-group">
+                <h4 class="mega-menu-sub-title"><a href="/collections/t-shirts">Oversized T-Shirts</a></h4>
+                <ul class="mega-menu-collection-list">
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Anime</a></li>
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Minimalist Graphic</a></li>
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Vintage Wash</a></li>
+                </ul>
+              </div>
+              <div class="mega-menu-sub-group">
+                <h4 class="mega-menu-sub-title"><a href="/collections/shirts">Shirts</a></h4>
+                <ul class="mega-menu-collection-list">
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Resort Collar</a></li>
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Oversized Linen</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="mega-menu-col">
+            <h3 class="mega-menu-main-title"><a href="/collections/all">BOTTOM WEAR</a></h3>
+            <div class="mega-menu-subcategories">
+              <div class="mega-menu-sub-group">
+                <h4 class="mega-menu-sub-title"><a href="/collections/all">Denims</a></h4>
+                <ul class="mega-menu-collection-list">
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Barrel Denims</a></li>
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Baggy Wide Fit</a></li>
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Distressed Vintage</a></li>
+                </ul>
+              </div>
+              <div class="mega-menu-sub-group">
+                <h4 class="mega-menu-sub-title"><a href="/collections/all">Cargo Pants</a></h4>
+                <ul class="mega-menu-collection-list">
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Parachute Cargos</a></li>
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Tactical Multi-pocket</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="mega-menu-col">
+            <h3 class="mega-menu-main-title"><a href="/collections/all">OUTERWEAR</a></h3>
+            <div class="mega-menu-subcategories">
+              <div class="mega-menu-sub-group">
+                <h4 class="mega-menu-sub-title"><a href="/collections/all">Jackets & Hoodies</a></h4>
+                <ul class="mega-menu-collection-list">
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Heavyweight Hoodies</a></li>
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Bomber Jackets</a></li>
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Fleece Zip-Ups</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="mega-menu-col">
+            <h3 class="mega-menu-main-title"><a href="/collections/all">ACCESSORIES</a></h3>
+            <div class="mega-menu-subcategories">
+              <div class="mega-menu-sub-group">
+                <h4 class="mega-menu-sub-title"><a href="/collections/all">Headwear & Gear</a></h4>
+                <ul class="mega-menu-collection-list">
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Embroidered Caps</a></li>
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Knit Beanies</a></li>
+                  <li class="mega-menu-collection-item"><a href="/collections/all" class="mega-menu-collection-link">Tote Bags</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
     </div>
   </div>
 </div>
@@ -559,6 +810,38 @@
       "default": 16,
       "unit": "px",
       "label": "Scrolled Border Radius"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Mega Menu Navigation",
+      "default": "main-menu",
+      "info": "Select a 3-level menu (Main Category -> Sub Category -> Collection Name) created in Shopify Admin -> Navigation."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "main_category",
+      "name": "Main Category Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Main Category Title",
+          "default": "Top wear"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Main Category Link"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Sub Categories & Collections Menu",
+          "info": "Nested menu containing Sub Categories (Level 1) and Collection Links (Level 2)."
+        }
+      ]
     }
   ]
 }
