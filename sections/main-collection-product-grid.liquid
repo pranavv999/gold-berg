@@ -251,6 +251,115 @@
     display: none !important;
   }
 
+  /* 6. Filter Dropdown Popups Typography & Styling */
+  .facets__display {
+    background-color: #ffffff !important;
+    border: 1px solid #e5e5e7 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  }
+
+  .facets__header {
+    padding: 14px 18px !important;
+    border-bottom: 1px solid #f0f0f2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .facets__selected {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #1d1d1f !important;
+    letter-spacing: 0 !important;
+  }
+
+  .facets__reset {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #1d1d1f !important;
+    text-decoration: underline !important;
+    text-underline-offset: 3px !important;
+    transition: opacity 0.2s ease !important;
+  }
+
+  .facets__reset:hover {
+    opacity: 0.7 !important;
+  }
+
+  .facets__list {
+    padding: 8px 12px !important;
+  }
+
+  .facet-checkbox {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: #1d1d1f !important;
+    padding: 8px 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    cursor: pointer !important;
+    border-radius: 6px !important;
+    transition: background-color 0.15s ease !important;
+  }
+
+  .facet-checkbox:hover {
+    background-color: #f7f7f9 !important;
+  }
+
+  .facet-checkbox__text,
+  .facet-checkbox__text-label {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: #1d1d1f !important;
+    line-height: 1.4 !important;
+  }
+
+  .facets__price {
+    padding: 16px 18px !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  }
+
+  .facets__price .field {
+    align-items: center !important;
+  }
+
+  .facets__price .field__currency {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #1d1d1f !important;
+    margin-right: 6px !important;
+  }
+
+  .facets__price .field__input {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    color: #1d1d1f !important;
+    border: 1px solid #d1d1d6 !important;
+    border-radius: 6px !important;
+    padding: 8px 12px !important;
+    box-shadow: none !important;
+  }
+
+  .facets__price .field__input:focus {
+    border-color: #1d1d1f !important;
+    outline: none !important;
+  }
+
+  .facets__price .field__label {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 12px !important;
+    color: #86868b !important;
+  }
+
   /* Force 100% Full Width and 24px Side Padding on Collection Page */
   body.template-collection .page-width,
   main[data-template="collection"] .page-width,
