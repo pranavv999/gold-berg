@@ -316,16 +316,8 @@
                 border-radius 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
-  /* Non-scrolled state (Top of page): match nav-bar length and seamless attachment */
-  .custom-glass-header-wrapper:not(.is-scrolled) .custom-mega-menu-panel {
-    margin-top: 0 !important;
-    border-top: none !important;
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-  }
-
-  /* Scrolled state: rounded float matching navbar shape */
-  .custom-glass-header-wrapper.is-scrolled .custom-mega-menu-panel {
+  /* Consistent 8px gap and rounded corners in both scrolled and non-scrolled states */
+  .custom-mega-menu-panel {
     margin-top: 8px !important;
     border-radius: var(--glass-radius) !important;
   }
