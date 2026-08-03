@@ -34,6 +34,64 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Force 100% Full Width and 24px Side Padding on Collection Page */
+  body.template-collection .page-width,
+  main[data-template="collection"] .page-width,
+  .template-collection .page-width,
+  .page-width.facets-vertical,
+  .facets-wrapper.page-width,
+  .collection.page-width,
+  .collection-hero__inner.page-width {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    body.template-collection .page-width,
+    main[data-template="collection"] .page-width,
+    .template-collection .page-width,
+    .page-width.facets-vertical,
+    .facets-wrapper.page-width,
+    .collection.page-width,
+    .collection-hero__inner.page-width {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
+  }
+
+  /* Enforce 4-Column Grid Layout on Desktop & Tablet */
+  @media screen and (min-width: 750px) {
+    body.template-collection #product-grid,
+    main[data-template="collection"] #product-grid,
+    .template-collection #product-grid,
+    .product-grid {
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr) !important;
+      column-gap: 1.8rem !important;
+      row-gap: 3.5rem !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    body.template-collection #product-grid .grid__item,
+    main[data-template="collection"] #product-grid .grid__item,
+    .template-collection #product-grid .grid__item,
+    .product-grid .grid__item {
+      width: 100% !important;
+      max-width: 100% !important;
+      flex: none !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
 {%- endstyle -%}
 
 <collection-component
