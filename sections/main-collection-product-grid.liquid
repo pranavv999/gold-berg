@@ -373,6 +373,100 @@
     overflow: hidden !important;
   }
 
+  /* Custom Collection Typography for Product Title and Prices */
+  .card__heading,
+  .card__heading a,
+  .card-information .card__heading,
+  .card-information .card__heading a,
+  .full-unstyled-link {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: #1d1d1f !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.01em !important;
+    margin: 0 0 4px 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-decoration: none !important;
+  }
+
+  .card__heading a:hover,
+  .full-unstyled-link:hover {
+    color: #1d1d1f !important;
+    text-decoration: none !important;
+  }
+
+  .price,
+  .price__container,
+  .card-information .price {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    margin-top: 2px !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  }
+
+  .price.price--on-sale .price__regular {
+    display: none !important;
+  }
+
+  .price.price--on-sale .price__sale {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .price:not(.price--on-sale) .price__sale {
+    display: none !important;
+  }
+
+  .price:not(.price--on-sale) .price__regular {
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .price__sale .price-item--sale {
+    order: 1 !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #6e6e73 !important;
+    line-height: 1.3 !important;
+    letter-spacing: 0 !important;
+    text-decoration: none !important;
+  }
+
+  .price__sale span:has(s),
+  .price__sale s {
+    order: 2 !important;
+  }
+
+  .price:not(.price--on-sale) .price-item--regular {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #6e6e73 !important;
+    line-height: 1.3 !important;
+    letter-spacing: 0 !important;
+    text-decoration: none !important;
+  }
+
+  .price s,
+  .price s .price-item,
+  .price s.price-item,
+  .price-item--regular.variant-item__old-price {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    text-decoration: line-through !important;
+    color: #aeaeaf !important;
+    line-height: 1.3 !important;
+    letter-spacing: 0 !important;
+  }
+
   /* Force 100% Full Width and 24px Side Padding on Collection Page */
   body.template-collection .page-width,
   main[data-template="collection"] .page-width,
