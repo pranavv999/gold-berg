@@ -26,14 +26,12 @@ class CartDrawer extends HTMLElement {
   }
 
   open(triggeredBy) {
-    if (this.classList.contains('active')) return;
     if (triggeredBy) this.setActiveElement(triggeredBy);
     const cartDrawerNote = this.querySelector('[id^="Details-"] summary');
     if (cartDrawerNote && !cartDrawerNote.hasAttribute('role')) this.setSummaryAccessibility(cartDrawerNote);
-    // here the animation doesn't seem to always get triggered. A timeout seem to help
-    setTimeout(() => {
-      this.classList.add('animate', 'active');
-    });
+    
+    this.classList.add('animate', 'active');
+    document.body.classList.add('overflow-hidden');
 
     this.addEventListener(
       'transitionend',
@@ -42,16 +40,13 @@ class CartDrawer extends HTMLElement {
           ? this.querySelector('.drawer__inner-empty')
           : document.getElementById('CartDrawer');
         const focusElement = this.querySelector('.drawer__inner') || this.querySelector('.drawer__close');
-        trapFocus(containerToTrapFocusOn, focusElement);
+        if (containerToTrapFocusOn && focusElement) {
+          trapFocus(containerToTrapFocusOn, focusElement);
+        }
       },
       { once: true },
     );
 
-    document.body.classList.add('overflow-hidden');
-
-    // cart-drawer-items is a CartItems subclass that extends createViewEventElement.
-    // Its `view-event-trigger="manual"` skips auto-dispatch on connect; we fire
-    // it here when the drawer opens, with `context: 'dialog'` from the payload attribute.
     this.querySelector('cart-drawer-items')?.dispatchViewEvent();
   }
 
@@ -77,22 +72,34 @@ class CartDrawer extends HTMLElement {
   }
 
   renderContents(parsedState) {
-    this.querySelector('.drawer__inner').classList.contains('is-empty') &&
-      this.querySelector('.drawer__inner').classList.remove('is-empty');
-    this.productId = parsedState.id;
-    this.getSectionsToRender().forEach((section) => {
-      const sectionElement = section.selector
-        ? document.querySelector(section.selector)
-        : document.getElementById(section.id);
+    this.open();
+    this.querySelector('.drawer__inner')?.classList.remove('is-empty');
+    if (parsedState && parsedState.id) this.productId = parsedState.id;
 
-      if (!sectionElement) return;
-      sectionElement.innerHTML = this.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
-    });
+    if (parsedState && parsedState.sections) {
+      this.getSectionsToRender().forEach((section) => {
+        const sectionElement = section.selector
+          ? document.querySelector(section.selector)
+          : document.getElementById(section.id);
 
-    setTimeout(() => {
-      this.querySelector('#CartDrawer-Overlay').addEventListener('click', this.close.bind(this));
-      this.open();
-    });
+        if (!sectionElement || !parsedState.sections[section.id]) return;
+        const newHtml = this.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
+        if (newHtml) sectionElement.innerHTML = newHtml;
+      });
+    }
+
+    const fetchCartUrl = window.routes ? window.routes.cart_url : '/cart';
+    fetch(`${fetchCartUrl}?section_id=cart-drawer`)
+      .then((res) => res.text())
+      .then((html) => {
+        const parsed = new DOMParser().parseFromString(html, 'text/html');
+        const newDrawerInner = parsed.querySelector('#CartDrawer');
+        const currentDrawerInner = document.querySelector('#CartDrawer');
+        if (newDrawerInner && currentDrawerInner) {
+          currentDrawerInner.innerHTML = newDrawerInner.innerHTML;
+        }
+      })
+      .catch((e) => console.error('Cart drawer refresh error:', e));
   }
 
   getSectionInnerHTML(html, selector = '.shopify-section') {

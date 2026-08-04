@@ -832,12 +832,69 @@
     });
   }
 
+  // AJAX Add To Bag Form Submit Logic
+  function initAddToCartForm() {
+    const form = document.getElementById('product-form-custom');
+    if (!form || form.dataset.ajaxBound) return;
+    form.dataset.ajaxBound = 'true';
+
+    form.addEventListener('submit', function(evt) {
+      evt.preventDefault();
+      
+      const submitBtn = form.querySelector('button[name="add"]');
+      if (submitBtn) submitBtn.disabled = true;
+
+      const formData = new FormData(form);
+      const cartDrawer = document.querySelector('cart-drawer');
+      
+      if (cartDrawer && typeof cartDrawer.getSectionsToRender === 'function') {
+        const sections = cartDrawer.getSectionsToRender().map(s => s.id);
+        formData.append('sections', sections.join(','));
+        formData.append('sections_url', window.location.pathname);
+      } else {
+        formData.append('sections', 'cart-drawer,cart-icon-bubble');
+      }
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: formData
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.status) {
+          alert(response.description || response.message || 'Error adding to bag');
+          return;
+        }
+
+        // Re-render cart drawer & open it
+        const drawer = document.querySelector('cart-drawer');
+        if (drawer) {
+          if (typeof drawer.renderContents === 'function') {
+            drawer.renderContents(response);
+          } else if (typeof drawer.open === 'function') {
+            drawer.open();
+          }
+        }
+      })
+      .catch(err => {
+        console.error('Error adding to cart:', err);
+      })
+      .finally(() => {
+        if (submitBtn) submitBtn.disabled = false;
+      });
+    });
+  }
+
   // Run initialization on loads
   document.addEventListener('DOMContentLoaded', () => {
     initInvertedScroll();
     initVariantSelector();
     initTabSwitching();
     initMobileMediaSlider();
+    initAddToCartForm();
   });
   
   document.addEventListener('shopify:section:load', () => {
@@ -845,6 +902,7 @@
     initVariantSelector();
     initTabSwitching();
     initMobileMediaSlider();
+    initAddToCartForm();
   });
 {%- endjavascript -%}
 
