@@ -412,3 +412,319 @@ cart-drawer-items::-webkit-scrollbar-track-piece {
     margin-left: 0;
   }
 }
+
+/* ============================================================
+   Floating Glassmorphism Cart Drawer (Matching ZICA BELLA UI)
+   ============================================================ */
+cart-drawer,
+.drawer,
+#CartDrawer {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100% !important;
+  z-index: 999999999 !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: stretch !important;
+  box-sizing: border-box !important;
+  transition: visibility 0.3s ease !important;
+}
+
+body.overflow-hidden > *:not(cart-drawer):not(#CartDrawer) {
+  filter: blur(2.5px) !important;
+  transition: filter 0.3s ease !important;
+}
+
+.cart-drawer__overlay {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  background: rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  z-index: 999999998 !important;
+}
+
+.drawer__inner {
+  position: relative !important;
+  z-index: 999999999 !important;
+  width: 440px !important;
+  max-width: calc(100vw - 32px) !important;
+  margin: 16px !important;
+  height: calc(100% - 32px) !important;
+  border-radius: 28px !important;
+  background: rgba(240, 240, 242, 0.85) !important;
+  backdrop-filter: blur(30px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25) !important;
+  padding: 24px 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Header */
+.drawer__header {
+  padding: 0 4px 16px 4px !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 16px !important;
+}
+
+.drawer__header-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.drawer__header-left svg {
+  color: #1d1d1f !important;
+}
+
+.drawer__heading {
+  margin: 0 !important;
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #1d1d1f !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+
+.cart-drawer__badge {
+  background: rgba(0, 0, 0, 0.08) !important;
+  color: #1d1d1f !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  border-radius: 12px !important;
+  padding: 2px 8px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.drawer__close {
+  position: static !important;
+  min-width: auto !important;
+  min-height: auto !important;
+  padding: 4px !important;
+  color: #6e6e73 !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+.drawer__close .svg-wrapper {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+/* Item List */
+.cart-drawer .cart-items,
+.cart-drawer tbody {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+.cart-drawer thead {
+  display: none !important;
+}
+
+.cart-drawer .cart-item {
+  display: grid !important;
+  grid-template-columns: 72px 1fr !important;
+  grid-template-rows: auto auto !important;
+  gap: 10px 14px !important;
+  background: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+  border-radius: 16px !important;
+  padding: 14px 16px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+
+.cart-drawer .cart-item__media {
+  grid-column: 1 !important;
+  grid-row: 1 / 3 !important;
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  background: #ffffff !important;
+  padding: 0 !important;
+}
+
+.cart-drawer .cart-item__image {
+  width: 72px !important;
+  height: 72px !important;
+  object-fit: cover !important;
+  border-radius: 12px !important;
+}
+
+.cart-drawer .cart-item__details {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  padding: 0 !important;
+}
+
+.cart-drawer .cart-item__name {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #1d1d1f !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.03em !important;
+  margin: 0 !important;
+  line-height: 1.3 !important;
+  text-decoration: none !important;
+}
+
+.cart-drawer .product-option {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 11px !important;
+  color: #86868b !important;
+  margin-top: 2px !important;
+  text-transform: uppercase !important;
+}
+
+.cart-drawer .cart-item__totals {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+.cart-drawer .cart-item__totals .price {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #1d1d1f !important;
+}
+
+.cart-drawer .cart-item__quantity {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  padding: 0 !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+}
+
+.cart-drawer quantity-input.quantity {
+  width: 90px !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  background: rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  border-radius: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 4px !important;
+}
+
+.cart-drawer .quantity__button {
+  width: 24px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #1d1d1f !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.cart-drawer .quantity__input {
+  width: 28px !important;
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #1d1d1f !important;
+  text-align: center !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.cart-drawer .cart-remove-button {
+  display: none !important;
+}
+
+/* Footer Section */
+.drawer__footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+  padding: 16px 4px 4px 4px !important;
+  margin-top: auto !important;
+  background: transparent !important;
+}
+
+.cart-drawer .totals {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 16px !important;
+}
+
+.cart-drawer .totals__total {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: #86868b !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+}
+
+.cart-drawer .totals__total-value {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #1d1d1f !important;
+  margin: 0 !important;
+}
+
+.cart-drawer .tax-note {
+  display: none !important;
+}
+
+.cart-drawer .cart__checkout-button {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 30px !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+.cart-drawer .cart__checkout-button:hover {
+  background: #1d1d1f !important;
+  transform: translateY(-1px) !important;
+}
+
+
