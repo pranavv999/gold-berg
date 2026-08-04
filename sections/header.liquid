@@ -17,6 +17,11 @@
     z-index: 999999 !important;
   }
 
+  :root {
+    --glass-opacity: {{ section.settings.glass_opacity | divided_by: 100.0 }};
+    --glass-radius: {{ section.settings.glass_radius }}px;
+  }
+
   /* Custom Glassmorphic Header CSS */
   .custom-glass-header-wrapper {
     position: fixed !important;
