@@ -696,10 +696,15 @@ body.overflow-hidden > *:not(cart-drawer):not(#CartDrawer) {
 
 /* Footer Section */
 .drawer__footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
-  padding: 16px 4px 4px 4px !important;
+  background: rgba(255, 255, 255, 0.45) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+  border-radius: 20px !important;
+  padding: 16px 18px !important;
   margin-top: auto !important;
-  background: transparent !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+  box-sizing: border-box !important;
 }
 
 .cart-drawer .totals {
