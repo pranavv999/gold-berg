@@ -73,11 +73,15 @@
   background: transparent;
 }
 
-.card .card__inner .card__media {
-  overflow: hidden;
-  /* Fix for Safari border bug on hover */
+.card .card__inner .card__media,
+.card__inner,
+.card__media,
+.card__media img,
+.card .media img {
+  overflow: hidden !important;
+  /* Rounded corners for product card images */
   z-index: 0;
-  border-radius: calc(var(--border-radius) - var(--border-width) - var(--image-padding));
+  border-radius: 10px !important;
 }
 
 .card--card .card__inner .card__media {
