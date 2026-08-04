@@ -691,6 +691,63 @@
   </div>
 </collection-component>
 
+<script>
+  function initCollectionCardSliders() {
+    document.querySelectorAll('.card-image-slider-wrapper:not(.slider-initialized)').forEach(wrapper => {
+      wrapper.classList.add('slider-initialized');
+      const track = wrapper.querySelector('.card-image-slider-track');
+      const prev = wrapper.querySelector('.card-slider-arrow--prev');
+      const next = wrapper.querySelector('.card-slider-arrow--next');
+      const dots = wrapper.querySelectorAll('.slider-dot');
+      const slides = track ? track.querySelectorAll('.card-slider-slide') : [];
+      const total = slides.length;
+      let index = 0;
+      
+      if (!prev || !next || total <= 1) return;
+      
+      function updateSlider() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((dot, idx) => {
+          if (idx === index) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+      
+      prev.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        index = (index - 1 + total) % total;
+        updateSlider();
+      });
+      
+      next.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        index = (index + 1) % total;
+        updateSlider();
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCollectionCardSliders);
+  } else {
+    initCollectionCardSliders();
+  }
+  document.addEventListener('shopify:section:load', initCollectionCardSliders);
+
+  const observer = new MutationObserver(() => {
+    initCollectionCardSliders();
+  });
+  const targetNode = document.getElementById('ProductGridContainer') || document.getElementById('product-grid');
+  if (targetNode) {
+    observer.observe(targetNode, { childList: true, subtree: true });
+  }
+</script>
+
 {% schema %}
 {
   "name": "t:sections.main-collection-product-grid.name",
