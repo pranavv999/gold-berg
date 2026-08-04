@@ -1569,3 +1569,84 @@ details[open] > .facets__summary span {
   font-size: 12px !important;
   color: #86868b !important;
 }
+
+/* ============================================================
+   Mobile "Filter and sort" Grey Pill & Typography Styling
+   ============================================================ */
+.mobile-facets__open-wrapper {
+  display: inline-block !important;
+}
+
+.mobile-facets__open {
+  background: #f4f4f6 !important;
+  border-radius: 30px !important;
+  padding: 0 16px !important;
+  border: none !important;
+  box-shadow: none !important;
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #1d1d1f !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  width: auto !important;
+  margin: 0 !important;
+  text-decoration: none !important;
+}
+
+.mobile-facets__open:hover,
+.mobile-facets__open:focus {
+  background: #eaeaea !important;
+  color: #1d1d1f !important;
+  text-decoration: none !important;
+}
+
+.mobile-facets__open > * + * {
+  margin-left: 6px !important;
+}
+
+.mobile-facets__open .svg-wrapper {
+  width: 14px !important;
+  height: 14px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-right: 2px !important;
+  margin-left: 0 !important;
+}
+
+.mobile-facets__open .svg-wrapper svg,
+.mobile-facets__open line,
+.mobile-facets__open circle {
+  stroke: #1d1d1f !important;
+}
+
+.mobile-facets__open-label {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #1d1d1f !important;
+  text-decoration: none !important;
+  line-height: 1 !important;
+}
+
+.mobile-facets__open:hover .mobile-facets__open-label {
+  text-decoration: none !important;
+}
+
+/* Mobile Facets Drawer Typography */
+.mobile-facets__inner,
+.mobile-facets__summary,
+.mobile-facets__label,
+.mobile-facets__item,
+.mobile-facets__heading,
+.mobile-facets__footer .button {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
