@@ -65,8 +65,10 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
   }
 
   resetQuantityInput(id) {
-    const input = this.querySelector(`#Quantity-${id}`);
-    input.value = input.getAttribute('value');
+    const input = document.querySelector(`#Quantity-${id}`) || document.querySelector(`#Drawer-quantity-${id}`);
+    if (input) {
+      input.value = input.getAttribute('value') || '1';
+    }
     this.isEnterPressed = false;
   }
 
@@ -82,12 +84,15 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
     const index = event.target.dataset.index;
     let message = '';
 
-    if (inputValue < event.target.dataset.min) {
-      message = window.quickOrderListStrings.min_error.replace('[min]', event.target.dataset.min);
-    } else if (inputValue > parseInt(event.target.max)) {
-      message = window.quickOrderListStrings.max_error.replace('[max]', event.target.max);
-    } else if (inputValue % parseInt(event.target.step) !== 0) {
-      message = window.quickOrderListStrings.step_error.replace('[step]', event.target.step);
+    const isCart = this.tagName === 'CART-DRAWER-ITEMS' || this.tagName === 'CART-ITEMS' || this.closest('cart-drawer') || this.closest('#CartDrawer');
+    const min = parseInt(event.target.dataset.min || '1');
+
+    if (inputValue > 0 && inputValue < min && !isCart) {
+      message = window.quickOrderListStrings?.min_error ? window.quickOrderListStrings.min_error.replace('[min]', min) : `Minimum quantity is ${min}`;
+    } else if (event.target.max && inputValue > parseInt(event.target.max)) {
+      message = window.quickOrderListStrings?.max_error ? window.quickOrderListStrings.max_error.replace('[max]', event.target.max) : `Maximum quantity is ${event.target.max}`;
+    } else if (event.target.step && inputValue % parseInt(event.target.step) !== 0) {
+      message = window.quickOrderListStrings?.step_error ? window.quickOrderListStrings.step_error.replace('[step]', event.target.step) : `Quantity must be in steps of ${event.target.step}`;
     }
 
     if (message) {
@@ -95,11 +100,12 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
     } else {
       event.target.setCustomValidity('');
       event.target.reportValidity();
+      const activeName = document.activeElement ? document.activeElement.getAttribute('name') : null;
       this.updateQuantity(
         index,
         inputValue,
         event,
-        document.activeElement.getAttribute('name'),
+        activeName || 'minus',
         event.target.dataset.quantityVariantId
       );
     }
