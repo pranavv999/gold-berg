@@ -154,7 +154,7 @@
     background: #f4f4f6 !important;
     border-radius: 30px !important;
     border: none !important;
-    padding: 0 32px 0 16px !important;
+    padding: 0 !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -162,6 +162,7 @@
     height: 34px !important;
     min-height: 34px !important;
     width: auto !important;
+    min-width: 145px !important;
     max-width: none !important;
     box-sizing: border-box !important;
     vertical-align: middle !important;
@@ -181,20 +182,21 @@
     font-size: 12px !important;
     font-weight: 500 !important;
     color: #1d1d1f !important;
-    padding: 0 !important;
+    padding: 0 38px 0 20px !important;
     margin: 0 !important;
     height: 34px !important;
     line-height: 34px !important;
-    width: auto !important;
+    width: 100% !important;
     cursor: pointer !important;
     appearance: none !important;
     -webkit-appearance: none !important;
     white-space: nowrap !important;
+    box-sizing: border-box !important;
   }
 
   .facet-filters__field .select .svg-wrapper {
     position: absolute !important;
-    right: 14px !important;
+    right: 16px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     pointer-events: none !important;
@@ -203,6 +205,7 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+    z-index: 2 !important;
   }
 
   /* 5. Product Count Pill ("11 products") */
