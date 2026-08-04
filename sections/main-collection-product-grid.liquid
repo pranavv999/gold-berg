@@ -693,36 +693,32 @@
 
 <script>
   function initCollectionCardSliders() {
-    document.querySelectorAll('.card-image-slider-wrapper:not(.slider-initialized)').forEach(wrapper => {
+    document.querySelectorAll('.card-image-slider-wrapper:not(.slider-initialized)').forEach(function(wrapper) {
       wrapper.classList.add('slider-initialized');
-      const track = wrapper.querySelector('.card-image-slider-track');
-      const prev = wrapper.querySelector('.card-slider-arrow--prev');
-      const next = wrapper.querySelector('.card-slider-arrow--next');
-      const dots = wrapper.querySelectorAll('.slider-dot');
-      const slides = track ? track.querySelectorAll('.card-slider-slide') : [];
-      const total = slides.length;
-      let index = 0;
-      
+      var track = wrapper.querySelector('.card-image-slider-track');
+      var prev  = wrapper.querySelector('.card-slider-arrow--prev');
+      var next  = wrapper.querySelector('.card-slider-arrow--next');
+      var dots  = wrapper.querySelectorAll('.slider-dot');
+      var slides = track ? track.querySelectorAll('.card-slider-slide') : [];
+      var total = slides.length;
+      var index = 0;
+
       if (!prev || !next || total <= 1) return;
-      
+
       function updateSlider() {
-        track.style.transform = `translateX(-${index * 100}%)`;
-        dots.forEach((dot, idx) => {
-          if (idx === index) {
-            dot.classList.add('active');
-          } else {
-            dot.classList.remove('active');
-          }
+        track.style.transform = 'translateX(-' + (index * 100) + '%)';
+        dots.forEach(function(dot, idx) {
+          dot.classList.toggle('active', idx === index);
         });
       }
-      
+
       prev.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
         index = (index - 1 + total) % total;
         updateSlider();
       });
-      
+
       next.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -732,21 +728,15 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCollectionCardSliders);
-  } else {
-    initCollectionCardSliders();
-  }
+  document.addEventListener('DOMContentLoaded', initCollectionCardSliders);
   document.addEventListener('shopify:section:load', initCollectionCardSliders);
 
-  const observer = new MutationObserver(() => {
-    initCollectionCardSliders();
-  });
-  const targetNode = document.getElementById('ProductGridContainer') || document.getElementById('product-grid');
-  if (targetNode) {
-    observer.observe(targetNode, { childList: true, subtree: true });
-  }
+  var _obs = new MutationObserver(function() { initCollectionCardSliders(); });
+  var _target = document.getElementById('ProductGridContainer') || document.getElementById('product-grid');
+  if (_target) _obs.observe(_target, { childList: true, subtree: true });
 </script>
+
+
 
 {% schema %}
 {

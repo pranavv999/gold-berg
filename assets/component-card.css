@@ -418,6 +418,7 @@
   width: 100% !important;
   height: 100% !important;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  cursor: pointer !important;
 }
 
 .card-slider-slide {
@@ -799,4 +800,36 @@
   .grid__item:nth-child(8n) .product-card-wrapper:hover .shape--blob {
     clip-path: polygon(var(--shape--blob-5));
   }
+}
+
+/* ============================================================
+   CRITICAL: Disable Dawn's invisible card link overlay ::after
+   Dawn defines .card__heading a::after { position: absolute;
+   top: 0; left: 0; right: 0; bottom: 0; z-index: 1; } at line
+   ~557 which creates a full-card invisible click target that
+   intercepts ALL clicks including slider arrow buttons.
+   This rule MUST be at end of file to win the cascade.
+   ============================================================ */
+.card__heading a::after,
+.card--card .card__heading a::after,
+.card--standard.card--text a::after {
+  display: none !important;
+  pointer-events: none !important;
+  content: none !important;
+}
+
+/* ============================================================
+   CRITICAL: The .card__content inside .card__inner is painted
+   AFTER .card__media in DOM order, so it sits visually on top
+   and intercepts ALL clicks on the image area.
+   pointer-events: none passes all clicks through to the slider.
+   The title/price links in the OUTER .card__content still work.
+   ============================================================ */
+.card__inner > .card__content {
+  pointer-events: none !important;
+}
+
+/* Arrows MUST receive pointer events */
+.card-slider-arrow {
+  pointer-events: auto !important;
 }
