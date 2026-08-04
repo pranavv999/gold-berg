@@ -514,6 +514,10 @@
 }
 
 @media screen and (max-width: 749px) {
+  .card-slider-arrow {
+    display: none !important;
+  }
+
   .card-slider-dots {
     bottom: 0.8rem !important;
     padding: 0.25rem 0.5rem !important;

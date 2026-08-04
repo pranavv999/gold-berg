@@ -175,6 +175,10 @@
   }
 
   @media screen and (max-width: 749px) {
+    .card-slider-arrow {
+      display: none !important;
+    }
+
     .card-slider-dots {
       bottom: 0.8rem !important;
       padding: 0.25rem 0.5rem !important;
@@ -494,7 +498,7 @@
       const total = slides.length;
       let index = 0;
       
-      if (!prev || !next || total <= 1) return;
+      if (total <= 1) return;
       
       function updateSlider() {
         track.style.transform = `translateX(-${index * 100}%)`;
@@ -507,18 +511,63 @@
         });
       }
       
-      prev.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        index = (index - 1 + total) % total;
-        updateSlider();
-      });
+      if (prev) {
+        prev.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          index = (index - 1 + total) % total;
+          updateSlider();
+        });
+      }
       
-      next.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        index = (index + 1) % total;
-        updateSlider();
+      if (next) {
+        next.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          index = (index + 1) % total;
+          updateSlider();
+        });
+      }
+
+      // Touch / Swipe Gesture support for mobile
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+      let isSwiping = false;
+
+      wrapper.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 1) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          touchEndX = touchStartX;
+          touchEndY = touchStartY;
+          isSwiping = true;
+        }
+      }, { passive: true });
+
+      wrapper.addEventListener('touchmove', function(e) {
+        if (isSwiping && e.touches.length === 1) {
+          touchEndX = e.touches[0].clientX;
+          touchEndY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      wrapper.addEventListener('touchend', function(e) {
+        if (!isSwiping) return;
+        isSwiping = false;
+
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+
+        if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) {
+            index = (index + 1) % total;
+          } else {
+            index = (index - 1 + total) % total;
+          }
+          updateSlider();
+        }
       });
     });
   }

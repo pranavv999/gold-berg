@@ -703,7 +703,7 @@
       var total = slides.length;
       var index = 0;
 
-      if (!prev || !next || total <= 1) return;
+      if (total <= 1) return;
 
       function updateSlider() {
         track.style.transform = 'translateX(-' + (index * 100) + '%)';
@@ -712,18 +712,63 @@
         });
       }
 
-      prev.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        index = (index - 1 + total) % total;
-        updateSlider();
-      });
+      if (prev) {
+        prev.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          index = (index - 1 + total) % total;
+          updateSlider();
+        });
+      }
 
-      next.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        index = (index + 1) % total;
-        updateSlider();
+      if (next) {
+        next.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          index = (index + 1) % total;
+          updateSlider();
+        });
+      }
+
+      // Touch / Swipe Gesture support for mobile
+      var touchStartX = 0;
+      var touchStartY = 0;
+      var touchEndX = 0;
+      var touchEndY = 0;
+      var isSwiping = false;
+
+      wrapper.addEventListener('touchstart', function(e) {
+        if (e.touches.length === 1) {
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+          touchEndX = touchStartX;
+          touchEndY = touchStartY;
+          isSwiping = true;
+        }
+      }, { passive: true });
+
+      wrapper.addEventListener('touchmove', function(e) {
+        if (isSwiping && e.touches.length === 1) {
+          touchEndX = e.touches[0].clientX;
+          touchEndY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      wrapper.addEventListener('touchend', function(e) {
+        if (!isSwiping) return;
+        isSwiping = false;
+
+        var diffX = touchEndX - touchStartX;
+        var diffY = touchEndY - touchStartY;
+
+        if (Math.abs(diffX) > 30 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) {
+            index = (index + 1) % total;
+          } else {
+            index = (index - 1 + total) % total;
+          }
+          updateSlider();
+        }
       });
     });
   }
