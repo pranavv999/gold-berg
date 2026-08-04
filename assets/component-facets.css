@@ -1640,7 +1640,7 @@ details[open] > .facets__summary span {
   text-decoration: none !important;
 }
 
-/* Mobile Facets Drawer Typography */
+/* Mobile Facets Drawer Typography & Layout */
 .mobile-facets__inner,
 .mobile-facets__summary,
 .mobile-facets__label,
@@ -1648,5 +1648,60 @@ details[open] > .facets__summary span {
 .mobile-facets__heading,
 .mobile-facets__footer .button {
   font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+.mobile-facets__summary {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #1d1d1f !important;
+}
+
+.mobile-facets__summary > div > span:first-child {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #1d1d1f !important;
+}
+
+.mobile-facets__sort label {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #1d1d1f !important;
+}
+
+.mobile-facets__sort .select__select {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: #6e6e73 !important;
+}
+
+.mobile-facets__heading {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #1d1d1f !important;
+}
+
+.mobile-facets__close-button {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: #1d1d1f !important;
+}
+
+.mobile-facets__clear {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #1d1d1f !important;
+  text-decoration: underline !important;
+}
+
+.mobile-facets__footer .button {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  border-radius: 6px !important;
 }
 
