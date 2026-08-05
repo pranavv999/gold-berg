@@ -193,6 +193,20 @@ product-info {
   margin-bottom: 1rem;
 }
 
+.product-form__submit[aria-disabled='true'],
+.product-form__submit[disabled],
+.product-form__submit:disabled,
+button[name="add"][disabled],
+button[name="add"][aria-disabled="true"] {
+  background: #e0e0e0 !important;
+  border-color: #d1d1d6 !important;
+  color: #8e8e93 !important;
+  opacity: 0.65 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  box-shadow: none !important;
+}
+
 .product-form__submit[aria-disabled='true'] + .shopify-payment-button .shopify-payment-button__button[disabled],
 .product-form__submit[disabled] + .shopify-payment-button .shopify-payment-button__button[disabled] {
   cursor: not-allowed;

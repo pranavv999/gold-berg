@@ -228,6 +228,19 @@
     border-color: #1d1d1f;
   }
 
+  .cta-btn:disabled,
+  .cta-btn[disabled],
+  .cta-btn[aria-disabled="true"],
+  .cta-btn.is-disabled {
+    background: #e0e0e0 !important;
+    border-color: #d1d1d6 !important;
+    color: #8e8e93 !important;
+    opacity: 0.65 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    box-shadow: none !important;
+  }
+
   /* DETAILED INFORMATION CARD */
   .tab-navigation {
     display: flex;
