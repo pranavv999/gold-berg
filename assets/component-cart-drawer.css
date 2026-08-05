@@ -470,6 +470,15 @@ body.overflow-hidden > *:not(cart-drawer):not(#CartDrawer) {
 }
 
 /* Header */
+cart-drawer.is-empty .drawer__inner {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  padding: 24px 20px !important;
+}
+
+cart-drawer.is-empty .drawer__header,
 .drawer__header {
   padding: 0 4px 16px 4px !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
@@ -477,6 +486,8 @@ body.overflow-hidden > *:not(cart-drawer):not(#CartDrawer) {
   justify-content: space-between !important;
   align-items: center !important;
   margin-bottom: 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .drawer__header-left {
@@ -760,6 +771,126 @@ body.overflow-hidden > *:not(cart-drawer):not(#CartDrawer) {
 .cart-drawer .cart__checkout-button:hover {
   background: #1d1d1f !important;
   transform: translateY(-1px) !important;
+}
+
+/* ============================================================
+   Empty Cart Drawer Typography & Layout
+   ============================================================ */
+.drawer__inner-empty {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 1 !important;
+  height: 100% !important;
+  padding: 32px 16px !important;
+  box-sizing: border-box !important;
+}
+
+.cart-drawer__warnings {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  text-align: center !important;
+  padding: 0 !important;
+}
+
+.cart-drawer__empty-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.cart-drawer .cart__empty-text {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #1d1d1f !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  margin: 0 0 20px 0 !important;
+  text-align: center !important;
+}
+
+.cart-drawer__empty-content .button:before,
+.cart-drawer__empty-content .button:after,
+.cart-drawer__empty-content a.button:before,
+.cart-drawer__empty-content a.button:after,
+.cart-drawer__empty-content .continue-shopping-btn:before,
+.cart-drawer__empty-content .continue-shopping-btn:after,
+.cart-drawer .button:before,
+.cart-drawer .button:after {
+  display: none !important;
+  content: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.cart-drawer__empty-content .button,
+.cart-drawer__empty-content a.button,
+.cart-drawer__empty-content .continue-shopping-btn {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 30px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  padding: 0 28px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+.cart-drawer__empty-content .button:hover,
+.cart-drawer__empty-content a.button:hover,
+.cart-drawer__empty-content .continue-shopping-btn:hover {
+  background: #1d1d1f !important;
+  transform: translateY(-1px) !important;
+}
+
+.cart-drawer .cart__login-title {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #1d1d1f !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  margin-top: 36px !important;
+  margin-bottom: 6px !important;
+  text-align: center !important;
+}
+
+.cart-drawer .cart__login-paragraph {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  color: #86868b !important;
+  letter-spacing: 0.02em !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+.cart-drawer .cart__login-paragraph a {
+  color: #1d1d1f !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
 }
 
 
