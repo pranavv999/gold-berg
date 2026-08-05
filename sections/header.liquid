@@ -209,16 +209,25 @@
   .header-cart-pill {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 8px !important;
-    padding: 10px 18px !important;
+    gap: 6px !important;
+    padding: 6px 12px !important;
     border-radius: 9999px !important;
     background: rgba(var(--color-foreground), 0.06) !important;
     color: rgb(var(--color-foreground)) !important;
     text-decoration: none !important;
-    font-size: 1.4rem !important;
-    font-weight: 500 !important;
     border: 1px solid rgba(var(--color-foreground), 0.08) !important;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .header-cart-pill.is-empty {
+    padding: 0 !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    border: none !important;
+    justify-content: center !important;
+    gap: 0 !important;
   }
 
   .header-cart-pill:hover {
@@ -227,12 +236,35 @@
     transform: scale(1.05) !important;
   }
 
+  .header-cart-pill.is-empty:hover {
+    background: rgba(var(--color-foreground), 0.06) !important;
+    transform: scale(1.1) !important;
+  }
+
   .header-cart-pill:active {
     transform: scale(0.96) !important;
   }
 
   .header-cart-pill svg {
     flex-shrink: 0 !important;
+  }
+
+  .header-cart-count {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    color: rgb(var(--color-foreground)) !important;
+    background: rgba(var(--color-foreground), 0.08) !important;
+    padding: 2px 7px !important;
+    border-radius: 12px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .header-cart-count.hidden,
+  .header-cart-pill.is-empty .header-cart-count {
+    display: none !important;
   }
 
   /* Visibility Helpers */
@@ -299,27 +331,10 @@
       height: 32px !important;
     }
     
-    /* Make Cart Pill look like a flat icon button (no pill wrapper/text) */
-    .header-cart-pill {
-      background: transparent !important;
-      border: none !important;
-      border-radius: 50% !important;
-      padding: 0 !important;
+    /* Cart Button Mobile adjustments */
+    .header-cart-pill.is-empty {
       width: 32px !important;
       height: 32px !important;
-      justify-content: center !important;
-      gap: 0 !important;
-      box-shadow: none !important;
-    }
-    .header-cart-pill:hover {
-      background: rgba(var(--color-foreground), 0.06) !important;
-      transform: scale(1.1) !important;
-    }
-    .header-cart-pill:active {
-      transform: scale(0.92) !important;
-    }
-    .header-cart-pill .header-cart-text {
-      display: none !important;
     }
 
     /* Scaling Logo and Text */
@@ -637,13 +652,13 @@
       {%- endif -%}
 
       <!-- Cart Dynamic Pill Badge -->
-      <a href="{{ routes.cart_url }}" class="header-cart-pill" id="cart-icon-bubble">
+      <a href="{{ routes.cart_url }}" class="header-cart-pill{% if cart.item_count == 0 %} is-empty{% endif %}" id="cart-icon-bubble" aria-label="Cart">
         <svg class="icon icon-cart" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <path d="M16 10a4 4 0 0 1-8 0"></path>
         </svg>
-        <span class="header-cart-text">Cart (<span id="cart-count-value">{{ cart.item_count }}</span>)</span>
+        <span class="header-cart-count{% if cart.item_count == 0 %} hidden{% endif %}" id="cart-count-value">{{ cart.item_count }}</span>
       </a>
     </div>
     

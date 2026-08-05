@@ -91,6 +91,19 @@ class CartDrawer extends HTMLElement {
           this.classList.remove('is-empty');
         }
 
+        const cartBubble = document.querySelector('#cart-icon-bubble');
+        const cartCountEl = document.querySelector('#cart-count-value');
+        fetch(`${fetchCartUrl}.js`)
+          .then(r => r.json())
+          .then(cart => {
+            if (cartBubble) cartBubble.classList.toggle('is-empty', cart.item_count === 0);
+            if (cartCountEl) {
+              cartCountEl.textContent = cart.item_count;
+              cartCountEl.classList.toggle('hidden', cart.item_count === 0);
+            }
+          })
+          .catch(() => {});
+
         this.open();
       })
       .catch((e) => {

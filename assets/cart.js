@@ -222,9 +222,16 @@ class CartItems extends window.StandardEvents.createViewEventElement(HTMLElement
           this.classList.toggle('is-empty', parsedState.item_count === 0);
           const cartDrawerWrapper = document.querySelector('cart-drawer');
           const cartFooter = document.getElementById('main-cart-footer');
+          const cartBubble = document.querySelector('#cart-icon-bubble');
+          const cartCountEl = document.querySelector('#cart-count-value');
 
           if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
           if (cartDrawerWrapper) cartDrawerWrapper.classList.toggle('is-empty', parsedState.item_count === 0);
+          if (cartBubble) cartBubble.classList.toggle('is-empty', parsedState.item_count === 0);
+          if (cartCountEl) {
+            cartCountEl.textContent = parsedState.item_count;
+            cartCountEl.classList.toggle('hidden', parsedState.item_count === 0);
+          }
 
           sectionsToRender.forEach((section) => {
             const elementToReplace =
