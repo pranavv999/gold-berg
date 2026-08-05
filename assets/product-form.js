@@ -95,6 +95,7 @@ if (!customElements.get('product-form')) {
 
             const cartDrawer = document.querySelector('cart-drawer');
             if (cartDrawer) {
+              cartDrawer.classList.remove('is-empty');
               if (typeof cartDrawer.renderContents === 'function') {
                 cartDrawer.renderContents(response);
               } else if (typeof cartDrawer.open === 'function') {
@@ -112,7 +113,8 @@ if (!customElements.get('product-form')) {
           })
           .finally(() => {
             if (this.submitButton) this.submitButton.classList.remove('loading');
-            if (this.cart && this.cart.classList.contains('is-empty')) this.cart.classList.remove('is-empty');
+            const drawer = document.querySelector('cart-drawer');
+            if (drawer) drawer.classList.remove('is-empty');
             if (!this.error && this.submitButton) this.submitButton.removeAttribute('aria-disabled');
             const spinner = this.querySelector('.loading__spinner');
             if (spinner) spinner.classList.add('hidden');
@@ -198,8 +200,18 @@ document.addEventListener('submit', function(evt) {
   evt.preventDefault();
   evt.stopPropagation();
 
+  const submitBtn = form.querySelector('button[name="add"]') || form.querySelector('button[type="submit"]');
+  let originalBtnHtml = '';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.setAttribute('aria-disabled', 'true');
+    originalBtnHtml = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span>ADDED TO BAG</span>';
+  }
+
   const formData = new FormData(form);
   const cartDrawer = document.querySelector('cart-drawer');
+  if (cartDrawer) cartDrawer.classList.remove('is-empty');
 
   if (cartDrawer && typeof cartDrawer.getSectionsToRender === 'function') {
     const sections = cartDrawer.getSectionsToRender().map(s => s.id);
@@ -221,11 +233,17 @@ document.addEventListener('submit', function(evt) {
     delete form.dataset.handledByGlobal;
     if (response.status) {
       alert(response.description || response.message || 'Error adding to cart');
+      if (submitBtn) {
+        submitBtn.innerHTML = originalBtnHtml;
+        submitBtn.disabled = false;
+        submitBtn.removeAttribute('aria-disabled');
+      }
       return;
     }
 
     const drawer = document.querySelector('cart-drawer');
     if (drawer) {
+      drawer.classList.remove('is-empty');
       if (typeof drawer.renderContents === 'function') {
         drawer.renderContents(response);
       } else if (typeof drawer.open === 'function') {
@@ -239,5 +257,14 @@ document.addEventListener('submit', function(evt) {
   .catch(err => {
     delete form.dataset.handledByGlobal;
     console.error('Error adding to cart:', err);
+  })
+  .finally(() => {
+    setTimeout(() => {
+      if (submitBtn) {
+        submitBtn.innerHTML = originalBtnHtml;
+        submitBtn.disabled = false;
+        submitBtn.removeAttribute('aria-disabled');
+      }
+    }, 1200);
   });
 }, true);

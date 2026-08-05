@@ -72,34 +72,32 @@ class CartDrawer extends HTMLElement {
   }
 
   renderContents(parsedState) {
-    this.open();
-    this.querySelector('.drawer__inner')?.classList.remove('is-empty');
+    this.classList.remove('is-empty');
     if (parsedState && parsedState.id) this.productId = parsedState.id;
 
-    if (parsedState && parsedState.sections) {
-      this.getSectionsToRender().forEach((section) => {
-        const sectionElement = section.selector
-          ? document.querySelector(section.selector)
-          : document.getElementById(section.id);
-
-        if (!sectionElement || !parsedState.sections[section.id]) return;
-        const newHtml = this.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
-        if (newHtml) sectionElement.innerHTML = newHtml;
-      });
-    }
-
     const fetchCartUrl = window.routes ? window.routes.cart_url : '/cart';
-    fetch(`${fetchCartUrl}?section_id=cart-drawer`)
+    return fetch(`${fetchCartUrl}?section_id=cart-drawer`)
       .then((res) => res.text())
       .then((html) => {
         const parsed = new DOMParser().parseFromString(html, 'text/html');
-        const newDrawerInner = parsed.querySelector('#CartDrawer');
-        const currentDrawerInner = document.querySelector('#CartDrawer');
-        if (newDrawerInner && currentDrawerInner) {
-          currentDrawerInner.innerHTML = newDrawerInner.innerHTML;
+        const newDrawer = parsed.querySelector('#CartDrawer');
+        const currentDrawer = document.querySelector('#CartDrawer');
+        if (newDrawer && currentDrawer) {
+          currentDrawer.innerHTML = newDrawer.innerHTML;
         }
+
+        const parsedCartDrawer = parsed.querySelector('cart-drawer');
+        if (!parsedCartDrawer || !parsedCartDrawer.classList.contains('is-empty')) {
+          this.classList.remove('is-empty');
+        }
+
+        this.open();
       })
-      .catch((e) => console.error('Cart drawer refresh error:', e));
+      .catch((e) => {
+        console.error('Cart drawer refresh error:', e);
+        this.classList.remove('is-empty');
+        this.open();
+      });
   }
 
   getSectionInnerHTML(html, selector = '.shopify-section') {

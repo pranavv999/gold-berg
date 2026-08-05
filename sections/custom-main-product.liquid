@@ -841,11 +841,20 @@
     form.addEventListener('submit', function(evt) {
       evt.preventDefault();
       
-      const submitBtn = form.querySelector('button[name="add"]');
-      if (submitBtn) submitBtn.disabled = true;
+      const submitBtn = form.querySelector('button[name="add"]') || form.querySelector('button[type="submit"]');
+      let originalBtnHtml = '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-disabled', 'true');
+        originalBtnHtml = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span>ADDED TO BAG</span>';
+      }
 
       const formData = new FormData(form);
       const cartDrawer = document.querySelector('cart-drawer');
+      if (cartDrawer) {
+        cartDrawer.classList.remove('is-empty');
+      }
       
       if (cartDrawer && typeof cartDrawer.getSectionsToRender === 'function') {
         const sections = cartDrawer.getSectionsToRender().map(s => s.id);
@@ -866,12 +875,18 @@
       .then(response => {
         if (response.status) {
           alert(response.description || response.message || 'Error adding to bag');
+          if (submitBtn) {
+            submitBtn.innerHTML = originalBtnHtml;
+            submitBtn.disabled = false;
+            submitBtn.removeAttribute('aria-disabled');
+          }
           return;
         }
 
         // Re-render cart drawer & open it
         const drawer = document.querySelector('cart-drawer');
         if (drawer) {
+          drawer.classList.remove('is-empty');
           if (typeof drawer.renderContents === 'function') {
             drawer.renderContents(response);
           } else if (typeof drawer.open === 'function') {
@@ -883,7 +898,13 @@
         console.error('Error adding to cart:', err);
       })
       .finally(() => {
-        if (submitBtn) submitBtn.disabled = false;
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.innerHTML = originalBtnHtml;
+            submitBtn.disabled = false;
+            submitBtn.removeAttribute('aria-disabled');
+          }
+        }, 1200);
       });
     });
   }
