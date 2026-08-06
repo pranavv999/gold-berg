@@ -72,3 +72,59 @@ input::-webkit-search-decoration {
 .template-search__results {
   position: relative;
 }
+
+/* Search Input Typography & Sizing Fixes */
+.template-search {
+  padding-top: 3.5rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .template-search {
+    padding-top: 4.5rem !important;
+  }
+}
+
+.template-search__header h1 {
+  display: none !important;
+}
+
+.template-search__header {
+  margin-top: 1rem !important;
+  margin-bottom: 2.5rem !important;
+}
+
+.template-search__search {
+  margin: 0 auto 2.5rem !important;
+  max-width: 68rem !important;
+}
+
+.template-search__search .search {
+  margin-top: 0 !important;
+}
+
+.field__input,
+.search__input,
+.search__input.field__input {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: #1d1d1f !important;
+  border-radius: 12px !important;
+  letter-spacing: normal !important;
+}
+
+.field__label,
+.search .field__label {
+  font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 11px !important;
+  color: #8e8e93 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.field__input:focus ~ .field__label,
+.field__input:not(:placeholder-shown) ~ .field__label,
+.field__input:-webkit-autofill ~ .field__label {
+  font-size: 10px !important;
+  color: #8e8e93 !important;
+  letter-spacing: 0.03em !important;
+}
