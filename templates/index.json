@@ -46,10 +46,24 @@
         "collection": "all",
         "container_radius": 24
       }
+    },
+    "image_slider_centered": {
+      "type": "image-slider-centered",
+      "settings": {
+        "heading": "AS SEEN ON",
+        "autoplay": true,
+        "autoplay_interval": 5000,
+        "show_arrows": false,
+        "show_dots": false,
+        "aria_label": "Image slider carousel",
+        "adapt_height": true,
+        "image_fit": "cover"
+      }
     }
   },
   "order": [
     "image_banner",
-    "custom_collection_row"
+    "custom_collection_row",
+    "image_slider_centered"
   ]
 }
