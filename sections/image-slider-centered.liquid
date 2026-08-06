@@ -168,48 +168,44 @@
     >
       <div class="image-slider-track" id="SliderTrack-{{ section.id }}">
         {%- if section.blocks.size > 0 -%}
-          {%- for i in (1..2) -%}
-            {%- for block in section.blocks -%}
-              <div class="image-slider-card-item{% if i == 2 %} is-clone{% endif %}" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
-                {%- if block.settings.link != blank -%}
-                  <a href="{{ block.settings.link }}" class="image-slider-card fit-{{ section.settings.image_fit }}">
-                {%- else -%}
-                  <div class="image-slider-card fit-{{ section.settings.image_fit }}">
-                {%- endif -%}
+          {%- for block in section.blocks -%}
+            <div class="image-slider-card-item" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" class="image-slider-card fit-{{ section.settings.image_fit }}">
+              {%- else -%}
+                <div class="image-slider-card fit-{{ section.settings.image_fit }}">
+              {%- endif -%}
 
-                  {%- if block.settings.image != blank -%}
-                    <img
-                      src="{{ block.settings.image | image_url: width: 600 }}"
-                      alt="{{ block.settings.alt | default: block.settings.image.alt | default: section.settings.heading | escape }}"
-                      loading="lazy"
-                      width="300"
-                      height="350"
-                    >
-                  {%- else -%}
-                    <div class="image-slider-placeholder">
-                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
-                    </div>
-                  {%- endif -%}
-
-                {%- if block.settings.link != blank -%}
-                  </a>
+                {%- if block.settings.image != blank -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 600 }}"
+                    alt="{{ block.settings.alt | default: block.settings.image.alt | default: section.settings.heading | escape }}"
+                    loading="lazy"
+                    width="300"
+                    height="350"
+                  >
                 {%- else -%}
-                  </div>
-                {%- endif -%}
-              </div>
-            {%- endfor -%}
-          {%- endfor -%}
-        {%- else -%}
-          {%- for i in (1..2) -%}
-            {%- for j in (1..6) -%}
-              <div class="image-slider-card-item{% if i == 2 %} is-clone{% endif %}">
-                <div class="image-slider-card fit-contain">
                   <div class="image-slider-placeholder">
                     {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                   </div>
+                {%- endif -%}
+
+              {%- if block.settings.link != blank -%}
+                </a>
+              {%- else -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for j in (1..6) -%}
+            <div class="image-slider-card-item">
+              <div class="image-slider-card fit-contain">
+                <div class="image-slider-placeholder">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 </div>
               </div>
-            {%- endfor -%}
+            </div>
           {%- endfor -%}
         {%- endif -%}
       </div>
