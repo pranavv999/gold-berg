@@ -270,15 +270,6 @@
     const originalItems = Array.from(track.children);
     if (originalItems.length === 0) return;
 
-    // Dynamically clone items in JS for seamless closed-loop marquee
-    originalItems.forEach(item => {
-      const clone = item.cloneNode(true);
-      clone.removeAttribute('data-block-id');
-      clone.removeAttribute('id');
-      clone.classList.add('is-clone');
-      track.appendChild(clone);
-    });
-
     function getOriginalWidth() {
       let totalWidth = 0;
       const gap = parseFloat(window.getComputedStyle(track).gap || '20');
@@ -286,6 +277,18 @@
         totalWidth += el.offsetWidth + gap;
       });
       return totalWidth;
+    }
+
+    // Ensure seamless closed-loop marquee buffer (at least 2.5x container width)
+    const minWidth = wrapper.clientWidth * 2.5;
+    while (track.scrollWidth < minWidth) {
+      originalItems.forEach(item => {
+        const clone = item.cloneNode(true);
+        clone.removeAttribute('data-block-id');
+        clone.removeAttribute('id');
+        clone.classList.add('is-clone');
+        track.appendChild(clone);
+      });
     }
 
     let animationFrame = null;
