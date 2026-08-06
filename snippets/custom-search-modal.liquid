@@ -160,14 +160,27 @@
     color: #1d1d1f;
   }
 
-  .custom-search-modal-input {
+  .custom-search-modal-input,
+  .custom-search-modal-input:focus,
+  .custom-search-modal-input:focus-visible,
+  .custom-search-modal-input:active,
+  .custom-search-modal-input:hover {
     flex: 1;
-    border: none;
-    outline: none;
-    background: transparent;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
     font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     font-size: 15px !important;
     color: #1d1d1f !important;
+    box-sizing: border-box !important;
+  }
+
+  .custom-search-modal-input::after,
+  .custom-search-modal-input::before {
+    display: none !important;
   }
 
   .custom-search-modal-input::placeholder {
