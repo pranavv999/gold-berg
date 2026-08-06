@@ -172,30 +172,30 @@
               <div class="fullwidth-slider-link">
             {%- endif -%}
 
-              {%- if block.settings.image != blank -%}
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 2000 }}"
+                alt="{{ block.settings.alt | default: block.settings.image.alt | escape }}"
+                loading="lazy"
+                width="1600"
+                height="900"
+                class="fullwidth-slider-image desktop-only{% if block.settings.image_mobile != blank %} has-mobile{% endif %}"
+              >
+              {%- if block.settings.image_mobile != blank -%}
                 <img
-                  src="{{ block.settings.image | image_url: width: 2000 }}"
-                  alt="{{ block.settings.alt | default: block.settings.image.alt | escape }}"
+                  src="{{ block.settings.image_mobile | image_url: width: 1000 }}"
+                  alt="{{ block.settings.alt | default: block.settings.image_mobile.alt | escape }}"
                   loading="lazy"
-                  width="1600"
-                  height="900"
-                  class="fullwidth-slider-image desktop-only{% if block.settings.image_mobile != blank %} has-mobile{% endif %}"
+                  width="800"
+                  height="1000"
+                  class="fullwidth-slider-image mobile-only"
                 >
-                {%- if block.settings.image_mobile != blank -%}
-                  <img
-                    src="{{ block.settings.image_mobile | image_url: width: 1000 }}"
-                    alt="{{ block.settings.alt | default: block.settings.image_mobile.alt | escape }}"
-                    loading="lazy"
-                    width="800"
-                    height="1000"
-                    class="fullwidth-slider-image mobile-only"
-                  >
-                {%- endif -%}
-              {%- else -%}
-                <div class="fullwidth-slider-placeholder">
-                  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                </div>
               {%- endif -%}
+            {%- else -%}
+              <div class="fullwidth-slider-placeholder">
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {%- endif -%}
 
             {%- if block.settings.link != blank -%}
               </a>
@@ -216,14 +216,42 @@
     </div>
 
     {%- if section.settings.show_arrows and section.blocks.size > 1 -%}
-      <button type="button" class="fullwidth-slider-arrow prev" id="FullwidthPrev-{{ section.id }}" aria-label="Previous slide">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <button
+        type="button"
+        class="fullwidth-slider-arrow prev"
+        id="FullwidthPrev-{{ section.id }}"
+        aria-label="Previous slide"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </button>
 
-      <button type="button" class="fullwidth-slider-arrow next" id="FullwidthNext-{{ section.id }}" aria-label="Next slide">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <button
+        type="button"
+        class="fullwidth-slider-arrow next"
+        id="FullwidthNext-{{ section.id }}"
+        aria-label="Next slide"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <polyline points="9 18 15 12 9 6"></polyline>
         </svg>
       </button>
@@ -469,11 +497,7 @@
   "presets": [
     {
       "name": "Full-width Image Slider",
-      "blocks": [
-        { "type": "slide" },
-        { "type": "slide" },
-        { "type": "slide" }
-      ]
+      "blocks": [{ "type": "slide" }, { "type": "slide" }, { "type": "slide" }]
     }
   ]
 }
