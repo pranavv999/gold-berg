@@ -339,7 +339,11 @@
   .description-content,
   .description-content *,
   .tab-pane,
-  .tab-pane * {
+  .tab-pane *,
+  .tab-richtext-content,
+  .tab-richtext-content *,
+  .tab-page-content,
+  .tab-page-content * {
     font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   }
 
@@ -348,7 +352,25 @@
   .description-content h3,
   .description-content h4,
   .description-content h5,
-  .description-content h6 {
+  .description-content h6,
+  .tab-pane h1,
+  .tab-pane h2,
+  .tab-pane h3,
+  .tab-pane h4,
+  .tab-pane h5,
+  .tab-pane h6,
+  .tab-richtext-content h1,
+  .tab-richtext-content h2,
+  .tab-richtext-content h3,
+  .tab-richtext-content h4,
+  .tab-richtext-content h5,
+  .tab-richtext-content h6,
+  .tab-page-content h1,
+  .tab-page-content h2,
+  .tab-page-content h3,
+  .tab-page-content h4,
+  .tab-page-content h5,
+  .tab-page-content h6 {
     font-size: 11px !important;
     font-weight: 600 !important;
     color: #1d1d1f !important;
@@ -359,41 +381,82 @@
 
   .description-content h1:first-child,
   .description-content h2:first-child,
-  .description-content h3:first-child {
+  .description-content h3:first-child,
+  .tab-pane h1:first-child,
+  .tab-pane h2:first-child,
+  .tab-pane h3:first-child,
+  .tab-richtext-content h1:first-child,
+  .tab-richtext-content h2:first-child,
+  .tab-richtext-content h3:first-child,
+  .tab-page-content h1:first-child,
+  .tab-page-content h2:first-child,
+  .tab-page-content h3:first-child {
     margin-top: 0 !important;
   }
 
   .description-content p,
   .description-content li,
   .description-content span,
-  .description-content div {
+  .description-content div,
+  .tab-pane p,
+  .tab-pane li,
+  .tab-pane span,
+  .tab-pane div,
+  .tab-richtext-content p,
+  .tab-richtext-content li,
+  .tab-richtext-content span,
+  .tab-richtext-content div,
+  .tab-page-content p,
+  .tab-page-content li,
+  .tab-page-content span,
+  .tab-page-content div {
     font-size: 11px !important;
     color: #6e6e73 !important;
     line-height: 1.6 !important;
   }
 
-  .description-content p {
+  .description-content p,
+  .tab-pane p,
+  .tab-richtext-content p,
+  .tab-page-content p {
     margin: 0 0 16px 0 !important;
   }
 
   .description-content ul,
-  .description-content ol {
+  .description-content ol,
+  .tab-pane ul,
+  .tab-pane ol,
+  .tab-richtext-content ul,
+  .tab-richtext-content ol,
+  .tab-page-content ul,
+  .tab-page-content ol {
     padding-left: 16px !important;
     margin: 0 0 16px 0 !important;
   }
 
-  .description-content li {
+  .description-content li,
+  .tab-pane li,
+  .tab-richtext-content li,
+  .tab-page-content li {
     margin-bottom: 6px !important;
+    font-size: 11px !important;
+    color: #6e6e73 !important;
   }
 
-  .description-content a {
+  .description-content a,
+  .tab-pane a,
+  .tab-richtext-content a,
+  .tab-page-content a {
     color: #0066cc !important;
     text-decoration: none !important;
     font-size: 11px !important;
     transition: text-decoration 0.2s;
   }
 
-  .description-content a:hover {
+  .description-content a:hover,
+  .tab-pane a:hover,
+  .tab-richtext-content a:hover,
+  .tab-page-content a:hover {
     text-decoration: underline !important;
   }
 
