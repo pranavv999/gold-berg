@@ -215,6 +215,8 @@
   .custom-search-modal-body {
     padding: 24px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
     flex: 1;
   }
 
@@ -383,8 +385,11 @@
     transition: opacity 0.2s;
   }
 
-  .search-modal-view-all-btn:hover {
-    opacity: 0.85;
+  body.search-modal-open,
+  html.search-modal-open {
+    overflow: hidden !important;
+    height: 100vh !important;
+    touch-action: none !important;
   }
 </style>
 
@@ -417,6 +422,8 @@
       const input = document.getElementById('custom-search-modal-input');
       if (modal) {
         modal.classList.add('active');
+        document.body.classList.add('search-modal-open');
+        document.documentElement.classList.add('search-modal-open');
         renderRecentlyViewed();
         if (input) {
           setTimeout(() => input.focus(), 150);
@@ -428,6 +435,8 @@
       const modal = document.getElementById('custom-search-modal');
       if (modal) {
         modal.classList.remove('active');
+        document.body.classList.remove('search-modal-open');
+        document.documentElement.classList.remove('search-modal-open');
       }
     };
 
