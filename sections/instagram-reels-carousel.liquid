@@ -267,20 +267,37 @@
     // Smooth pixel speed per frame
     const speed = Math.max(0.4, 3800 / intervalMs);
 
+    const originalItems = Array.from(track.children);
+    if (originalItems.length === 0) return;
+
+    // Dynamically clone items in JS for seamless closed-loop marquee
+    originalItems.forEach(item => {
+      const clone = item.cloneNode(true);
+      clone.removeAttribute('data-block-id');
+      clone.removeAttribute('id');
+      clone.classList.add('is-clone');
+      track.appendChild(clone);
+    });
+
+    function getOriginalWidth() {
+      let totalWidth = 0;
+      const gap = parseFloat(window.getComputedStyle(track).gap || '20');
+      originalItems.forEach(el => {
+        totalWidth += el.offsetWidth + gap;
+      });
+      return totalWidth;
+    }
+
     let animationFrame = null;
     let currentX = 0;
     let isPaused = false;
 
-    function getHalfWidth() {
-      return track.scrollWidth / 2;
-    }
-
     function animate() {
       if (isAutoplay && !isPaused) {
         currentX -= speed;
-        const halfWidth = getHalfWidth();
-        if (Math.abs(currentX) >= halfWidth) {
-          currentX += halfWidth;
+        const loopWidth = getOriginalWidth();
+        if (Math.abs(currentX) >= loopWidth) {
+          currentX += loopWidth;
         }
         track.style.transform = `translate3d(${currentX}px, 0, 0)`;
       }
@@ -309,9 +326,9 @@
       touchStartX = touchCurrentX;
       currentX += diff;
 
-      const halfWidth = getHalfWidth();
-      if (currentX > 0) currentX -= halfWidth;
-      if (Math.abs(currentX) >= halfWidth) currentX += halfWidth;
+      const loopWidth = getOriginalWidth();
+      if (currentX > 0) currentX -= loopWidth;
+      if (Math.abs(currentX) >= loopWidth) currentX += loopWidth;
 
       track.style.transform = `translate3d(${currentX}px, 0, 0)`;
     }, { passive: true });
@@ -330,8 +347,8 @@
         if (item) {
           const shift = item.offsetWidth + 20;
           currentX += shift;
-          const halfWidth = getHalfWidth();
-          if (currentX > 0) currentX -= halfWidth;
+          const loopWidth = getOriginalWidth();
+          if (currentX > 0) currentX -= loopWidth;
           track.style.transform = `translate3d(${currentX}px, 0, 0)`;
         }
       });
@@ -343,8 +360,8 @@
         if (item) {
           const shift = item.offsetWidth + 20;
           currentX -= shift;
-          const halfWidth = getHalfWidth();
-          if (Math.abs(currentX) >= halfWidth) currentX += halfWidth;
+          const loopWidth = getOriginalWidth();
+          if (Math.abs(currentX) >= loopWidth) currentX += loopWidth;
           track.style.transform = `translate3d(${currentX}px, 0, 0)`;
         }
       });
