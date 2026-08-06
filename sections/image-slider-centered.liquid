@@ -44,19 +44,19 @@
   .image-slider-track {
     display: flex;
     gap: 2rem;
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    width: max-content;
     will-change: transform;
   }
 
   .image-slider-card-item {
-    flex: 0 0 calc((100% - (2rem * 4)) / 5);
-    min-width: 160px;
+    width: 220px;
+    flex-shrink: 0;
     box-sizing: border-box;
   }
 
   @media screen and (max-width: 1024px) {
     .image-slider-card-item {
-      flex: 0 0 calc((100% - (2rem * 3)) / 4);
+      width: 190px;
     }
   }
 
@@ -72,16 +72,7 @@
       margin-bottom: 2rem !important;
     }
     .image-slider-card-item {
-      flex: 0 0 calc((100% - 1.5rem) / 2);
-    }
-    .image-slider-track {
-      gap: 1.5rem;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .image-slider-card-item {
-      flex: 0 0 calc((100% - 1.2rem) / 2);
+      width: 155px;
     }
     .image-slider-track {
       gap: 1.2rem;
@@ -158,28 +149,6 @@
     background: #f7f7f8;
     border-color: #d1d1d6;
   }
-
-  .image-slider-dots {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .image-slider-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #d1d1d6;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    transition: background 0.25s, transform 0.25s;
-  }
-
-  .image-slider-dot.active {
-    background: #1d1d1f;
-    transform: scale(1.25);
-  }
 {%- endstyle -%}
 
 <div class="image-slider-outer" id="ImageSlider-{{ section.id }}">
@@ -199,69 +168,65 @@
     >
       <div class="image-slider-track" id="SliderTrack-{{ section.id }}">
         {%- if section.blocks.size > 0 -%}
-          {%- for block in section.blocks -%}
-            <div class="image-slider-card-item" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
-              {%- if block.settings.link != blank -%}
-                <a href="{{ block.settings.link }}" class="image-slider-card fit-{{ section.settings.image_fit }}">
-              {%- else -%}
-                <div class="image-slider-card fit-{{ section.settings.image_fit }}">
-              {%- endif -%}
-
-                {%- if block.settings.image != blank -%}
-                  <img
-                    src="{{ block.settings.image | image_url: width: 600 }}"
-                    alt="{{ block.settings.alt | default: block.settings.image.alt | default: section.settings.heading | escape }}"
-                    loading="lazy"
-                    width="300"
-                    height="350"
-                  >
+          {%- for i in (1..2) -%}
+            {%- for block in section.blocks -%}
+              <div class="image-slider-card-item{% if i == 2 %} is-clone{% endif %}" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" class="image-slider-card fit-{{ section.settings.image_fit }}">
                 {%- else -%}
+                  <div class="image-slider-card fit-{{ section.settings.image_fit }}">
+                {%- endif -%}
+
+                  {%- if block.settings.image != blank -%}
+                    <img
+                      src="{{ block.settings.image | image_url: width: 600 }}"
+                      alt="{{ block.settings.alt | default: block.settings.image.alt | default: section.settings.heading | escape }}"
+                      loading="lazy"
+                      width="300"
+                      height="350"
+                    >
+                  {%- else -%}
+                    <div class="image-slider-placeholder">
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                  {%- endif -%}
+
+                {%- if block.settings.link != blank -%}
+                  </a>
+                {%- else -%}
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..2) -%}
+            {%- for j in (1..6) -%}
+              <div class="image-slider-card-item{% if i == 2 %} is-clone{% endif %}">
+                <div class="image-slider-card fit-contain">
                   <div class="image-slider-placeholder">
                     {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                   </div>
-                {%- endif -%}
-
-              {%- if block.settings.link != blank -%}
-                </a>
-              {%- else -%}
-                </div>
-              {%- endif -%}
-            </div>
-          {%- endfor -%}
-        {%- else -%}
-          {%- for i in (1..6) -%}
-            <div class="image-slider-card-item">
-              <div class="image-slider-card fit-contain">
-                <div class="image-slider-placeholder">
-                  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
                 </div>
               </div>
-            </div>
+            {%- endfor -%}
           {%- endfor -%}
         {%- endif -%}
       </div>
 
-      {%- if section.settings.show_arrows or section.settings.show_dots -%}
+      {%- if section.settings.show_arrows -%}
         <div class="image-slider-controls">
-          {%- if section.settings.show_arrows -%}
-            <button type="button" class="image-slider-arrow prev-btn" id="PrevBtn-{{ section.id }}" aria-label="Previous slide">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-            </button>
-          {%- endif -%}
+          <button type="button" class="image-slider-arrow prev-btn" id="PrevBtn-{{ section.id }}" aria-label="Previous slide">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
 
-          {%- if section.settings.show_dots -%}
-            <div class="image-slider-dots" id="DotsNav-{{ section.id }}"></div>
-          {%- endif -%}
-
-          {%- if section.settings.show_arrows -%}
-            <button type="button" class="image-slider-arrow next-btn" id="NextBtn-{{ section.id }}" aria-label="Next slide">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </button>
-          {%- endif -%}
+          <button type="button" class="image-slider-arrow next-btn" id="NextBtn-{{ section.id }}" aria-label="Next slide">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
         </div>
       {%- endif -%}
     </div>
@@ -276,177 +241,109 @@
 
     const wrapper = track.parentElement;
     const isAutoplay = wrapper.getAttribute('data-autoplay') === 'true';
-    const intervalTime = parseInt(wrapper.getAttribute('data-interval') || '5000', 10);
+    const intervalMs = parseInt(wrapper.getAttribute('data-interval') || '5000', 10);
+    // Smooth pixel speed per frame
+    const speed = Math.max(0.4, 3800 / intervalMs);
+
+    let animationFrame = null;
+    let currentX = 0;
+    let isPaused = false;
+
+    function getHalfWidth() {
+      return track.scrollWidth / 2;
+    }
+
+    function animate() {
+      if (isAutoplay && !isPaused) {
+        currentX -= speed;
+        const halfWidth = getHalfWidth();
+        if (Math.abs(currentX) >= halfWidth) {
+          currentX += halfWidth;
+        }
+        track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+      }
+      animationFrame = requestAnimationFrame(animate);
+    }
+
+    // Pause on hover
+    wrapper.addEventListener('mouseenter', () => { isPaused = true; });
+    wrapper.addEventListener('mouseleave', () => { isPaused = false; });
+
+    // Touch swipe support
+    let touchStartX = 0;
+    let touchCurrentX = 0;
+    let isTouching = false;
+
+    wrapper.addEventListener('touchstart', (e) => {
+      isTouching = true;
+      isPaused = true;
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    wrapper.addEventListener('touchmove', (e) => {
+      if (!isTouching) return;
+      touchCurrentX = e.touches[0].clientX;
+      const diff = touchCurrentX - touchStartX;
+      touchStartX = touchCurrentX;
+      currentX += diff;
+
+      const halfWidth = getHalfWidth();
+      if (currentX > 0) currentX -= halfWidth;
+      if (Math.abs(currentX) >= halfWidth) currentX += halfWidth;
+
+      track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+    }, { passive: true });
+
+    wrapper.addEventListener('touchend', () => {
+      isTouching = false;
+      isPaused = false;
+    });
+
     const prevBtn = document.getElementById('PrevBtn-' + sectionId);
     const nextBtn = document.getElementById('NextBtn-' + sectionId);
-    const dotsNav = document.getElementById('DotsNav-' + sectionId);
-
-    let items = Array.from(track.children);
-    if (items.length === 0) return;
-
-    let currentIndex = 0;
-    let autoplayTimer = null;
-
-    function getItemsPerPage() {
-      const w = window.innerWidth;
-      if (w <= 749) return 2;
-      if (w <= 1024) return 4;
-      return 5;
-    }
-
-    function getMaxIndex() {
-      const perPage = getItemsPerPage();
-      return Math.max(0, items.length - perPage);
-    }
-
-    function updateSlider() {
-      const maxIndex = getMaxIndex();
-      if (currentIndex > maxIndex) currentIndex = 0;
-      if (currentIndex < 0) currentIndex = maxIndex;
-
-      const firstItem = items[0];
-      if (!firstItem) return;
-
-      const itemWidth = firstItem.offsetWidth;
-      const gap = parseInt(window.getComputedStyle(track).gap || '20', 10);
-      const moveDistance = (itemWidth + gap) * currentIndex;
-
-      track.style.transform = `translateX(-${moveDistance}px)`;
-
-      // Update dots if enabled
-      if (dotsNav) {
-        const dots = Array.from(dotsNav.children);
-        dots.forEach((dot, idx) => {
-          dot.classList.toggle('active', idx === currentIndex);
-        });
-      }
-    }
-
-    function renderDots() {
-      if (!dotsNav) return;
-      dotsNav.innerHTML = '';
-      const maxIndex = getMaxIndex();
-      for (let i = 0; i <= maxIndex; i++) {
-        const dot = document.createElement('button');
-        dot.className = 'image-slider-dot' + (i === currentIndex ? ' active' : '');
-        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-        dot.addEventListener('click', () => {
-          currentIndex = i;
-          updateSlider();
-          resetAutoplay();
-        });
-        dotsNav.appendChild(dot);
-      }
-    }
-
-    function nextSlide() {
-      const maxIndex = getMaxIndex();
-      if (currentIndex >= maxIndex) {
-        currentIndex = 0;
-      } else {
-        currentIndex++;
-      }
-      updateSlider();
-    }
-
-    function prevSlide() {
-      const maxIndex = getMaxIndex();
-      if (currentIndex <= 0) {
-        currentIndex = maxIndex;
-      } else {
-        currentIndex--;
-      }
-      updateSlider();
-    }
-
-    function startAutoplay() {
-      if (!isAutoplay) return;
-      stopAutoplay();
-      autoplayTimer = setInterval(nextSlide, intervalTime);
-    }
-
-    function stopAutoplay() {
-      if (autoplayTimer) clearInterval(autoplayTimer);
-    }
-
-    function resetAutoplay() {
-      stopAutoplay();
-      startAutoplay();
-    }
 
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetAutoplay();
+        const item = track.querySelector('.image-slider-card-item');
+        if (item) {
+          const shift = item.offsetWidth + 20;
+          currentX += shift;
+          const halfWidth = getHalfWidth();
+          if (currentX > 0) currentX -= halfWidth;
+          track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+        }
       });
     }
 
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetAutoplay();
+        const item = track.querySelector('.image-slider-card-item');
+        if (item) {
+          const shift = item.offsetWidth + 20;
+          currentX -= shift;
+          const halfWidth = getHalfWidth();
+          if (Math.abs(currentX) >= halfWidth) currentX += halfWidth;
+          track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+        }
       });
     }
-
-    // Touch swipe support
-    let startX = 0;
-    let currentX = 0;
-    let isSwiping = false;
-
-    wrapper.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-      isSwiping = true;
-      stopAutoplay();
-    }, { passive: true });
-
-    wrapper.addEventListener('touchmove', (e) => {
-      if (!isSwiping) return;
-      currentX = e.touches[0].clientX;
-    }, { passive: true });
-
-    wrapper.addEventListener('touchend', () => {
-      if (!isSwiping) return;
-      const diffX = startX - currentX;
-      if (Math.abs(diffX) > 40) {
-        if (diffX > 0) {
-          nextSlide();
-        } else {
-          prevSlide();
-        }
-      }
-      isSwiping = false;
-      startAutoplay();
-    });
 
     // Theme Editor Live Block Selection
     if (Shopify && Shopify.designMode) {
       document.addEventListener('shopify:block:select', (evt) => {
         if (evt.detail.sectionId === sectionId) {
-          const blockId = evt.detail.blockId;
-          const idx = items.findIndex(item => item.getAttribute('data-block-id') === blockId);
-          if (idx !== -1) {
-            currentIndex = idx;
-            updateSlider();
-            stopAutoplay();
-          }
+          isPaused = true;
         }
       });
 
       document.addEventListener('shopify:block:deselect', (evt) => {
         if (evt.detail.sectionId === sectionId) {
-          startAutoplay();
+          isPaused = false;
         }
       });
     }
 
-    renderDots();
-    updateSlider();
-    startAutoplay();
-
-    window.addEventListener('resize', () => {
-      renderDots();
-      updateSlider();
-    });
+    animate();
   })();
 </script>
 
