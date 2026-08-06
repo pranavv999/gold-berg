@@ -59,11 +59,23 @@
         "adapt_height": true,
         "image_fit": "cover"
       }
+    },
+    "fullwidth_image_slider": {
+      "type": "image-slider-fullwidth",
+      "settings": {
+        "autoplay": true,
+        "autoplay_interval": 5000,
+        "show_arrows": true,
+        "show_dots": true,
+        "aria_label": "Full width image carousel",
+        "image_fit": "cover"
+      }
     }
   },
   "order": [
     "image_banner",
     "custom_collection_row",
-    "image_slider_centered"
+    "image_slider_centered",
+    "fullwidth_image_slider"
   ]
 }
