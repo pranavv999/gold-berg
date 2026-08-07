@@ -89,10 +89,24 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   position: absolute;
   top: 10px;
   right: -10px;
-  color: rgb(var(--color-foreground));
+  color: #000000 !important;
   background-color: transparent;
   border: none;
   cursor: pointer;
+  opacity: 1 !important;
+}
+
+.drawer__close svg,
+.drawer__close path {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+  opacity: 1 !important;
+}
+
+.drawer__close:hover svg,
+.drawer__close:hover path {
+  opacity: 0.7 !important;
 }
 
 .cart-drawer__warnings .drawer__close {
@@ -102,6 +116,7 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
 .drawer__close .svg-wrapper {
   height: 2rem;
   width: 2rem;
+  color: #000000 !important;
 }
 
 .drawer__contents {
