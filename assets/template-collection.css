@@ -153,3 +153,69 @@ main[data-template="collection"] .page-width,
 .collection__view-all a:not(.link) {
   margin-top: 1rem;
 }
+
+/* MOBILE TYPOGRAPHY OVERRIDES FOR COLLECTIONS (/collections/*) */
+@media screen and (max-width: 749px) {
+  /* 1. Collection title : 12px */
+  .collection-hero__title,
+  .template-collection .collection-hero__title,
+  h1.collection-hero__title {
+    font-size: 12px !important;
+  }
+
+  /* 2. Filter and sort : 10px */
+  .mobile-facets__open-label,
+  .mobile-facets__open,
+  .mobile-facets__open span,
+  .mobile-facets__heading,
+  .mobile-facets__summary,
+  .mobile-facets__summary span,
+  .mobile-facets__label,
+  .facet-filters__label,
+  .facets__summary,
+  .facets__summary span,
+  .facets__label,
+  .mobile-facets__open-wrapper,
+  .mobile-facets__inner span,
+  .mobile-facets__inner button {
+    font-size: 10px !important;
+  }
+
+  /* 3. Product name and price : 10px */
+  .card__heading,
+  .card__heading a,
+  .card-information .card__heading,
+  .card-information .card__heading a,
+  .full-unstyled-link,
+  .price,
+  .price *,
+  .price-item,
+  .price-item *,
+  .price__regular,
+  .price__regular *,
+  .price__sale,
+  .price__sale *,
+  .price-item--regular,
+  .price-item--sale,
+  .price__sale .price-item--sale,
+  .price:not(.price--on-sale) .price-item--regular,
+  .price s,
+  .price s *,
+  .price s .price-item,
+  .price s.price-item,
+  .card-information,
+  .card-information * {
+    font-size: 10px !important;
+  }
+
+  /* 4. Pagination number : 10px */
+  .pagination__item,
+  .pagination__item--current,
+  .pagination__list li,
+  .pagination__list a,
+  .pagination__list span,
+  .pagination-wrapper,
+  .pagination {
+    font-size: 10px !important;
+  }
+}

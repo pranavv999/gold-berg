@@ -98,3 +98,15 @@
   margin-top: 0.2rem;
   color: rgba(var(--color-foreground), 0.7);
 }
+
+@media screen and (max-width: 749px) {
+  .template-collection .price-item,
+  .template-collection .price-item--sale,
+  .template-collection .price-item--regular,
+  .template-collection .price__sale .price-item--sale,
+  .template-collection .price:not(.price--on-sale) .price-item--regular,
+  .template-collection .price s,
+  .template-collection .price s .price-item {
+    font-size: 10px !important;
+  }
+}
