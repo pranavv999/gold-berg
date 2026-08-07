@@ -10,6 +10,14 @@
   text-align: var(--text-alignment);
 }
 
+.card__heading,
+.card__heading a,
+.full-unstyled-link {
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
 .card:not(.ratio) {
   display: flex;
   flex-direction: column;
