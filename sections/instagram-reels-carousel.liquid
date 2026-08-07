@@ -264,10 +264,9 @@
     const wrapper = track.parentElement;
     const isAutoplay = wrapper.getAttribute('data-autoplay') === 'true';
     const intervalMs = parseInt(wrapper.getAttribute('data-interval') || '5000', 10);
-    // Smooth pixel speed per frame
-    const speed = Math.max(0.4, 3800 / intervalMs);
+    const speed = Math.max(0.5, 3800 / intervalMs);
 
-    const originalItems = Array.from(track.children);
+    const originalItems = Array.from(track.children).filter(el => !el.classList.contains('is-clone'));
     if (originalItems.length === 0) return;
 
     function getOriginalWidth() {
@@ -279,28 +278,48 @@
       return totalWidth;
     }
 
-    // Ensure seamless closed-loop marquee buffer (at least 2.5x container width)
-    const minWidth = wrapper.clientWidth * 2.5;
-    while (track.scrollWidth < minWidth) {
-      originalItems.forEach(item => {
-        const clone = item.cloneNode(true);
-        clone.removeAttribute('data-block-id');
-        clone.removeAttribute('id');
-        clone.classList.add('is-clone');
-        track.appendChild(clone);
+    let originalWidth = 0;
+
+    function initClones() {
+      // Clear old clones if any
+      Array.from(track.children).forEach(child => {
+        if (child.classList.contains('is-clone')) child.remove();
       });
+
+      originalWidth = getOriginalWidth();
+      if (originalWidth <= 0) return;
+
+      // Ensure track length is at least (originalWidth + wrapper.clientWidth + 500)
+      const requiredWidth = originalWidth + wrapper.clientWidth + 500;
+      let safetyCounter = 0;
+      while (track.scrollWidth < requiredWidth && safetyCounter < 15) {
+        originalItems.forEach(item => {
+          const clone = item.cloneNode(true);
+          clone.removeAttribute('data-block-id');
+          clone.removeAttribute('id');
+          clone.classList.add('is-clone');
+          track.appendChild(clone);
+        });
+        safetyCounter++;
+      }
     }
+
+    initClones();
+
+    // Re-verify after load
+    window.addEventListener('load', () => {
+      initClones();
+    });
 
     let animationFrame = null;
     let currentX = 0;
     let isPaused = false;
 
     function animate() {
-      if (isAutoplay && !isPaused) {
+      if (isAutoplay && !isPaused && originalWidth > 0) {
         currentX -= speed;
-        const loopWidth = getOriginalWidth();
-        if (Math.abs(currentX) >= loopWidth) {
-          currentX += loopWidth;
+        if (Math.abs(currentX) >= originalWidth) {
+          currentX += originalWidth;
         }
         track.style.transform = `translate3d(${currentX}px, 0, 0)`;
       }
@@ -323,15 +342,14 @@
     }, { passive: true });
 
     wrapper.addEventListener('touchmove', (e) => {
-      if (!isTouching) return;
+      if (!isTouching || originalWidth <= 0) return;
       touchCurrentX = e.touches[0].clientX;
       const diff = touchCurrentX - touchStartX;
       touchStartX = touchCurrentX;
       currentX += diff;
 
-      const loopWidth = getOriginalWidth();
-      if (currentX > 0) currentX -= loopWidth;
-      if (Math.abs(currentX) >= loopWidth) currentX += loopWidth;
+      if (currentX > 0) currentX -= originalWidth;
+      if (Math.abs(currentX) >= originalWidth) currentX += originalWidth;
 
       track.style.transform = `translate3d(${currentX}px, 0, 0)`;
     }, { passive: true });
@@ -346,12 +364,11 @@
 
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
-        const item = track.querySelector('.instagram-reel-card-item');
-        if (item) {
+        const item = originalItems[0];
+        if (item && originalWidth > 0) {
           const shift = item.offsetWidth + 20;
           currentX += shift;
-          const loopWidth = getOriginalWidth();
-          if (currentX > 0) currentX -= loopWidth;
+          if (currentX > 0) currentX -= originalWidth;
           track.style.transform = `translate3d(${currentX}px, 0, 0)`;
         }
       });
@@ -359,16 +376,19 @@
 
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
-        const item = track.querySelector('.instagram-reel-card-item');
-        if (item) {
+        const item = originalItems[0];
+        if (item && originalWidth > 0) {
           const shift = item.offsetWidth + 20;
           currentX -= shift;
-          const loopWidth = getOriginalWidth();
-          if (Math.abs(currentX) >= loopWidth) currentX += loopWidth;
+          if (Math.abs(currentX) >= originalWidth) currentX += originalWidth;
           track.style.transform = `translate3d(${currentX}px, 0, 0)`;
         }
       });
     }
+
+    window.addEventListener('resize', () => {
+      initClones();
+    });
 
     // Theme Editor Live Block Selection
     if (Shopify && Shopify.designMode) {
