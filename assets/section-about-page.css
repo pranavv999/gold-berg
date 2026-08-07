@@ -4,7 +4,7 @@
 
 .about-page-wrapper {
   width: 100%;
-  padding: 40px 24px;
+  padding: 115px 24px 40px 24px !important;
   background-color: #f4f4f4;
   box-sizing: border-box;
   min-height: calc(100vh - 120px);
