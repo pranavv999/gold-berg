@@ -227,29 +227,64 @@
   }
 
   /* SmartSize Overlay & Backdrop Elevation */
+  /* SmartSize Overlay & Backdrop Elevation */
   .smartsize-overlay,
   .smartsize-backdrop,
   [class*="smartsize-overlay"],
-  [class*="smartsize-backdrop"] {
-    z-index: 99999999 !important;
+  [class*="smartsize-backdrop"],
+  [id*="smartsize-backdrop"] {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    z-index: 999999998 !important;
   }
 
   /* Main SmartSize Outer Dialog Card */
   .smartsize-modal,
   .smartsize-popup,
-  .smartsize-modal-wrapper,
   div[class*="smartsize-modal-wrapper"],
-  div[class*="smartsize-modal-container"] {
-    z-index: 99999999 !important;
-    max-width: 520px !important;
+  div[class*="smartsize-popup"] {
+    z-index: 999999999 !important;
+    width: min(92vw, 540px) !important;
+    min-width: min(92vw, 540px) !important;
+    max-width: 540px !important;
     max-height: 85vh !important;
     border-radius: 20px !important;
-    overflow: hidden !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35) !important;
     position: fixed !important;
-    top: 50% !important;
+    top: 52% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35) !important;
+    box-sizing: border-box !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    margin: 0 !important;
+  }
+
+  /* Reset fixed positioning and full width on inner children */
+  div[class*="smartsize-modal"] div[class*="container"],
+  div[class*="smartsize-modal"] div[class*="content"],
+  div[class*="smartsize-modal"] div[class*="body"],
+  div[class*="smartsize-popup"] div[class*="container"],
+  div[class*="smartsize-popup"] div[class*="content"],
+  div[class*="smartsize-popup"] div[class*="body"],
+  .smartsize-modal-content,
+  .smartsize-content,
+  .smartsize-body,
+  .smartsize-container {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    box-sizing: border-box !important;
   }
 
   /* SmartSize Modal Header & Close Button (Top-Right Circular Pill) */
@@ -297,14 +332,25 @@
     color: #000000 !important;
   }
 
-  /* Compact Image & Table Sizing inside popup */
+  /* Full Width Image & Table Sizing inside popup */
   [class*="smartsize"] table,
+  .smartsize-modal table,
+  .smartsize-popup table {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    table-layout: auto !important;
+    border-collapse: collapse !important;
+  }
+
   [class*="smartsize"] img,
   .smartsize-modal img,
-  .smartsize-modal table {
+  .smartsize-popup img {
+    width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
-    transform-origin: top center !important;
+    display: block !important;
+    margin: 0 auto !important;
   }
 
   .variants-grid {
@@ -1216,7 +1262,7 @@
   // SmartSize App & Native Size Guide Trigger Handler
   function formatSmartSizeLinks() {
     const smartLinks = document.querySelectorAll(
-      '.product-app-block-wrapper a, .product-app-block-wrapper button, .product-app-block-wrapper span, [class*="smartsize"] a, [class*="smartsize"] button, .smartsize-trigger-link, [data-smartsize-chart]'
+      '.variant-selector-header .product-app-block-wrapper a, .variant-selector-header .product-app-block-wrapper button, .variant-selector-header .product-app-block-wrapper span, .variant-selector-header .smartsize-trigger-link, .variant-selector-header [data-smartsize-chart]'
     );
     smartLinks.forEach(link => {
       if (link.tagName === 'DIV' || link.classList.contains('product-app-block-wrapper')) return;
