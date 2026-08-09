@@ -334,19 +334,23 @@
     
     /* LEFT: Search aligned next to hamburger button */
     .custom-header-left {
-      gap: 12px !important;
+      gap: 10px !important;
     }
 
-    /* Remove round bubble style on hamburger button */
+    /* Slightly decreased hamburger lines and button container on mobile */
     .header-hamburger-btn {
       background: transparent !important;
       border: none !important;
-      width: 24px !important;
-      height: 24px !important;
+      width: 28px !important;
+      height: 28px !important;
       border-radius: 0 !important;
       padding: 0 !important;
       color: rgb(var(--color-foreground)) !important;
       box-shadow: none !important;
+    }
+    .header-hamburger-btn .hamburger-icon-svg {
+      width: 15px !important;
+      height: 15px !important;
     }
     .header-hamburger-btn:hover {
       background: transparent !important;
@@ -358,18 +362,35 @@
 
     /* RIGHT: gap adjustment */
     .custom-header-right {
-      gap: 12px !important;
+      gap: 10px !important;
     }
 
+    /* Slightly decreased Search and Profile icons on mobile */
     .header-icon-btn {
-      width: 32px !important;
-      height: 32px !important;
+      width: 28px !important;
+      height: 28px !important;
+    }
+    .header-icon-btn svg {
+      width: 17px !important;
+      height: 17px !important;
     }
     
-    /* Cart Button Mobile adjustments */
-    .header-cart-pill.is-empty {
-      width: 32px !important;
-      height: 32px !important;
+    /* Slightly decreased Cart icon on mobile */
+    .header-cart-pill {
+      width: 28px !important;
+      height: 28px !important;
+    }
+    .header-cart-pill svg {
+      width: 17px !important;
+      height: 17px !important;
+    }
+    .header-cart-count {
+      top: 0px !important;
+      right: 0px !important;
+      min-width: 15px !important;
+      height: 15px !important;
+      font-size: 9px !important;
+      line-height: 15px !important;
     }
 
     /* Scaling Logo and Text */
