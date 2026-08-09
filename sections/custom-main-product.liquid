@@ -144,6 +144,95 @@
     color: #1d1d1f;
   }
 
+  .size-guide-trigger-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .product-app-block-wrapper {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .product-app-block-wrapper div,
+  .product-app-block-wrapper form,
+  .product-app-block-wrapper section {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .variant-selector-header .product-app-block-wrapper a,
+  .variant-selector-header .product-app-block-wrapper button,
+  .variant-selector-header .product-app-block-wrapper span,
+  .product-app-block-wrapper a,
+  .product-app-block-wrapper button,
+  .product-app-block-wrapper span,
+  .smartsize-trigger-link,
+  [data-smartsize-chart],
+  .smartsize-block a,
+  .smartsize-block button,
+  [class*="smartsize"] a,
+  [class*="smartsize"] button {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    color: #6e6e73 !important;
+    background-color: #f2f2f4 !important;
+    background: #f2f2f4 !important;
+    border: none !important;
+    padding: 6px 12px !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    box-sizing: border-box !important;
+    letter-spacing: normal !important;
+    transition: background-color 0.2s, color 0.2s !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .variant-selector-header .product-app-block-wrapper a:hover,
+  .variant-selector-header .product-app-block-wrapper button:hover,
+  .variant-selector-header .product-app-block-wrapper span:hover,
+  .product-app-block-wrapper a:hover,
+  .product-app-block-wrapper button:hover,
+  .product-app-block-wrapper span:hover,
+  .smartsize-trigger-link:hover,
+  [data-smartsize-chart]:hover,
+  .smartsize-block a:hover,
+  .smartsize-block button:hover,
+  [class*="smartsize"] a:hover,
+  [class*="smartsize"] button:hover {
+    background-color: #e5e5e7 !important;
+    background: #e5e5e7 !important;
+    color: #1d1d1f !important;
+    text-decoration: none !important;
+  }
+
+  .product-app-block-wrapper:not(:empty) + .size-guide-btn {
+    display: none !important;
+  }
+
   .variants-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -677,13 +766,22 @@
               {%- endif -%}
             {%- endif -%}
           </div>
-          
+
           {%- unless product.has_only_default_variant -%}
             {%- for option in product.options_with_values -%}
               <div class="variant-selector-wrapper">
                 <div class="variant-selector-header">
                   <span class="variant-selector-label">Select {{ option.name }}</span>
-                  <button type="button" class="size-guide-btn" onclick="document.getElementById('size-guide-modal').classList.add('active')">Size Guide</button>
+                  <div class="size-guide-trigger-container">
+                    {%- for block in section.blocks -%}
+                      {%- if block.type == '@app' -%}
+                        <div class="product-app-block-wrapper" {{ block.shopify_attributes }}>
+                          {% render block %}
+                        </div>
+                      {%- endif -%}
+                    {%- endfor -%}
+                    <button type="button" class="size-guide-btn">Size Guide</button>
+                  </div>
                 </div>
                 
                 <div class="variants-grid">
@@ -720,7 +818,16 @@
               <div class="variant-selector-wrapper">
                 <div class="variant-selector-header">
                   <span class="variant-selector-label">Select Option</span>
-                  <button type="button" class="size-guide-btn" onclick="document.getElementById('size-guide-modal').classList.add('active')">Size Guide</button>
+                  <div class="size-guide-trigger-container">
+                    {%- for block in section.blocks -%}
+                      {%- if block.type == '@app' -%}
+                        <div class="product-app-block-wrapper" {{ block.shopify_attributes }}>
+                          {% render block %}
+                        </div>
+                      {%- endif -%}
+                    {%- endfor -%}
+                    <button type="button" class="size-guide-btn">Size Guide</button>
+                  </div>
                 </div>
                 <div class="variants-grid">
                   {%- for variant in product.variants -%}
@@ -1032,6 +1139,65 @@
     });
   }
 
+  // SmartSize App & Native Size Guide Trigger Handler
+  function formatSmartSizeLinks() {
+    const smartLinks = document.querySelectorAll(
+      '.product-app-block-wrapper a, .product-app-block-wrapper button, .product-app-block-wrapper span, [class*="smartsize"] a, [class*="smartsize"] button, .smartsize-trigger-link, [data-smartsize-chart]'
+    );
+    smartLinks.forEach(link => {
+      if (link.tagName === 'DIV' || link.classList.contains('product-app-block-wrapper')) return;
+      link.classList.add('size-guide-btn');
+      link.style.textDecoration = 'none';
+      link.style.borderRadius = '12px';
+      link.style.backgroundColor = '#f2f2f4';
+      link.style.color = '#6e6e73';
+      link.style.padding = '6px 12px';
+      link.style.fontSize = '10px';
+      link.style.fontWeight = '500';
+      link.style.fontFamily = 'inherit';
+      link.style.display = 'inline-flex';
+      link.style.alignItems = 'center';
+      link.style.justifyContent = 'center';
+    });
+  }
+
+  function initSizeGuideTrigger() {
+    formatSmartSizeLinks();
+    setTimeout(formatSmartSizeLinks, 500);
+    setTimeout(formatSmartSizeLinks, 1500);
+
+    document.querySelectorAll('.size-guide-btn').forEach(btn => {
+      if (btn.dataset.smartsizeBound) return;
+      btn.dataset.smartsizeBound = 'true';
+
+      btn.addEventListener('click', (e) => {
+        if (window.SmartSize && typeof window.SmartSize.open === 'function') {
+          e.preventDefault();
+          e.stopPropagation();
+          window.SmartSize.open();
+          return;
+        }
+
+        const appTrigger = document.querySelector(
+          '.product-app-block-wrapper a, .product-app-block-wrapper button, .smartsize-trigger-link, [data-smartsize-chart], a[href*="smartsize"], .smartsize-block a'
+        );
+        if (appTrigger && appTrigger !== btn) {
+          e.preventDefault();
+          e.stopPropagation();
+          appTrigger.click();
+          return;
+        }
+
+        const modal = document.getElementById('size-guide-modal');
+        if (modal) {
+          e.preventDefault();
+          e.stopPropagation();
+          modal.classList.add('active');
+        }
+      });
+    });
+  }
+
   // Run initialization on loads
   document.addEventListener('DOMContentLoaded', () => {
     initInvertedScroll();
@@ -1039,6 +1205,7 @@
     initTabSwitching();
     initMobileMediaSlider();
     initAddToCartForm();
+    initSizeGuideTrigger();
   });
   
   document.addEventListener('shopify:section:load', () => {
@@ -1047,6 +1214,7 @@
     initTabSwitching();
     initMobileMediaSlider();
     initAddToCartForm();
+    initSizeGuideTrigger();
   });
 
   document.addEventListener('shopify:block:select', (evt) => {
@@ -1076,6 +1244,9 @@
     }
   ],
   "blocks": [
+    {
+      "type": "@app"
+    },
     {
       "type": "accordion_row",
       "name": "Accordion row",
