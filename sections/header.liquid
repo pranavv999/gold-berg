@@ -60,16 +60,53 @@
                 height 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
-  /* Scrolled Floating State */
+  /* Scrolled Floating & Shrinking State */
   .custom-glass-header-wrapper.is-scrolled {
-    padding: 16px 24px 0 24px !important;
+    padding: 12px 24px 0 24px !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .custom-glass-header-wrapper.is-scrolled {
+      padding: 8px 12px 0 12px !important;
+    }
   }
 
   .custom-glass-header-wrapper.is-scrolled .custom-glass-header {
     border-radius: var(--glass-radius) !important;
-    border: 1px solid rgba(var(--color-foreground), 0.15) !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
-    height: 64px !important;
+    border: 1px solid rgba(var(--color-foreground), 0.14) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12) !important;
+    height: 56px !important;
+    padding: 0 20px !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .custom-glass-header-wrapper.is-scrolled .custom-glass-header {
+      height: 50px !important;
+      padding: 0 14px !important;
+    }
+  }
+
+  .custom-glass-header-wrapper.is-scrolled .header-logo-img {
+    max-height: 32px !important;
+    width: auto !important;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .custom-glass-header-wrapper.is-scrolled .header-hamburger-btn {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  /* Override when merchant turns OFF enable_scroll_shrink setting */
+  .custom-glass-header-wrapper.disable-shrink.is-scrolled {
+    padding: 0 !important;
+  }
+  .custom-glass-header-wrapper.disable-shrink.is-scrolled .custom-glass-header {
+    border-radius: 0 !important;
+    height: 72px !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02) !important;
   }
 
   /* Layout alignment */
@@ -582,8 +619,13 @@
   }
 </style>
 
+{%- assign disable_scroll_shrink = false -%}
+{%- if section.settings.enable_scroll_shrink == false -%}
+  {%- assign disable_scroll_shrink = true -%}
+{%- endif -%}
+
 <div 
-  class="custom-glass-header-wrapper color-{{ section.settings.color_scheme }}" 
+  class="custom-glass-header-wrapper color-{{ section.settings.color_scheme }}{% if disable_scroll_shrink %} disable-shrink{% endif %}" 
   id="custom-glass-header-wrapper" 
   style="--glass-opacity: {{ section.settings.glass_opacity | divided_by: 100.0 }}; --glass-radius: {{ section.settings.glass_radius }}px;"
 >
@@ -591,7 +633,7 @@
     
     <!-- LEFT: Hamburger Menu and Search Icon (Mobile) -->
     <div class="custom-header-left">
-      <button class="header-hamburger-btn" aria-label="Menu" id="header-hamburger-menu-btn">
+      <button class="header-hamburger-btn" aria-label="Menu" id="header-hamburger-menu-btn" onclick="toggleCustomMegaMenu(event)">
         <svg class="hamburger-icon-svg" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path class="hamburger-line line-1" d="M2 9H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
           <path class="hamburger-line line-2" d="M2 9H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
@@ -884,91 +926,90 @@
 
 
 
-{% javascript %}
-  document.addEventListener('DOMContentLoaded', () => {
-    const headerWrapper = document.getElementById('custom-glass-header-wrapper');
-    const hamburgerBtn = document.getElementById('header-hamburger-menu-btn');
-    if (!headerWrapper) return;
+<script>
+  window.toggleCustomMegaMenu = function(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    var wrapper = document.getElementById('custom-glass-header-wrapper');
+    if (wrapper) {
+      wrapper.classList.toggle('mega-menu-open');
+    }
+  };
 
-    // Toggle Mega Menu on Hamburger Click
-    if (hamburgerBtn) {
-      hamburgerBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        headerWrapper.classList.toggle('mega-menu-open');
-      });
+  (function() {
+    function initGlassHeader() {
+      var wrapper = document.getElementById('custom-glass-header-wrapper');
+      if (!wrapper) return;
+
+      function checkScroll() {
+        var sy = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        if (sy > 5) {
+          wrapper.classList.add('is-scrolled');
+        } else {
+          wrapper.classList.remove('is-scrolled');
+        }
+      }
+
+      checkScroll();
+      window.addEventListener('scroll', checkScroll, { passive: true });
+      window.addEventListener('resize', checkScroll, { passive: true });
     }
 
-    // Close Mega Menu when clicking outside header wrapper
-    document.addEventListener('click', (e) => {
-      if (headerWrapper.classList.contains('mega-menu-open') && !headerWrapper.contains(e.target)) {
-        headerWrapper.classList.remove('mega-menu-open');
-      }
-    });
-
-    // Close Mega Menu on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && headerWrapper.classList.contains('mega-menu-open')) {
-        headerWrapper.classList.remove('mega-menu-open');
-      }
-    });
-
-    const threshold = 10; // Scroll threshold in pixels
-
-    function checkScroll() {
-      const scrollY = window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollY > threshold) {
-        headerWrapper.classList.add('is-scrolled');
-      } else {
-        headerWrapper.classList.remove('is-scrolled');
-      }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initGlassHeader);
+    } else {
+      initGlassHeader();
     }
 
-    // Run check on load in case the page is already scrolled
-    checkScroll();
+    document.addEventListener('shopify:section:load', initGlassHeader);
 
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          checkScroll();
-          ticking = false;
-        });
-        ticking = true;
+    document.addEventListener('click', function(e) {
+      var wrapper = document.getElementById('custom-glass-header-wrapper');
+      if (!wrapper) return;
+
+      var btn = e.target.closest('#header-hamburger-menu-btn, .header-hamburger-btn');
+      if (btn) {
+        return; // Handled by inline onclick="toggleCustomMegaMenu(event)"
       }
-    }, { passive: true });
 
-    // Mobile Sub-category Accordion Toggle (triggers on click of sub-category title or arrow)
-    const subHeaders = document.querySelectorAll('.mega-menu-sub-header');
-    subHeaders.forEach(header => {
-      header.addEventListener('click', (e) => {
-        // Only run accordion toggle on mobile screens (< 750px)
-        if (window.innerWidth >= 750) return;
+      if (wrapper.classList.contains('mega-menu-open') && !wrapper.contains(e.target)) {
+        wrapper.classList.remove('mega-menu-open');
+      }
 
+      var subHeader = e.target.closest('.mega-menu-sub-header');
+      if (subHeader && window.innerWidth < 750) {
         e.preventDefault();
         e.stopPropagation();
 
-        const currentSubGroup = header.closest('.mega-menu-sub-group');
+        var currentSubGroup = subHeader.closest('.mega-menu-sub-group');
         if (!currentSubGroup) return;
 
-        const isAlreadyOpen = currentSubGroup.classList.contains('is-open');
+        var isAlreadyOpen = currentSubGroup.classList.contains('is-open');
 
-        // Behavior 1: Close all other open sub-categories on mobile
-        document.querySelectorAll('.mega-menu-sub-group.is-open').forEach(group => {
+        document.querySelectorAll('.mega-menu-sub-group.is-open').forEach(function(group) {
           group.classList.remove('is-open');
-          const toggleBtn = group.querySelector('.mega-menu-toggle-btn');
+          var toggleBtn = group.querySelector('.mega-menu-toggle-btn');
           if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false');
         });
 
-        // Behavior 2: Toggle clicked sub-category (expand if closed, contract if already open)
         if (!isAlreadyOpen) {
           currentSubGroup.classList.add('is-open');
-          const toggleBtn = currentSubGroup.querySelector('.mega-menu-toggle-btn');
+          var toggleBtn = currentSubGroup.querySelector('.mega-menu-toggle-btn');
           if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true');
         }
-      });
+      }
     });
-  });
-{% endjavascript %}
+
+    document.addEventListener('keydown', function(e) {
+      var wrapper = document.getElementById('custom-glass-header-wrapper');
+      if (e.key === 'Escape' && wrapper && wrapper.classList.contains('mega-menu-open')) {
+        wrapper.classList.remove('mega-menu-open');
+      }
+    });
+  })();
+</script>
 
 {% schema %}
 {
@@ -1000,6 +1041,13 @@
       "default": 80,
       "unit": "%",
       "label": "Glass Opacity"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll_shrink",
+      "label": "Enable scroll float & shrink effect",
+      "default": true,
+      "info": "When enabled, scrolling down detaches the header from screen edges into a floating glass pill."
     },
     {
       "type": "range",
