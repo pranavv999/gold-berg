@@ -239,7 +239,7 @@
     width: 100vw !important;
     height: 100vh !important;
     background: rgba(0, 0, 0, 0.6) !important;
-    z-index: 999999998 !important;
+    z-index: 2147483646 !important;
   }
 
   /* Main SmartSize Outer Dialog Card */
@@ -247,17 +247,17 @@
   .smartsize-popup,
   div[class*="smartsize-modal-wrapper"],
   div[class*="smartsize-popup"] {
-    z-index: 999999999 !important;
+    z-index: 2147483647 !important;
     width: min(92vw, 540px) !important;
     min-width: min(92vw, 540px) !important;
     max-width: 540px !important;
-    max-height: 85vh !important;
+    max-height: 78vh !important;
     border-radius: 20px !important;
     background: #ffffff !important;
     background-color: #ffffff !important;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35) !important;
     position: fixed !important;
-    top: 52% !important;
+    top: calc(50% + 32px) !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
     box-sizing: border-box !important;
