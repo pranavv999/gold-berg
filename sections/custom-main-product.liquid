@@ -181,11 +181,7 @@
   .product-app-block-wrapper button,
   .product-app-block-wrapper span,
   .smartsize-trigger-link,
-  [data-smartsize-chart],
-  .smartsize-block a,
-  .smartsize-block button,
-  [class*="smartsize"] a,
-  [class*="smartsize"] button {
+  [data-smartsize-chart] {
     font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     font-size: 10px !important;
     font-weight: 500 !important;
@@ -204,6 +200,7 @@
     margin: 0 !important;
     height: auto !important;
     min-height: 0 !important;
+    width: auto !important;
     box-sizing: border-box !important;
     letter-spacing: normal !important;
     transition: background-color 0.2s, color 0.2s !important;
@@ -218,11 +215,7 @@
   .product-app-block-wrapper button:hover,
   .product-app-block-wrapper span:hover,
   .smartsize-trigger-link:hover,
-  [data-smartsize-chart]:hover,
-  .smartsize-block a:hover,
-  .smartsize-block button:hover,
-  [class*="smartsize"] a:hover,
-  [class*="smartsize"] button:hover {
+  [data-smartsize-chart]:hover {
     background-color: #e5e5e7 !important;
     background: #e5e5e7 !important;
     color: #1d1d1f !important;
@@ -231,6 +224,87 @@
 
   .product-app-block-wrapper:not(:empty) + .size-guide-btn {
     display: none !important;
+  }
+
+  /* SmartSize Overlay & Backdrop Elevation */
+  .smartsize-overlay,
+  .smartsize-backdrop,
+  [class*="smartsize-overlay"],
+  [class*="smartsize-backdrop"] {
+    z-index: 99999999 !important;
+  }
+
+  /* Main SmartSize Outer Dialog Card */
+  .smartsize-modal,
+  .smartsize-popup,
+  .smartsize-modal-wrapper,
+  div[class*="smartsize-modal-wrapper"],
+  div[class*="smartsize-modal-container"] {
+    z-index: 99999999 !important;
+    max-width: 520px !important;
+    max-height: 85vh !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35) !important;
+  }
+
+  /* SmartSize Modal Header & Close Button (Top-Right Circular Pill) */
+  .smartsize-modal [class*="close"],
+  .smartsize-popup [class*="close"],
+  [class*="smartsize-modal"] [class*="close"],
+  [class*="smartsize-popup"] [class*="close"],
+  [class*="smartsize"] button[class*="close"],
+  [class*="smartsize"] [aria-label*="close" i],
+  [class*="smartsize"] [aria-label*="Close"] {
+    position: absolute !important;
+    top: 12px !important;
+    right: 12px !important;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
+    border-radius: 50% !important;
+    background: rgba(0, 0, 0, 0.06) !important;
+    background-color: rgba(0, 0, 0, 0.06) !important;
+    color: #1d1d1f !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    font-size: 14px !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    z-index: 999999999 !important;
+    pointer-events: auto !important;
+    transition: background-color 0.2s !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .smartsize-modal [class*="close"]:hover,
+  .smartsize-popup [class*="close"]:hover,
+  [class*="smartsize"] button[class*="close"]:hover {
+    background: rgba(0, 0, 0, 0.12) !important;
+    background-color: rgba(0, 0, 0, 0.12) !important;
+    color: #000000 !important;
+  }
+
+  /* Compact Image & Table Sizing inside popup */
+  [class*="smartsize"] table,
+  [class*="smartsize"] img,
+  .smartsize-modal img,
+  .smartsize-modal table {
+    max-width: 100% !important;
+    height: auto !important;
+    transform-origin: top center !important;
   }
 
   .variants-grid {
@@ -1195,6 +1269,19 @@
           modal.classList.add('active');
         }
       });
+    // Global click listener for SmartSize close buttons
+    document.addEventListener('click', (e) => {
+      const closeElem = e.target.closest('[class*="close"], [class*="dismiss"], [aria-label*="close" i], [aria-label*="Close"]');
+      if (closeElem && closeElem.closest('[class*="smartsize"], [id*="smartsize"]')) {
+        if (window.SmartSize && typeof window.SmartSize.close === 'function') {
+          window.SmartSize.close();
+        } else {
+          document.querySelectorAll('[class*="smartsize"], [id*="smartsize"]').forEach(modal => {
+            modal.style.display = 'none';
+            modal.classList.remove('active');
+          });
+        }
+      }
     });
   }
 
