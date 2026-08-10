@@ -921,11 +921,11 @@
 
                     <button
                       type="button"
-                      class="variant-pill{% if is_selected %} selected{% endif %}{% unless variant_for_value.available %} disabled{% endunless %}"
+                      class="variant-pill{% if is_selected %} selected{% endif %}{% unless variant_for_value.available %} is-out-of-stock{% endunless %}"
                       data-variant-id="{{ variant_for_value.id }}"
+                      data-available="{{ variant_for_value.available }}"
                       data-price="{{ variant_for_value.price | money }}"
                       data-compare-price="{% if variant_for_value.compare_at_price > variant_for_value.price %}{{ variant_for_value.compare_at_price | money }}{% endif %}"
-                      {% unless variant_for_value.available %}disabled{% endunless %}
                     >
                       {{ value }}
                     </button>
@@ -1081,22 +1081,18 @@
   </div>
 </div>
 
-{%- javascript -%}
-  // Parallax scrolling discarded - standard document scrolling active
-  function initInvertedScroll() {}
-
-  // Variant selector selection logic
-  function initVariantSelector() {
-    const form = document.getElementById('product-form-custom');
-    if (!form) return;
-    const hiddenIdInput = form.querySelector('input[name="id"]');
-    const pills = form.querySelectorAll('.variant-pill');
-    const priceElem = form.querySelector('.product-info-price');
-    const comparePriceElem = form.querySelector('.product-compare-price');
-    
-    pills.forEach(pill => {
-      pill.addEventListener('click', function() {
-        if (pill.disabled || pill.classList.contains('disabled')) return;
+<script>
+  // Global delegated click handler for Variant Pills, Tabs, and Size Guide
+  document.addEventListener('click', function(e) {
+    // 1. Variant Pill Selection
+    const pill = e.target.closest('.variant-pill');
+    if (pill) {
+      const form = pill.closest('form') || document.getElementById('product-form-custom');
+      if (form) {
+        const hiddenIdInput = form.querySelector('input[name="id"]');
+        const priceElem = form.querySelector('.product-info-price');
+        const comparePriceElem = form.querySelector('.product-compare-price');
+        const pills = form.querySelectorAll('.variant-pill');
         
         pills.forEach(p => p.classList.remove('selected'));
         pill.classList.add('selected');
@@ -1119,24 +1115,22 @@
             comparePriceElem.style.display = 'none';
           }
         }
-      });
-    });
-  }
+      }
+      return;
+    }
 
-  // Tab Switching Logic
-  function initTabSwitching() {
-    const tabBtns = document.querySelectorAll('.tab-header-btn');
-    const tabPanes = document.querySelectorAll('.tab-pane');
-    
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        const tabId = btn.getAttribute('data-tab');
-        
-        // Toggle tabs
+    // 2. Tab Switching
+    const tabBtn = e.target.closest('.tab-header-btn');
+    if (tabBtn) {
+      const tabId = tabBtn.getAttribute('data-tab');
+      if (tabId) {
+        const container = tabBtn.closest('.product-info-card') || document;
+        const tabBtns = container.querySelectorAll('.tab-header-btn');
+        const tabPanes = container.querySelectorAll('.tab-pane');
+
         tabBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        // Toggle panes
+        tabBtn.classList.add('active');
+
         tabPanes.forEach(pane => {
           if (pane.id === `tab-${tabId}`) {
             pane.classList.add('active');
@@ -1144,9 +1138,121 @@
             pane.classList.remove('active');
           }
         });
-      });
+      }
+      return;
+    }
+
+    // 3. Size Guide Trigger
+    const sizeGuideBtn = e.target.closest('.size-guide-btn');
+    if (sizeGuideBtn) {
+      e.preventDefault();
+      if (window.SmartSize && typeof window.SmartSize.open === 'function') {
+        window.SmartSize.open();
+        return;
+      }
+      const appTrigger = document.querySelector(
+        '.product-app-block-wrapper a, .product-app-block-wrapper button, .smartsize-trigger-link, [data-smartsize-chart], a[href*="smartsize"], .smartsize-block a'
+      );
+      if (appTrigger && appTrigger !== sizeGuideBtn) {
+        appTrigger.click();
+        return;
+      }
+      const modal = document.getElementById('size-guide-modal');
+      if (modal) {
+        modal.classList.add('active');
+      }
+      return;
+    }
+
+    // 4. SmartSize Close Buttons
+    const closeElem = e.target.closest('[class*="close"], [class*="dismiss"], [aria-label*="close" i], [aria-label*="Close"]');
+    if (closeElem && closeElem.closest('[class*="smartsize"], [id*="smartsize"]')) {
+      if (window.SmartSize && typeof window.SmartSize.close === 'function') {
+        window.SmartSize.close();
+      } else {
+        document.querySelectorAll('[class*="smartsize"], [id*="smartsize"]').forEach(m => {
+          m.style.display = 'none';
+          m.classList.remove('active');
+        });
+      }
+    }
+  });
+
+  // Global delegated submit handler for AJAX Add to Bag
+  document.addEventListener('submit', function(e) {
+    const form = e.target.closest('#product-form-custom');
+    if (!form) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const submitBtn = form.querySelector('button[name="add"]') || form.querySelector('button[type="submit"]');
+    let originalBtnHtml = '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.setAttribute('aria-disabled', 'true');
+      originalBtnHtml = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<span>ADDED TO BAG</span>';
+    }
+
+    const formData = new FormData(form);
+    const cartDrawer = document.querySelector('cart-drawer');
+    if (cartDrawer) {
+      cartDrawer.classList.remove('is-empty');
+    }
+
+    if (cartDrawer && typeof cartDrawer.getSectionsToRender === 'function') {
+      const sections = cartDrawer.getSectionsToRender().map(s => s.id);
+      formData.append('sections', sections.join(','));
+      formData.append('sections_url', window.location.pathname);
+    } else {
+      formData.append('sections', 'cart-drawer,cart-icon-bubble');
+    }
+
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: formData
+    })
+    .then(res => res.json())
+    .then(response => {
+      if (response.status) {
+        alert(response.description || response.message || 'Error adding to bag');
+        if (submitBtn) {
+          submitBtn.innerHTML = originalBtnHtml;
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute('aria-disabled');
+        }
+        return;
+      }
+
+      // Open cart drawer dynamically
+      if (cartDrawer) {
+        cartDrawer.classList.remove('is-empty');
+        if (typeof cartDrawer.open === 'function') {
+          cartDrawer.open();
+        } else if (typeof cartDrawer.renderContents === 'function') {
+          cartDrawer.renderContents(response);
+        } else {
+          cartDrawer.setAttribute('open', '');
+        }
+      }
+    })
+    .catch(err => {
+      console.error('Error adding to cart:', err);
+    })
+    .finally(() => {
+      setTimeout(() => {
+        if (submitBtn) {
+          submitBtn.innerHTML = originalBtnHtml;
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute('aria-disabled');
+        }
+      }, 1200);
     });
-  }
+  });
 
   // Mobile media slider dots sync logic
   function initMobileMediaSlider() {
@@ -1182,84 +1288,7 @@
     });
   }
 
-  // AJAX Add To Bag Form Submit Logic
-  function initAddToCartForm() {
-    const form = document.getElementById('product-form-custom');
-    if (!form || form.dataset.ajaxBound) return;
-    form.dataset.ajaxBound = 'true';
-
-    form.addEventListener('submit', function(evt) {
-      evt.preventDefault();
-      
-      const submitBtn = form.querySelector('button[name="add"]') || form.querySelector('button[type="submit"]');
-      let originalBtnHtml = '';
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.setAttribute('aria-disabled', 'true');
-        originalBtnHtml = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<span>ADDED TO BAG</span>';
-      }
-
-      const formData = new FormData(form);
-      const cartDrawer = document.querySelector('cart-drawer');
-      if (cartDrawer) {
-        cartDrawer.classList.remove('is-empty');
-      }
-      
-      if (cartDrawer && typeof cartDrawer.getSectionsToRender === 'function') {
-        const sections = cartDrawer.getSectionsToRender().map(s => s.id);
-        formData.append('sections', sections.join(','));
-        formData.append('sections_url', window.location.pathname);
-      } else {
-        formData.append('sections', 'cart-drawer,cart-icon-bubble');
-      }
-
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest'
-        },
-        body: formData
-      })
-      .then(res => res.json())
-      .then(response => {
-        if (response.status) {
-          alert(response.description || response.message || 'Error adding to bag');
-          if (submitBtn) {
-            submitBtn.innerHTML = originalBtnHtml;
-            submitBtn.disabled = false;
-            submitBtn.removeAttribute('aria-disabled');
-          }
-          return;
-        }
-
-        // Re-render cart drawer & open it
-        const drawer = document.querySelector('cart-drawer');
-        if (drawer) {
-          drawer.classList.remove('is-empty');
-          if (typeof drawer.renderContents === 'function') {
-            drawer.renderContents(response);
-          } else if (typeof drawer.open === 'function') {
-            drawer.open();
-          }
-        }
-      })
-      .catch(err => {
-        console.error('Error adding to cart:', err);
-      })
-      .finally(() => {
-        setTimeout(() => {
-          if (submitBtn) {
-            submitBtn.innerHTML = originalBtnHtml;
-            submitBtn.disabled = false;
-            submitBtn.removeAttribute('aria-disabled');
-          }
-        }, 1200);
-      });
-    });
-  }
-
-  // SmartSize App & Native Size Guide Trigger Handler
+  // Format SmartSize links on trigger load
   function formatSmartSizeLinks() {
     const smartLinks = document.querySelectorAll(
       '.variant-selector-header .product-app-block-wrapper a, .variant-selector-header .product-app-block-wrapper button, .variant-selector-header .product-app-block-wrapper span, .variant-selector-header .smartsize-trigger-link, .variant-selector-header [data-smartsize-chart]'
@@ -1281,83 +1310,18 @@
     });
   }
 
-  function initSizeGuideTrigger() {
-    formatSmartSizeLinks();
-    setTimeout(formatSmartSizeLinks, 500);
-    setTimeout(formatSmartSizeLinks, 1500);
-
-    document.querySelectorAll('.size-guide-btn').forEach(btn => {
-      if (btn.dataset.smartsizeBound) return;
-      btn.dataset.smartsizeBound = 'true';
-
-      btn.addEventListener('click', (e) => {
-        if (window.SmartSize && typeof window.SmartSize.open === 'function') {
-          e.preventDefault();
-          e.stopPropagation();
-          window.SmartSize.open();
-          return;
-        }
-
-        const appTrigger = document.querySelector(
-          '.product-app-block-wrapper a, .product-app-block-wrapper button, .smartsize-trigger-link, [data-smartsize-chart], a[href*="smartsize"], .smartsize-block a'
-        );
-        if (appTrigger && appTrigger !== btn) {
-          e.preventDefault();
-          e.stopPropagation();
-          appTrigger.click();
-          return;
-        }
-
-        const modal = document.getElementById('size-guide-modal');
-        if (modal) {
-          e.preventDefault();
-          e.stopPropagation();
-          modal.classList.add('active');
-        }
-      });
-    // Global click listener for SmartSize close buttons
-    document.addEventListener('click', (e) => {
-      const closeElem = e.target.closest('[class*="close"], [class*="dismiss"], [aria-label*="close" i], [aria-label*="Close"]');
-      if (closeElem && closeElem.closest('[class*="smartsize"], [id*="smartsize"]')) {
-        if (window.SmartSize && typeof window.SmartSize.close === 'function') {
-          window.SmartSize.close();
-        } else {
-          document.querySelectorAll('[class*="smartsize"], [id*="smartsize"]').forEach(modal => {
-            modal.style.display = 'none';
-            modal.classList.remove('active');
-          });
-        }
-      }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initMobileMediaSlider();
+      formatSmartSizeLinks();
+      setTimeout(formatSmartSizeLinks, 1000);
     });
+  } else {
+    initMobileMediaSlider();
+    formatSmartSizeLinks();
+    setTimeout(formatSmartSizeLinks, 1000);
   }
-
-  // Run initialization on loads
-  document.addEventListener('DOMContentLoaded', () => {
-    initInvertedScroll();
-    initVariantSelector();
-    initTabSwitching();
-    initMobileMediaSlider();
-    initAddToCartForm();
-    initSizeGuideTrigger();
-  });
-  
-  document.addEventListener('shopify:section:load', () => {
-    initInvertedScroll();
-    initVariantSelector();
-    initTabSwitching();
-    initMobileMediaSlider();
-    initAddToCartForm();
-    initSizeGuideTrigger();
-  });
-
-  document.addEventListener('shopify:block:select', (evt) => {
-    const blockId = evt.detail.blockId;
-    const tabBtn = document.querySelector(`.tab-header-btn[data-tab="${blockId}"]`);
-    if (tabBtn) {
-      tabBtn.click();
-    }
-  });
-{%- endjavascript -%}
+</script>
 
 {% schema %}
 {
