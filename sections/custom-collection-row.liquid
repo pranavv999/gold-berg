@@ -369,7 +369,9 @@
     <div class="custom-collection-header">
       <h3 class="custom-collection-name">{{ collection_title }}</h3>
       {%- unless section.settings.hide_discover_more -%}
-        <a href="{{ collection_url }}" class="custom-collection-more-btn">Discover more</a>
+        <a href="{{ collection_url }}" class="custom-collection-more-btn">
+          {{- section.settings.button_label | default: 'Discover more' -}}
+        </a>
       {%- endunless -%}
     </div>
 
@@ -667,9 +669,15 @@
       ]
     },
     {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Discover more"
+    },
+    {
       "type": "checkbox",
       "id": "hide_discover_more",
-      "label": "Hide \"Discover more\" button",
+      "label": "Hide button",
       "default": false
     },
     {
