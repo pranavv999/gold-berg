@@ -87,6 +87,13 @@ collection-component {
   padding: 0 1.5rem;
 }
 
+@media screen and (max-width: 749px) {
+  .page-width {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+}
+
 body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
   max-width: 100%;
 }
