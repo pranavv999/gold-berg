@@ -7,7 +7,7 @@
 <footer class="custom-footer-section">
   <div class="custom-footer-outer-wrapper">
     {% comment %} Floating Inner White Footer Card Container {% endcomment %}
-    <div class="custom-footer-card">
+    <div class="custom-footer-card" style="--container-radius: {{ section.settings.container_radius | default: 24 }}px;">
       <div class="custom-footer-content-grid">
         {% comment %} Left Column: Newsletter & Social Links {% endcomment %}
         <div class="custom-footer-left">
@@ -265,6 +265,16 @@
   "tag": "section",
   "class": "section-footer",
   "settings": [
+    {
+      "type": "range",
+      "id": "container_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 24,
+      "label": "Container corner radius"
+    },
     {
       "type": "header",
       "content": "Footer Brand Logo"

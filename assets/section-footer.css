@@ -28,7 +28,7 @@
   position: relative;
   z-index: 3;
   background: #ffffff;
-  border-radius: 32px;
+  border-radius: var(--container-radius, 32px);
   padding: 56px 64px 32px 64px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
@@ -312,7 +312,7 @@
 
   .custom-footer-card {
     padding: 28px 20px 20px 20px;
-    border-radius: 24px;
+    border-radius: var(--container-radius, 24px) !important;
   }
 
   .custom-footer-content-grid {
