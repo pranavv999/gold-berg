@@ -398,7 +398,7 @@
 .card-image-slider-wrapper {
   position: relative !important;
   background: #f2f2f4 !important;
-  border-radius: 18px !important;
+  border-radius: 10px !important;
   aspect-ratio: 0.85 !important;
   overflow: hidden !important;
   width: 100% !important;
