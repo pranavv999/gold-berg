@@ -152,7 +152,7 @@
 {%- endstyle -%}
 
 <div class="image-slider-outer" id="ImageSlider-{{ section.id }}">
-  <div class="image-slider-container">
+  <div class="image-slider-container" style="--container-radius: {{ section.settings.container_radius }}px;">
     {%- if section.settings.heading != blank -%}
       <div class="image-slider-header">
         <h2 class="image-slider-heading">{{ section.settings.heading | escape }}</h2>
@@ -450,6 +450,16 @@
         }
       ],
       "default": "cover"
+    },
+    {
+      "type": "range",
+      "id": "container_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 24,
+      "label": "Container corner radius"
     }
   ],
   "blocks": [
