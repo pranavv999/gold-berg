@@ -446,7 +446,7 @@
                   <div class="custom-product-meta">
                     <h4 class="custom-product-title">{{ item.title }}</h4>
                     <div class="custom-product-price-row">
-                      <span class="custom-product-price">From {{ item.price | money }}</span>
+                      <span class="custom-product-price">{{ item.price | money }}</span>
                       {%- if item.compare_at_price > item.price -%}
                         <span class="custom-product-compare">{{ item.compare_at_price | money }}</span>
                       {%- endif -%}
@@ -520,7 +520,7 @@
               <div class="custom-product-meta">
                 <h4 class="custom-product-title">{{ product_title }}</h4>
                 <div class="custom-product-price-row">
-                  <span class="custom-product-price">From {{ current_price }}</span>
+                  <span class="custom-product-price">{{ current_price }}</span>
                   {%- if compare_price != null -%}
                     <span class="custom-product-compare">{{ compare_price }}</span>
                   {%- endif -%}

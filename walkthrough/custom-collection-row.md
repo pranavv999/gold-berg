@@ -42,7 +42,7 @@ The merchant can customize the following settings directly inside the Shopify Th
   * The active slide dot is styled as a filled gray dot.
 * **Card Details**:
   * Product Name: Left-aligned beneath the image.
-  * Pricing: Left-aligned under the name, displaying "From $[Price]" and a struck-through comparison price if it is on sale.
+  * Pricing: Left-aligned under the name, displaying "$[Price]" and a struck-through comparison price if it is on sale.
 
 ### Mobile Typography & Scaling
 On mobile screen widths (`max-width: 749px`), sizes scale down:
