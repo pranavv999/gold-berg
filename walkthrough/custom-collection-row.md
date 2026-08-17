@@ -23,6 +23,7 @@ The merchant can customize the following settings directly inside the Shopify Th
 * **Margins**: Stretches horizontally to keep a constant margin from the browser edges:
   * **Desktop**: Spaced exactly **24px** from the left and right browser edges.
   * **Mobile**: Spaced exactly **5px** from the left and right browser edges to maximize display size on small screens.
+* **Section Vertical Gap**: When sections sit back-to-back, top/bottom outer padding provides a total gap of **22px** on Desktop (`11px` top/bottom padding) and **12px** on Mobile (`6px` top/bottom padding).
 * **Rounded Corners**: Controllable from the Customizer via range slider setting `--container-radius`.
 
 ### Header Area
