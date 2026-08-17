@@ -24,6 +24,7 @@ The merchant can customize the following settings directly inside the Shopify Th
   * **Desktop**: Spaced exactly **24px** from the left and right browser edges.
   * **Mobile**: Spaced exactly **5px** from the left and right browser edges to maximize display size on small screens.
 * **Section Vertical Gap**: When sections sit back-to-back, top/bottom outer padding provides a total gap of **22px** on Desktop (`11px` top/bottom padding) and **12px** on Mobile (`6px` top/bottom padding).
+* **Inner Panel Padding**: Styled with **3.5rem (56px) / 4rem (64px)** padding on Desktop and **12px** padding on Mobile (`padding: 12px !important`).
 * **Rounded Corners**: Controllable from the Customizer via range slider setting `--container-radius`.
 
 ### Header Area
@@ -31,7 +32,8 @@ The merchant can customize the following settings directly inside the Shopify Th
 * **Discover More Button**: Right-aligned pill button with a black fill background and white text linking directly to the collection page.
 
 ### Product Card Layout (Desktop View)
-* Displays a row of **4 equal-sized product cards**.
+* Displays a row of **4 equal-sized product cards** on Desktop and **2 columns** on Mobile.
+* **Grid Gap**: Styled with a **13px** grid gap on Desktop and **4px** grid gap on Mobile.
 * **Tall Aspect Ratio**: Built with a 3:4 aspect ratio (`0.75` height proportion) to ensure product cards look elegant and tall as the container expands.
 * **Hover Image Slider**:
   * Hovering over any card reveals navigation arrows (Left/Right) on the side edges of the image box.
@@ -43,7 +45,7 @@ The merchant can customize the following settings directly inside the Shopify Th
   * The active slide dot is styled as a filled gray dot.
 * **Card Details**:
   * Product Name: Left-aligned beneath the image.
-  * Pricing: Left-aligned under the name, displaying "$[Price]" and a struck-through comparison price if it is on sale.
+  * Pricing: Left-aligned under the name, displaying "$[Price]" and a struck-through comparison price if it is on sale, with a **10px** bottom margin for comfortable breathing room above subsequent rows.
 
 ### Mobile Typography & Scaling
 On mobile screen widths (`max-width: 749px`), sizes scale down:
@@ -51,4 +53,4 @@ On mobile screen widths (`max-width: 749px`), sizes scale down:
 * **Discover More Button**: Reduced to **8px** with a compact padding of `2px 10px`.
 * **Product Name**: Reduced to **10px** (`font-size: 10px !important`).
 * **Product Prices**: Both actual and comparison prices are reduced to **8px** (`font-size: 8px !important`).
-* **Product Card Image Height**: Height increased by **40px** on both Desktop and Mobile (`padding-top: calc((100% * 4 / 3) + 40px)` based on a **3:4 aspect ratio** with `object-fit: cover`) for enhanced visual presence while preserving proportions.
+* **Product Card Image Height**: Set to **`351.48 / 474.5`** aspect ratio on Desktop and **`192 / 282.92`** aspect ratio on Mobile (`object-fit: cover`) for responsive presentation across screen sizes.
