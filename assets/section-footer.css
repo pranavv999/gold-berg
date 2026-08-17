@@ -110,11 +110,23 @@
   width: 100%;
 }
 
+.footer-newsletter-form .field:after,
+.footer-newsletter-form .field:before,
+.newsletter-form .field:after,
+.newsletter-form .field:before {
+  content: none !important;
+  display: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
 .field {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .newsletter-field__input {

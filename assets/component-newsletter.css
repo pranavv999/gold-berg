@@ -25,6 +25,16 @@
 
 .newsletter-form__field-wrapper .field {
   z-index: 0;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.newsletter-form__field-wrapper .field:after,
+.newsletter-form__field-wrapper .field:before {
+  content: none !important;
+  display: none !important;
+  box-shadow: none !important;
+  border: none !important;
 }
 
 .newsletter-form__message {
