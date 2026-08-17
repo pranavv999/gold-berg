@@ -50,4 +50,4 @@ On mobile screen widths (`max-width: 749px`), sizes scale down:
 * **Discover More Button**: Reduced to **8px** with a compact padding of `2px 10px`.
 * **Product Name**: Reduced to **10px** (`font-size: 10px !important`).
 * **Product Prices**: Both actual and comparison prices are reduced to **8px** (`font-size: 8px !important`).
-* **Product Card Image Height**: Height increased by **40px** on both Desktop and Mobile (`padding-top: calc((100% / 0.85) + 40px)` with `object-fit: cover`) for enhanced visual presence while preserving proportions.
+* **Product Card Image Height**: Height increased by **40px** on both Desktop and Mobile (`padding-top: calc((100% * 4 / 3) + 40px)` based on a **3:4 aspect ratio** with `object-fit: cover`) for enhanced visual presence while preserving proportions.
