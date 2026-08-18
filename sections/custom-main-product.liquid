@@ -518,6 +518,74 @@
     display: block;
   }
 
+  /* PRODUCT VIDEO SHOWCASE (BELOW ACCORDION CONTENT) */
+  .product-video-showcase-container {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e7;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .product-video-label {
+    font-family: var(--font-body-family), sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8e8e93;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .product-video-card-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .product-video-card {
+    position: relative;
+    width: 100%;
+    max-width: 198px;
+    aspect-ratio: 9 / 16;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #000000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+  }
+
+  .product-video-card video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-video-showcase-container {
+      margin-top: 16px;
+      padding-top: 16px;
+    }
+
+    .product-video-label {
+      font-size: 9px;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    .product-video-card {
+      max-width: 100%;
+      border-radius: 24px;
+    }
+
+    .product-video-card video {
+      border-radius: 24px;
+    }
+  }
+
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(4px); }
     to { opacity: 1; transform: translateY(0); }
@@ -1155,6 +1223,56 @@
             </div>
           {%- endif -%}
         </div>
+
+        {%- assign video_blocks = section.blocks | where: 'type', 'product_video' -%}
+        {%- for block in video_blocks -%}
+          {%- assign is_video_visible = false -%}
+          {%- if block.settings.show_on_all -%}
+            {%- assign is_video_visible = true -%}
+          {%- else -%}
+            {%- if block.settings.target_products != blank -%}
+              {%- for target in block.settings.target_products -%}
+                {%- if target.handle == product.handle -%}
+                  {%- assign is_video_visible = true -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endif -%}
+
+          {%- if product.metafields.custom.video != blank or product.metafields.custom.experimental_video != blank -%}
+            {%- assign is_video_visible = true -%}
+          {%- endif -%}
+
+          {%- if is_video_visible -%}
+            {%- assign video_mp4 = block.settings.video_url -%}
+            {%- if block.settings.video != blank -%}
+              {%- assign video_mp4 = block.settings.video.sources | where: 'format', 'mp4' | first | map: 'url' | default: block.settings.video.sources[0].url -%}
+            {%- elsif product.metafields.custom.video != blank -%}
+              {%- assign video_mp4 = product.metafields.custom.video.value | default: product.metafields.custom.video -%}
+            {%- endif -%}
+
+            <div class="product-video-showcase-container" {{ block.shopify_attributes }}>
+              {%- if block.settings.label != blank -%}
+                <div class="product-video-label">{{ block.settings.label | escape }}</div>
+              {%- endif -%}
+              <div class="product-video-card-wrapper">
+                <div class="product-video-card">
+                  {%- if block.settings.video != blank -%}
+                    {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false }}
+                  {%- elsif video_mp4 != blank -%}
+                    <video autoplay loop muted playsinline preload="metadata">
+                      <source src="{{ video_mp4 }}" type="video/mp4">
+                    </video>
+                  {%- else -%}
+                    <div style="width:100%;height:100%;background:#111111;display:flex;align-items:center;justify-content:center;color:#8e8e93;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;">
+                      Video Showcase
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
       
     </div>
@@ -1465,6 +1583,46 @@
           "id": "target_products",
           "label": "Target products (when 'Show on all' is unchecked)",
           "info": "Select product(s) this tab should appear on if not shown on all products."
+        }
+      ]
+    },
+    {
+      "type": "product_video",
+      "name": "Product Video Showcase",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Sub-heading Label",
+          "default": "EXPERIMENTAL REFERENCE"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Shopify Hosted Video"
+        },
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Custom Video MP4 URL",
+          "info": "Direct link to an .mp4 file if Shopify video is not used."
+        },
+        {
+          "type": "header",
+          "content": "Product Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_all",
+          "default": false,
+          "label": "Show on all products"
+        },
+        {
+          "type": "product_list",
+          "id": "target_products",
+          "label": "Target products",
+          "info": "Select product(s) this video showcase should appear on."
         }
       ]
     }
