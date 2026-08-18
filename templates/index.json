@@ -80,12 +80,19 @@
         "show_arrows": false,
         "container_radius": 24
       }
+    },
+    "featured_collection_grid_banners": {
+      "type": "featured-collection-grid-banners",
+      "settings": {
+        "title": ""
+      }
     }
   },
   "order": [
     "image_banner",
     "custom_collection_row",
     "image_slider_centered",
+    "featured_collection_grid_banners",
     "fullwidth_image_slider",
     "instagram_reels_carousel"
   ]

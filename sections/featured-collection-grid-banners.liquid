@@ -1,0 +1,256 @@
+{% doc %}
+  Renders a 4-banner edge-to-edge grid section linking to collections.
+  Displays 4 square 1:1 image cards in a single row on desktop and 2x2 grid on mobile extending edge-to-edge.
+
+  @param {string} [title] - Optional section title
+  @param {boolean} [show_overlay] - Toggle overlay title rendering
+{% enddoc %}
+
+{%- style -%}
+  .grid-banners-outer {
+    background: transparent;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .grid-banners-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 24px 16px 24px;
+  }
+
+  .grid-banners-title {
+    font-family: var(--font-heading-family), sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    color: #111111;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .grid-banners-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .grid-banner-card {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f2f2f4;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+
+  .grid-banner-card img,
+  .grid-banner-card svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .grid-banner-card:hover img {
+    transform: scale(1.03);
+  }
+
+  .grid-banner-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+    pointer-events: none;
+  }
+
+  .grid-banner-title {
+    font-family: var(--font-body-family), sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .grid-banner-arrow {
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    transition: transform 0.2s ease;
+  }
+
+  .grid-banner-card:hover .grid-banner-arrow {
+    transform: translateX(4px);
+  }
+
+  @media screen and (max-width: 749px) {
+    .grid-banners-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 4px;
+    }
+
+    .grid-banners-header {
+      padding: 12px 16px 8px 16px;
+    }
+
+    .grid-banners-title {
+      font-size: 12px;
+    }
+
+    .grid-banner-overlay {
+      padding: 10px;
+    }
+
+    .grid-banner-title {
+      font-size: 10px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="grid-banners-outer" id="GridBanners-{{ section.id }}">
+  {%- if section.settings.title != blank -%}
+    <div class="grid-banners-header">
+      <h2 class="grid-banners-title">{{ section.settings.title | escape }}</h2>
+    </div>
+  {%- endif -%}
+
+  <div class="grid-banners-grid">
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks limit: 4 -%}
+        {%- assign banner_collection = collections[block.settings.collection] -%}
+        {%- assign target_url = block.settings.url | default: banner_collection.url | default: '#' -%}
+        {%- assign banner_title = block.settings.title | default: banner_collection.title -%}
+
+        {%- assign display_overlay = true -%}
+        {%- if section.settings.show_overlay == false or block.settings.show_overlay == false -%}
+          {%- assign display_overlay = false -%}
+        {%- endif -%}
+
+        <a href="{{ target_url }}" class="grid-banner-card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: banner_title }}
+          {%- elsif banner_collection.image != blank -%}
+            {{ banner_collection.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: banner_title }}
+          {%- else -%}
+            {%- assign placeholder_idx = forloop.index | modulo: 4 | plus: 1 -%}
+            {{ 'collection-' | append: placeholder_idx | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+
+          {%- if display_overlay and banner_title != blank -%}
+            <div class="grid-banner-overlay">
+              <span class="grid-banner-title">{{ banner_title }}</span>
+              <span class="grid-banner-arrow">&rarr;</span>
+            </div>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..4) -%}
+        <a href="#" class="grid-banner-card">
+          {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- if section.settings.show_overlay != false -%}
+            <div class="grid-banner-overlay">
+              <span class="grid-banner-title">COLLECTION {{ i }}</span>
+              <span class="grid-banner-arrow">&rarr;</span>
+            </div>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Grid Banners",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "Show overlay titles",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner Card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Banner Image"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection Link"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Custom URL (Overrides Collection)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_overlay",
+          "label": "Show overlay title",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Overlay Title",
+          "info": "Optional. Displays banner title overlay if provided."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Grid Banners",
+      "blocks": [
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
