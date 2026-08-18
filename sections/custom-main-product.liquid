@@ -535,7 +535,7 @@
     text-transform: uppercase;
     color: #8e8e93;
     margin-bottom: 16px;
-    text-align: center;
+    text-align: left;
   }
 
   .product-video-card-wrapper {
@@ -554,6 +554,36 @@
     background: #000000;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
+  }
+
+  .product-video-sound-toggle {
+    position: absolute !important;
+    top: 8px !important;
+    left: 8px !important;
+    z-index: 15 !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50% !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    opacity: 0.75 !important;
+    transition: transform 0.2s ease, opacity 0.2s ease, background-color 0.2s ease !important;
+  }
+
+  .product-video-sound-toggle:hover {
+    transform: scale(1.1) !important;
+    opacity: 1 !important;
+    background: rgba(0, 0, 0, 0.55) !important;
   }
 
   .product-video-card video {
@@ -1257,6 +1287,17 @@
               {%- endif -%}
               <div class="product-video-card-wrapper">
                 <div class="product-video-card">
+                  <button type="button" class="product-video-sound-toggle" aria-label="Toggle Sound">
+                    <svg class="sound-icon-muted" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                      <line x1="23" y1="9" x2="17" y2="15"></line>
+                      <line x1="17" y1="9" x2="23" y2="15"></line>
+                    </svg>
+                    <svg class="sound-icon-unmuted" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    </svg>
+                  </button>
                   {%- if block.settings.video != blank -%}
                     {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false }}
                   {%- elsif video_mp4 != blank -%}
@@ -1336,6 +1377,28 @@
             pane.classList.remove('active');
           }
         });
+      }
+      return;
+    }
+
+    // 3. Video Sound Toggle (Mute/Unmute)
+    const soundBtn = e.target.closest('.product-video-sound-toggle');
+    if (soundBtn) {
+      const card = soundBtn.closest('.product-video-card');
+      if (card) {
+        const video = card.querySelector('video');
+        if (video) {
+          video.muted = !video.muted;
+          const mutedIcon = soundBtn.querySelector('.sound-icon-muted');
+          const unmutedIcon = soundBtn.querySelector('.sound-icon-unmuted');
+          if (video.muted) {
+            if (mutedIcon) mutedIcon.style.display = 'block';
+            if (unmutedIcon) unmutedIcon.style.display = 'none';
+          } else {
+            if (mutedIcon) mutedIcon.style.display = 'none';
+            if (unmutedIcon) unmutedIcon.style.display = 'block';
+          }
+        }
       }
       return;
     }
