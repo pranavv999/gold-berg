@@ -1281,12 +1281,19 @@
               {%- assign video_mp4 = product.metafields.custom.video.value | default: product.metafields.custom.video -%}
             {%- endif -%}
 
+            {%- assign poster_url = '' -%}
+            {%- if block.settings.poster_image != blank -%}
+              {%- assign poster_url = block.settings.poster_image | image_url: width: 800 -%}
+            {%- elsif block.settings.video.preview_image != blank -%}
+              {%- assign poster_url = block.settings.video.preview_image | image_url: width: 800 -%}
+            {%- endif -%}
+
             <div class="product-video-showcase-container" {{ block.shopify_attributes }}>
               {%- if block.settings.label != blank -%}
                 <div class="product-video-label">{{ block.settings.label | escape }}</div>
               {%- endif -%}
               <div class="product-video-card-wrapper">
-                <div class="product-video-card">
+                <div class="product-video-card" data-lazy-video-container>
                   <button type="button" class="product-video-sound-toggle" aria-label="Toggle Sound">
                     <svg class="sound-icon-muted" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -1299,10 +1306,10 @@
                     </svg>
                   </button>
                   {%- if block.settings.video != blank -%}
-                    {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, playsinline: true, controls: false }}
+                    {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, playsinline: true, controls: false, poster: poster_url, preload: 'none', class: 'lazy-video-element' }}
                   {%- elsif video_mp4 != blank -%}
-                    <video autoplay loop muted playsinline preload="metadata">
-                      <source src="{{ video_mp4 }}" type="video/mp4">
+                    <video loop muted playsinline preload="none" {% if poster_url != blank %}poster="{{ poster_url }}"{% endif %} class="lazy-video-element">
+                      <source data-src="{{ video_mp4 }}" type="video/mp4">
                     </video>
                   {%- else -%}
                     <div style="width:100%;height:100%;background:#111111;display:flex;align-items:center;justify-content:center;color:#8e8e93;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;">
@@ -1571,15 +1578,47 @@
     });
   }
 
+  // Lazy Stream & Auto-Play Video on Scroll via IntersectionObserver
+  function initLazyVideoShowcase() {
+    const videoContainers = document.querySelectorAll('[data-lazy-video-container]');
+    if ('IntersectionObserver' in window && videoContainers.length > 0) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const video = entry.target.querySelector('video');
+          if (!video) return;
+
+          if (entry.isIntersecting) {
+            const source = video.querySelector('source[data-src]');
+            if (source && !source.src) {
+              source.src = source.getAttribute('data-src');
+              video.load();
+            }
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      }, {
+        rootMargin: '100px 0px',
+        threshold: 0.1
+      });
+
+      videoContainers.forEach(container => videoObserver.observe(container));
+    }
+  }
+
+  // Initialize features on DOM load
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       initMobileMediaSlider();
       formatSmartSizeLinks();
+      initLazyVideoShowcase();
       setTimeout(formatSmartSizeLinks, 1000);
     });
   } else {
     initMobileMediaSlider();
     formatSmartSizeLinks();
+    initLazyVideoShowcase();
     setTimeout(formatSmartSizeLinks, 1000);
   }
 </script>
@@ -1670,6 +1709,12 @@
           "id": "video_url",
           "label": "Custom Video MP4 URL",
           "info": "Direct link to an .mp4 file if Shopify video is not used."
+        },
+        {
+          "type": "image_picker",
+          "id": "poster_image",
+          "label": "Poster / Thumbnail Image",
+          "info": "Optional. Displays instantly while video buffers on scroll."
         },
         {
           "type": "header",
