@@ -7,7 +7,16 @@
     <!-- Top Input Header Bar -->
     <div class="search-modal-input-row">
       <span class="search-modal-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
@@ -28,8 +37,22 @@
         Clear
       </button>
 
-      <button type="button" class="custom-search-close-btn" onclick="closeCustomSearchModal()" aria-label="Close search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <button
+        type="button"
+        class="custom-search-close-btn"
+        onclick="closeCustomSearchModal()"
+        aria-label="Close search"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
@@ -55,12 +78,16 @@
             <span class="search-modal-section-title">Products</span>
           </div>
           <div class="search-modal-products-grid">
-            {%- assign featured_collection = collections['all'] | default: collections.first -%}
+            {%- assign featured_collection = collections.all | default: collections.first -%}
             {%- for product in featured_collection.products limit: 4 -%}
               <a href="{{ product.url }}" class="search-modal-product-card">
                 <div class="search-modal-product-image-wrapper">
                   {%- if product.featured_media != blank -%}
-                    <img src="{{ product.featured_media | image_url: width: 300 }}" alt="{{ product.title | escape }}" loading="lazy">
+                    <img
+                      src="{{ product.featured_media | image_url: width: 300 }}"
+                      alt="{{ product.title | escape }}"
+                      loading="lazy"
+                    >
                   {%- endif -%}
                 </div>
                 <div class="search-modal-product-info">
@@ -93,9 +120,7 @@
 
         <!-- Bottom View All CTA -->
         <div class="search-modal-footer">
-          <button type="button" class="search-modal-view-all-btn" id="search-modal-view-all-btn">
-            VIEW ALL
-          </button>
+          <button type="button" class="search-modal-view-all-btn" id="search-modal-view-all-btn">VIEW ALL</button>
         </div>
       </div>
     </div>
@@ -172,7 +197,7 @@
     background: transparent !important;
     -webkit-appearance: none !important;
     appearance: none !important;
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     font-size: 15px !important;
     color: #1d1d1f !important;
     box-sizing: border-box !important;
@@ -237,11 +262,11 @@
 
   .custom-search-modal-card,
   .custom-search-modal-card * {
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   }
 
   .search-modal-section-title {
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     font-size: 11px !important;
     font-weight: 600 !important;
     color: #8e8e93 !important;
@@ -252,7 +277,7 @@
   .search-modal-clear-recent {
     background: none;
     border: none;
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     font-size: 11px !important;
     font-weight: 600 !important;
     color: #8e8e93 !important;
@@ -289,7 +314,7 @@
     aspect-ratio: 0.85;
     border-radius: 12px;
     overflow: hidden;
-    background: #f7f7f8;
+    background: #f3f3f5;
     margin-bottom: 8px;
   }
 
@@ -305,7 +330,7 @@
   }
 
   .search-modal-product-title {
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     font-size: 10px !important;
     font-weight: 400 !important;
     color: #1d1d1f !important;
@@ -321,7 +346,7 @@
 
   .search-modal-product-price,
   .search-modal-product-price * {
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     font-size: 10px !important;
     letter-spacing: normal !important;
     display: flex;
@@ -350,7 +375,7 @@
     background: #f2f2f4;
     border-radius: 20px;
     padding: 6px 14px;
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     font-size: 11px !important;
     font-weight: 400 !important;
     color: #1d1d1f !important;
@@ -376,7 +401,7 @@
     border: none;
     border-radius: 4px;
     padding: 12px 28px;
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     font-size: 11px !important;
     font-weight: 600 !important;
     letter-spacing: 0.06em !important;

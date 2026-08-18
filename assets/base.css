@@ -2955,9 +2955,11 @@ details-disclosure>details {
   word-break: break-word;
 }
 
+html,
+body,
 .gradient {
-  background: rgb(var(--color-background));
-  background: var(--gradient-background);
+  background: #F3F3F5 !important;
+  background-color: #F3F3F5 !important;
   background-attachment: fixed;
 }
 
