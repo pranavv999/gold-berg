@@ -21,6 +21,7 @@
     display: flex;
     gap: 8px;
     width: 100%;
+    min-width: 0;
   }
 
   .media-track-left,
@@ -54,6 +55,8 @@
     position: sticky;
     top: 100px;
     align-self: start;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .product-info-card {
@@ -63,6 +66,9 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
     border: 1px solid rgba(0, 0, 0, 0.03);
     box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .product-info-header-row {
@@ -457,7 +463,16 @@
     display: flex;
     border-bottom: 1px solid #e5e5e7;
     margin-bottom: 24px;
-    gap: 32px;
+    gap: 24px;
+    overflow-x: auto;
+    max-width: 100%;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .tab-navigation::-webkit-scrollbar {
+    display: none;
   }
 
   .tab-header-btn {
@@ -470,6 +485,8 @@
     cursor: pointer;
     position: relative;
     transition: color 0.2s;
+    flex-shrink: 0;
+    white-space: nowrap;
   }
 
   .tab-header-btn:hover {
@@ -1005,21 +1022,38 @@
       
       <!-- Product Details and Tabbed Card -->
       <div class="product-info-card" style="--container-radius: {{ section.settings.container_radius }}px">
-        {%- assign accordion_blocks = section.blocks | where: 'type', 'accordion_row' -%}
+        {%- assign raw_accordion_blocks = section.blocks | where: 'type', 'accordion_row' -%}
 
         <div class="tab-navigation">
-          {%- if accordion_blocks.size > 0 -%}
-            {%- for block in accordion_blocks -%}
+          {%- assign visible_tab_count = 0 -%}
+          {%- for block in raw_accordion_blocks -%}
+            {%- assign is_visible = false -%}
+            {%- if block.settings.show_on_all == true or block.settings.show_on_all == nil -%}
+              {%- assign is_visible = true -%}
+            {%- else -%}
+              {%- if block.settings.target_products != blank -%}
+                {%- for target in block.settings.target_products -%}
+                  {%- if target.handle == product.handle -%}
+                    {%- assign is_visible = true -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+            {%- endif -%}
+
+            {%- if is_visible -%}
+              {%- assign visible_tab_count = visible_tab_count | plus: 1 -%}
               <button
                 type="button"
-                class="tab-header-btn{% if forloop.first %} active{% endif %}"
+                class="tab-header-btn{% if visible_tab_count == 1 %} active{% endif %}"
                 data-tab="{{ block.id }}"
                 {{ block.shopify_attributes }}
               >
                 {{ block.settings.heading | escape }}
               </button>
-            {%- endfor -%}
-          {%- else -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if raw_accordion_blocks.size == 0 or visible_tab_count == 0 -%}
             <button type="button" class="tab-header-btn active" data-tab="details">Details & Description</button>
             <button type="button" class="tab-header-btn" data-tab="washcare">Washcare</button>
             <button type="button" class="tab-header-btn" data-tab="shipping">Shipping</button>
@@ -1027,9 +1061,24 @@
         </div>
 
         <div class="tabs-contents">
-          {%- if accordion_blocks.size > 0 -%}
-            {%- for block in accordion_blocks -%}
-              <div class="tab-pane{% if forloop.first %} active{% endif %}" id="tab-{{ block.id }}">
+          {%- assign visible_pane_count = 0 -%}
+          {%- for block in raw_accordion_blocks -%}
+            {%- assign is_visible = false -%}
+            {%- if block.settings.show_on_all == true or block.settings.show_on_all == nil -%}
+              {%- assign is_visible = true -%}
+            {%- else -%}
+              {%- if block.settings.target_products != blank -%}
+                {%- for target in block.settings.target_products -%}
+                  {%- if target.handle == product.handle -%}
+                    {%- assign is_visible = true -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+            {%- endif -%}
+
+            {%- if is_visible -%}
+              {%- assign visible_pane_count = visible_pane_count | plus: 1 -%}
+              <div class="tab-pane{% if visible_pane_count == 1 %} active{% endif %}" id="tab-{{ block.id }}">
                 <div class="specs-section">
                   {%- if block.settings.show_description -%}
                     <div class="description-section">
@@ -1055,8 +1104,10 @@
                   {%- endif -%}
                 </div>
               </div>
-            {%- endfor -%}
-          {%- else -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if raw_accordion_blocks.size == 0 or visible_pane_count == 0 -%}
             <!-- Fallback Default Tabs -->
             <div class="tab-pane active" id="tab-details">
               <div class="specs-section">
@@ -1398,6 +1449,22 @@
           "id": "show_description",
           "default": false,
           "label": "Show product description"
+        },
+        {
+          "type": "header",
+          "content": "Product Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_all",
+          "default": true,
+          "label": "Show on all products"
+        },
+        {
+          "type": "product_list",
+          "id": "target_products",
+          "label": "Target products (when 'Show on all' is unchecked)",
+          "info": "Select product(s) this tab should appear on if not shown on all products."
         }
       ]
     }
