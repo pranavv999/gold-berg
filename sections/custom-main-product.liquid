@@ -724,26 +724,37 @@
   }
 
   .mobile-media-dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    padding: 12px 0;
+    position: absolute !important;
+    bottom: 12px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    z-index: 10 !important;
+    background: rgba(0, 0, 0, 0.45) !important;
+    padding: 3px 8px !important;
+    border-radius: 10px !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   }
 
   .mobile-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #d1d1d6;
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 4px !important;
+    height: 4px !important;
+    min-width: 4px !important;
+    min-height: 4px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    transition: background 0.3s, transform 0.3s !important;
     cursor: pointer;
   }
 
   .mobile-dot.active {
-    background: #1d1d1f;
-    width: 8px;
-    height: 8px;
+    background: #ffffff !important;
+    transform: scale(1.2) !important;
   }
 
   /* RESPONSIVE LAYOUT */
@@ -769,13 +780,26 @@
 
   @media screen and (max-width: 749px) {
     .custom-product-outer {
-      padding: 70px 5px 24px 5px !important;
+      padding: 70px 5px 6px 5px !important;
     }
-    .product-info-card {
-      padding: 20px;
+    .custom-product-media-mobile {
+      margin-bottom: 12px !important;
+    }
+    .custom-product-info-column {
+      gap: 12px !important;
+    }
+    .product-price-row {
+      margin-bottom: 12px !important;
     }
     .variants-grid {
       grid-template-columns: repeat(4, 1fr);
+      margin-bottom: 12px !important;
+    }
+    .cta-buttons-row {
+      margin-bottom: 12px !important;
+    }
+    .product-info-card {
+      padding: 20px;
     }
   }
 
@@ -846,17 +870,17 @@
             {%- endfor -%}
           {%- endif -%}
         </div>
-      </div>
-      <div class="mobile-media-dots">
-        {%- if image_count > 0 -%}
-          {%- for img in product_images -%}
-            <span class="mobile-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}"></span>
-          {%- endfor -%}
-        {%- else -%}
-          {%- for i in (1..4) -%}
-            <span class="mobile-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}"></span>
-          {%- endfor -%}
-        {%- endif -%}
+        <div class="mobile-media-dots">
+          {%- if image_count > 0 -%}
+            {%- for img in product_images -%}
+              <span class="mobile-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}"></span>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <span class="mobile-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.index0 }}"></span>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
       </div>
     </div>
 
