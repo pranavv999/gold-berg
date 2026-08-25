@@ -4,7 +4,7 @@
 
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 
-<footer class="custom-footer-section">
+<footer class="custom-footer-section" style="--padding-top-desktop: {{ section.settings.padding_top_desktop | default: 15 }}px; --padding-top-mobile: {{ section.settings.padding_top_mobile | default: 15 }}px;">
   <div class="custom-footer-outer-wrapper">
     {% comment %} Floating Inner White Footer Card Container {% endcomment %}
     <div class="custom-footer-card" style="--container-radius: {{ section.settings.container_radius | default: 24 }}px;">
@@ -366,6 +366,30 @@
       "id": "watermark_text",
       "label": "Watermark Text",
       "default": "Sober"
+    },
+    {
+      "type": "header",
+      "content": "Top Padding (Space Above Footer)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop Top Padding",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Top Padding",
+      "default": 15
     }
   ],
   "blocks": [
