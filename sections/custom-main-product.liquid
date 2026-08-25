@@ -121,17 +121,13 @@
 
   .variant-selector-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: flex-end;
     margin-bottom: 12px;
   }
 
   .variant-selector-label {
-    font-size: 10px;
-    font-weight: 600;
-    color: #1d1d1f;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    display: none !important;
   }
 
   .size-guide-btn {
@@ -1052,6 +1048,16 @@
 
           <div class="product-info-header-row">
             <h1 class="product-info-title">{{ product.title }}</h1>
+            <div class="size-guide-trigger-container">
+              {%- for block in section.blocks -%}
+                {%- if block.type == '@app' -%}
+                  <div class="product-app-block-wrapper" {{ block.shopify_attributes }}>
+                    {% render block %}
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+              <button type="button" class="size-guide-btn">Size Guide</button>
+            </div>
           </div>
           
           <div class="product-price-row">
@@ -1067,20 +1073,6 @@
           {%- unless product.has_only_default_variant -%}
             {%- for option in product.options_with_values -%}
               <div class="variant-selector-wrapper">
-                <div class="variant-selector-header">
-                  <span class="variant-selector-label">Select {{ option.name }}</span>
-                  <div class="size-guide-trigger-container">
-                    {%- for block in section.blocks -%}
-                      {%- if block.type == '@app' -%}
-                        <div class="product-app-block-wrapper" {{ block.shopify_attributes }}>
-                          {% render block %}
-                        </div>
-                      {%- endif -%}
-                    {%- endfor -%}
-                    <button type="button" class="size-guide-btn">Size Guide</button>
-                  </div>
-                </div>
-                
                 <div class="variants-grid">
                   {%- for value in option.values -%}
                     {%- assign variant_for_value = nil -%}
@@ -1113,19 +1105,6 @@
           {%- else -%}
             {%- if product.variants.size > 1 -%}
               <div class="variant-selector-wrapper">
-                <div class="variant-selector-header">
-                  <span class="variant-selector-label">Select Option</span>
-                  <div class="size-guide-trigger-container">
-                    {%- for block in section.blocks -%}
-                      {%- if block.type == '@app' -%}
-                        <div class="product-app-block-wrapper" {{ block.shopify_attributes }}>
-                          {% render block %}
-                        </div>
-                      {%- endif -%}
-                    {%- endfor -%}
-                    <button type="button" class="size-guide-btn">Size Guide</button>
-                  </div>
-                </div>
                 <div class="variants-grid">
                   {%- for variant in product.variants -%}
                     <button
