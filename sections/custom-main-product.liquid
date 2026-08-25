@@ -135,21 +135,26 @@
   }
 
   .size-guide-btn {
-    font-size: 10px;
-    font-weight: 500;
-    color: #6e6e73;
-    background: #f2f2f4;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 12px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.2s;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    color: #1d1d1f !important;
+    background: #e3e3e7 !important;
+    background-color: #e3e3e7 !important;
+    border: none !important;
+    padding: 4px 9px !important;
+    border-radius: 20px !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    transition: background-color 0.2s, color 0.2s !important;
   }
 
   .size-guide-btn:hover {
-    background: #e5e5e7;
-    color: #1d1d1f;
+    background: #d4d4d9 !important;
+    background-color: #d4d4d9 !important;
+    color: #000000 !important;
   }
 
   .size-guide-trigger-container {
@@ -185,20 +190,24 @@
   .variant-selector-header .product-app-block-wrapper a,
   .variant-selector-header .product-app-block-wrapper button,
   .variant-selector-header .product-app-block-wrapper span,
+  .variant-selector-header .product-app-block-wrapper p,
   .product-app-block-wrapper a,
   .product-app-block-wrapper button,
   .product-app-block-wrapper span,
+  .product-app-block-wrapper p,
   .smartsize-trigger-link,
-  [data-smartsize-chart] {
+  [data-smartsize-chart],
+  [class*="smartsize-trigger"],
+  [class*="smartsize-btn"] {
     font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     font-size: 10px !important;
-    font-weight: 500 !important;
-    color: #6e6e73 !important;
-    background-color: #f2f2f4 !important;
-    background: #f2f2f4 !important;
+    font-weight: 400 !important;
+    color: #1d1d1f !important;
+    background-color: #e3e3e7 !important;
+    background: #e3e3e7 !important;
     border: none !important;
-    padding: 6px 12px !important;
-    border-radius: 12px !important;
+    padding: 4px 9px !important;
+    border-radius: 20px !important;
     cursor: pointer !important;
     text-decoration: none !important;
     display: inline-flex !important;
@@ -210,23 +219,47 @@
     min-height: 0 !important;
     width: auto !important;
     box-sizing: border-box !important;
-    letter-spacing: normal !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
     transition: background-color 0.2s, color 0.2s !important;
     box-shadow: none !important;
     outline: none !important;
   }
 
+  @media screen and (max-width: 749px) {
+    .size-guide-btn,
+    .variant-selector-header .product-app-block-wrapper a,
+    .variant-selector-header .product-app-block-wrapper button,
+    .variant-selector-header .product-app-block-wrapper span,
+    .variant-selector-header .product-app-block-wrapper p,
+    .product-app-block-wrapper a,
+    .product-app-block-wrapper button,
+    .product-app-block-wrapper span,
+    .product-app-block-wrapper p,
+    .smartsize-trigger-link,
+    [data-smartsize-chart],
+    [class*="smartsize-trigger"],
+    [class*="smartsize-btn"] {
+      font-size: 8.5px !important;
+      padding: 4px 10px !important;
+    }
+  }
+
   .variant-selector-header .product-app-block-wrapper a:hover,
   .variant-selector-header .product-app-block-wrapper button:hover,
   .variant-selector-header .product-app-block-wrapper span:hover,
+  .variant-selector-header .product-app-block-wrapper p:hover,
   .product-app-block-wrapper a:hover,
   .product-app-block-wrapper button:hover,
   .product-app-block-wrapper span:hover,
+  .product-app-block-wrapper p:hover,
   .smartsize-trigger-link:hover,
-  [data-smartsize-chart]:hover {
-    background-color: #e5e5e7 !important;
-    background: #e5e5e7 !important;
-    color: #1d1d1f !important;
+  [data-smartsize-chart]:hover,
+  [class*="smartsize-trigger"]:hover,
+  [class*="smartsize-btn"]:hover {
+    background-color: #d4d4d9 !important;
+    background: #d4d4d9 !important;
+    color: #000000 !important;
     text-decoration: none !important;
   }
 
