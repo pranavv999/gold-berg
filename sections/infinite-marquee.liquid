@@ -57,7 +57,12 @@
   .infinite-marquee-item-wrapper {
     display: inline-flex;
     align-items: center;
-    padding-right: {{ section.settings.gap_between_items }}px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .infinite-marquee-item {
+    margin-right: -{{ section.settings.letter_spacing }}px;
   }
 
   .infinite-marquee-separator {
@@ -96,7 +101,8 @@
     }
 
     .infinite-marquee-item-wrapper {
-      padding-right: {{ section.settings.gap_between_items | divided_by: 1.5 }}px;
+      padding: 0;
+      margin: 0;
     }
 
     .infinite-marquee-separator {
