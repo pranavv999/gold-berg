@@ -2,6 +2,25 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "infinite_marquee": {
+      "type": "infinite-marquee",
+      "settings": {
+        "marquee_text": "FREE WORLDWIDE SHIPPING • SOBER ANIMAL • PREMIUM OVERSIZED FIT • NEW DROPS LIVE",
+        "separator_text": "•",
+        "text_color": "#ffffff",
+        "background_color": "#000000",
+        "font_size_desktop": 14,
+        "font_size_mobile": 12,
+        "font_weight": "500",
+        "letter_spacing": 2,
+        "padding_vertical_desktop": 14,
+        "padding_vertical_mobile": 10,
+        "gap_between_items": 40,
+        "speed": 25,
+        "direction": "normal",
+        "pause_on_hover": true
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -50,6 +69,7 @@
     }
   },
   "order": [
+    "infinite_marquee",
     "footer"
   ]
 }

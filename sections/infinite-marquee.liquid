@@ -1,0 +1,371 @@
+{%- style -%}
+  .section-{{ section.id }}-marquee {
+    background-color: {{ section.settings.background_color | default: '#000000' }};
+    color: {{ section.settings.text_color | default: '#ffffff' }};
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    padding-top: {{ section.settings.padding_vertical_desktop }}px;
+    padding-bottom: {{ section.settings.padding_vertical_desktop }}px;
+    box-sizing: border-box;
+  }
+
+  .infinite-marquee-wrapper {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    user-select: none;
+  }
+
+  .infinite-marquee-track {
+    display: flex;
+    width: max-content;
+    white-space: nowrap;
+    will-change: transform;
+    animation: infiniteMarqueeScroll {{ section.settings.speed }}s linear infinite;
+    animation-direction: {{ section.settings.direction }};
+  }
+
+  {%- if section.settings.pause_on_hover -%}
+    .infinite-marquee-wrapper:hover .infinite-marquee-track {
+      animation-play-state: paused;
+    }
+  {%- endif -%}
+
+  .infinite-marquee-content {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .infinite-marquee-item,
+  .infinite-marquee-separator,
+  .infinite-marquee-link {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-size: {{ section.settings.font_size_desktop }}px;
+    font-weight: {{ section.settings.font_weight }};
+    color: {{ section.settings.text_color | default: '#ffffff' }} !important;
+    letter-spacing: {{ section.settings.letter_spacing }}px;
+    text-transform: {{ section.settings.text_transform }};
+    line-height: 1;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .infinite-marquee-item-wrapper {
+    display: inline-flex;
+    align-items: center;
+    padding-right: {{ section.settings.gap_between_items }}px;
+  }
+
+  .infinite-marquee-separator {
+    padding-left: {{ section.settings.gap_between_items | divided_by: 2 }}px;
+    padding-right: {{ section.settings.gap_between_items | divided_by: 2 }}px;
+    opacity: 0.75;
+  }
+
+  .infinite-marquee-link {
+    transition: opacity 0.2s ease;
+  }
+
+  .infinite-marquee-link:hover {
+    opacity: 0.8;
+  }
+
+  @keyframes infiniteMarqueeScroll {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .section-{{ section.id }}-marquee {
+      padding-top: {{ section.settings.padding_vertical_mobile }}px;
+      padding-bottom: {{ section.settings.padding_vertical_mobile }}px;
+    }
+
+    .infinite-marquee-item,
+    .infinite-marquee-separator,
+    .infinite-marquee-link {
+      font-size: {{ section.settings.font_size_mobile }}px;
+    }
+
+    .infinite-marquee-item-wrapper {
+      padding-right: {{ section.settings.gap_between_items | divided_by: 1.5 }}px;
+    }
+
+    .infinite-marquee-separator {
+      padding-left: {{ section.settings.gap_between_items | divided_by: 3 }}px;
+      padding-right: {{ section.settings.gap_between_items | divided_by: 3 }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-marquee">
+  <div class="infinite-marquee-wrapper">
+    <div class="infinite-marquee-track">
+      {%- comment -%} 2 identical tracks ensure 100% -> 50% seamless infinite scroll loop {%- endcomment -%}
+      {%- for track_index in (1..2) -%}
+        <div class="infinite-marquee-content" aria-hidden="{% if track_index == 1 %}false{% else %}true{% endif %}">
+          {%- comment -%} Repeat inner items to fill wide viewports {%- endcomment -%}
+          {%- for repeat in (1..4) -%}
+            {%- if section.blocks.size > 0 -%}
+              {%- for block in section.blocks -%}
+                <div class="infinite-marquee-item-wrapper" {{ block.shopify_attributes }}>
+                  {%- if block.settings.link != blank -%}
+                    <a href="{{ block.settings.link }}" class="infinite-marquee-link">
+                  {%- endif -%}
+                  <span class="infinite-marquee-item">{{ block.settings.text }}</span>
+                  {%- if block.settings.link != blank -%}
+                    </a>
+                  {%- endif -%}
+                  {%- if section.settings.separator_text != blank -%}
+                    <span class="infinite-marquee-separator">{{ section.settings.separator_text }}</span>
+                  {%- endif -%}
+                </div>
+              {%- endfor -%}
+            {%- else -%}
+              <div class="infinite-marquee-item-wrapper">
+                {%- if section.settings.marquee_link != blank -%}
+                  <a href="{{ section.settings.marquee_link }}" class="infinite-marquee-link">
+                {%- endif -%}
+                <span class="infinite-marquee-item">{{ section.settings.marquee_text }}</span>
+                {%- if section.settings.marquee_link != blank -%}
+                  </a>
+                {%- endif -%}
+                {%- if section.settings.separator_text != blank -%}
+                  <span class="infinite-marquee-separator">{{ section.settings.separator_text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Infinite Marquee",
+  "tag": "section",
+  "class": "section-infinite-marquee",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "marquee_text",
+      "label": "Marquee Text",
+      "default": "FREE WORLDWIDE SHIPPING • SOBER ANIMAL • PREMIUM OVERSIZED FIT • NEW DROPS LIVE"
+    },
+    {
+      "type": "url",
+      "id": "marquee_link",
+      "label": "Marquee Link (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "separator_text",
+      "label": "Separator Text / Symbol",
+      "default": "•"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "font_size_desktop",
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop Font Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "font_size_mobile",
+      "min": 8,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Font Size",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font Weight",
+      "options": [
+        { "value": "300", "label": "Light (300)" },
+        { "value": "400", "label": "Normal (400)" },
+        { "value": "500", "label": "Medium (500)" },
+        { "value": "600", "label": "Semi-Bold (600)" },
+        { "value": "700", "label": "Bold (700)" },
+        { "value": "800", "label": "Extra Bold (800)" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "unit": "px",
+      "label": "Letter Spacing",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "text_transform",
+      "label": "Text Transform",
+      "options": [
+        { "value": "uppercase", "label": "UPPERCASE" },
+        { "value": "lowercase", "label": "lowercase" },
+        { "value": "capitalize", "label": "Capitalize" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "header",
+      "content": "Layout & Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical_desktop",
+      "min": 4,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop Vertical Padding (Empty space above/below)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical_mobile",
+      "min": 4,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Vertical Padding (Empty space above/below)",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "gap_between_items",
+      "min": 10,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Spacing Between Marquee Items",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Animation Settings"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 5,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "label": "Scroll Duration (Lower = Faster)",
+      "default": 25
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Scroll Direction",
+      "options": [
+        { "value": "normal", "label": "Left (Default)" },
+        { "value": "reverse", "label": "Right" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause Marquee on Hover",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "marquee_item",
+      "name": "Marquee Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Item Text",
+          "default": "SOBER ANIMAL"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Item Link (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Infinite Marquee",
+      "blocks": [
+        {
+          "type": "marquee_item",
+          "settings": {
+            "text": "FREE WORLDWIDE SHIPPING"
+          }
+        },
+        {
+          "type": "marquee_item",
+          "settings": {
+            "text": "SOBER ANIMAL OVERSIZED FIT"
+          }
+        },
+        {
+          "type": "marquee_item",
+          "settings": {
+            "text": "PREMIUM 240 GSM COTTON"
+          }
+        },
+        {
+          "type": "marquee_item",
+          "settings": {
+            "text": "NEW COLLECTION DROPPED"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
