@@ -3918,3 +3918,27 @@ body.gradient {
       margin-bottom: 14px !important;
     }
   }
+}
+
+/* HIDE SHOPIFY NATIVE & APP COOKIE CONSENT BANNERS */
+#shopify-pc__banner,
+#shopify-privacy-banner,
+[id*="shopify-privacy"],
+[id*="shopify-pc"],
+[class*="shopify-privacy"],
+[class*="shopify-pc"],
+.shopify-pc__banner,
+.shopify-pc__modal,
+[class*="cookie-consent"],
+[id*="cookie-consent"],
+[class*="cookie-banner"],
+[id*="cookie-banner"],
+[class*="cookieConsent"],
+[id*="cookieConsent"],
+div[id*="privacy-banner"],
+div[class*="privacy-banner"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
