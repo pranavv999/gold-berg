@@ -397,6 +397,18 @@
     margin-bottom: 24px;
   }
 
+  .variants-grid.variants-grid--5-cols {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .variants-grid.variants-grid--5-cols .variant-pill {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
   .variant-pill {
     background: #ffffff;
     border: 1px solid #d1d1d6;
@@ -949,6 +961,9 @@
       gap: 6px;
       margin-bottom: 12px !important;
     }
+    .variants-grid.variants-grid--5-cols {
+      gap: 6px !important;
+    }
     .variant-pill {
       width: 63px;
       height: 32px;
@@ -1092,7 +1107,7 @@
           {%- unless product.has_only_default_variant -%}
             {%- for option in product.options_with_values -%}
               <div class="variant-selector-wrapper">
-                <div class="variants-grid">
+                <div class="variants-grid{% if option.values.size >= 5 %} variants-grid--5-cols{% endif %}">
                   {%- for value in option.values -%}
                     {%- assign variant_for_value = nil -%}
                     {%- for v in product.variants -%}
@@ -1124,7 +1139,7 @@
           {%- else -%}
             {%- if product.variants.size > 1 -%}
               <div class="variant-selector-wrapper">
-                <div class="variants-grid">
+                <div class="variants-grid{% if product.variants.size >= 5 %} variants-grid--5-cols{% endif %}">
                   {%- for variant in product.variants -%}
                     <button
                       type="button"
