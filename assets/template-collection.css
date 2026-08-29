@@ -84,6 +84,17 @@ main[data-template="collection"] .page-width,
     margin: 0 !important;
     padding: 0 !important;
   }
+
+  /* Single 12px Spacing between Mobile Filter & Sort component container and Product Grid */
+  .facets-container,
+  .facets-container-drawer {
+    margin-bottom: 12px !important;
+  }
+
+  .mobile-facets__wrapper,
+  .mobile-facets__open-wrapper {
+    margin-bottom: 0 !important;
+  }
 }
   .collection .grid__item:only-child {
     flex: 0 0 100%;
