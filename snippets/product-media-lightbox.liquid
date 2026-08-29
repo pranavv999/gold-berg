@@ -340,11 +340,22 @@
     ];
 
     const totalCount = mediaImages.length;
-    let currentIndex = 0;
-    let touchStartX = 0;
-    let touchEndX = 0;
+    let currentScale = 1;
+    let isMultiTouch = false;
+    let lastTapTime = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    function resetZoom() {
+      currentScale = 1;
+      if (mainImage) {
+        mainImage.style.transform = 'none';
+        mainImage.style.transition = 'opacity 0.2s ease, transform 0.25s ease';
+      }
+    }
 
     function openLightbox(index) {
+      resetZoom();
       currentIndex = (index >= 0 && index < totalCount) ? index : 0;
       updateLightboxState();
       lightbox.classList.add('active');
@@ -353,6 +364,7 @@
     }
 
     function closeLightbox() {
+      resetZoom();
       lightbox.classList.remove('active');
       lightbox.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
@@ -361,7 +373,7 @@
     function updateLightboxState() {
       if (!mediaImages[currentIndex]) return;
 
-      // Update Main Image
+      resetZoom();
       mainImage.style.opacity = '0.4';
       mainImage.src = mediaImages[currentIndex];
       mainImage.onload = function() {
@@ -404,13 +416,31 @@
       updateLightboxState();
     }
 
+    // DOUBLE TAP TO TOGGLE ZOOM IN / ZOOM OUT
+    if (mainImage) {
+      mainImage.addEventListener('touchend', function(e) {
+        if (isMultiTouch) return;
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTapTime;
+        if (tapLength < 300 && tapLength > 0) {
+          e.preventDefault();
+          if (currentScale > 1) {
+            resetZoom();
+          } else {
+            currentScale = 2.5;
+            mainImage.style.transform = `scale(${currentScale})`;
+          }
+        }
+        lastTapTime = currentTime;
+      });
+    }
+
     // CLICK EVENT DELEGATION FOR ALL PRODUCT GALLERY IMAGES
     document.addEventListener('click', function (e) {
       const slide = e.target.closest('.media-slide, .mobile-media-slide, .product__media-item, [data-lightbox-trigger]');
       if (slide) {
         let index = parseInt(slide.getAttribute('data-lightbox-index'), 10);
         if (isNaN(index)) {
-          // Fallback: calculate index from position among siblings or images
           const allSlides = Array.from(document.querySelectorAll('.media-slide, .mobile-media-slide, .product__media-item'));
           index = allSlides.indexOf(slide);
           if (index < 0) index = 0;
@@ -455,22 +485,45 @@
       if (e.key === 'ArrowLeft') prevImage();
     });
 
-    // TOUCH SWIPE FOR MOBILE
+    // TOUCH SWIPE FOR MOBILE (IGNORES MULTI-TOUCH / PINCH ZOOM)
     lightbox.addEventListener('touchstart', function (e) {
       if (!lightbox.classList.contains('active')) return;
-      touchStartX = e.changedTouches[0].screenX;
+      if (e.touches.length > 1) {
+        isMultiTouch = true;
+        return;
+      }
+      isMultiTouch = false;
+      touchStartX = e.touches[0].screenX;
+      touchStartY = e.touches[0].screenY;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchmove', function (e) {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.touches.length > 1) {
+        isMultiTouch = true;
+      }
     }, { passive: true });
 
     lightbox.addEventListener('touchend', function (e) {
       if (!lightbox.classList.contains('active')) return;
+      if (isMultiTouch || currentScale > 1) {
+        if (e.touches.length === 0) {
+          setTimeout(() => { isMultiTouch = false; }, 100);
+        }
+        return;
+      }
       touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
       handleSwipe();
     }, { passive: true });
 
     function handleSwipe() {
-      const swipeDistance = touchEndX - touchStartX;
-      if (Math.abs(swipeDistance) > 40) {
-        if (swipeDistance < 0) {
+      const swipeDistanceX = touchEndX - touchStartX;
+      const swipeDistanceY = touchEndY - touchStartY;
+      
+      // Ensure horizontal swipe is dominant and exceeds minimum threshold
+      if (Math.abs(swipeDistanceX) > 40 && Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY)) {
+        if (swipeDistanceX < 0) {
           nextImage();
         } else {
           prevImage();
