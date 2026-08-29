@@ -395,12 +395,12 @@
   letter-spacing: 0 !important;
 }
 
-/* Card Image Slider (Matching Custom-Collection) */
+/* Card Image Slider (Matching Custom-Collection & Reference Bluorng 4:6 ratio) */
 .card-image-slider-wrapper {
   position: relative !important;
   background: #f2f2f4 !important;
   border-radius: 10px !important;
-  aspect-ratio: 351.48 / 474.5 !important;
+  aspect-ratio: 4 / 6 !important;
   overflow: hidden !important;
   width: 100% !important;
   height: auto !important;
@@ -408,7 +408,7 @@
 
 @media screen and (max-width: 749px) {
   .card-image-slider-wrapper {
-    aspect-ratio: 192 / 282.92 !important;
+    aspect-ratio: 4 / 6 !important;
   }
 }
 
@@ -846,16 +846,17 @@
 }
 
 /* ============================================================
-   Force all product card media containers to 9:16 aspect ratio
-   (Height is 16/9 = 177.777778% of width)
+   Force all product card media containers to 4:6 aspect ratio
+   (Height is 6/4 = 150% of width)
    ============================================================ */
 .product-card-wrapper .card__inner.ratio,
 .product-card-wrapper .card__media {
-  --ratio-percent: 117.647% !important;
+  aspect-ratio: 4 / 6 !important;
+  --ratio-percent: 150% !important;
 }
 
 .product-card-wrapper .card__inner.ratio::before {
-  padding-bottom: 117.647% !important;
+  padding-bottom: 150% !important;
 }
 
 /* High-contrast dark glass slider dots */
