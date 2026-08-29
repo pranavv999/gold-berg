@@ -699,6 +699,7 @@
       </div>
 
       {% render 'product-media-modal', variant_images: variant_images %}
+      {% render 'product-media-lightbox', product: product %}
 
       {% assign popups = section.blocks | where: 'type', 'popup' %}
       {%- for block in popups -%}

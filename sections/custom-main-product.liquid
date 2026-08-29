@@ -996,7 +996,7 @@
       <div class="media-track-left">
         {%- if image_count > 0 -%}
           {%- for img in product_images -%}
-            <div class="media-slide">
+            <div class="media-slide" style="cursor: pointer;" data-lightbox-index="{{ forloop.index0 }}">
               {{ img | image_url: width: 1000 | image_tag: loading: 'lazy', alt: product.title }}
             </div>
           {%- endfor -%}
@@ -1015,7 +1015,7 @@
           {%- for i in (1..image_count) -%}
             {%- assign rev_idx = image_count | minus: i -%}
             {%- assign img = product_images[rev_idx] -%}
-            <div class="media-slide">
+            <div class="media-slide" style="cursor: pointer;" data-lightbox-index="{{ rev_idx }}">
               {{ img | image_url: width: 1000 | image_tag: loading: 'lazy', alt: product.title }}
             </div>
           {%- endfor -%}
@@ -1036,7 +1036,7 @@
         <div class="mobile-media-track">
           {%- if image_count > 0 -%}
             {%- for img in product_images -%}
-              <div class="mobile-media-slide">
+              <div class="mobile-media-slide" style="cursor: pointer;" data-lightbox-index="{{ forloop.index0 }}">
                 {{ img | image_url: width: 800 | image_tag: loading: 'lazy', alt: product.title }}
               </div>
             {%- endfor -%}
@@ -1372,6 +1372,8 @@
     </div>
   </div>
 </div>
+
+{% render 'product-media-lightbox', product: product %}
 
 <script>
   // Global delegated click handler for Variant Pills, Tabs, and Size Guide
