@@ -3942,3 +3942,24 @@ div[class*="privacy-banner"] {
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* PREVENT IOS SAFARI AUTO-ZOOM ON INPUT FOCUS */
+@media screen and (max-width: 767px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="date"],
+  textarea,
+  select,
+  .field__input,
+  .newsletter-form__field-wrapper .field__input,
+  .footer-block__newsletter .field__input,
+  .search__input,
+  .custom-search-input {
+    font-size: 16px !important;
+  }
+}

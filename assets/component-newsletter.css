@@ -23,6 +23,13 @@
   padding-right: 5rem;
 }
 
+@media screen and (max-width: 749px) {
+  .newsletter-form__field-wrapper .field__input,
+  .newsletter-form input {
+    font-size: 16px !important;
+  }
+}
+
 .newsletter-form__field-wrapper .field {
   z-index: 0;
   box-shadow: none !important;
