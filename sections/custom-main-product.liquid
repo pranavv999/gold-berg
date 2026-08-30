@@ -1539,10 +1539,11 @@
     const submitBtn = form.querySelector('button[name="add"]') || form.querySelector('button[type="submit"]');
     let originalBtnHtml = '';
     if (submitBtn) {
+      if (submitBtn.disabled || submitBtn.getAttribute('aria-disabled') === 'true') return;
       submitBtn.disabled = true;
       submitBtn.setAttribute('aria-disabled', 'true');
       originalBtnHtml = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span>ADDED TO BAG</span>';
+      submitBtn.innerHTML = '<span>ADDING...</span>';
     }
 
     const formData = new FormData(form);
@@ -1578,13 +1579,17 @@
         return;
       }
 
-      // Open cart drawer dynamically
+      if (submitBtn) {
+        submitBtn.innerHTML = '<span>ADDED TO BAG</span>';
+      }
+
+      // Refresh cart drawer contents dynamically and open drawer
       if (cartDrawer) {
         cartDrawer.classList.remove('is-empty');
-        if (typeof cartDrawer.open === 'function') {
-          cartDrawer.open();
-        } else if (typeof cartDrawer.renderContents === 'function') {
+        if (typeof cartDrawer.renderContents === 'function') {
           cartDrawer.renderContents(response);
+        } else if (typeof cartDrawer.open === 'function') {
+          cartDrawer.open();
         } else {
           cartDrawer.setAttribute('open', '');
         }
@@ -1592,6 +1597,11 @@
     })
     .catch(err => {
       console.error('Error adding to cart:', err);
+      if (submitBtn) {
+        submitBtn.innerHTML = originalBtnHtml;
+        submitBtn.disabled = false;
+        submitBtn.removeAttribute('aria-disabled');
+      }
     })
     .finally(() => {
       setTimeout(() => {
@@ -1600,7 +1610,7 @@
           submitBtn.disabled = false;
           submitBtn.removeAttribute('aria-disabled');
         }
-      }, 1200);
+      }, 1500);
     });
   });
 
