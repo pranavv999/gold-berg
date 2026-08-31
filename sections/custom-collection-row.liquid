@@ -241,7 +241,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding-top: 4.410px !important;
+    padding-top: 4.41px !important;
     padding-bottom: 0 !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -383,6 +383,21 @@
   }
 {%- endstyle -%}
 
+{%- assign is_visible = false -%}
+{%- if section.settings.show_on_all -%}
+  {%- assign is_visible = true -%}
+{%- elsif product != null and section.settings.target_products != blank -%}
+  {%- for target in section.settings.target_products -%}
+    {%- if target.handle == product.handle or target.id == product.id -%}
+      {%- assign is_visible = true -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- elsif product == null -%}
+  {%- assign is_visible = true -%}
+{%- endif -%}
+
+{%- if is_visible -%}
 {%- assign featured_collection = section.settings.collection | default: collections.all | default: collections.first -%}
 {%- assign collection_title = section.settings.title
   | default: featured_collection.title
@@ -572,6 +587,7 @@
     </div>
   </div>
 </div>
+{%- endif -%}
 
 {%- javascript -%}
   function initCollectionCardSliders() {
@@ -728,6 +744,22 @@
       "unit": "px",
       "default": 24,
       "label": "Container corner radius"
+    },
+    {
+      "type": "header",
+      "content": "Product Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_all",
+      "default": false,
+      "label": "Show on all products"
+    },
+    {
+      "type": "product_list",
+      "id": "target_products",
+      "label": "Target products (when 'Show on all' is unchecked)",
+      "info": "Select product(s) this collection row should appear on."
     }
   ],
   "presets": [
