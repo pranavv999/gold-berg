@@ -640,13 +640,13 @@
   }
 </style>
 
-{%- assign disable_scroll_shrink = false -%}
-{%- if section.settings.enable_scroll_shrink == false -%}
-  {%- assign disable_scroll_shrink = true -%}
+{%- assign has_scroll_effect = true -%}
+{%- if section.settings.scrolled_effect == false -%}
+  {%- assign has_scroll_effect = false -%}
 {%- endif -%}
 
 <div 
-  class="custom-glass-header-wrapper color-{{ section.settings.color_scheme }}{% if disable_scroll_shrink %} disable-shrink{% endif %}" 
+  class="custom-glass-header-wrapper color-{{ section.settings.color_scheme }}{% unless has_scroll_effect %} is-scrolled always-shrinked{% endunless %}" 
   id="custom-glass-header-wrapper" 
   style="--glass-opacity: {{ section.settings.glass_opacity | divided_by: 100.0 }}; --glass-radius: {{ section.settings.glass_radius }}px;"
 >
@@ -965,12 +965,16 @@
       if (!wrapper) return;
 
       function checkScroll() {
-        var sy = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        if (sy > 5) {
+        {%- if has_scroll_effect -%}
+          var sy = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+          if (sy > 5) {
+            wrapper.classList.add('is-scrolled');
+          } else {
+            wrapper.classList.remove('is-scrolled');
+          }
+        {%- else -%}
           wrapper.classList.add('is-scrolled');
-        } else {
-          wrapper.classList.remove('is-scrolled');
-        }
+        {%- endif -%}
       }
 
       checkScroll();
@@ -1065,10 +1069,10 @@
     },
     {
       "type": "checkbox",
-      "id": "enable_scroll_shrink",
-      "label": "Enable scroll float & shrink effect",
+      "id": "scrolled_effect",
+      "label": "scrolled-effect",
       "default": true,
-      "info": "When enabled, scrolling down detaches the header from screen edges into a floating glass pill."
+      "info": "ON: Navbar expands to browser edges at top and shrinks when scrolled. OFF: Navbar remains permanently shrinked & floating away from browser edges at all times with no scroll effect."
     },
     {
       "type": "range",
