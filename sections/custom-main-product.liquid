@@ -1138,6 +1138,83 @@
             {%- endif -%}
           </div>
 
+          <!-- AVAILABLE OFFERS BLOCKS -->
+          {%- assign available_offers_blocks = section.blocks | where: 'type', 'available_offers' -%}
+          {%- for block in available_offers_blocks -%}
+            {%- assign is_offers_visible = false -%}
+            {%- if block.settings.show_on_all -%}
+              {%- assign is_offers_visible = true -%}
+            {%- elsif product != null and block.settings.target_products != blank -%}
+              {%- for target in block.settings.target_products -%}
+                {%- if target.handle == product.handle or target.id == product.id -%}
+                  {%- assign is_offers_visible = true -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- elsif product == null -%}
+              {%- assign is_offers_visible = true -%}
+            {%- endif -%}
+
+            {%- if is_offers_visible -%}
+              <div
+                class="available-offers-wrap"
+                style="
+                  --offers-margin-top: {{ block.settings.margin_top }}px;
+                  --offers-margin-bottom: {{ block.settings.margin_bottom }}px;
+                  --offers-heading-size: {{ block.settings.heading_font_size }}px;
+                  --offers-heading-color: {{ block.settings.heading_color }};
+                  --offers-card-bg: {{ block.settings.card_bg }};
+                  --offers-card-border: {{ block.settings.card_border_color }};
+                  --offers-card-accent: {{ block.settings.card_accent_color }};
+                  --offers-title-size: {{ block.settings.title_font_size }}px;
+                  --offers-title-color: {{ block.settings.title_color }};
+                  --offers-badge-bg: {{ block.settings.badge_bg }};
+                  --offers-badge-color: {{ block.settings.badge_text_color }};
+                  --offers-code-color: {{ block.settings.code_text_color }};
+                "
+                {{ block.shopify_attributes }}
+              >
+                {%- if block.settings.heading != blank -%}
+                  <div class="available-offers-heading">{{ block.settings.heading }}</div>
+                {%- endif -%}
+
+                <div class="available-offers-grid{% if block.settings.offer_1_enable and block.settings.offer_2_enable == false %} available-offers-grid--single{% endif %}{% if block.settings.offer_1_enable == false and block.settings.offer_2_enable %} available-offers-grid--single{% endif %}">
+                  {%- if block.settings.offer_1_enable -%}
+                    <div class="available-offers-card">
+                      {%- if block.settings.offer_1_text != blank -%}
+                        <div class="available-offers-subtitle">{{ block.settings.offer_1_text }}</div>
+                      {%- endif -%}
+                      <div class="available-offers-bottom">
+                        {%- if block.settings.offer_1_badge != blank -%}
+                          <div class="available-offers-prepaid">{{ block.settings.offer_1_badge }}</div>
+                        {%- endif -%}
+                        {%- if block.settings.offer_1_code != blank -%}
+                          <div class="available-offers-applied">{{ block.settings.offer_1_code }}</div>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  {%- endif -%}
+
+                  {%- if block.settings.offer_2_enable -%}
+                    <div class="available-offers-card">
+                      {%- if block.settings.offer_2_text != blank -%}
+                        <div class="available-offers-subtitle">{{ block.settings.offer_2_text }}</div>
+                      {%- endif -%}
+                      <div class="available-offers-bottom">
+                        {%- if block.settings.offer_2_badge != blank -%}
+                          <div class="available-offers-prepaid">{{ block.settings.offer_2_badge }}</div>
+                        {%- endif -%}
+                        {%- if block.settings.offer_2_code != blank -%}
+                          <div class="available-offers-applied">{{ block.settings.offer_2_code }}</div>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
           {%- unless product.has_only_default_variant -%}
             {%- for option in product.options_with_values -%}
               <div class="variant-selector-wrapper">
@@ -1825,12 +1902,208 @@
           "info": "Select product(s) this video showcase should appear on."
         }
       ]
+    },
+    {
+      "type": "available_offers",
+      "name": "Available Offers",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Product Visibility"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_on_all",
+          "default": true,
+          "label": "Show on all products"
+        },
+        {
+          "type": "product_list",
+          "id": "target_products",
+          "label": "Target products (when 'Show on all' is unchecked)",
+          "info": "Select product(s) this offer block should appear on."
+        },
+        {
+          "type": "header",
+          "content": "Section Heading"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "AVAILABLE OFFERS",
+          "label": "Heading"
+        },
+        {
+          "type": "header",
+          "content": "Offer Card 1"
+        },
+        {
+          "type": "checkbox",
+          "id": "offer_1_enable",
+          "default": true,
+          "label": "Enable Offer 1"
+        },
+        {
+          "type": "text",
+          "id": "offer_1_text",
+          "default": "Buy 1 product & get 10% off",
+          "label": "Offer 1 Title"
+        },
+        {
+          "type": "text",
+          "id": "offer_1_badge",
+          "default": "PREPAID ONLY",
+          "label": "Offer 1 Badge / Details"
+        },
+        {
+          "type": "text",
+          "id": "offer_1_code",
+          "default": "⚡ Auto Applied",
+          "label": "Offer 1 Code / Status"
+        },
+        {
+          "type": "header",
+          "content": "Offer Card 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "offer_2_enable",
+          "default": true,
+          "label": "Enable Offer 2"
+        },
+        {
+          "type": "text",
+          "id": "offer_2_text",
+          "default": "Buy 2 or more & get 15% off",
+          "label": "Offer 2 Title"
+        },
+        {
+          "type": "text",
+          "id": "offer_2_badge",
+          "default": "PREPAID ONLY",
+          "label": "Offer 2 Badge / Details"
+        },
+        {
+          "type": "text",
+          "id": "offer_2_code",
+          "default": "⚡ Auto Applied",
+          "label": "Offer 2 Code / Status"
+        },
+        {
+          "type": "header",
+          "content": "Typography & Styling"
+        },
+        {
+          "type": "range",
+          "id": "heading_font_size",
+          "min": 8,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 10,
+          "label": "Heading Font Size"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "default": "#111111",
+          "label": "Heading Color"
+        },
+        {
+          "type": "range",
+          "id": "title_font_size",
+          "min": 8,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "default": 10,
+          "label": "Offer Title Font Size"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "default": "#111111",
+          "label": "Offer Title Color"
+        },
+        {
+          "type": "color",
+          "id": "card_bg",
+          "default": "#fafafa",
+          "label": "Card Background"
+        },
+        {
+          "type": "color",
+          "id": "card_border_color",
+          "default": "#e5e5e5",
+          "label": "Card Border Color"
+        },
+        {
+          "type": "color",
+          "id": "card_accent_color",
+          "default": "#111111",
+          "label": "Card Left Accent Bar Color"
+        },
+        {
+          "type": "color",
+          "id": "badge_bg",
+          "default": "#f2f2f2",
+          "label": "Badge Background"
+        },
+        {
+          "type": "color",
+          "id": "badge_text_color",
+          "default": "#555555",
+          "label": "Badge Text Color"
+        },
+        {
+          "type": "color",
+          "id": "code_text_color",
+          "default": "#16a34a",
+          "label": "Code / Applied Text Color"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 14,
+          "label": "Margin Top"
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 14,
+          "label": "Margin Bottom"
+        }
+      ]
     }
   ],
   "presets": [
     {
       "name": "Custom Product Main",
       "blocks": [
+        {
+          "type": "available_offers",
+          "settings": {
+            "show_on_all": true,
+            "heading": "AVAILABLE OFFERS",
+            "offer_1_enable": true,
+            "offer_1_text": "Buy 1 product & get 10% off",
+            "offer_1_badge": "PREPAID ONLY",
+            "offer_1_code": "⚡ Auto Applied",
+            "offer_2_enable": true,
+            "offer_2_text": "Buy 2 or more & get 15% off",
+            "offer_2_badge": "PREPAID ONLY",
+            "offer_2_code": "⚡ Auto Applied"
+          }
+        },
         {
           "type": "accordion_row",
           "settings": {

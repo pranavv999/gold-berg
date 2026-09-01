@@ -3963,3 +3963,92 @@ div[class*="privacy-banner"] {
     font-size: 16px !important;
   }
 }
+
+/* AVAILABLE OFFERS BADGES */
+.available-offers-wrap {
+  width: 100%;
+  margin-top: var(--offers-margin-top, 14px);
+  margin-bottom: var(--offers-margin-bottom, 14px);
+}
+.available-offers-heading {
+  font-family: var(--font-heading-family);
+  font-size: var(--offers-heading-size, 10px) !important;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--offers-heading-color, #111111) !important;
+}
+.available-offers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.available-offers-grid--single {
+  grid-template-columns: 1fr;
+}
+.available-offers-card {
+  background: var(--offers-card-bg, #fafafa) !important;
+  border: 1px solid var(--offers-card-border, #e5e5e5) !important;
+  border-left: 3px solid var(--offers-card-accent, #111111) !important;
+  border-radius: 4px;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.available-offers-subtitle {
+  font-size: var(--offers-title-size, 10px) !important;
+  font-weight: 700;
+  color: var(--offers-title-color, #111111) !important;
+  line-height: 1.4;
+}
+.available-offers-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.available-offers-prepaid {
+  font-size: 8px;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  background: var(--offers-badge-bg, #f2f2f2) !important;
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--offers-badge-color, #555555) !important;
+  white-space: nowrap;
+}
+.available-offers-applied {
+  font-size: 9px;
+  color: var(--offers-code-color, #16a34a) !important;
+  font-weight: 700;
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .available-offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .available-offers-grid--single {
+    grid-template-columns: 1fr;
+  }
+  .available-offers-card {
+    padding: 7px 8px;
+  }
+  .available-offers-bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    flex-wrap: nowrap;
+  }
+  .available-offers-prepaid {
+    font-size: 7px;
+    padding: 2px 4px;
+    letter-spacing: 0.3px;
+  }
+}
