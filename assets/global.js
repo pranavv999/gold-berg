@@ -121,7 +121,9 @@ function trapFocus(container, elementToFocus = container) {
   document.addEventListener('focusout', trapFocusHandlers.focusout);
   document.addEventListener('focusin', trapFocusHandlers.focusin);
 
-  elementToFocus.focus();
+  if (elementToFocus && typeof elementToFocus.focus === 'function') {
+    elementToFocus.focus({ preventScroll: true });
+  }
 
   if (
     elementToFocus.tagName === 'INPUT' &&
@@ -199,7 +201,9 @@ function removeTrapFocus(elementToFocus = null) {
   document.removeEventListener('focusout', trapFocusHandlers.focusout);
   document.removeEventListener('keydown', trapFocusHandlers.keydown);
 
-  if (elementToFocus) elementToFocus.focus();
+  if (elementToFocus && typeof elementToFocus.focus === 'function') {
+    elementToFocus.focus({ preventScroll: true });
+  }
 }
 
 function onKeyUpEscape(event) {
