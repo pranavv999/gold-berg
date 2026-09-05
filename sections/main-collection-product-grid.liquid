@@ -556,15 +556,18 @@
       padding: 0 !important;
     }
 
-    /* Single 12px Spacing between Mobile Filter & Sort component container and Product Grid */
     .facets-container,
     .facets-container-drawer {
-      margin-bottom: 12px !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: visible !important;
     }
 
-    .mobile-facets__wrapper,
-    .mobile-facets__open-wrapper {
-      margin-bottom: 0 !important;
+    .facets-container .mobile-facets__open-wrapper,
+    .facets-container-drawer .mobile-facets__open-wrapper {
+      display: none !important;
     }
   }
 

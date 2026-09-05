@@ -9,11 +9,38 @@
 
   @media screen and (max-width: 749px) {
     .collection-hero {
-      padding-top: calc(72px + 20px) !important;
-      padding-bottom: 0px !important;
+      padding-top: calc(72px + 16px) !important;
+      padding-bottom: 8px !important;
+      margin-bottom: 0 !important;
     }
     .collection-hero--with-image .collection-hero__inner {
       padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 1rem);
+    }
+    .collection-hero__inner {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
+    .collection-hero__text-wrapper {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      width: 100% !important;
+      gap: 12px !important;
+    }
+    .collection-hero__title {
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      margin: 0 !important;
+      line-height: 1.2 !important;
+      display: inline-block !important;
+    }
+    .collection-hero__mobile-filter {
+      display: flex !important;
+      align-items: center !important;
+      margin-left: auto !important;
+      flex-shrink: 0 !important;
     }
   }
 
@@ -62,6 +89,22 @@
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
       </h1>
+
+      <div class="collection-hero__mobile-filter medium-hide large-up-hide">
+        <button
+          type="button"
+          class="mobile-facets__open"
+          onclick="const s = document.querySelector('.mobile-facets__open-wrapper') || document.querySelector('menu-drawer.mobile-facets__wrapper summary'); if (s) s.click();"
+          aria-label="Filter and sort"
+        >
+          <span class="svg-wrapper">
+            {{- 'icon-filter.svg' | inline_asset_content -}}
+          </span>
+          <span class="mobile-facets__open-label button-label">
+            {{ 'products.facets.filter_and_sort' | t | default: 'Filter and sort' }}
+          </span>
+        </button>
+      </div>
 
       {%- if section.settings.show_collection_description -%}
         <div class="collection-hero__description rte">{{ collection.description }}</div>
