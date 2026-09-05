@@ -23,12 +23,32 @@
             "heading": "Shipping",
             "content": "<p>Shipping & Delivery Details:</p><ul><li>Standard delivery: 3-5 business days</li><li>Free shipping on orders over RS. 4,999</li><li>Easy 7-day hassle-free returns</li><li>Cash on delivery available</li></ul>"
           }
+        },
+        "trust_benefits_card": {
+          "type": "trust_benefits_card",
+          "settings": {
+            "heading": "CRAFTED FOR COMFORT. BUILT TO LAST.",
+            "show_lines": true,
+            "card_bg_color": "#000000",
+            "card_text_color": "#ffffff",
+            "card_padding_vertical": 24,
+            "card_padding_horizontal": 20,
+            "item_1_icon": "support",
+            "item_1_title": "24/7 Support",
+            "item_2_icon": "secure_payment",
+            "item_2_title": "Secure Payments",
+            "item_3_icon": "free_shipping",
+            "item_3_title": "Free Shipping",
+            "item_4_icon": "premium_quality",
+            "item_4_title": "Premium Quality"
+          }
         }
       },
       "block_order": [
         "accordion_details",
         "accordion_washcare",
-        "accordion_shipping"
+        "accordion_shipping",
+        "trust_benefits_card"
       ],
       "settings": {
         "container_radius": 24

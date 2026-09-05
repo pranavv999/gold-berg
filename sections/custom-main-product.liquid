@@ -131,7 +131,7 @@
   }
 
   .size-guide-btn {
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     font-size: 10px !important;
     font-weight: 400 !important;
     color: #1d1d1f !important;
@@ -193,9 +193,9 @@
   .product-app-block-wrapper p,
   .smartsize-trigger-link,
   [data-smartsize-chart],
-  [class*="smartsize-trigger"],
-  [class*="smartsize-btn"] {
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  [class*='smartsize-trigger'],
+  [class*='smartsize-btn'] {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
     font-size: 10px !important;
     font-weight: 400 !important;
     color: #1d1d1f !important;
@@ -234,8 +234,8 @@
     .product-app-block-wrapper p,
     .smartsize-trigger-link,
     [data-smartsize-chart],
-    [class*="smartsize-trigger"],
-    [class*="smartsize-btn"] {
+    [class*='smartsize-trigger'],
+    [class*='smartsize-btn'] {
       font-size: 8.5px !important;
       padding: 4px 10px !important;
     }
@@ -251,8 +251,8 @@
   .product-app-block-wrapper p:hover,
   .smartsize-trigger-link:hover,
   [data-smartsize-chart]:hover,
-  [class*="smartsize-trigger"]:hover,
-  [class*="smartsize-btn"]:hover {
+  [class*='smartsize-trigger']:hover,
+  [class*='smartsize-btn']:hover {
     background-color: #d4d4d9 !important;
     background: #d4d4d9 !important;
     color: #000000 !important;
@@ -266,9 +266,9 @@
   /* SmartSize Overlay & Backdrop Elevation */
   .smartsize-overlay,
   .smartsize-backdrop,
-  [class*="smartsize-overlay"],
-  [class*="smartsize-backdrop"],
-  [id*="smartsize-backdrop"] {
+  [class*='smartsize-overlay'],
+  [class*='smartsize-backdrop'],
+  [id*='smartsize-backdrop'] {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
@@ -283,20 +283,55 @@
   }
 
   /* Force header stack order behind SmartSize modal backdrop when modal is active */
-  body:has(.smartsize-modal, .smartsize-popup, [class*="smartsize-modal"], [class*="smartsize-popup"], [class*="smartsize-backdrop"]) .header-wrapper,
-  body:has(.smartsize-modal, .smartsize-popup, [class*="smartsize-modal"], [class*="smartsize-popup"], [class*="smartsize-backdrop"]) sticky-header,
-  body:has(.smartsize-modal, .smartsize-popup, [class*="smartsize-modal"], [class*="smartsize-popup"], [class*="smartsize-backdrop"]) #shopify-section-header,
-  body:has(.smartsize-modal, .smartsize-popup, [class*="smartsize-modal"], [class*="smartsize-popup"], [class*="smartsize-backdrop"]) .section-header,
-  body:has(.smartsize-modal, .smartsize-popup, [class*="smartsize-modal"], [class*="smartsize-popup"], [class*="smartsize-backdrop"]) header {
+  body:has(
+      .smartsize-modal,
+      .smartsize-popup,
+      [class*='smartsize-modal'],
+      [class*='smartsize-popup'],
+      [class*='smartsize-backdrop']
+    )
+    .header-wrapper,
+  body:has(
+      .smartsize-modal,
+      .smartsize-popup,
+      [class*='smartsize-modal'],
+      [class*='smartsize-popup'],
+      [class*='smartsize-backdrop']
+    )
+    sticky-header,
+  body:has(
+      .smartsize-modal,
+      .smartsize-popup,
+      [class*='smartsize-modal'],
+      [class*='smartsize-popup'],
+      [class*='smartsize-backdrop']
+    )
+    #shopify-section-header,
+  body:has(
+      .smartsize-modal,
+      .smartsize-popup,
+      [class*='smartsize-modal'],
+      [class*='smartsize-popup'],
+      [class*='smartsize-backdrop']
+    )
+    .section-header,
+  body:has(
+      .smartsize-modal,
+      .smartsize-popup,
+      [class*='smartsize-modal'],
+      [class*='smartsize-popup'],
+      [class*='smartsize-backdrop']
+    )
+    header {
     z-index: 1 !important;
   }
 
   /* Main SmartSize Outer Dialog Card */
   .smartsize-modal,
   .smartsize-popup,
-  div[class*="smartsize-modal-wrapper"],
-  div[class*="smartsize-popup"],
-  div[class*="smartsize-modal"] {
+  div[class*='smartsize-modal-wrapper'],
+  div[class*='smartsize-popup'],
+  div[class*='smartsize-modal'] {
     z-index: 2147483647 !important;
     width: min(92vw, 520px) !important;
     min-width: min(92vw, 520px) !important;
@@ -321,9 +356,9 @@
   @media screen and (max-width: 749px) {
     .smartsize-modal,
     .smartsize-popup,
-    div[class*="smartsize-modal-wrapper"],
-    div[class*="smartsize-popup"],
-    div[class*="smartsize-modal"] {
+    div[class*='smartsize-modal-wrapper'],
+    div[class*='smartsize-popup'],
+    div[class*='smartsize-modal'] {
       width: 88vw !important;
       min-width: 88vw !important;
       max-width: 88vw !important;
@@ -338,12 +373,12 @@
   }
 
   /* Reset fixed positioning and full width on inner children */
-  div[class*="smartsize-modal"] div[class*="container"],
-  div[class*="smartsize-modal"] div[class*="content"],
-  div[class*="smartsize-modal"] div[class*="body"],
-  div[class*="smartsize-popup"] div[class*="container"],
-  div[class*="smartsize-popup"] div[class*="content"],
-  div[class*="smartsize-popup"] div[class*="body"],
+  div[class*='smartsize-modal'] div[class*='container'],
+  div[class*='smartsize-modal'] div[class*='content'],
+  div[class*='smartsize-modal'] div[class*='body'],
+  div[class*='smartsize-popup'] div[class*='container'],
+  div[class*='smartsize-popup'] div[class*='content'],
+  div[class*='smartsize-popup'] div[class*='body'],
   .smartsize-modal-content,
   .smartsize-content,
   .smartsize-body,
@@ -359,13 +394,13 @@
   }
 
   /* SmartSize Modal Header & Close Button (Top-Right Circular Pill) */
-  .smartsize-modal [class*="close"],
-  .smartsize-popup [class*="close"],
-  [class*="smartsize-modal"] [class*="close"],
-  [class*="smartsize-popup"] [class*="close"],
-  [class*="smartsize"] button[class*="close"],
-  [class*="smartsize"] [aria-label*="close" i],
-  [class*="smartsize"] [aria-label*="Close"] {
+  .smartsize-modal [class*='close'],
+  .smartsize-popup [class*='close'],
+  [class*='smartsize-modal'] [class*='close'],
+  [class*='smartsize-popup'] [class*='close'],
+  [class*='smartsize'] button[class*='close'],
+  [class*='smartsize'] [aria-label*='close' i],
+  [class*='smartsize'] [aria-label*='Close'] {
     position: absolute !important;
     top: 12px !important;
     right: 12px !important;
@@ -395,16 +430,16 @@
     outline: none !important;
   }
 
-  .smartsize-modal [class*="close"]:hover,
-  .smartsize-popup [class*="close"]:hover,
-  [class*="smartsize"] button[class*="close"]:hover {
+  .smartsize-modal [class*='close']:hover,
+  .smartsize-popup [class*='close']:hover,
+  [class*='smartsize'] button[class*='close']:hover {
     background: rgba(0, 0, 0, 0.12) !important;
     background-color: rgba(0, 0, 0, 0.12) !important;
     color: #000000 !important;
   }
 
   /* Full Width Image & Table Sizing inside popup */
-  [class*="smartsize"] table,
+  [class*='smartsize'] table,
   .smartsize-modal table,
   .smartsize-popup table {
     width: 100% !important;
@@ -414,7 +449,7 @@
     border-collapse: collapse !important;
   }
 
-  [class*="smartsize"] img,
+  [class*='smartsize'] img,
   .smartsize-modal img,
   .smartsize-popup img {
     width: 100% !important;
@@ -530,7 +565,7 @@
 
   .cta-btn:disabled,
   .cta-btn[disabled],
-  .cta-btn[aria-disabled="true"],
+  .cta-btn[aria-disabled='true'],
   .cta-btn.is-disabled {
     background: #e0e0e0 !important;
     border-color: #d1d1d6 !important;
@@ -710,8 +745,14 @@
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .specs-section {
@@ -763,7 +804,7 @@
   .tab-richtext-content *,
   .tab-page-content,
   .tab-page-content * {
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   }
 
   .description-content h1,
@@ -971,7 +1012,7 @@
       grid-template-columns: 1fr;
       gap: 0px;
     }
-    
+
     .custom-product-info-column {
       position: static;
       top: auto;
@@ -1024,18 +1065,18 @@
       padding: 15px !important;
     }
   }
-
 {%- endstyle -%}
 
-{%- assign product_images = product.media | where: "media_type", "image" -%}
+{%- assign product_images = product.media | where: 'media_type', 'image' -%}
 {%- assign image_count = product_images.size -%}
 
 <div class="custom-product-outer">
   <div class="custom-product-container">
-    
     <!-- DESKTOP MEDIA SECTION (2-Column Layout) -->
-    <div class="custom-product-media-column custom-product-media-desktop" style="--product-image-aspect: {{ product.featured_image.aspect_ratio | default: 1.0 }}">
-      
+    <div
+      class="custom-product-media-column custom-product-media-desktop"
+      style="--product-image-aspect: {{ product.featured_image.aspect_ratio | default: 1.0 }}"
+    >
       <!-- LEFT TRACK (Images I1 -> IN) -->
       <div class="media-track-left">
         {%- if image_count > 0 -%}
@@ -1052,7 +1093,7 @@
           {%- endfor -%}
         {%- endif -%}
       </div>
-      
+
       <!-- RIGHT TRACK (Images IN -> I1 Reversed) -->
       <div class="media-track-right">
         {%- if image_count > 0 -%}
@@ -1071,7 +1112,6 @@
           {%- endfor -%}
         {%- endif -%}
       </div>
-      
     </div>
 
     <!-- MOBILE MEDIA SECTION (Single Image Touch Slider with Bubble Dots) -->
@@ -1108,12 +1148,11 @@
 
     <!-- RIGHT SIDE: Product Purchasing and Detailed Info Cards -->
     <div class="custom-product-info-column">
-      
       <!-- Purchasing Controls Card -->
       <div class="product-info-card" style="--container-radius: {{ section.settings.container_radius }}px">
         {%- form 'product', product, id: 'product-form-custom' -%}
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-          
+
           {%- assign current_variant = product.selected_or_first_available_variant -%}
           {%- assign compare_at_price = current_variant.compare_at_price -%}
           {%- assign price = current_variant.price -%}
@@ -1137,7 +1176,7 @@
               <button type="button" class="size-guide-btn">Size Guide</button>
             </div>
           </div>
-          
+
           <div class="product-price-row">
             <span class="product-info-price">{{ price | money }}</span>
             {%- if compare_at_price > price -%}
@@ -1230,7 +1269,7 @@
               <div class="variant-selector-wrapper">
                 <div class="variants-grid{% if option.values.size >= 5 %} variants-grid--5-cols{% endif %}">
                   {%- for value in option.values -%}
-                    {%- assign variant_for_value = nil -%}
+                    {%- assign variant_for_value = null -%}
                     {%- for v in product.variants -%}
                       {%- if v.options contains value -%}
                         {%- assign variant_for_value = v -%}
@@ -1239,7 +1278,7 @@
                     {%- endfor -%}
 
                     {%- assign is_selected = false -%}
-                    {%- if current_variant.id == variant_for_value.id or forloop.first and current_variant == nil -%}
+                    {%- if current_variant.id == variant_for_value.id or forloop.first and current_variant == null -%}
                       {%- assign is_selected = true -%}
                     {%- endif -%}
 
@@ -1268,7 +1307,9 @@
                       data-variant-id="{{ variant.id }}"
                       data-price="{{ variant.price | money }}"
                       data-compare-price="{% if variant.compare_at_price > variant.price %}{{ variant.compare_at_price | money }}{% endif %}"
-                      {% unless variant.available %}disabled{% endunless %}
+                      {% unless variant.available %}
+                        disabled
+                      {% endunless %}
                     >
                       {{ variant.title }}
                     </button>
@@ -1277,14 +1318,14 @@
               </div>
             {%- endif -%}
           {%- endunless -%}
-          
+
           <div class="cta-buttons-row">
             <button type="submit" name="add" class="cta-btn cta-btn--outline">Add to bag</button>
             <button type="button" class="cta-btn cta-btn--solid" onclick="location.href='/checkout'">Buy now</button>
           </div>
         {%- endform -%}
       </div>
-      
+
       <!-- Product Details and Tabbed Card -->
       <div class="product-info-card" style="--container-radius: {{ section.settings.container_radius }}px">
         {%- assign raw_accordion_blocks = section.blocks | where: 'type', 'accordion_row' -%}
@@ -1293,7 +1334,7 @@
           {%- assign visible_tab_count = 0 -%}
           {%- for block in raw_accordion_blocks -%}
             {%- assign is_visible = false -%}
-            {%- if block.settings.show_on_all == true or block.settings.show_on_all == nil -%}
+            {%- if block.settings.show_on_all == true or block.settings.show_on_all == null -%}
               {%- assign is_visible = true -%}
             {%- else -%}
               {%- if block.settings.target_products != blank -%}
@@ -1329,7 +1370,7 @@
           {%- assign visible_pane_count = 0 -%}
           {%- for block in raw_accordion_blocks -%}
             {%- assign is_visible = false -%}
-            {%- if block.settings.show_on_all == true or block.settings.show_on_all == nil -%}
+            {%- if block.settings.show_on_all == true or block.settings.show_on_all == null -%}
               {%- assign is_visible = true -%}
             {%- else -%}
               {%- if block.settings.target_products != blank -%}
@@ -1443,9 +1484,16 @@
           {%- if is_video_visible -%}
             {%- assign video_mp4 = block.settings.video_url -%}
             {%- if block.settings.video != blank -%}
-              {%- assign video_mp4 = block.settings.video.sources | where: 'format', 'mp4' | first | map: 'url' | default: block.settings.video.sources[0].url -%}
+              {%- assign video_mp4 = block.settings.video.sources
+                | where: 'format', 'mp4'
+                | first
+                | map: 'url'
+                | default: block.settings.video.sources[0].url
+              -%}
             {%- elsif product.metafields.custom.video != blank -%}
-              {%- assign video_mp4 = product.metafields.custom.video.value | default: product.metafields.custom.video -%}
+              {%- assign video_mp4 = product.metafields.custom.video.value
+                | default: product.metafields.custom.video
+              -%}
             {%- endif -%}
 
             {%- assign poster_url = '' -%}
@@ -1462,20 +1510,61 @@
               <div class="product-video-card-wrapper">
                 <div class="product-video-card" data-lazy-video-container>
                   <button type="button" class="product-video-sound-toggle" aria-label="Toggle Sound">
-                    <svg class="sound-icon-muted" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg
+                      class="sound-icon-muted"
+                      width="8"
+                      height="8"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
                       <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                       <line x1="23" y1="9" x2="17" y2="15"></line>
                       <line x1="17" y1="9" x2="23" y2="15"></line>
                     </svg>
-                    <svg class="sound-icon-unmuted" width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                    <svg
+                      class="sound-icon-unmuted"
+                      width="8"
+                      height="8"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      style="display: none;"
+                    >
                       <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                       <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                     </svg>
                   </button>
                   {%- if block.settings.video != blank -%}
-                    {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, playsinline: true, controls: false, poster: poster_url, preload: 'none', class: 'lazy-video-element' }}
+                    {{
+                      block.settings.video
+                      | video_tag:
+                        autoplay: false,
+                        loop: true,
+                        muted: true,
+                        playsinline: true,
+                        controls: false,
+                        poster: poster_url,
+                        preload: 'none',
+                        class: 'lazy-video-element'
+                    }}
                   {%- elsif video_mp4 != blank -%}
-                    <video loop muted playsinline preload="none" {% if poster_url != blank %}poster="{{ poster_url }}"{% endif %} class="lazy-video-element">
+                    <video
+                      loop
+                      muted
+                      playsinline
+                      preload="none"
+                      {% if poster_url != blank %}
+                        poster="{{ poster_url }}"
+                      {% endif %}
+                      class="lazy-video-element"
+                    >
                       <source data-src="{{ video_mp4 }}" type="video/mp4">
                     </video>
                   {%- else -%}
@@ -1489,7 +1578,13 @@
           {%- endif -%}
         {%- endfor -%}
       </div>
-      
+
+      {%- assign trust_blocks = section.blocks | where: 'type', 'trust_benefits_card' -%}
+      {%- for block in trust_blocks -%}
+        {% render 'trust-benefits-card-block', block: block %}
+      {%- else -%}
+        {% render 'trust-benefits-card-block' %}
+      {%- endfor -%}
     </div>
   </div>
 </div>
@@ -1498,7 +1593,7 @@
 
 <script>
   // Global delegated click handler for Variant Pills, Tabs, and Size Guide
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', function (e) {
     // 1. Variant Pill Selection
     const pill = e.target.closest('.variant-pill');
     if (pill) {
@@ -1508,10 +1603,10 @@
         const priceElem = form.querySelector('.product-info-price');
         const comparePriceElem = form.querySelector('.product-compare-price');
         const pills = form.querySelectorAll('.variant-pill');
-        
-        pills.forEach(p => p.classList.remove('selected'));
+
+        pills.forEach((p) => p.classList.remove('selected'));
         pill.classList.add('selected');
-        
+
         const variantId = pill.getAttribute('data-variant-id');
         if (hiddenIdInput && variantId) {
           hiddenIdInput.value = variantId;
@@ -1543,10 +1638,10 @@
         const tabBtns = container.querySelectorAll('.tab-header-btn');
         const tabPanes = container.querySelectorAll('.tab-pane');
 
-        tabBtns.forEach(b => b.classList.remove('active'));
+        tabBtns.forEach((b) => b.classList.remove('active'));
         tabBtn.classList.add('active');
 
-        tabPanes.forEach(pane => {
+        tabPanes.forEach((pane) => {
           if (pane.id === `tab-${tabId}`) {
             pane.classList.add('active');
           } else {
@@ -1602,12 +1697,14 @@
     }
 
     // 4. SmartSize Close Buttons
-    const closeElem = e.target.closest('[class*="close"], [class*="dismiss"], [aria-label*="close" i], [aria-label*="Close"]');
+    const closeElem = e.target.closest(
+      '[class*="close"], [class*="dismiss"], [aria-label*="close" i], [aria-label*="Close"]'
+    );
     if (closeElem && closeElem.closest('[class*="smartsize"], [id*="smartsize"]')) {
       if (window.SmartSize && typeof window.SmartSize.close === 'function') {
         window.SmartSize.close();
       } else {
-        document.querySelectorAll('[class*="smartsize"], [id*="smartsize"]').forEach(m => {
+        document.querySelectorAll('[class*="smartsize"], [id*="smartsize"]').forEach((m) => {
           m.style.display = 'none';
           m.classList.remove('active');
         });
@@ -1616,7 +1713,7 @@
   });
 
   // Global delegated submit handler for AJAX Add to Bag
-  document.addEventListener('submit', function(e) {
+  document.addEventListener('submit', function (e) {
     const form = e.target.closest('#product-form-custom');
     if (!form) return;
 
@@ -1640,7 +1737,7 @@
     }
 
     if (cartDrawer && typeof cartDrawer.getSectionsToRender === 'function') {
-      const sections = cartDrawer.getSectionsToRender().map(s => s.id);
+      const sections = cartDrawer.getSectionsToRender().map((s) => s.id);
       formData.append('sections', sections.join(','));
       formData.append('sections_url', window.location.pathname);
     } else {
@@ -1650,71 +1747,71 @@
     fetch('/cart/add.js', {
       method: 'POST',
       headers: {
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
       },
-      body: formData
+      body: formData,
     })
-    .then(res => res.json())
-    .then(response => {
-      if (response.status) {
-        alert(response.description || response.message || 'Error adding to bag');
+      .then((res) => res.json())
+      .then((response) => {
+        if (response.status) {
+          alert(response.description || response.message || 'Error adding to bag');
+          if (submitBtn) {
+            submitBtn.innerHTML = originalBtnHtml;
+            submitBtn.disabled = false;
+            submitBtn.removeAttribute('aria-disabled');
+          }
+          return;
+        }
+
+        if (submitBtn) {
+          submitBtn.innerHTML = '<span>ADDED TO BAG</span>';
+        }
+
+        // Refresh cart drawer contents dynamically and open drawer
+        if (cartDrawer) {
+          cartDrawer.classList.remove('is-empty');
+          if (typeof cartDrawer.renderContents === 'function') {
+            cartDrawer.renderContents(response);
+          } else if (typeof cartDrawer.open === 'function') {
+            cartDrawer.open();
+          } else {
+            cartDrawer.setAttribute('open', '');
+          }
+        }
+      })
+      .catch((err) => {
+        console.error('Error adding to cart:', err);
         if (submitBtn) {
           submitBtn.innerHTML = originalBtnHtml;
           submitBtn.disabled = false;
           submitBtn.removeAttribute('aria-disabled');
         }
-        return;
-      }
-
-      if (submitBtn) {
-        submitBtn.innerHTML = '<span>ADDED TO BAG</span>';
-      }
-
-      // Refresh cart drawer contents dynamically and open drawer
-      if (cartDrawer) {
-        cartDrawer.classList.remove('is-empty');
-        if (typeof cartDrawer.renderContents === 'function') {
-          cartDrawer.renderContents(response);
-        } else if (typeof cartDrawer.open === 'function') {
-          cartDrawer.open();
-        } else {
-          cartDrawer.setAttribute('open', '');
-        }
-      }
-    })
-    .catch(err => {
-      console.error('Error adding to cart:', err);
-      if (submitBtn) {
-        submitBtn.innerHTML = originalBtnHtml;
-        submitBtn.disabled = false;
-        submitBtn.removeAttribute('aria-disabled');
-      }
-    })
-    .finally(() => {
-      setTimeout(() => {
-        if (submitBtn) {
-          submitBtn.innerHTML = originalBtnHtml;
-          submitBtn.disabled = false;
-          submitBtn.removeAttribute('aria-disabled');
-        }
-      }, 1500);
-    });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          if (submitBtn) {
+            submitBtn.innerHTML = originalBtnHtml;
+            submitBtn.disabled = false;
+            submitBtn.removeAttribute('aria-disabled');
+          }
+        }, 1500);
+      });
   });
 
   // Mobile media slider dots sync logic
   function initMobileMediaSlider() {
     const mobileTrack = document.querySelector('.mobile-media-track');
     const dots = document.querySelectorAll('.mobile-dot');
-    
+
     if (!mobileTrack || dots.length === 0) return;
-    
+
     mobileTrack.addEventListener('scroll', () => {
       const scrollPosition = mobileTrack.scrollLeft;
       const slideWidth = mobileTrack.offsetWidth;
       if (slideWidth === 0) return;
-      
+
       const activeIndex = Math.round(scrollPosition / slideWidth);
-      
+
       dots.forEach((dot, index) => {
         if (index === activeIndex) {
           dot.classList.add('active');
@@ -1729,7 +1826,7 @@
         const slideWidth = mobileTrack.offsetWidth;
         mobileTrack.scrollTo({
           left: slideWidth * index,
-          behavior: 'smooth'
+          behavior: 'smooth',
         });
       });
     });
@@ -1740,7 +1837,7 @@
     const smartLinks = document.querySelectorAll(
       '.variant-selector-header .product-app-block-wrapper a, .variant-selector-header .product-app-block-wrapper button, .variant-selector-header .product-app-block-wrapper span, .variant-selector-header .smartsize-trigger-link, .variant-selector-header [data-smartsize-chart]'
     );
-    smartLinks.forEach(link => {
+    smartLinks.forEach((link) => {
       if (link.tagName === 'DIV' || link.classList.contains('product-app-block-wrapper')) return;
       link.classList.add('size-guide-btn');
       link.style.textDecoration = 'none';
@@ -1761,28 +1858,31 @@
   function initLazyVideoShowcase() {
     const videoContainers = document.querySelectorAll('[data-lazy-video-container]');
     if ('IntersectionObserver' in window && videoContainers.length > 0) {
-      const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const video = entry.target.querySelector('video');
-          if (!video) return;
+      const videoObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const video = entry.target.querySelector('video');
+            if (!video) return;
 
-          if (entry.isIntersecting) {
-            const source = video.querySelector('source[data-src]');
-            if (source && !source.src) {
-              source.src = source.getAttribute('data-src');
-              video.load();
+            if (entry.isIntersecting) {
+              const source = video.querySelector('source[data-src]');
+              if (source && !source.src) {
+                source.src = source.getAttribute('data-src');
+                video.load();
+              }
+              video.play().catch(() => {});
+            } else {
+              video.pause();
             }
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        });
-      }, {
-        rootMargin: '100px 0px',
-        threshold: 0.1
-      });
+          });
+        },
+        {
+          rootMargin: '100px 0px',
+          threshold: 0.1,
+        }
+      );
 
-      videoContainers.forEach(container => videoObserver.observe(container));
+      videoContainers.forEach((container) => videoObserver.observe(container));
     }
   }
 
@@ -2091,6 +2191,193 @@
           "unit": "px",
           "default": 14,
           "label": "Margin Bottom"
+        }
+      ]
+    },
+    {
+      "type": "trust_benefits_card",
+      "name": "Trust & Benefits Card",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "CRAFTED FOR COMFORT. BUILT TO LAST.",
+          "label": "Heading"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_lines",
+          "default": true,
+          "label": "Show side accent lines on heading"
+        },
+        {
+          "type": "color",
+          "id": "card_bg_color",
+          "default": "#000000",
+          "label": "Card Background Color"
+        },
+        {
+          "type": "color",
+          "id": "card_text_color",
+          "default": "#ffffff",
+          "label": "Card Text Color"
+        },
+        {
+          "type": "range",
+          "id": "card_padding_vertical",
+          "min": 12,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 20,
+          "label": "Vertical Padding"
+        },
+        {
+          "type": "range",
+          "id": "card_padding_horizontal",
+          "min": 12,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "default": 20,
+          "label": "Horizontal Padding"
+        },
+        {
+          "type": "header",
+          "content": "Benefit Item 1"
+        },
+        {
+          "type": "select",
+          "id": "item_1_icon",
+          "label": "Item 1 Preset Icon",
+          "default": "support",
+          "options": [
+            { "value": "support", "label": "24/7 Support" },
+            { "value": "secure_payment", "label": "Secure Payments" },
+            { "value": "free_shipping", "label": "Free Shipping" },
+            { "value": "premium_quality", "label": "Premium Quality" },
+            { "value": "returns", "label": "Easy Returns" },
+            { "value": "clock", "label": "Fast Delivery" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "item_1_title",
+          "default": "24/7 Support",
+          "label": "Item 1 Title"
+        },
+        {
+          "type": "html",
+          "id": "item_1_custom_svg",
+          "label": "Item 1 Custom SVG HTML"
+        },
+        {
+          "type": "image_picker",
+          "id": "item_1_custom_image",
+          "label": "Item 1 Custom Image"
+        },
+        {
+          "type": "header",
+          "content": "Benefit Item 2"
+        },
+        {
+          "type": "select",
+          "id": "item_2_icon",
+          "label": "Item 2 Preset Icon",
+          "default": "secure_payment",
+          "options": [
+            { "value": "support", "label": "24/7 Support" },
+            { "value": "secure_payment", "label": "Secure Payments" },
+            { "value": "free_shipping", "label": "Free Shipping" },
+            { "value": "premium_quality", "label": "Premium Quality" },
+            { "value": "returns", "label": "Easy Returns" },
+            { "value": "clock", "label": "Fast Delivery" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "item_2_title",
+          "default": "Secure Payments",
+          "label": "Item 2 Title"
+        },
+        {
+          "type": "html",
+          "id": "item_2_custom_svg",
+          "label": "Item 2 Custom SVG HTML"
+        },
+        {
+          "type": "image_picker",
+          "id": "item_2_custom_image",
+          "label": "Item 2 Custom Image"
+        },
+        {
+          "type": "header",
+          "content": "Benefit Item 3"
+        },
+        {
+          "type": "select",
+          "id": "item_3_icon",
+          "label": "Item 3 Preset Icon",
+          "default": "free_shipping",
+          "options": [
+            { "value": "support", "label": "24/7 Support" },
+            { "value": "secure_payment", "label": "Secure Payments" },
+            { "value": "free_shipping", "label": "Free Shipping" },
+            { "value": "premium_quality", "label": "Premium Quality" },
+            { "value": "returns", "label": "Easy Returns" },
+            { "value": "clock", "label": "Fast Delivery" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "item_3_title",
+          "default": "Free Shipping",
+          "label": "Item 3 Title"
+        },
+        {
+          "type": "html",
+          "id": "item_3_custom_svg",
+          "label": "Item 3 Custom SVG HTML"
+        },
+        {
+          "type": "image_picker",
+          "id": "item_3_custom_image",
+          "label": "Item 3 Custom Image"
+        },
+        {
+          "type": "header",
+          "content": "Benefit Item 4"
+        },
+        {
+          "type": "select",
+          "id": "item_4_icon",
+          "label": "Item 4 Preset Icon",
+          "default": "premium_quality",
+          "options": [
+            { "value": "support", "label": "24/7 Support" },
+            { "value": "secure_payment", "label": "Secure Payments" },
+            { "value": "free_shipping", "label": "Free Shipping" },
+            { "value": "premium_quality", "label": "Premium Quality" },
+            { "value": "returns", "label": "Easy Returns" },
+            { "value": "clock", "label": "Fast Delivery" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "item_4_title",
+          "default": "Premium Quality",
+          "label": "Item 4 Title"
+        },
+        {
+          "type": "html",
+          "id": "item_4_custom_svg",
+          "label": "Item 4 Custom SVG HTML"
+        },
+        {
+          "type": "image_picker",
+          "id": "item_4_custom_image",
+          "label": "Item 4 Custom Image"
         }
       ]
     }

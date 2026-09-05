@@ -1,0 +1,483 @@
+{% doc %}
+  Renders a Trust & Benefits section with a main title and customizable benefit items (icon + title).
+{% enddoc %}
+
+<div class="custom-trust-outer" style="
+  --outer-bg-color: {{ section.settings.outer_bg_color | default: '#ffffff' }};
+  --bg-color: {{ section.settings.bg_color | default: '#000000' }};
+  --text-color: {{ section.settings.text_color | default: '#ffffff' }};
+  --border-color: {{ section.settings.border_color | default: 'rgba(255, 255, 255, 0.2)' }};
+  --container-radius: {{ section.settings.container_radius | default: 24 }}px;
+  --padding-top: {{ section.settings.padding_top | default: 16 }}px;
+  --padding-bottom: {{ section.settings.padding_bottom | default: 16 }}px;
+">
+  <div class="page-width">
+    <div class="custom-trust-container">
+      <div class="trust-benefits-card">
+        {%- if section.settings.heading != blank -%}
+          <div class="trust-benefits-header">
+            {%- if section.settings.show_lines -%}
+              <span class="trust-benefits-line"></span>
+            {%- endif -%}
+            <h2 class="trust-benefits-title">{{ section.settings.heading | escape }}</h2>
+            {%- if section.settings.show_lines -%}
+              <span class="trust-benefits-line"></span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="trust-benefits-grid">
+            {%- for block in section.blocks -%}
+              <div class="trust-benefit-item" {{ block.shopify_attributes }}>
+                <div class="trust-benefit-icon-wrap">
+                  {%- if block.settings.custom_image != blank -%}
+                    {{ block.settings.custom_image | image_url: width: 60 | image_tag: class: 'trust-benefit-custom-img', loading: 'lazy' }}
+                  {%- elsif block.settings.custom_svg != blank -%}
+                    <div class="trust-benefit-custom-svg">
+                      {{ block.settings.custom_svg }}
+                    </div>
+                  {%- else -%}
+                    {%- case block.settings.icon -%}
+                      {%- when 'support' -%}
+                        <svg viewBox="0 0 24 24" class="trust-benefit-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+                          <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/>
+                          <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+                        </svg>
+                      {%- when 'secure_payment' -%}
+                        <svg viewBox="0 0 24 24" class="trust-benefit-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                          <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                      {%- when 'free_shipping' -%}
+                        <svg viewBox="0 0 24 24" class="trust-benefit-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="1" y="3" width="15" height="13" rx="2"/>
+                          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                          <circle cx="5.5" cy="18.5" r="2.5"/>
+                          <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                      {%- when 'premium_quality' -%}
+                        <svg viewBox="0 0 24 24" class="trust-benefit-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="8" r="6"/>
+                          <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+                        </svg>
+                      {%- when 'returns' -%}
+                        <svg viewBox="0 0 24 24" class="trust-benefit-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+                          <path d="M21 3v5h-5"/>
+                          <path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+                          <path d="M3 21v-5h5"/>
+                        </svg>
+                      {%- when 'clock' -%}
+                        <svg viewBox="0 0 24 24" class="trust-benefit-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"/>
+                          <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                      {%- else -%}
+                        <svg viewBox="0 0 24 24" class="trust-benefit-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"/>
+                          <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                    {%- endcase -%}
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.title != blank -%}
+                  <span class="trust-benefit-title">{{ block.settings.title | escape }}</span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .custom-trust-outer {
+    width: 100%;
+    background: transparent !important;
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-bottom);
+    box-sizing: border-box;
+  }
+
+  .custom-trust-container {
+    background: var(--outer-bg-color, #ffffff);
+    border-radius: var(--container-radius, 24px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    padding: 16px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .trust-benefits-card {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-radius: calc(var(--container-radius) - 4px);
+    padding: 28px 24px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .trust-benefits-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+
+  .trust-benefits-title {
+    margin: 0;
+    font-family: var(--font-heading-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: inherit;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .trust-benefits-line {
+    flex: 1;
+    height: 1px;
+    background-color: var(--border-color);
+    opacity: 0.6;
+  }
+
+  .trust-benefits-grid {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .trust-benefit-item {
+    flex: 1 1 0%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding: 0 8px;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .trust-benefit-item:not(:nth-child(4n))::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 5%;
+    height: 90%;
+    width: 1px;
+    background-color: var(--border-color);
+    opacity: 0.4;
+  }
+
+  .trust-benefit-icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1.2px solid var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+
+  .trust-benefit-item:hover .trust-benefit-icon-wrap {
+    transform: scale(1.06);
+  }
+
+  .trust-benefit-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--text-color);
+  }
+
+  .trust-benefit-custom-img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .trust-benefit-custom-svg {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+  }
+
+  .trust-benefit-custom-svg svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .trust-benefit-title {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: inherit;
+    display: block;
+    word-break: break-word;
+  }
+
+  @media screen and (min-width: 750px) {
+    .custom-trust-container {
+      padding: 20px;
+    }
+
+    .trust-benefits-card {
+      padding: 32px 36px;
+    }
+
+    .trust-benefits-header {
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .trust-benefits-title {
+      font-size: 13px;
+      letter-spacing: 0.15em;
+    }
+
+    .trust-benefit-icon-wrap {
+      width: 58px;
+      height: 58px;
+      margin-bottom: 12px;
+    }
+
+    .trust-benefit-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .trust-benefit-title {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .custom-trust-container {
+      padding: 10px;
+    }
+
+    .trust-benefits-card {
+      padding: 20px 10px;
+    }
+
+    .trust-benefit-item {
+      padding: 0 4px;
+    }
+
+    .trust-benefit-icon-wrap {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 8px;
+    }
+
+    .trust-benefit-icon {
+      width: 19px;
+      height: 19px;
+    }
+
+    .trust-benefit-title {
+      font-size: 9.5px;
+      letter-spacing: 0;
+    }
+
+    .trust-benefits-title {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Trust & Benefits Section",
+  "tag": "section",
+  "class": "section-trust-benefits",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "CRAFTED FOR COMFORT. BUILT TO LAST."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_lines",
+      "label": "Show side divider lines",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "outer_bg_color",
+      "label": "Container Outer Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Card Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text & Icon Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border & Line Color",
+      "default": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "type": "range",
+      "id": "container_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Container Corner Radius",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_item",
+      "name": "Benefit Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "support",
+              "label": "24/7 Support (Headset)"
+            },
+            {
+              "value": "secure_payment",
+              "label": "Secure Payments (Shield)"
+            },
+            {
+              "value": "free_shipping",
+              "label": "Free Shipping (Truck)"
+            },
+            {
+              "value": "premium_quality",
+              "label": "Premium Quality (Ribbon)"
+            },
+            {
+              "value": "returns",
+              "label": "Easy Returns (Refresh)"
+            },
+            {
+              "value": "clock",
+              "label": "Fast Delivery (Clock)"
+            }
+          ],
+          "default": "support"
+        },
+        {
+          "type": "html",
+          "id": "custom_svg",
+          "label": "Custom SVG Code (Optional)",
+          "info": "Paste custom SVG HTML code to override standard preset icon."
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Icon Image (Optional)",
+          "info": "Upload an icon image to override preset/SVG."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "24/7 Support"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust & Benefits Section",
+      "settings": {
+        "heading": "CRAFTED FOR COMFORT. BUILT TO LAST."
+      },
+      "blocks": [
+        {
+          "type": "benefit_item",
+          "settings": {
+            "icon": "support",
+            "title": "24/7 Support"
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "icon": "secure_payment",
+            "title": "Secure Payments"
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "icon": "free_shipping",
+            "title": "Free Shipping"
+          }
+        },
+        {
+          "type": "benefit_item",
+          "settings": {
+            "icon": "premium_quality",
+            "title": "Premium Quality"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
