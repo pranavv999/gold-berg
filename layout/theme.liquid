@@ -440,5 +440,45 @@
     {%- endif -%}
 
     {% render 'custom-search-modal' %}
+
+    <!-- Lenis Smooth Inertial Scroll -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.9/dist/lenis.css">
+    <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js" defer="defer"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Only initialize Lenis on desktop devices with mouse wheel (width >= 992px)
+        if (window.innerWidth >= 992 && !('ontouchstart' in window)) {
+          const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            touchMultiplier: 2,
+            infinite: false,
+          });
+
+          function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+          }
+          requestAnimationFrame(raf);
+
+          window.lenis = lenis;
+
+          // Pause Lenis when drawers or modals are open so background scrolling doesn't conflict
+          const observer = new MutationObserver(function () {
+            const hasOpenDrawer = document.querySelector('cart-drawer.active, menu-drawer[open], details[open].menu-drawer, body.overflow-hidden');
+            if (hasOpenDrawer) {
+              lenis.stop();
+            } else {
+              lenis.start();
+            }
+          });
+          observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class', 'open'] });
+        }
+      });
+    </script>
   </body>
 </html>
