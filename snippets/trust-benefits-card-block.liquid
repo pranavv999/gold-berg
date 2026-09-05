@@ -81,42 +81,98 @@
             {%- else -%}
               {%- case icon_val -%}
                 {%- when 'support' -%}
-                  <svg viewBox="0 0 24 24" class="tb-card-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="tb-card-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
                     <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/>
                     <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
                   </svg>
                 {%- when 'secure_payment' -%}
-                  <svg viewBox="0 0 24 24" class="tb-card-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="tb-card-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     <path d="m9 12 2 2 4-4"/>
                   </svg>
                 {%- when 'free_shipping' -%}
-                  <svg viewBox="0 0 24 24" class="tb-card-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="tb-card-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <rect x="1" y="3" width="15" height="13" rx="2"/>
                     <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
                     <circle cx="5.5" cy="18.5" r="2.5"/>
                     <circle cx="18.5" cy="18.5" r="2.5"/>
                   </svg>
                 {%- when 'premium_quality' -%}
-                  <svg viewBox="0 0 24 24" class="tb-card-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="tb-card-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <circle cx="12" cy="8" r="6"/>
                     <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
                   </svg>
                 {%- when 'returns' -%}
-                  <svg viewBox="0 0 24 24" class="tb-card-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="tb-card-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
                     <path d="M21 3v5h-5"/>
                     <path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
                     <path d="M3 21v-5h5"/>
                   </svg>
                 {%- when 'clock' -%}
-                  <svg viewBox="0 0 24 24" class="tb-card-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="tb-card-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <circle cx="12" cy="12" r="10"/>
                     <polyline points="12 6 12 12 16 14"/>
                   </svg>
                 {%- else -%}
-                  <svg viewBox="0 0 24 24" class="tb-card-icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="tb-card-icon"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
                     <circle cx="12" cy="12" r="10"/>
                     <path d="m9 12 2 2 4-4"/>
                   </svg>
@@ -138,7 +194,7 @@
     color: var(--card-color, #ffffff);
     border-radius: var(--container-radius, 24px);
     padding: var(--padding-v, 20px) var(--padding-h, 20px);
-    margin-top: 16px;
+    margin-top: 0 !important;
     box-sizing: border-box;
     width: 100%;
   }
@@ -255,6 +311,7 @@
 
   @media screen and (max-width: 480px) {
     .trust-benefits-column-card {
+      margin-top: 0 !important;
       padding: 16px 8px;
     }
     .tb-card-grid {
