@@ -4052,3 +4052,34 @@ div[class*="privacy-banner"] {
     letter-spacing: 0.3px;
   }
 }
+
+/* ============================================================
+   GLOBAL SCROLL OPTIMIZATIONS & HARDWARE ACCELERATION
+   ============================================================ */
+
+/* 1. Smooth Native Anchor Scrolling (Accessibility Compliant) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* 2. Drawer Overscroll Containment (Prevents body scroll bleed when scrolling inside drawers) */
+.cart-drawer,
+.cart-drawer__items,
+.mobile-facets__inner,
+.menu-drawer,
+.menu-drawer__navigation {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 3. GPU Hardware Acceleration for Sticky Header & Floating UI Elements */
+.header-wrapper,
+.header-wrapper--sticky,
+.sticky-header,
+.custom-header-wrapper {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
