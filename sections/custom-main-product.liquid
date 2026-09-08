@@ -336,6 +336,7 @@
     width: min(92vw, 520px) !important;
     min-width: min(92vw, 520px) !important;
     max-width: 520px !important;
+    height: auto !important;
     max-height: 72vh !important;
     max-height: 72dvh !important;
     border-radius: 20px !important;
@@ -349,7 +350,19 @@
     box-sizing: border-box !important;
     overflow-y: auto !important;
     overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
     margin: 0 !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  .smartsize-modal::-webkit-scrollbar,
+  .smartsize-popup::-webkit-scrollbar,
+  div[class*='smartsize-modal']::-webkit-scrollbar,
+  div[class*='smartsize-popup']::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
 
   /* Mobile Adjustments for iPhone & Touchscreen Devices */
@@ -362,6 +375,7 @@
       width: 88vw !important;
       min-width: 88vw !important;
       max-width: 88vw !important;
+      height: auto !important;
       max-height: 68vh !important;
       max-height: 68dvh !important;
       top: 50% !important;
@@ -438,15 +452,37 @@
     color: #000000 !important;
   }
 
-  /* Full Width Image & Table Sizing inside popup */
+  /* Fluid Shrinking Content: Table, Typography & Images inside popup */
   [class*='smartsize'] table,
   .smartsize-modal table,
   .smartsize-popup table {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 auto !important;
-    table-layout: auto !important;
+    table-layout: fixed !important;
     border-collapse: collapse !important;
+  }
+
+  [class*='smartsize'] th,
+  [class*='smartsize'] td,
+  .smartsize-modal th,
+  .smartsize-modal td,
+  .smartsize-popup th,
+  .smartsize-popup td {
+    padding: clamp(4px, 1vh, 10px) clamp(2px, 0.8vw, 8px) !important;
+    font-size: clamp(9px, 1.8vw, 13px) !important;
+    text-align: center !important;
+    word-break: break-word !important;
+  }
+
+  [class*='smartsize'] h1,
+  [class*='smartsize'] h2,
+  [class*='smartsize'] h3,
+  .smartsize-modal h1,
+  .smartsize-modal h2,
+  .smartsize-modal h3 {
+    font-size: clamp(12px, 2.5vw, 18px) !important;
+    margin: 0 0 clamp(6px, 1.2vh, 14px) 0 !important;
   }
 
   [class*='smartsize'] img,
@@ -454,6 +490,8 @@
   .smartsize-popup img {
     width: 100% !important;
     max-width: 100% !important;
+    max-height: 42vh !important;
+    object-fit: contain !important;
     height: auto !important;
     display: block !important;
     margin: 0 auto !important;
