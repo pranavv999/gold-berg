@@ -17,8 +17,8 @@
   }
 </style>
 
-<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
-  <div id="CartDrawer" class="cart-drawer">
+<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}" data-lenis-prevent>
+  <div id="CartDrawer" class="cart-drawer" data-lenis-prevent>
     <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
     <div
       class="drawer__inner gradient color-{{ settings.cart_color_scheme }}"
@@ -26,6 +26,7 @@
       aria-modal="true"
       aria-label="{{ 'sections.cart.title' | t }}"
       tabindex="-1"
+      data-lenis-prevent
     >
       <div class="drawer__header">
         <div class="drawer__header-left">
@@ -75,6 +76,7 @@
         </div>
       {%- endif -%}
       <cart-drawer-items
+        data-lenis-prevent
         view-event-payload="{{ cart | standard_event_data: 'view', context: 'dialog' | escape }}"
         view-event-trigger="manual"
         {% if cart == empty %}
