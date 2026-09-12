@@ -1,27 +1,91 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "custom-main-product",
       "blocks": {
+        "product_video_naRtPr": {
+          "type": "product_video",
+          "settings": {
+            "label": "EXPERIMENTAL REFERENCE",
+            "video": "shopify://files/videos/SaveClip.App_AQNitYRB8t5us1TaS4u2garVBAB6Z-_4dbKriSGgZmNqB-jsfKiC-zzwZIU-TPP_w-sEdT1K4wn7f3pZpcw_y9egPnVXqv5q5J9_p_A.mp4",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/vijay_10.webp",
+            "show_on_all": true,
+            "target_products": []
+          }
+        },
+        "available_offers_P6yEz7": {
+          "type": "available_offers",
+          "settings": {
+            "show_on_all": true,
+            "target_products": [],
+            "heading": "AVAILABLE OFFERS",
+            "offer_1_enable": true,
+            "offer_1_text": "Buy 1 product & get 10% off",
+            "offer_1_badge": "PREPAID ONLY",
+            "offer_1_code": "⚡ Auto Applied",
+            "offer_2_enable": true,
+            "offer_2_text": "Buy 2 or more & get 15% off",
+            "offer_2_badge": "PREPAID ONLY",
+            "offer_2_code": "⚡ Auto Applied",
+            "heading_font_size": 10,
+            "heading_color": "#111111",
+            "title_font_size": 10,
+            "title_color": "#111111",
+            "card_bg": "#fafafa",
+            "card_border_color": "#e5e5e5",
+            "card_accent_color": "#111111",
+            "badge_bg": "#f2f2f2",
+            "badge_text_color": "#555555",
+            "code_text_color": "#16a34a",
+            "margin_top": 14,
+            "margin_bottom": 14
+          }
+        },
+        "smartsize_app_block_wzCtaW": {
+          "type": "shopify://apps/smartsize/blocks/app-block/465a43e0-6a1a-4d30-b82e-fe6118568705",
+          "settings": {}
+        },
         "accordion_details": {
           "type": "accordion_row",
           "settings": {
             "heading": "Details & Description",
-            "show_description": true
+            "content": "",
+            "page": "",
+            "show_description": true,
+            "show_on_all": true,
+            "target_products": []
           }
         },
         "accordion_washcare": {
           "type": "accordion_row",
           "settings": {
             "heading": "Washcare",
-            "content": "<p>Washcare Instructions:</p><ul><li>Reverse wash only</li><li>Do not iron on the print</li><li>Steam iron recommended</li><li>Dry in shade</li></ul>"
+            "content": "<p>Washcare Instructions:</p><ul><li>Reverse wash only</li><li>Do not iron on the print</li><li>Steam iron recommended</li><li>Dry in shade</li></ul>",
+            "page": "",
+            "show_description": false,
+            "show_on_all": true,
+            "target_products": []
           }
         },
         "accordion_shipping": {
           "type": "accordion_row",
           "settings": {
             "heading": "Shipping",
-            "content": "<p>Shipping & Delivery Details:</p><ul><li>Standard delivery: 3-5 business days</li><li>Free shipping on orders over RS. 4,999</li><li>Easy 7-day hassle-free returns</li><li>Cash on delivery available</li></ul>"
+            "content": "<p>Shipping & Delivery Details:</p><ul><li>Standard delivery: 3-5 business days</li><li>Free shipping on orders over RS. 4,999</li><li>Easy 7-day hassle-free returns</li><li>Cash on delivery available</li></ul>",
+            "page": "",
+            "show_description": false,
+            "show_on_all": true,
+            "target_products": []
           }
         },
         "trust_benefits_card": {
@@ -35,16 +99,23 @@
             "card_padding_horizontal": 20,
             "item_1_icon": "support",
             "item_1_title": "24/7 Support",
+            "item_1_custom_svg": "",
             "item_2_icon": "secure_payment",
             "item_2_title": "Secure Payments",
+            "item_2_custom_svg": "",
             "item_3_icon": "free_shipping",
             "item_3_title": "Free Shipping",
+            "item_3_custom_svg": "",
             "item_4_icon": "premium_quality",
-            "item_4_title": "Premium Quality"
+            "item_4_title": "Premium Quality",
+            "item_4_custom_svg": ""
           }
         }
       },
       "block_order": [
+        "product_video_naRtPr",
+        "available_offers_P6yEz7",
+        "smartsize_app_block_wzCtaW",
         "accordion_details",
         "accordion_washcare",
         "accordion_shipping",
@@ -58,9 +129,13 @@
       "type": "custom-collection-row",
       "settings": {
         "title": "PEOPLE ALSO BUY",
+        "collection": "",
         "product_source": "related_products",
+        "button_label": "Discover more",
         "hide_discover_more": true,
-        "container_radius": 24
+        "container_radius": 24,
+        "show_on_all": false,
+        "target_products": []
       }
     }
   },
