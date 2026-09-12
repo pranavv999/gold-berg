@@ -17,7 +17,7 @@
         "color_scheme": "scheme-1",
         "logo_width": 200,
         "glass_opacity": 60,
-        "scrolled_effect": false,
+        "scrolled_effect": true,
         "glass_radius": 16,
         "menu": "main-menu-test"
       }
