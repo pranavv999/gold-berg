@@ -797,13 +797,39 @@ a.active-facets__button.focused .active-facets__button-inner {
 
 .mobile-facets__header {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
-  padding: calc(1rem + env(safe-area-inset-top, 0px)) 2.5rem 1rem 2.5rem;
+  padding: calc(1rem + env(safe-area-inset-top, 0px)) 5rem 1rem 2.5rem;
   text-align: center;
   display: flex;
   position: sticky;
   top: 0;
   z-index: 2;
   background-color: rgb(var(--color-background));
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-facets__close-button-header {
+  position: absolute;
+  right: 1.2rem;
+  top: calc(50% + env(safe-area-inset-top, 0px) / 2);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgb(var(--color-foreground));
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.mobile-facets__close-button-header:hover,
+.mobile-facets__close-button-header:focus {
+  background-color: rgba(var(--color-foreground), 0.08);
 }
 
 .mobile-facets__header-inner {
