@@ -1009,6 +1009,18 @@
         wrapper.classList.remove('mega-menu-open');
       }
 
+      // Allow real anchor links to navigate
+      var link = e.target.closest('a');
+      if (link) {
+        var href = link.getAttribute('href');
+        if (href && href !== '#' && href !== 'javascript:void(0);' && href.trim() !== '') {
+          if (wrapper.classList.contains('mega-menu-open')) {
+            wrapper.classList.remove('mega-menu-open');
+          }
+          return;
+        }
+      }
+
       var subHeader = e.target.closest('.mega-menu-sub-header');
       if (subHeader && window.innerWidth < 750) {
         e.preventDefault();
