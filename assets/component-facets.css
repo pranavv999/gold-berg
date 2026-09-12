@@ -748,8 +748,10 @@ a.active-facets__button.focused .active-facets__button-inner {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 100;
-  background-color: rgba(var(--color-foreground), 0.5);
+  z-index: 10000000;
+  background: rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
   pointer-events: none;
 }
 
@@ -764,11 +766,15 @@ a.active-facets__button.focused .active-facets__button-inner {
 
 .mobile-facets__wrapper .disclosure-has-popup[open]>summary::before {
   height: 100vh;
-  z-index: 3;
+  z-index: 10000000;
 }
 
 .mobile-facets__inner {
-  background-color: rgb(var(--color-background));
+  background: rgba(var(--color-background), var(--glass-opacity, 0.85)) !important;
+  backdrop-filter: blur(20px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(190%) !important;
+  border-left: 1px solid rgba(var(--color-foreground), 0.12) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25) !important;
   width: calc(100% - 5rem);
   margin-left: auto;
   height: 100%;
@@ -778,10 +784,6 @@ a.active-facets__button.focused .active-facets__button-inner {
   max-width: 37.5rem;
   display: flex;
   flex-direction: column;
-  border-color: rgba(var(--color-foreground), var(--drawer-border-opacity));
-  border-style: solid;
-  border-width: 0 0 0 var(--drawer-border-width);
-  filter: drop-shadow(var(--drawer-shadow-horizontal-offset) var(--drawer-shadow-vertical-offset) var(--drawer-shadow-blur-radius) rgba(var(--color-shadow), var(--drawer-shadow-opacity)));
 }
 
 .menu-opening .mobile-facets__inner {
@@ -794,12 +796,41 @@ a.active-facets__button.focused .active-facets__button-inner {
 
 .mobile-facets__header {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
-  padding: 1rem 2.5rem;
+  padding: calc(1rem + env(safe-area-inset-top, 0px)) 5rem 1rem 2.5rem;
   text-align: center;
   display: flex;
   position: sticky;
   top: 0;
   z-index: 2;
+  background: transparent !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-facets__close-button-header {
+  position: absolute;
+  right: 1.2rem;
+  top: calc(50% + env(safe-area-inset-top, 0px) / 2);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgb(var(--color-foreground));
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.mobile-facets__close-button-header:hover,
+.mobile-facets__close-button-header:focus {
+  background-color: rgba(var(--color-foreground), 0.08);
 }
 
 .mobile-facets__header-inner {
