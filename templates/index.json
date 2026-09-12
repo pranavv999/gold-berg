@@ -63,6 +63,75 @@
         "target_products": []
       }
     },
+    "custom_collection_row_D38Wef": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "manga-archives",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
+    "featured_collection_grid_banners": {
+      "type": "featured-collection-grid-banners",
+      "blocks": {
+        "banner_ncFmcX": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/5fw.webp",
+            "collection": "barrel-denim",
+            "url": "",
+            "show_overlay": true,
+            "title": ""
+          }
+        },
+        "banner_7n4jCW": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/34.5_1.webp",
+            "collection": "embroided-sweatpants",
+            "url": "",
+            "show_overlay": true,
+            "title": ""
+          }
+        },
+        "banner_6BrqYm": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/2fw.webp",
+            "collection": "elemental-beasts-collection",
+            "url": "",
+            "show_overlay": true,
+            "title": ""
+          }
+        },
+        "banner_fWfeKW": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/3_dba3f996-40ed-40c1-bf2c-e243f9c5a3ff.webp",
+            "collection": "arcline-co-ord-set",
+            "url": "",
+            "show_overlay": true,
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "banner_ncFmcX",
+        "banner_7n4jCW",
+        "banner_6BrqYm",
+        "banner_fWfeKW"
+      ],
+      "settings": {
+        "title": "",
+        "show_overlay": true
+      }
+    },
     "image_slider_centered": {
       "type": "image-slider-centered",
       "settings": {
@@ -75,13 +144,6 @@
         "adapt_height": true,
         "image_fit": "cover",
         "container_radius": 24
-      }
-    },
-    "featured_collection_grid_banners": {
-      "type": "featured-collection-grid-banners",
-      "settings": {
-        "title": "",
-        "show_overlay": true
       }
     },
     "fullwidth_image_slider": {
@@ -109,8 +171,9 @@
   "order": [
     "image_banner",
     "custom_collection_row",
-    "image_slider_centered",
+    "custom_collection_row_D38Wef",
     "featured_collection_grid_banners",
+    "image_slider_centered",
     "fullwidth_image_slider",
     "instagram_reels_carousel"
   ]
