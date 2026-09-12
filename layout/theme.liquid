@@ -11,8 +11,12 @@
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
 
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.shopify.com">
+
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+      <link rel="dns-prefetch" href="https://fonts.shopifycdn.com">
     {%- endunless -%}
 
     <title>
@@ -441,9 +445,9 @@
 
     {% render 'custom-search-modal' %}
 
-    <!-- Lenis Smooth Inertial Scroll -->
-    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.9/dist/lenis.css">
-    <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js" defer="defer"></script>
+    <!-- Lenis Smooth Inertial Scroll (Hosted locally on Shopify CDN) -->
+    {{ 'lenis.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'lenis.min.js' | asset_url }}" defer="defer"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         // Only initialize Lenis on desktop devices with mouse wheel (width >= 992px)
