@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "image_banner": {
@@ -18,7 +27,7 @@
             "button_style_secondary_1": true,
             "button_label_2": "",
             "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_font_size": 15
           }
         }
       },
@@ -27,15 +36,17 @@
         "button"
       ],
       "settings": {
+        "image": "shopify://shop_images/orange_test.webp",
+        "mobile_image": "shopify://shop_images/orange_test_mobile.webp",
         "image_overlay_opacity": 40,
         "image_height": "extra-large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
         "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
         "desktop_content_alignment": "center",
+        "show_text_box": false,
         "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
         "show_text_below": false
       }
     },
@@ -43,12 +54,158 @@
       "type": "custom-collection-row",
       "settings": {
         "title": "",
-        "collection": "all",
-        "container_radius": 24
+        "collection": "all-products-2",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
+    "custom_collection_row_D38Wef": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "manga-archives",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
+    "featured_collection_grid_banners": {
+      "type": "featured-collection-grid-banners",
+      "blocks": {
+        "banner_ncFmcX": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/5fw.webp",
+            "collection": "barrel-denim",
+            "url": "",
+            "show_overlay": true,
+            "title": ""
+          }
+        },
+        "banner_7n4jCW": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/34.5_1.webp",
+            "collection": "embroided-sweatpants",
+            "url": "",
+            "show_overlay": true,
+            "title": ""
+          }
+        },
+        "banner_6BrqYm": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/2fw.webp",
+            "collection": "elemental-beasts-collection",
+            "url": "",
+            "show_overlay": true,
+            "title": ""
+          }
+        },
+        "banner_fWfeKW": {
+          "type": "banner",
+          "settings": {
+            "image": "shopify://shop_images/3_dba3f996-40ed-40c1-bf2c-e243f9c5a3ff.webp",
+            "collection": "arcline-co-ord-set",
+            "url": "",
+            "show_overlay": true,
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "banner_ncFmcX",
+        "banner_7n4jCW",
+        "banner_6BrqYm",
+        "banner_fWfeKW"
+      ],
+      "settings": {
+        "title": "",
+        "show_overlay": true
+      }
+    },
+    "custom_collection_row_xLT9GA": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "bloomline-essentials",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
       }
     },
     "image_slider_centered": {
       "type": "image-slider-centered",
+      "blocks": {
+        "slide_gBbhTT": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_15.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_kcDC8V": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_10.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_UNiHhf": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_03.jpg",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_Dwx8fQ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_14.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_fYmYwL": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_11.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_HqC4U4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_13.webp",
+            "link": "",
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_gBbhTT",
+        "slide_kcDC8V",
+        "slide_UNiHhf",
+        "slide_Dwx8fQ",
+        "slide_fYmYwL",
+        "slide_HqC4U4"
+      ],
       "settings": {
         "heading": "AS SEEN ON",
         "autoplay": true,
@@ -57,11 +214,26 @@
         "show_dots": false,
         "aria_label": "Image slider carousel",
         "adapt_height": true,
-        "image_fit": "cover"
+        "image_fit": "cover",
+        "container_radius": 12
       }
     },
     "fullwidth_image_slider": {
       "type": "image-slider-fullwidth",
+      "blocks": {
+        "slide_czW8Fj": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/desktop_banner.png",
+            "image_mobile": "shopify://shop_images/mobile_banner.jpg",
+            "link": "shopify://products/karma",
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_czW8Fj"
+      ],
       "settings": {
         "autoplay": true,
         "autoplay_interval": 5000,
@@ -71,29 +243,108 @@
         "image_fit": "cover"
       }
     },
+    "custom_collection_row_a9h3j7": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "elemental-beasts-collection",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
     "instagram_reels_carousel": {
       "type": "instagram-reels-carousel",
+      "blocks": {
+        "reel_4X6BWP": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/SaveClip.App_AQNitYRB8t5us1TaS4u2garVBAB6Z-_4dbKriSGgZmNqB-jsfKiC-zzwZIU-TPP_w-sEdT1K4wn7f3pZpcw_y9egPnVXqv5q5J9_p_A.mp4",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/4_83fff02e-bf4f-499b-98e5-672efa55b277.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_iQ6nbk": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Z6_V3.mp4",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/4_83fff02e-bf4f-499b-98e5-672efa55b277.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_RAEcjr": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/IMG_0282.mov",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/4_83fff02e-bf4f-499b-98e5-672efa55b277.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_fG8nfq": {
+          "type": "reel",
+          "settings": {
+            "video_url": "",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_gjULT7": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/IMG_8531.mp4",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/4_83fff02e-bf4f-499b-98e5-672efa55b277.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_qTEfCD": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/IMG_1401.mp4",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/4_83fff02e-bf4f-499b-98e5-672efa55b277.webp",
+            "link": "",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "reel_4X6BWP",
+        "reel_iQ6nbk",
+        "reel_RAEcjr",
+        "reel_fG8nfq",
+        "reel_gjULT7",
+        "reel_qTEfCD"
+      ],
       "settings": {
         "heading": "INSTAGRAM REELS",
         "autoplay": true,
-        "autoplay_interval": 5000,
+        "autoplay_interval": 6500,
         "show_arrows": false,
-        "container_radius": 24
-      }
-    },
-    "featured_collection_grid_banners": {
-      "type": "featured-collection-grid-banners",
-      "settings": {
-        "title": ""
+        "container_radius": 12
       }
     }
   },
   "order": [
     "image_banner",
     "custom_collection_row",
-    "image_slider_centered",
+    "custom_collection_row_D38Wef",
     "featured_collection_grid_banners",
+    "custom_collection_row_xLT9GA",
+    "image_slider_centered",
     "fullwidth_image_slider",
+    "custom_collection_row_a9h3j7",
     "instagram_reels_carousel"
   ]
 }
