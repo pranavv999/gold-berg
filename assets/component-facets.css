@@ -748,7 +748,7 @@ a.active-facets__button.focused .active-facets__button-inner {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 100;
+  z-index: 10000000;
   background-color: rgba(var(--color-foreground), 0.5);
   pointer-events: none;
 }
@@ -764,7 +764,7 @@ a.active-facets__button.focused .active-facets__button-inner {
 
 .mobile-facets__wrapper .disclosure-has-popup[open] > summary::before {
   height: 100vh;
-  z-index: 3;
+  z-index: 10000000;
 }
 
 .mobile-facets__inner {
@@ -797,12 +797,13 @@ a.active-facets__button.focused .active-facets__button-inner {
 
 .mobile-facets__header {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
-  padding: 1rem 2.5rem;
+  padding: calc(1rem + env(safe-area-inset-top, 0px)) 2.5rem 1rem 2.5rem;
   text-align: center;
   display: flex;
   position: sticky;
   top: 0;
   z-index: 2;
+  background-color: rgb(var(--color-background));
 }
 
 .mobile-facets__header-inner {
@@ -876,11 +877,11 @@ a.active-facets__button.focused .active-facets__button-inner {
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: 0.7rem;
+  top: calc(0.7rem + env(safe-area-inset-top, 0px));
   right: 1rem;
   width: 4.4rem;
   height: 4.4rem;
-  z-index: 101;
+  z-index: 10000002;
   opacity: 0;
   transition: opacity var(--duration-short) ease;
 }
@@ -1050,7 +1051,7 @@ input.mobile-facets__checkbox {
 
 .mobile-facets__footer {
   border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
-  padding: 2rem;
+  padding: 2rem 2rem calc(2rem + env(safe-area-inset-bottom, 0px)) 2rem;
   bottom: 0;
   position: sticky;
   display: flex;
