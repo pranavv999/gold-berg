@@ -220,6 +220,20 @@
     },
     "fullwidth_image_slider": {
       "type": "image-slider-fullwidth",
+      "blocks": {
+        "slide_czW8Fj": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/desktop_banner.png",
+            "image_mobile": "shopify://shop_images/mobile_banner.jpg",
+            "link": "shopify://products/karma",
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_czW8Fj"
+      ],
       "settings": {
         "autoplay": true,
         "autoplay_interval": 5000,
