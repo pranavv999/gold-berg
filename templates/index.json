@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "image_banner": {
@@ -18,7 +27,7 @@
             "button_style_secondary_1": true,
             "button_label_2": "",
             "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_font_size": 15
           }
         }
       },
@@ -27,15 +36,17 @@
         "button"
       ],
       "settings": {
+        "image": "shopify://shop_images/orange_test.webp",
+        "mobile_image": "shopify://shop_images/orange_test_mobile.webp",
         "image_overlay_opacity": 40,
         "image_height": "extra-large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
         "image_behavior": "none",
+        "desktop_content_position": "bottom-center",
         "desktop_content_alignment": "center",
+        "show_text_box": false,
         "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
+        "mobile_content_alignment": "center",
         "show_text_below": false
       }
     },
@@ -44,7 +55,12 @@
       "settings": {
         "title": "",
         "collection": "all",
-        "container_radius": 24
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 24,
+        "show_on_all": false,
+        "target_products": []
       }
     },
     "image_slider_centered": {
@@ -57,7 +73,15 @@
         "show_dots": false,
         "aria_label": "Image slider carousel",
         "adapt_height": true,
-        "image_fit": "cover"
+        "image_fit": "cover",
+        "container_radius": 24
+      }
+    },
+    "featured_collection_grid_banners": {
+      "type": "featured-collection-grid-banners",
+      "settings": {
+        "title": "",
+        "show_overlay": true
       }
     },
     "fullwidth_image_slider": {
@@ -79,12 +103,6 @@
         "autoplay_interval": 5000,
         "show_arrows": false,
         "container_radius": 24
-      }
-    },
-    "featured_collection_grid_banners": {
-      "type": "featured-collection-grid-banners",
-      "settings": {
-        "title": ""
       }
     }
   },
