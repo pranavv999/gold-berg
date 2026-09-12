@@ -446,7 +446,7 @@
 
   @media screen and (max-width: 749px) {
     .custom-glass-header-wrapper.mega-menu-open .custom-mega-menu-panel {
-      max-height: calc(100dvh - 70px - 1.5rem) !important;
+      max-height: min(80vh, calc(100dvh - 80px - env(safe-area-inset-bottom, 16px))) !important;
     }
   }
 
@@ -597,7 +597,7 @@
   /* Mobile Layout Adjustment & Accordion (max-width: 749px) */
   @media screen and (max-width: 749px) {
     .custom-mega-menu-inner {
-      padding: 24px 20px !important;
+      padding: 24px 20px calc(32px + env(safe-area-inset-bottom, 0px)) 20px !important;
     }
 
     .custom-mega-menu-grid {

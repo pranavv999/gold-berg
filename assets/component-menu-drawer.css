@@ -46,7 +46,7 @@ menu-drawer>details[open]>summary::before {
 
 @media screen and (max-width: 749px) {
   .js .menu-drawer {
-    height: calc(var(--viewport-height, 100dvh) - (var(--header-bottom-position, 100%)) - 1.5rem);
+    height: min(80vh, calc(var(--viewport-height, 100dvh) - (var(--header-bottom-position, 100%)) - 1.5rem - env(safe-area-inset-bottom, 0px)));
   }
 }
 
