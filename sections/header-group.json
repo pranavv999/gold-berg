@@ -16,7 +16,7 @@
       "settings": {
         "color_scheme": "scheme-1",
         "logo_width": 200,
-        "glass_opacity": 60,
+        "glass_opacity": 100,
         "scrolled_effect": true,
         "glass_radius": 16,
         "menu": "main-menu-test"
