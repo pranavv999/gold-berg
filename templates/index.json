@@ -215,7 +215,7 @@
         "aria_label": "Image slider carousel",
         "adapt_height": true,
         "image_fit": "cover",
-        "container_radius": 24
+        "container_radius": 12
       }
     },
     "fullwidth_image_slider": {
