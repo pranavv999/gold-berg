@@ -243,6 +243,20 @@
         "image_fit": "cover"
       }
     },
+    "custom_collection_row_a9h3j7": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "elemental-beasts-collection",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
     "instagram_reels_carousel": {
       "type": "instagram-reels-carousel",
       "blocks": {
@@ -316,23 +330,9 @@
       "settings": {
         "heading": "INSTAGRAM REELS",
         "autoplay": true,
-        "autoplay_interval": 5000,
+        "autoplay_interval": 6500,
         "show_arrows": false,
-        "container_radius": 24
-      }
-    },
-    "custom_collection_row_a9h3j7": {
-      "type": "custom-collection-row",
-      "name": "Custom Collection Row",
-      "settings": {
-        "title": "",
-        "collection": "elemental-beasts-collection",
-        "product_source": "collection",
-        "button_label": "Discover more",
-        "hide_discover_more": false,
-        "container_radius": 12,
-        "show_on_all": false,
-        "target_products": []
+        "container_radius": 12
       }
     }
   },
@@ -344,7 +344,7 @@
     "custom_collection_row_xLT9GA",
     "image_slider_centered",
     "fullwidth_image_slider",
-    "instagram_reels_carousel",
-    "custom_collection_row_a9h3j7"
+    "custom_collection_row_a9h3j7",
+    "instagram_reels_carousel"
   ]
 }
