@@ -327,18 +327,21 @@
   }
 
   /* Main SmartSize Outer Dialog Card */
+  /* SmartSize Responsive Modal Container */
   .smartsize-modal,
   .smartsize-popup,
   div[class*='smartsize-modal-wrapper'],
   div[class*='smartsize-popup'],
-  div[class*='smartsize-modal'] {
+  div[class*='smartsize-modal'],
+  #smartsize-dialog .MuiDialog-paper,
+  div[class*='smartsize'] .MuiDialog-paper {
     z-index: 2147483647 !important;
-    width: min(92vw, 520px) !important;
-    min-width: min(92vw, 520px) !important;
-    max-width: 520px !important;
+    width: min(92vw, 500px) !important;
+    min-width: min(92vw, 500px) !important;
+    max-width: 500px !important;
     height: auto !important;
-    max-height: 85vh !important;
-    max-height: 85dvh !important;
+    max-height: 65vh !important;
+    max-height: 65dvh !important;
     border-radius: 20px !important;
     background: #ffffff !important;
     background-color: #ffffff !important;
@@ -352,59 +355,45 @@
     overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
     margin: 0 !important;
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
+    padding: 36px 16px 20px 16px !important;
+    scrollbar-width: thin !important;
   }
 
   .smartsize-modal::-webkit-scrollbar,
   .smartsize-popup::-webkit-scrollbar,
   div[class*='smartsize-modal']::-webkit-scrollbar,
   div[class*='smartsize-popup']::-webkit-scrollbar {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
+    width: 4px !important;
   }
 
-  /* Mobile Adjustments for iPhone & Touchscreen Devices */
+  .smartsize-modal::-webkit-scrollbar-thumb,
+  .smartsize-popup::-webkit-scrollbar-thumb,
+  div[class*='smartsize-modal']::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 4px !important;
+  }
+
+  /* Mobile Adjustments for Touchscreen Devices */
   @media screen and (max-width: 749px) {
     .smartsize-modal,
     .smartsize-popup,
     div[class*='smartsize-modal-wrapper'],
     div[class*='smartsize-popup'],
-    div[class*='smartsize-modal'] {
+    div[class*='smartsize-modal'],
+    #smartsize-dialog .MuiDialog-paper,
+    div[class*='smartsize'] .MuiDialog-paper {
       width: 90vw !important;
       min-width: 90vw !important;
       max-width: 90vw !important;
       height: auto !important;
-      max-height: 84vh !important;
-      max-height: 84dvh !important;
+      max-height: 65vh !important;
+      max-height: 65dvh !important;
       top: 50% !important;
       left: 50% !important;
       transform: translate(-50%, -50%) !important;
-      padding: 36px 14px 18px 14px !important;
+      padding: 36px 16px 20px 16px !important;
       border-radius: 20px !important;
     }
-  }
-
-  /* Reset fixed positioning and full width on inner children */
-  div[class*='smartsize-modal'] div[class*='container'],
-  div[class*='smartsize-modal'] div[class*='content'],
-  div[class*='smartsize-modal'] div[class*='body'],
-  div[class*='smartsize-popup'] div[class*='container'],
-  div[class*='smartsize-popup'] div[class*='content'],
-  div[class*='smartsize-popup'] div[class*='body'],
-  .smartsize-modal-content,
-  .smartsize-content,
-  .smartsize-body,
-  .smartsize-container {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-shadow: none !important;
-    box-sizing: border-box !important;
   }
 
   /* SmartSize Modal Header & Close Button (Top-Right Circular Pill) */
@@ -418,15 +407,15 @@
     position: absolute !important;
     top: 12px !important;
     right: 12px !important;
-    width: 28px !important;
-    height: 28px !important;
-    min-width: 28px !important;
-    min-height: 28px !important;
-    max-width: 28px !important;
-    max-height: 28px !important;
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+    max-width: 30px !important;
+    max-height: 30px !important;
     border-radius: 50% !important;
-    background: rgba(0, 0, 0, 0.06) !important;
-    background-color: rgba(0, 0, 0, 0.06) !important;
+    background: rgba(0, 0, 0, 0.08) !important;
+    background-color: rgba(0, 0, 0, 0.08) !important;
     color: #1d1d1f !important;
     display: flex !important;
     align-items: center !important;
@@ -434,7 +423,7 @@
     padding: 0 !important;
     margin: 0 !important;
     border: none !important;
-    font-size: 14px !important;
+    font-size: 15px !important;
     line-height: 1 !important;
     cursor: pointer !important;
     z-index: 999999999 !important;
@@ -447,54 +436,9 @@
   .smartsize-modal [class*='close']:hover,
   .smartsize-popup [class*='close']:hover,
   [class*='smartsize'] button[class*='close']:hover {
-    background: rgba(0, 0, 0, 0.12) !important;
-    background-color: rgba(0, 0, 0, 0.12) !important;
+    background: rgba(0, 0, 0, 0.16) !important;
+    background-color: rgba(0, 0, 0, 0.16) !important;
     color: #000000 !important;
-  }
-
-  /* Fluid Shrinking Content: Table, Typography & Images inside popup */
-  [class*='smartsize'] table,
-  .smartsize-modal table,
-  .smartsize-popup table {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 auto !important;
-    table-layout: fixed !important;
-    border-collapse: collapse !important;
-  }
-
-  [class*='smartsize'] th,
-  [class*='smartsize'] td,
-  .smartsize-modal th,
-  .smartsize-modal td,
-  .smartsize-popup th,
-  .smartsize-popup td {
-    padding: clamp(4px, 1vh, 10px) clamp(2px, 0.8vw, 8px) !important;
-    font-size: clamp(9px, 1.8vw, 13px) !important;
-    text-align: center !important;
-    word-break: break-word !important;
-  }
-
-  [class*='smartsize'] h1,
-  [class*='smartsize'] h2,
-  [class*='smartsize'] h3,
-  .smartsize-modal h1,
-  .smartsize-modal h2,
-  .smartsize-modal h3 {
-    font-size: clamp(12px, 2.5vw, 18px) !important;
-    margin: 0 0 clamp(6px, 1.2vh, 14px) 0 !important;
-  }
-
-  [class*='smartsize'] img,
-  .smartsize-modal img,
-  .smartsize-popup img {
-    width: 100% !important;
-    max-width: 100% !important;
-    max-height: 42vh !important;
-    object-fit: contain !important;
-    height: auto !important;
-    display: block !important;
-    margin: 0 auto !important;
   }
 
   .variants-grid {
