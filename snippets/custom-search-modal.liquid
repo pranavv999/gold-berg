@@ -132,8 +132,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
     background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -141,7 +144,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding: 40px 16px;
+    padding: 32px 16px calc(32px + env(safe-area-inset-bottom, 0px)) 16px;
     box-sizing: border-box;
     opacity: 0;
     visibility: hidden;
@@ -159,6 +162,7 @@
     width: 100%;
     max-width: 680px;
     max-height: calc(100vh - 80px);
+    max-height: calc(100dvh - 70px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     display: flex;
     flex-direction: column;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
@@ -410,10 +414,34 @@
     transition: opacity 0.2s;
   }
 
+  @media screen and (max-width: 768px) {
+    .custom-search-modal-overlay {
+      padding: clamp(10px, 2vh, 18px) 10px calc(clamp(12px, 2vh, 20px) + env(safe-area-inset-bottom, 0px)) 10px !important;
+      align-items: flex-start !important;
+    }
+
+    .custom-search-modal-card {
+      border-radius: 16px !important;
+      max-height: calc(
+        100dvh - clamp(20px, 3vh, 36px) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)
+      ) !important;
+    }
+
+    .custom-search-modal-body {
+      padding: 16px 14px calc(24px + env(safe-area-inset-bottom, 0px)) 14px !important;
+    }
+
+    .search-modal-footer {
+      margin-top: 16px !important;
+      padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+  }
+
   body.search-modal-open,
   html.search-modal-open {
     overflow: hidden !important;
-    height: 100vh !important;
+    height: 100% !important;
+    height: 100dvh !important;
     touch-action: none !important;
   }
 </style>
