@@ -131,6 +131,20 @@
         "target_products": []
       }
     },
+    "custom_collection_row_EeiVwN": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "football-legends-collection",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
     "featured_collection_grid_banners": {
       "type": "featured-collection-grid-banners",
       "blocks": {
@@ -398,6 +412,7 @@
     "custom_collection_row_D38Wef",
     "custom_collection_row_mqgCDc",
     "custom_collection_row_HE3JcL",
+    "custom_collection_row_EeiVwN",
     "featured_collection_grid_banners",
     "custom_collection_row_xLT9GA",
     "image_slider_centered",
