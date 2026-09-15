@@ -36,8 +36,8 @@
         "button"
       ],
       "settings": {
-        "image": "shopify://shop_images/orange_test.webp",
-        "mobile_image": "shopify://shop_images/orange_test_mobile.webp",
+        "image": "shopify://shop_images/f-w-1_957e5cfb-080e-4633-a655-cbdc8a2e2a2c_1.webp",
+        "mobile_image": "shopify://shop_images/f-m-1_f2763e89-e257-45ca-9488-3301037f2a2d_1.webp",
         "image_overlay_opacity": 40,
         "image_height": "extra-large",
         "image_behavior": "none",
