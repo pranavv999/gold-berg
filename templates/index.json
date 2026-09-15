@@ -93,7 +93,7 @@
       "type": "custom-collection-row",
       "name": "Custom Collection Row",
       "settings": {
-        "title": "",
+        "title": "Waffle T-Shirts",
         "collection": "bloomline-essentials",
         "product_source": "collection",
         "button_label": "Discover more",
