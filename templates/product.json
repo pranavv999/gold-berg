@@ -19,12 +19,8 @@
             "video": "shopify://files/videos/SaveClip.App_AQNitYRB8t5us1TaS4u2garVBAB6Z-_4dbKriSGgZmNqB-jsfKiC-zzwZIU-TPP_w-sEdT1K4wn7f3pZpcw_y9egPnVXqv5q5J9_p_A.mp4",
             "video_url": "",
             "poster_image": "shopify://shop_images/vijay_10.webp",
-            "show_on_all": false,
-            "target_products": [
-              "ascent",
-              "bloodline-white-waffle-tee",
-              "bloodline-black-waffle-tee"
-            ]
+            "show_on_all": true,
+            "target_products": []
           }
         },
         "available_offers_P6yEz7": {
