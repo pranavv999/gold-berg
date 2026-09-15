@@ -223,6 +223,20 @@
         "container_radius": 12
       }
     },
+    "custom_collection_row_a9h3j7": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "elemental-beasts-collection",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
     "featured_collection_grid_banners": {
       "type": "featured-collection-grid-banners",
       "blocks": {
@@ -273,6 +287,7 @@
         "banner_6BrqYm",
         "banner_fWfeKW"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "show_overlay": true
@@ -280,6 +295,7 @@
     },
     "custom_collection_row_xLT9GA": {
       "type": "custom-collection-row",
+      "disabled": true,
       "name": "Custom Collection Row",
       "settings": {
         "title": "",
@@ -387,20 +403,6 @@
         "show_dots": true,
         "aria_label": "Full width image carousel",
         "image_fit": "cover"
-      }
-    },
-    "custom_collection_row_a9h3j7": {
-      "type": "custom-collection-row",
-      "name": "Custom Collection Row",
-      "settings": {
-        "title": "",
-        "collection": "elemental-beasts-collection",
-        "product_source": "collection",
-        "button_label": "Discover more",
-        "hide_discover_more": false,
-        "container_radius": 12,
-        "show_on_all": false,
-        "target_products": []
       }
     }
   },
