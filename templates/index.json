@@ -36,8 +36,8 @@
         "button"
       ],
       "settings": {
-        "image": "shopify://shop_images/orange_test.webp",
-        "mobile_image": "shopify://shop_images/orange_test_mobile.webp",
+        "image": "shopify://shop_images/f-w-1_957e5cfb-080e-4633-a655-cbdc8a2e2a2c_1.webp",
+        "mobile_image": "shopify://shop_images/f-m-1_f2763e89-e257-45ca-9488-3301037f2a2d_1.webp",
         "image_overlay_opacity": 40,
         "image_height": "extra-large",
         "image_behavior": "none",
@@ -54,7 +54,33 @@
       "type": "custom-collection-row",
       "settings": {
         "title": "",
-        "collection": "all-products-2",
+        "collection": "jackets",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
+    "custom_collection_row_F4wj48": {
+      "type": "custom-collection-row",
+      "settings": {
+        "title": "",
+        "collection": "deep-wave-denim-collection",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
+    "custom_collection_row_nN6nge": {
+      "type": "custom-collection-row",
+      "settings": {
+        "title": "",
+        "collection": "manga-archives",
         "product_source": "collection",
         "button_label": "Discover more",
         "hide_discover_more": false,
@@ -67,8 +93,64 @@
       "type": "custom-collection-row",
       "name": "Custom Collection Row",
       "settings": {
+        "title": "Waffle T-Shirts",
+        "collection": "bloomline-essentials",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
+    "custom_collection_row_mqgCDc": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
         "title": "",
-        "collection": "manga-archives",
+        "collection": "the-fan-jersey",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
+    "custom_collection_row_HE3JcL": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "dark-mode-collection",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
+    "custom_collection_row_EeiVwN": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "football-legends-collection",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
+    "custom_collection_row_a9h3j7": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "elemental-beasts-collection",
         "product_source": "collection",
         "button_label": "Discover more",
         "hide_discover_more": false,
@@ -127,6 +209,7 @@
         "banner_6BrqYm",
         "banner_fWfeKW"
       ],
+      "disabled": true,
       "settings": {
         "title": "",
         "show_overlay": true
@@ -134,6 +217,7 @@
     },
     "custom_collection_row_xLT9GA": {
       "type": "custom-collection-row",
+      "disabled": true,
       "name": "Custom Collection Row",
       "settings": {
         "title": "",
@@ -224,9 +308,9 @@
         "slide_czW8Fj": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/desktop_banner.png",
-            "image_mobile": "shopify://shop_images/mobile_banner.jpg",
-            "link": "shopify://products/karma",
+            "image": "shopify://shop_images/3_c42c5792-53b0-44b7-b4a7-5a497954a638.webp",
+            "image_mobile": "shopify://shop_images/4_2626dac2-a8e1-4638-93ea-47c55853ceff.webp",
+            "link": "shopify://products/petalfall-embroidered-pants",
             "alt": ""
           }
         }
@@ -241,20 +325,6 @@
         "show_dots": true,
         "aria_label": "Full width image carousel",
         "image_fit": "cover"
-      }
-    },
-    "custom_collection_row_a9h3j7": {
-      "type": "custom-collection-row",
-      "name": "Custom Collection Row",
-      "settings": {
-        "title": "",
-        "collection": "elemental-beasts-collection",
-        "product_source": "collection",
-        "button_label": "Discover more",
-        "hide_discover_more": false,
-        "container_radius": 12,
-        "show_on_all": false,
-        "target_products": []
       }
     },
     "instagram_reels_carousel": {
@@ -339,12 +409,17 @@
   "order": [
     "image_banner",
     "custom_collection_row",
+    "custom_collection_row_F4wj48",
+    "custom_collection_row_nN6nge",
     "custom_collection_row_D38Wef",
+    "custom_collection_row_mqgCDc",
+    "custom_collection_row_HE3JcL",
+    "custom_collection_row_EeiVwN",
+    "custom_collection_row_a9h3j7",
     "featured_collection_grid_banners",
     "custom_collection_row_xLT9GA",
     "image_slider_centered",
     "fullwidth_image_slider",
-    "custom_collection_row_a9h3j7",
     "instagram_reels_carousel"
   ]
 }
