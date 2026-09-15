@@ -94,7 +94,7 @@
       "name": "Custom Collection Row",
       "settings": {
         "title": "",
-        "collection": "manga-archives",
+        "collection": "bloomline-essentials",
         "product_source": "collection",
         "button_label": "Discover more",
         "hide_discover_more": false,
