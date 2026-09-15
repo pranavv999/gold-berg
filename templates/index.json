@@ -388,7 +388,7 @@
           "settings": {
             "image": "shopify://shop_images/desktop_banner.png",
             "image_mobile": "shopify://shop_images/mobile_banner.jpg",
-            "link": "shopify://products/karma",
+            "link": "shopify://products/arcane-vanguard-jacket",
             "alt": ""
           }
         }
