@@ -67,6 +67,19 @@
       "type": "custom-collection-row",
       "settings": {
         "title": "",
+        "collection": "deep-wave-denim-collection",
+        "product_source": "collection",
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
+    "custom_collection_row_nN6nge": {
+      "type": "custom-collection-row",
+      "settings": {
+        "title": "",
         "collection": "all-products-2",
         "product_source": "collection",
         "button_label": "Discover more",
@@ -353,6 +366,7 @@
     "image_banner",
     "custom_collection_row",
     "custom_collection_row_F4wj48",
+    "custom_collection_row_nN6nge",
     "custom_collection_row_D38Wef",
     "featured_collection_grid_banners",
     "custom_collection_row_xLT9GA",
