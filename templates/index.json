@@ -57,7 +57,7 @@
         "collection": "jackets",
         "product_source": "collection",
         "button_label": "Discover more",
-        "hide_discover_more": true,
+        "hide_discover_more": false,
         "container_radius": 12,
         "show_on_all": false,
         "target_products": []
