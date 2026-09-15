@@ -80,7 +80,7 @@
       "type": "custom-collection-row",
       "settings": {
         "title": "",
-        "collection": "all-products-2",
+        "collection": "manga-archives",
         "product_source": "collection",
         "button_label": "Discover more",
         "hide_discover_more": false,
