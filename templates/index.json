@@ -168,7 +168,7 @@
             "image": "shopify://shop_images/2_80a669fc-623c-4d19-b015-a32a05a53ab7.webp",
             "collection": "bloomline-essentials",
             "url": "",
-            "show_overlay": true,
+            "show_overlay": false,
             "title": ""
           }
         },
@@ -178,7 +178,7 @@
             "image": "shopify://shop_images/1_45dd224c-7b28-4738-bcd9-2f718c41606a.webp",
             "collection": "dark-mode-collection",
             "url": "",
-            "show_overlay": true,
+            "show_overlay": false,
             "title": ""
           }
         },
@@ -188,7 +188,7 @@
             "image": "shopify://shop_images/4_9bea751a-710e-47eb-b777-7572b25667fd.webp",
             "collection": "all-products-2",
             "url": "",
-            "show_overlay": true,
+            "show_overlay": false,
             "title": ""
           }
         },
@@ -198,7 +198,7 @@
             "image": "shopify://shop_images/3_bbb7e712-ce22-4812-9ae4-acdfc3cc0e31.webp",
             "collection": "arcline-co-ord-set",
             "url": "shopify://products/stitchcore-wallet",
-            "show_overlay": true,
+            "show_overlay": false,
             "title": ""
           }
         }
