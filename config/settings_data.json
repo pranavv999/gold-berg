@@ -214,7 +214,26 @@
           "shadow": "#121212"
         }
       }
-    }
+    },
+    "mid": "195y37fr6t5k",
+    "envType": "production",
+    "ga4Gokwik": "G-43WQB118ZG",
+    "fbpixel": "869830862411145",
+    "goEnable": true,
+    "priClr": "#000000",
+    "secClr": "#ffffff",
+    "main-titile": "Checkout",
+    "goBuynowEnable": true,
+    "btnBClr": "#000000",
+    "btnTextClr": "#ffffff",
+    "buyNowText": "Buy It Now",
+    "checkoutSubText": "10% Off On Prepaid Orders",
+    "checkoutEnableBanner": true,
+    "checkoutEnableLogo": true,
+    "buyNowSubText": "10% Off On Prepaid Orders",
+    "buyNowEnableBanner": true,
+    "buyNowEnableLogo": true,
+    "enableIntlFlow": false
   },
   "presets": {
     "Dawn": {
