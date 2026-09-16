@@ -1,35 +1,60 @@
 <style>
 /* ── GoKwik Button Decoration ──────────────────────────────────────── */
-.gk-btn-wrap{display:flex;flex-direction:column;width:100%;}
-.gk-banner{background:#22c55e;color:#fff;font-size:12px;font-weight:600;padding:5px 10px;text-align:center;border-radius:4px 4px 0 0;letter-spacing:.02em;}
+.gk-btn-wrap{display:flex;flex-direction:column;width:100%; position: relative;}
+{% comment %} .gk-banner{position: absolute !important; background:#22c55e;color:#fff;font-size:12px;font-weight:600;padding:5px 10px;text-align:center;border-radius:4px 4px 0 0;letter-spacing:.02em;} {% endcomment %}
 .gokwik-marge{display:flex!important;align-items:center!important;justify-content:center!important;}
 .gk-inner{display:inline-flex;align-items:center;justify-content:center;gap:10px;pointer-events:none;max-width:100%;}
 .gk-text-block {
- display: inline-flex;
- flex-direction: column;
- align-items: center;
- text-align: center;
- min-width: 0;
- line-height: 1.1;
+display: inline-flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+min-width: 0;
+line-height: 1.1;
 }
 
+
+
+
 .gk-btn-main {
- line-height: 1.1;
- font-size: 14px;
+line-height: 1.1;
+font-size: 14px;
+}
+button.shopify-payment-button__button.shopify-payment-button__button--unbranded.gokwik-marge {
+   color: #ffffff !important;
+   position: relative !important;
+}
+
+
+.gk-banner {
+   position: absolute !important;
+   background: #22c55e;
+   color: #fff;
+   font-size: 10px;
+   font-weight: 600;
+   padding: 0px 10px;
+   text-align: center;
+   border-radius: 50px;
+   letter-spacing: .02em;
+   top: -7px;
+   left: 25px;
+   z-index: 1;
 }
 
 
 .gk-sub-text {
- font-size: 9px;
- opacity: .8;
- margin-top: 0;
- line-height: 1;
+font-size: 9px;
+opacity: .8;
+margin-top: 0;
+line-height: 1;
 }
+
 
 .gk-pay-icons{display:inline-flex;align-items:center;gap:4px;flex-shrink:0;pointer-events:none;}
 .gk-pay-icons img{height:20px;width:auto;display:block;}
 .sr-brand-badge-container span.sr-powered-by{display:none!important;}
 </style>
+
 
 <script src="https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4" defer></script>
 
