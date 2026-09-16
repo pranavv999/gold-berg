@@ -216,6 +216,7 @@
     },
     "custom_collection_row_xLT9GA": {
       "type": "custom-collection-row",
+      "disabled": true,
       "name": "Custom Collection Row",
       "settings": {
         "title": "",
