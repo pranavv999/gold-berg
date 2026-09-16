@@ -1461,30 +1461,53 @@
             {%- endif -%}
           {%- endif -%}
 
-          {%- if product.metafields.custom.video != blank or product.metafields.custom.experimental_video != blank -%}
+          {%- assign pdp_metafield = product.metafields.custom.pdp_video.value | default: product.metafields.custom.pdp_video -%}
+          {%- if pdp_metafield == blank -%}
+            {%- assign pdp_metafield = product.metafields.custom.video.value | default: product.metafields.custom.video -%}
+          {%- endif -%}
+          {%- if pdp_metafield == blank -%}
+            {%- assign pdp_metafield = product.metafields.custom.experimental_video.value | default: product.metafields.custom.experimental_video -%}
+          {%- endif -%}
+
+          {%- if pdp_metafield != blank -%}
             {%- assign is_video_visible = true -%}
           {%- endif -%}
 
           {%- if is_video_visible -%}
-            {%- assign video_mp4 = block.settings.video_url -%}
-            {%- if block.settings.video != blank -%}
-              {%- assign video_mp4 = block.settings.video.sources
-                | where: 'format', 'mp4'
-                | first
-                | map: 'url'
-                | default: block.settings.video.sources[0].url
-              -%}
-            {%- elsif product.metafields.custom.video != blank -%}
-              {%- assign video_mp4 = product.metafields.custom.video.value
-                | default: product.metafields.custom.video
-              -%}
+            {%- assign active_video_obj = null -%}
+            {%- assign video_mp4 = '' -%}
+            {%- assign poster_url = '' -%}
+
+            {%- if pdp_metafield != blank -%}
+              {%- if pdp_metafield.sources != blank -%}
+                {%- assign mp4_source = pdp_metafield.sources | where: 'format', 'mp4' | first -%}
+                {%- assign video_mp4 = mp4_source.url | default: pdp_metafield.sources[0].url -%}
+                {%- if pdp_metafield.media_type == 'video' -%}
+                  {%- assign active_video_obj = pdp_metafield -%}
+                {%- endif -%}
+                {%- if pdp_metafield.preview_image != blank -%}
+                  {%- assign poster_url = pdp_metafield.preview_image | image_url: width: 800 -%}
+                {%- endif -%}
+              {%- elsif pdp_metafield.url != blank -%}
+                {%- assign video_mp4 = pdp_metafield.url -%}
+              {%- else -%}
+                {%- assign video_mp4 = pdp_metafield -%}
+              {%- endif -%}
+            {%- elsif block.settings.video != blank -%}
+              {%- assign mp4_source = block.settings.video.sources | where: 'format', 'mp4' | first -%}
+              {%- assign video_mp4 = mp4_source.url | default: block.settings.video.sources[0].url -%}
+              {%- if block.settings.video.media_type == 'video' -%}
+                {%- assign active_video_obj = block.settings.video -%}
+              {%- endif -%}
+              {%- if block.settings.video.preview_image != blank -%}
+                {%- assign poster_url = block.settings.video.preview_image | image_url: width: 800 -%}
+              {%- endif -%}
+            {%- elsif block.settings.video_url != blank -%}
+              {%- assign video_mp4 = block.settings.video_url -%}
             {%- endif -%}
 
-            {%- assign poster_url = '' -%}
             {%- if block.settings.poster_image != blank -%}
               {%- assign poster_url = block.settings.poster_image | image_url: width: 800 -%}
-            {%- elsif block.settings.video.preview_image != blank -%}
-              {%- assign poster_url = block.settings.video.preview_image | image_url: width: 800 -%}
             {%- endif -%}
 
             <div class="product-video-showcase-container" {{ block.shopify_attributes }}>
@@ -1525,9 +1548,9 @@
                       <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                     </svg>
                   </button>
-                  {%- if block.settings.video != blank -%}
+                  {%- if active_video_obj != blank -%}
                     {{
-                      block.settings.video
+                      active_video_obj
                       | video_tag:
                         autoplay: false,
                         loop: true,
