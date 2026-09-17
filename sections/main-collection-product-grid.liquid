@@ -311,6 +311,25 @@
     cursor: pointer !important;
     border-radius: 6px !important;
     transition: background-color 0.15s ease !important;
+    position: relative !important;
+  }
+
+  .facet-checkbox .svg-wrapper {
+    position: absolute !important;
+    left: 12.5px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 11px !important;
+    height: 9px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 5 !important;
+    pointer-events: none !important;
+  }
+
+  .facet-checkbox > svg {
+    margin-right: 0 !important;
+    flex-shrink: 0 !important;
   }
 
   .facet-checkbox:hover {
@@ -333,6 +352,14 @@
 
   .facets__price .field {
     align-items: center !important;
+  }
+
+  .facets__price .field:after,
+  .facets__price .field:before {
+    display: none !important;
+    content: none !important;
+    box-shadow: none !important;
+    border: none !important;
   }
 
   .facets__price .field__currency {
