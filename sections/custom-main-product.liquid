@@ -495,14 +495,30 @@
   }
 
   .variant-pill.disabled,
-  .variant-pill[disabled] {
-    opacity: 0.4;
-    color: #a1a1a6;
-    cursor: not-allowed;
-    text-decoration: line-through;
-    border-color: #e5e5e7;
-    background: #f5f5f7;
-    pointer-events: none;
+  .variant-pill[disabled],
+  .variant-pill.is-out-of-stock {
+    opacity: 0.4 !important;
+    color: #a1a1a6 !important;
+    cursor: not-allowed !important;
+    border-color: #e5e5e7 !important;
+    background: #f5f5f7 !important;
+    pointer-events: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .variant-pill.disabled::after,
+  .variant-pill[disabled]::after,
+  .variant-pill.is-out-of-stock::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 2 !important;
+    background: linear-gradient(to top right, transparent calc(50% - 1px), rgba(0, 0, 0, 0.4) 50%, transparent calc(50% + 1px)) !important;
+    pointer-events: none !important;
   }
 
   .cta-buttons-row {
@@ -1135,9 +1151,13 @@
       <!-- Purchasing Controls Card -->
       <div class="product-info-card" style="--container-radius: {{ section.settings.container_radius }}px">
         {%- form 'product', product, id: 'product-form-custom' -%}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-
           {%- assign current_variant = product.selected_or_first_available_variant -%}
+          {%- unless current_variant.available -%}
+            {%- if product.first_available_variant -%}
+              {%- assign current_variant = product.first_available_variant -%}
+            {%- endif -%}
+          {%- endunless -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
           {%- assign compare_at_price = current_variant.compare_at_price -%}
           {%- assign price = current_variant.price -%}
           {%- if compare_at_price > price -%}
@@ -1268,11 +1288,14 @@
 
                     <button
                       type="button"
-                      class="variant-pill{% if is_selected %} selected{% endif %}{% unless variant_for_value.available %} is-out-of-stock{% endunless %}"
+                      class="variant-pill{% if is_selected %} selected{% endif %}{% unless variant_for_value.available %} disabled is-out-of-stock{% endunless %}"
                       data-variant-id="{{ variant_for_value.id }}"
                       data-available="{{ variant_for_value.available }}"
                       data-price="{{ variant_for_value.price | money }}"
                       data-compare-price="{% if variant_for_value.compare_at_price > variant_for_value.price %}{{ variant_for_value.compare_at_price | money }}{% endif %}"
+                      {% unless variant_for_value.available %}
+                        disabled="disabled"
+                      {% endunless %}
                     >
                       {{ value }}
                     </button>
@@ -1604,6 +1627,11 @@
     // 1. Variant Pill Selection
     const pill = e.target.closest('.variant-pill');
     if (pill) {
+      if (pill.disabled || pill.classList.contains('disabled') || pill.classList.contains('is-out-of-stock')) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
       const form = pill.closest('form') || document.getElementById('product-form-custom');
       if (form) {
         const hiddenIdInput = form.querySelector('input[name="id"]');
