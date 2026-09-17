@@ -387,6 +387,16 @@
             "link": "",
             "caption": ""
           }
+        },
+        "reel_X9i7Hh": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Bloodline waffle black.webm",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/4_83fff02e-bf4f-499b-98e5-672efa55b277.webp",
+            "link": "",
+            "caption": ""
+          }
         }
       },
       "block_order": [
@@ -395,7 +405,8 @@
         "reel_RAEcjr",
         "reel_fG8nfq",
         "reel_gjULT7",
-        "reel_qTEfCD"
+        "reel_qTEfCD",
+        "reel_X9i7Hh"
       ],
       "settings": {
         "heading": "INSTAGRAM REELS",
