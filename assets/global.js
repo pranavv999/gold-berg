@@ -438,6 +438,20 @@ class MenuDrawer extends HTMLElement {
 
     this.mainDetailsToggle = this.querySelector('details');
 
+    if (this.mainDetailsToggle) {
+      this.mainDetailsToggle.addEventListener('toggle', () => {
+        if (!this.mainDetailsToggle.hasAttribute('open')) {
+          document.body.classList.remove(
+            `overflow-hidden-${this.dataset.breakpoint}`,
+            'overflow-hidden-mobile',
+            'overflow-hidden-tablet',
+            'overflow-hidden-desktop',
+            'overflow-hidden'
+          );
+        }
+      });
+    }
+
     this.addEventListener('keyup', this.onKeyUp.bind(this));
     this.addEventListener('focusout', this.onFocusOut.bind(this));
     this.bindEvents();
@@ -504,19 +518,28 @@ class MenuDrawer extends HTMLElement {
   }
 
   closeMenuDrawer(event, elementToFocus = false) {
-    if (event === undefined) return;
-
-    this.mainDetailsToggle.classList.remove('menu-opening');
-    this.mainDetailsToggle.querySelectorAll('details').forEach((details) => {
-      details.removeAttribute('open');
-      details.classList.remove('menu-opening');
-    });
-    this.mainDetailsToggle.querySelectorAll('.submenu-open').forEach((submenu) => {
-      submenu.classList.remove('submenu-open');
-    });
-    document.body.classList.remove(`overflow-hidden-${this.dataset.breakpoint}`);
+    if (this.mainDetailsToggle) {
+      this.mainDetailsToggle.classList.remove('menu-opening');
+      this.mainDetailsToggle.querySelectorAll('details').forEach((details) => {
+        details.removeAttribute('open');
+        details.classList.remove('menu-opening');
+      });
+      this.mainDetailsToggle.querySelectorAll('.submenu-open').forEach((submenu) => {
+        submenu.classList.remove('submenu-open');
+      });
+      this.mainDetailsToggle.removeAttribute('open');
+    }
+    document.body.classList.remove(
+      `overflow-hidden-${this.dataset.breakpoint}`,
+      'overflow-hidden-mobile',
+      'overflow-hidden-tablet',
+      'overflow-hidden-desktop',
+      'overflow-hidden'
+    );
     removeTrapFocus(elementToFocus);
-    this.closeAnimation(this.mainDetailsToggle);
+    if (this.mainDetailsToggle) {
+      this.closeAnimation(this.mainDetailsToggle);
+    }
 
     if (event instanceof KeyboardEvent) elementToFocus?.setAttribute('aria-expanded', false);
   }
