@@ -128,12 +128,12 @@
       "type": "custom-collection-row",
       "settings": {
         "title": "PEOPLE ALSO BUY",
-        "collection": "",
+        "collection": "all-products-2",
         "product_source": "related_products",
         "button_label": "Discover more",
         "hide_discover_more": true,
-        "container_radius": 24,
-        "show_on_all": false,
+        "container_radius": 12,
+        "show_on_all": true,
         "target_products": []
       }
     }
