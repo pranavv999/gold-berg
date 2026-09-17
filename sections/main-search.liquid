@@ -105,6 +105,18 @@
     color: #8e8e93 !important;
   }
 
+  /* Hide native browser input[type="search"] clear/cancel button (blue X on hover) */
+  .custom-search-page-input::-webkit-search-cancel-button,
+  .custom-search-page-input::-webkit-search-decoration,
+  .custom-search-page-input::-webkit-search-results-button,
+  .custom-search-page-input::-webkit-search-results-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    display: none !important;
+  }
+
   .custom-search-page-clear {
     position: absolute;
     right: 14px;
