@@ -158,7 +158,6 @@
 
   /* Filter Section Custom Styling (Matching Collection Page 100%) */
   .template-search .facets-container,
-  .template-search .facets-wrapper,
   .template-search .facets {
     padding-top: 0px !important;
     margin-top: 0px !important;
@@ -765,13 +764,7 @@
       {%- endif -%}
     </div>
     {%- if search.performed -%}
-      <div
-        {% if section.settings.filter_type == 'vertical' %}
-          class="facets-vertical page-width"
-        {% else %}
-          class="page-width"
-        {% endif %}
-      >
+      <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
         {%- if search.filters != empty -%}
           {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
             <aside
@@ -793,7 +786,7 @@
         <div class="product-grid-container" id="ProductGridContainer">
           {%- if search.results.size == 0 and search.filters != empty -%}
             <div
-              class="template-search__results collection collection--empty"
+              class="template-search__results collection collection--empty{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
               data-id="{{ section.id }}"
             >
               <div class="loading-overlay gradient"></div>
@@ -811,7 +804,7 @@
             </div>
           {%- else -%}
             <div
-              class="template-search__results collection"
+              class="template-search__results collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
               data-id="{{ section.id }}"
             >
               <div class="loading-overlay gradient"></div>
