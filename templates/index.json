@@ -166,7 +166,7 @@
           "type": "banner",
           "settings": {
             "image": "shopify://shop_images/2_80a669fc-623c-4d19-b015-a32a05a53ab7.webp",
-            "collection": "bloomline-essentials",
+            "collection": "top-wear",
             "url": "",
             "show_overlay": false,
             "title": ""
@@ -176,7 +176,7 @@
           "type": "banner",
           "settings": {
             "image": "shopify://shop_images/1_45dd224c-7b28-4738-bcd9-2f718c41606a.webp",
-            "collection": "dark-mode-collection",
+            "collection": "bottom-wear",
             "url": "",
             "show_overlay": false,
             "title": ""
