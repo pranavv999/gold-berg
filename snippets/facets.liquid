@@ -356,32 +356,30 @@
               {% endcase %}
             {%- endfor -%}
             {%- if filter_type == 'horizontal' -%}
-              {%- liquid
-                assign has_active_filter = false
-                for filter in results.filters
-                  if filter.active_values.size > 0
-                    assign has_active_filter = true
-                  endif
-                  if filter.type == 'price_range'
-                    if filter.min_value.value != null or filter.max_value.value != null
+              <div class="active-facets active-facets-desktop">
+                {%- liquid
+                  assign has_active_filter = false
+                  for filter in results.filters
+                    if filter.active_values.size > 0
                       assign has_active_filter = true
                     endif
-                  endif
-                endfor
-              -%}
-              {%- if has_active_filter -%}
-                <facet-remove class="facets__clear-all-wrapper">
-                  <a href="{{ results_url }}" class="facets__clear-all-link underlined-link">
-                    <span>{{ 'products.facets.clear_all' | t }}</span>
-                  </a>
-                </facet-remove>
-              {%- endif -%}
+                    if filter.type == 'price_range'
+                      if filter.min_value.value or filter.max_value.value
+                        assign has_active_filter = true
+                      endif
+                    endif
+                  endfor
+                -%}
+                {%- if has_active_filter -%}
+                  <facet-remove class="facets__clear-all-wrapper">
+                    <a href="{{ results_url }}" class="facets__clear-all-link underlined-link">
+                      <span>{{ 'products.facets.clear_all' | t }}</span>
+                    </a>
+                  </facet-remove>
+                {%- endif -%}
+              </div>
             {%- endif -%}
           </div>
-          {% comment %} Pills after filtes on filter type horizontal {% endcomment %}
-          {%- if filter_type == 'horizontal' -%}
-            <div class="active-facets active-facets-desktop"></div>
-          {%- endif -%}
         {% endif %}
 
         {% if results.current_vendor or results.current_type %}

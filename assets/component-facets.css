@@ -1745,10 +1745,13 @@ details[open]>.facets__summary span {
   text-decoration: underline !important;
 }
 
-.mobile-facets__footer .button {
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  border-radius: 6px !important;
+.facets__wrapper .active-facets-desktop {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: 34px !important;
 }
 
 .facets__clear-all-wrapper {
