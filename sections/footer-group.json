@@ -20,7 +20,7 @@
         "text_color": "#ffffff",
         "background_color": "#000000",
         "font_size_desktop": 10,
-        "font_size_mobile": 8,
+        "font_size_mobile": 6,
         "font_weight": "500",
         "letter_spacing": 2,
         "text_transform": "uppercase",
