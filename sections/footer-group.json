@@ -53,10 +53,9 @@
         },
         "social_youtube": {
           "type": "social_link",
-          "disabled": true,
           "settings": {
-            "platform": "youtube",
-            "url": "https://youtube.com",
+            "platform": "linkedin",
+            "url": "https://www.linkedin.com/company/sober-animal/",
             "title": ""
           }
         }
