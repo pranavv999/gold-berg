@@ -461,9 +461,11 @@ class MenuDrawer extends HTMLElement {
     this.querySelectorAll('summary').forEach((summary) =>
       summary.addEventListener('click', this.onSummaryClick.bind(this))
     );
-    this.querySelectorAll(
-      'button:not(.localization-selector):not(.country-selector__close-button):not(.country-filter__reset-button)'
-    ).forEach((button) => button.addEventListener('click', this.onCloseButtonClick.bind(this)));
+    if (!this.classList.contains('mobile-facets__wrapper')) {
+      this.querySelectorAll(
+        'button:not(.localization-selector):not(.country-selector__close-button):not(.country-filter__reset-button)'
+      ).forEach((button) => button.addEventListener('click', this.onCloseButtonClick.bind(this)));
+    }
   }
 
   onKeyUp(event) {
@@ -496,7 +498,7 @@ class MenuDrawer extends HTMLElement {
       if (window.matchMedia('(max-width: 990px)')) {
         document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
       }
-    } else {
+    } else if (!this.classList.contains('mobile-facets__wrapper')) {
       setTimeout(() => {
         detailsElement.classList.add('menu-opening');
         summaryElement.setAttribute('aria-expanded', true);
@@ -545,6 +547,7 @@ class MenuDrawer extends HTMLElement {
   }
 
   onFocusOut() {
+    if (this.classList.contains('mobile-facets__wrapper')) return;
     setTimeout(() => {
       if (this.mainDetailsToggle.hasAttribute('open') && !this.mainDetailsToggle.contains(document.activeElement))
         this.closeMenuDrawer();
