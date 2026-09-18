@@ -39,20 +39,21 @@
           "type": "social_link",
           "settings": {
             "platform": "instagram",
-            "url": "https://instagram.com",
+            "url": "https://www.instagram.com/sober.animal?igsh=dHg4dWkzcWxucGdh",
             "title": ""
           }
         },
         "social_x": {
           "type": "social_link",
           "settings": {
-            "platform": "x",
-            "url": "https://x.com",
+            "platform": "facebook",
+            "url": "https://www.facebook.com/share/1Av89zUZhi/?mibextid=wwXIfr",
             "title": ""
           }
         },
         "social_youtube": {
           "type": "social_link",
+          "disabled": true,
           "settings": {
             "platform": "youtube",
             "url": "https://youtube.com",
