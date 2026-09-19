@@ -132,7 +132,7 @@
 
   .size-guide-btn {
     font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    font-size: 10px !important;
+    font-size: 8px !important;
     font-weight: 400 !important;
     color: #1d1d1f !important;
     background: #e3e3e7 !important;
@@ -145,6 +145,10 @@
     cursor: pointer !important;
     text-decoration: none !important;
     transition: background-color 0.2s, color 0.2s !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
   }
 
   .size-guide-btn:hover {
@@ -159,288 +163,185 @@
     gap: 8px;
   }
 
-  .product-app-block-wrapper {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
+  @media screen and (max-width: 749px) {
+    .size-guide-btn {
+      font-size: 7px !important;
+      padding: 4px 8px !important;
+    }
   }
 
-  .product-app-block-wrapper div,
-  .product-app-block-wrapper form,
-  .product-app-block-wrapper section {
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+  /* SIZE GUIDE MODAL POPUP */
+  .size-guide-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 99999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .variant-selector-header .product-app-block-wrapper a,
-  .variant-selector-header .product-app-block-wrapper button,
-  .variant-selector-header .product-app-block-wrapper span,
-  .variant-selector-header .product-app-block-wrapper p,
-  .product-app-block-wrapper a,
-  .product-app-block-wrapper button,
-  .product-app-block-wrapper span,
-  .product-app-block-wrapper p,
-  .smartsize-trigger-link,
-  [data-smartsize-chart],
-  [class*='smartsize-trigger'],
-  [class*='smartsize-btn'] {
+  .size-guide-modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .size-guide-modal-card {
+    background: #e3e3e8;
+    border-radius: 28px;
+    width: 100%;
+    max-width: 440px;
+    padding: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    transform: scale(0.94);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .size-guide-modal-backdrop.active .size-guide-modal-card {
+    transform: scale(1);
+  }
+
+  .size-guide-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .size-guide-modal-title {
     font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    font-size: 10px !important;
-    font-weight: 400 !important;
-    color: #1d1d1f !important;
-    background-color: #e3e3e7 !important;
-    background: #e3e3e7 !important;
-    border: none !important;
-    padding: 4px 9px !important;
-    border-radius: 20px !important;
-    cursor: pointer !important;
-    text-decoration: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    line-height: 1 !important;
-    margin: 0 !important;
-    height: auto !important;
-    min-height: 0 !important;
-    width: auto !important;
-    box-sizing: border-box !important;
-    letter-spacing: 0.06em !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
-    transition: background-color 0.2s, color 0.2s !important;
-    box-shadow: none !important;
-    outline: none !important;
-  }
-
-  @media screen and (max-width: 749px) {
-    .size-guide-btn,
-    .variant-selector-header .product-app-block-wrapper a,
-    .variant-selector-header .product-app-block-wrapper button,
-    .variant-selector-header .product-app-block-wrapper span,
-    .variant-selector-header .product-app-block-wrapper p,
-    .product-app-block-wrapper a,
-    .product-app-block-wrapper button,
-    .product-app-block-wrapper span,
-    .product-app-block-wrapper p,
-    .smartsize-trigger-link,
-    [data-smartsize-chart],
-    [class*='smartsize-trigger'],
-    [class*='smartsize-btn'] {
-      font-size: 8.5px !important;
-      padding: 4px 10px !important;
-    }
-  }
-
-  .variant-selector-header .product-app-block-wrapper a:hover,
-  .variant-selector-header .product-app-block-wrapper button:hover,
-  .variant-selector-header .product-app-block-wrapper span:hover,
-  .variant-selector-header .product-app-block-wrapper p:hover,
-  .product-app-block-wrapper a:hover,
-  .product-app-block-wrapper button:hover,
-  .product-app-block-wrapper span:hover,
-  .product-app-block-wrapper p:hover,
-  .smartsize-trigger-link:hover,
-  [data-smartsize-chart]:hover,
-  [class*='smartsize-trigger']:hover,
-  [class*='smartsize-btn']:hover {
-    background-color: #d4d4d9 !important;
-    background: #d4d4d9 !important;
-    color: #000000 !important;
-    text-decoration: none !important;
-  }
-
-  .product-app-block-wrapper:not(:empty) + .size-guide-btn {
-    display: none !important;
-  }
-
-  /* SmartSize Overlay & Backdrop Elevation */
-  .smartsize-overlay,
-  .smartsize-backdrop,
-  [class*='smartsize-overlay'],
-  [class*='smartsize-backdrop'],
-  [id*='smartsize-backdrop'] {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: 100vw !important;
-    width: 100dvw !important;
-    height: 100vh !important;
-    height: 100dvh !important;
-    background: rgba(0, 0, 0, 0.65) !important;
-    z-index: 2147483646 !important;
-  }
-
-  /* Force header stack order behind SmartSize modal backdrop when modal is active */
-  body:has(
-      .smartsize-modal,
-      .smartsize-popup,
-      [class*='smartsize-modal'],
-      [class*='smartsize-popup'],
-      [class*='smartsize-backdrop']
-    )
-    .header-wrapper,
-  body:has(
-      .smartsize-modal,
-      .smartsize-popup,
-      [class*='smartsize-modal'],
-      [class*='smartsize-popup'],
-      [class*='smartsize-backdrop']
-    )
-    sticky-header,
-  body:has(
-      .smartsize-modal,
-      .smartsize-popup,
-      [class*='smartsize-modal'],
-      [class*='smartsize-popup'],
-      [class*='smartsize-backdrop']
-    )
-    #shopify-section-header,
-  body:has(
-      .smartsize-modal,
-      .smartsize-popup,
-      [class*='smartsize-modal'],
-      [class*='smartsize-popup'],
-      [class*='smartsize-backdrop']
-    )
-    .section-header,
-  body:has(
-      .smartsize-modal,
-      .smartsize-popup,
-      [class*='smartsize-modal'],
-      [class*='smartsize-popup'],
-      [class*='smartsize-backdrop']
-    )
-    header {
-    z-index: 1 !important;
-  }
-
-  /* Main SmartSize Outer Dialog Card */
-  /* SmartSize Responsive Modal Container */
-  .smartsize-modal,
-  .smartsize-popup,
-  div[class*='smartsize-modal-wrapper'],
-  div[class*='smartsize-popup'],
-  div[class*='smartsize-modal'],
-  #smartsize-dialog .MuiDialog-paper,
-  div[class*='smartsize'] .MuiDialog-paper {
-    z-index: 2147483647 !important;
-    width: min(92vw, 500px) !important;
-    min-width: min(92vw, 500px) !important;
-    max-width: 500px !important;
-    height: 65vh !important;
-    height: 65dvh !important;
-    max-height: 65vh !important;
-    max-height: 65dvh !important;
-    border-radius: 20px !important;
-    background: #ffffff !important;
-    background-color: #ffffff !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35) !important;
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    box-sizing: border-box !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    -webkit-overflow-scrolling: touch !important;
+    color: #48484a !important;
     margin: 0 !important;
-    padding: 36px 16px 20px 16px !important;
-    scrollbar-width: thin !important;
   }
 
-  .smartsize-modal::-webkit-scrollbar,
-  .smartsize-popup::-webkit-scrollbar,
-  div[class*='smartsize-modal']::-webkit-scrollbar,
-  div[class*='smartsize-popup']::-webkit-scrollbar {
-    width: 4px !important;
-  }
-
-  .smartsize-modal::-webkit-scrollbar-thumb,
-  .smartsize-popup::-webkit-scrollbar-thumb,
-  div[class*='smartsize-modal']::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2) !important;
-    border-radius: 4px !important;
-  }
-
-  /* Mobile Adjustments for Touchscreen Devices */
-  @media screen and (max-width: 749px) {
-    .smartsize-modal,
-    .smartsize-popup,
-    div[class*='smartsize-modal-wrapper'],
-    div[class*='smartsize-popup'],
-    div[class*='smartsize-modal'],
-    #smartsize-dialog .MuiDialog-paper,
-    div[class*='smartsize'] .MuiDialog-paper {
-      width: 90vw !important;
-      min-width: 90vw !important;
-      max-width: 90vw !important;
-      height: 65vh !important;
-      height: 65dvh !important;
-      max-height: 65vh !important;
-      max-height: 65dvh !important;
-      top: 50% !important;
-      left: 50% !important;
-      transform: translate(-50%, -50%) !important;
-      padding: 36px 16px 20px 16px !important;
-      border-radius: 20px !important;
-    }
-  }
-
-  /* SmartSize Modal Header & Close Button (Top-Right Circular Pill) */
-  .smartsize-modal [class*='close'],
-  .smartsize-popup [class*='close'],
-  [class*='smartsize-modal'] [class*='close'],
-  [class*='smartsize-popup'] [class*='close'],
-  [class*='smartsize'] button[class*='close'],
-  [class*='smartsize'] [aria-label*='close' i],
-  [class*='smartsize'] [aria-label*='Close'] {
-    position: absolute !important;
-    top: 12px !important;
-    right: 12px !important;
-    width: 30px !important;
-    height: 30px !important;
-    min-width: 30px !important;
-    min-height: 30px !important;
-    max-width: 30px !important;
-    max-height: 30px !important;
-    border-radius: 50% !important;
-    background: rgba(0, 0, 0, 0.08) !important;
-    background-color: rgba(0, 0, 0, 0.08) !important;
+  .size-guide-dismiss-btn {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    background: #d1d1d6 !important;
     color: #1d1d1f !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    border-radius: 20px !important;
+    font-size: 9px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    padding: 6px 14px !important;
     border: none !important;
-    font-size: 15px !important;
-    line-height: 1 !important;
     cursor: pointer !important;
-    z-index: 999999999 !important;
-    pointer-events: auto !important;
-    transition: background-color 0.2s !important;
-    box-shadow: none !important;
+    transition: background-color 0.2s, transform 0.1s !important;
     outline: none !important;
   }
 
-  .smartsize-modal [class*='close']:hover,
-  .smartsize-popup [class*='close']:hover,
-  [class*='smartsize'] button[class*='close']:hover {
-    background: rgba(0, 0, 0, 0.16) !important;
-    background-color: rgba(0, 0, 0, 0.16) !important;
+  .size-guide-dismiss-btn:hover {
+    background: #c7c7cc !important;
     color: #000000 !important;
+  }
+
+  .size-guide-modal-note {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: #636366;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+
+  .size-guide-modal-content {
+    border: solid 1px black;
+    border-radius: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .size-guide-modal-img {
+    width: 100%;
+    height: auto;
+    max-height: 65vh;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block;
+  }
+
+  .size-guide-modal-fallback-chart {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+  .fallback-chart-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .fallback-chart-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    width: 100%;
+  }
+
+  .fallback-chart-row > div {
+    background: #111111;
+    border: 1px solid #222222;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 400;
+    padding: 10px 4px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fallback-chart-row.header-row > div {
+    font-weight: 700;
+    font-size: 8.5px;
+    letter-spacing: 0.05em;
+    color: #cccccc;
+    background: #181818;
+  }
+
+  @media screen and (max-width: 749px) {
+    .size-guide-modal-card {
+      padding: 20px;
+      border-radius: 24px;
+      max-width: 90vw;
+    }
+    .size-guide-modal-title {
+      font-size: 10px !important;
+    }
+    .size-guide-dismiss-btn {
+      font-size: 8px !important;
+      padding: 5px 12px !important;
+    }
+    .size-guide-modal-note {
+      font-size: 10px;
+      margin-bottom: 12px;
+    }
   }
 
   .variants-grid {
@@ -517,7 +418,12 @@
     right: 0 !important;
     bottom: 0 !important;
     z-index: 2 !important;
-    background: linear-gradient(to top right, transparent calc(50% - 1px), rgba(0, 0, 0, 0.4) 50%, transparent calc(50% + 1px)) !important;
+    background: linear-gradient(
+      to top right,
+      transparent calc(50% - 1px),
+      rgba(0, 0, 0, 0.4) 50%,
+      transparent calc(50% + 1px)
+    ) !important;
     pointer-events: none !important;
   }
 
@@ -1484,12 +1390,18 @@
             {%- endif -%}
           {%- endif -%}
 
-          {%- assign pdp_metafield = product.metafields.custom.pdp_video.value | default: product.metafields.custom.pdp_video -%}
+          {%- assign pdp_metafield = product.metafields.custom.pdp_video.value
+            | default: product.metafields.custom.pdp_video
+          -%}
           {%- if pdp_metafield == blank -%}
-            {%- assign pdp_metafield = product.metafields.custom.video.value | default: product.metafields.custom.video -%}
+            {%- assign pdp_metafield = product.metafields.custom.video.value
+              | default: product.metafields.custom.video
+            -%}
           {%- endif -%}
           {%- if pdp_metafield == blank -%}
-            {%- assign pdp_metafield = product.metafields.custom.experimental_video.value | default: product.metafields.custom.experimental_video -%}
+            {%- assign pdp_metafield = product.metafields.custom.experimental_video.value
+              | default: product.metafields.custom.experimental_video
+            -%}
           {%- endif -%}
 
           {%- if pdp_metafield != blank -%}
@@ -1619,6 +1531,110 @@
   </div>
 </div>
 
+{%- assign size_chart_metafield = product.metafields.custom.size_chart_img -%}
+{%- assign size_chart_url = '' -%}
+
+{%- if size_chart_metafield != blank -%}
+  {%- assign raw_size_chart = size_chart_metafield.value | default: size_chart_metafield -%}
+  {%- if raw_size_chart.cloudinary_src != blank -%}
+    {%- assign size_chart_url = raw_size_chart | image_url: width: 1200 -%}
+  {%- elsif raw_size_chart.src != blank -%}
+    {%- assign size_chart_url = raw_size_chart | image_url: width: 1200 -%}
+  {%- elsif raw_size_chart.image_url != blank -%}
+    {%- assign size_chart_url = raw_size_chart | image_url: width: 1200 -%}
+  {%- elsif raw_size_chart.gid != blank or raw_size_chart.id != blank -%}
+    {%- assign size_chart_url = raw_size_chart | image_url: width: 1200 -%}
+  {%- else -%}
+    {%- assign size_chart_url = raw_size_chart -%}
+  {%- endif -%}
+{%- endif -%}
+
+<!-- SIZE GUIDE MODAL POPUP -->
+<div
+  id="size-guide-modal"
+  class="size-guide-modal-backdrop"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="size-guide-modal-title"
+>
+  <div class="size-guide-modal-card">
+    <div class="size-guide-modal-header">
+      <h2 id="size-guide-modal-title" class="size-guide-modal-title">SIZING REFERENCE</h2>
+      <button type="button" class="size-guide-dismiss-btn" aria-label="Dismiss Size Guide">DISMISS</button>
+    </div>
+
+    {%- assign note_text = section.settings.size_guide_note | default: 'Note : all sizes are in centimeter' -%}
+    {%- if note_text != blank -%}
+      <div class="size-guide-modal-note">{{ note_text }}</div>
+    {%- endif -%}
+
+    <div class="size-guide-modal-content">
+      {%- if size_chart_url != blank -%}
+        <img
+          src="{{ size_chart_url }}"
+          alt="{{ product.title | escape }} Size Chart"
+          class="size-guide-modal-img"
+          loading="lazy"
+        >
+      {%- else -%}
+        <div class="size-guide-modal-fallback-chart">
+          <div class="fallback-chart-grid">
+            <div class="fallback-chart-row header-row">
+              <div>SIZE</div>
+              <div>WAIST</div>
+              <div>LENGTH</div>
+              <div>BOTTOM</div>
+              <div>HIP</div>
+            </div>
+            <div class="fallback-chart-row">
+              <div>XS</div>
+              <div>26"</div>
+              <div>41.5"</div>
+              <div>30"</div>
+              <div>38"</div>
+            </div>
+            <div class="fallback-chart-row">
+              <div>S</div>
+              <div>28"</div>
+              <div>41.5"</div>
+              <div>30"</div>
+              <div>40"</div>
+            </div>
+            <div class="fallback-chart-row">
+              <div>M</div>
+              <div>30"</div>
+              <div>42"</div>
+              <div>30"</div>
+              <div>42"</div>
+            </div>
+            <div class="fallback-chart-row">
+              <div>L</div>
+              <div>32"</div>
+              <div>42"</div>
+              <div>30"</div>
+              <div>44"</div>
+            </div>
+            <div class="fallback-chart-row">
+              <div>XL</div>
+              <div>34"</div>
+              <div>42"</div>
+              <div>30"</div>
+              <div>46"</div>
+            </div>
+            <div class="fallback-chart-row">
+              <div>XXL</div>
+              <div>36"</div>
+              <div>42"</div>
+              <div>30"</div>
+              <div>48"</div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
 {% render 'product-media-lightbox', product: product %}
 
 <script>
@@ -1709,40 +1725,37 @@
       return;
     }
 
-    // 3. Size Guide Trigger
+    // 3. Size Guide Open & Close Handlers
     const sizeGuideBtn = e.target.closest('.size-guide-btn');
     if (sizeGuideBtn) {
       e.preventDefault();
-      if (window.SmartSize && typeof window.SmartSize.open === 'function') {
-        window.SmartSize.open();
-        return;
-      }
-      const appTrigger = document.querySelector(
-        '.product-app-block-wrapper a, .product-app-block-wrapper button, .smartsize-trigger-link, [data-smartsize-chart], a[href*="smartsize"], .smartsize-block a'
-      );
-      if (appTrigger && appTrigger !== sizeGuideBtn) {
-        appTrigger.click();
-        return;
-      }
       const modal = document.getElementById('size-guide-modal');
       if (modal) {
         modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
       }
       return;
     }
 
-    // 4. SmartSize Close Buttons
-    const closeElem = e.target.closest(
-      '[class*="close"], [class*="dismiss"], [aria-label*="close" i], [aria-label*="Close"]'
-    );
-    if (closeElem && closeElem.closest('[class*="smartsize"], [id*="smartsize"]')) {
-      if (window.SmartSize && typeof window.SmartSize.close === 'function') {
-        window.SmartSize.close();
-      } else {
-        document.querySelectorAll('[class*="smartsize"], [id*="smartsize"]').forEach((m) => {
-          m.style.display = 'none';
-          m.classList.remove('active');
-        });
+    const dismissBtn = e.target.closest('.size-guide-dismiss-btn');
+    const modalBackdrop = e.target.classList.contains('size-guide-modal-backdrop') ? e.target : null;
+    if (dismissBtn || modalBackdrop) {
+      const modal = document.getElementById('size-guide-modal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+      return;
+    }
+  });
+
+  // Close Size Guide Modal on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('size-guide-modal');
+      if (modal && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
       }
     }
   });
@@ -1943,6 +1956,12 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "text",
+      "id": "size_guide_note",
+      "label": "Size Guide Note",
+      "default": "Note : all sizes are in centimeter"
+    },
     {
       "type": "range",
       "id": "container_radius",
