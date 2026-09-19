@@ -116,6 +116,7 @@
         "trust_benefits_card"
       ],
       "settings": {
+        "size_guide_note": "Note : All sizes are in inches.",
         "container_radius": 24
       }
     },
