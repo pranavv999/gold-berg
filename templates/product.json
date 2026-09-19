@@ -50,10 +50,6 @@
             "margin_bottom": 14
           }
         },
-        "smartsize_app_block_wzCtaW": {
-          "type": "shopify://apps/smartsize/blocks/app-block/465a43e0-6a1a-4d30-b82e-fe6118568705",
-          "settings": {}
-        },
         "accordion_details": {
           "type": "accordion_row",
           "settings": {
@@ -114,7 +110,6 @@
       "block_order": [
         "product_video_naRtPr",
         "available_offers_P6yEz7",
-        "smartsize_app_block_wzCtaW",
         "accordion_details",
         "accordion_washcare",
         "accordion_shipping",

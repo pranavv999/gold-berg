@@ -129,6 +129,25 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "cart_color_scheme": "scheme-1",
+    "mid": "195y37fr6t5k",
+    "envType": "production",
+    "ga4Gokwik": "G-43WQB118ZG",
+    "fbpixel": "869830862411145",
+    "goEnable": true,
+    "checkoutSubText": "10% Off On Prepaid Orders",
+    "checkoutEnableLogo": true,
+    "checkoutEnableBanner": true,
+    "goBuynowEnable": true,
+    "buyNowText": "Buy It Now",
+    "buyNowSubText": "10% Off On Prepaid Orders",
+    "buyNowEnableLogo": true,
+    "buyNowEnableBanner": true,
+    "enableIntlFlow": false,
+    "priClr": "#000000",
+    "secClr": "#ffffff",
+    "main-titile": "Checkout",
+    "btnBClr": "#000000",
+    "btnTextClr": "#ffffff",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
@@ -147,7 +166,7 @@
     "blocks": {
       "4293466245358296089": {
         "type": "shopify://apps/smartsize/blocks/app-embed/465a43e0-6a1a-4d30-b82e-fe6118568705",
-        "disabled": false,
+        "disabled": true,
         "settings": {
           "button_horizontal_aligment": "left",
           "button_horizontal_aligment_mobile": "left",
@@ -214,26 +233,7 @@
           "shadow": "#121212"
         }
       }
-    },
-    "mid": "195y37fr6t5k",
-    "envType": "production",
-    "ga4Gokwik": "G-43WQB118ZG",
-    "fbpixel": "869830862411145",
-    "goEnable": true,
-    "priClr": "#000000",
-    "secClr": "#ffffff",
-    "main-titile": "Checkout",
-    "goBuynowEnable": true,
-    "btnBClr": "#000000",
-    "btnTextClr": "#ffffff",
-    "buyNowText": "Buy It Now",
-    "checkoutSubText": "10% Off On Prepaid Orders",
-    "checkoutEnableBanner": true,
-    "checkoutEnableLogo": true,
-    "buyNowSubText": "10% Off On Prepaid Orders",
-    "buyNowEnableBanner": true,
-    "buyNowEnableLogo": true,
-    "enableIntlFlow": false
+    }
   },
   "presets": {
     "Dawn": {
