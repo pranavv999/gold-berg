@@ -132,7 +132,7 @@
 
   .size-guide-btn {
     font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    font-size: 10px !important;
+    font-size: 8px !important;
     font-weight: 400 !important;
     color: #1d1d1f !important;
     background: #e3e3e7 !important;
@@ -145,6 +145,10 @@
     cursor: pointer !important;
     text-decoration: none !important;
     transition: background-color 0.2s, color 0.2s !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
   }
 
   .size-guide-btn:hover {
@@ -159,288 +163,11 @@
     gap: 8px;
   }
 
-  .product-app-block-wrapper {
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-
-  .product-app-block-wrapper div,
-  .product-app-block-wrapper form,
-  .product-app-block-wrapper section {
-    background: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-
-  .variant-selector-header .product-app-block-wrapper a,
-  .variant-selector-header .product-app-block-wrapper button,
-  .variant-selector-header .product-app-block-wrapper span,
-  .variant-selector-header .product-app-block-wrapper p,
-  .product-app-block-wrapper a,
-  .product-app-block-wrapper button,
-  .product-app-block-wrapper span,
-  .product-app-block-wrapper p,
-  .smartsize-trigger-link,
-  [data-smartsize-chart],
-  [class*='smartsize-trigger'],
-  [class*='smartsize-btn'] {
-    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    font-size: 10px !important;
-    font-weight: 400 !important;
-    color: #1d1d1f !important;
-    background-color: #e3e3e7 !important;
-    background: #e3e3e7 !important;
-    border: none !important;
-    padding: 4px 9px !important;
-    border-radius: 20px !important;
-    cursor: pointer !important;
-    text-decoration: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    line-height: 1 !important;
-    margin: 0 !important;
-    height: auto !important;
-    min-height: 0 !important;
-    width: auto !important;
-    box-sizing: border-box !important;
-    letter-spacing: 0.06em !important;
-    text-transform: uppercase !important;
-    transition: background-color 0.2s, color 0.2s !important;
-    box-shadow: none !important;
-    outline: none !important;
-  }
-
   @media screen and (max-width: 749px) {
-    .size-guide-btn,
-    .variant-selector-header .product-app-block-wrapper a,
-    .variant-selector-header .product-app-block-wrapper button,
-    .variant-selector-header .product-app-block-wrapper span,
-    .variant-selector-header .product-app-block-wrapper p,
-    .product-app-block-wrapper a,
-    .product-app-block-wrapper button,
-    .product-app-block-wrapper span,
-    .product-app-block-wrapper p,
-    .smartsize-trigger-link,
-    [data-smartsize-chart],
-    [class*='smartsize-trigger'],
-    [class*='smartsize-btn'] {
-      font-size: 8.5px !important;
-      padding: 4px 10px !important;
+    .size-guide-btn {
+      font-size: 7px !important;
+      padding: 4px 8px !important;
     }
-  }
-
-  .variant-selector-header .product-app-block-wrapper a:hover,
-  .variant-selector-header .product-app-block-wrapper button:hover,
-  .variant-selector-header .product-app-block-wrapper span:hover,
-  .variant-selector-header .product-app-block-wrapper p:hover,
-  .product-app-block-wrapper a:hover,
-  .product-app-block-wrapper button:hover,
-  .product-app-block-wrapper span:hover,
-  .product-app-block-wrapper p:hover,
-  .smartsize-trigger-link:hover,
-  [data-smartsize-chart]:hover,
-  [class*='smartsize-trigger']:hover,
-  [class*='smartsize-btn']:hover {
-    background-color: #d4d4d9 !important;
-    background: #d4d4d9 !important;
-    color: #000000 !important;
-    text-decoration: none !important;
-  }
-
-  .product-app-block-wrapper:not(:empty) + .size-guide-btn {
-    display: none !important;
-  }
-
-  /* SmartSize Overlay & Backdrop Elevation */
-  .smartsize-overlay,
-  .smartsize-backdrop,
-  [class*='smartsize-overlay'],
-  [class*='smartsize-backdrop'],
-  [id*='smartsize-backdrop'] {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: 100vw !important;
-    width: 100dvw !important;
-    height: 100vh !important;
-    height: 100dvh !important;
-    background: rgba(0, 0, 0, 0.65) !important;
-    z-index: 2147483646 !important;
-  }
-
-  /* Force header stack order behind SmartSize modal backdrop when modal is active */
-  body:has(
-      .smartsize-modal,
-      .smartsize-popup,
-      [class*='smartsize-modal'],
-      [class*='smartsize-popup'],
-      [class*='smartsize-backdrop']
-    )
-    .header-wrapper,
-  body:has(
-      .smartsize-modal,
-      .smartsize-popup,
-      [class*='smartsize-modal'],
-      [class*='smartsize-popup'],
-      [class*='smartsize-backdrop']
-    )
-    sticky-header,
-  body:has(
-      .smartsize-modal,
-      .smartsize-popup,
-      [class*='smartsize-modal'],
-      [class*='smartsize-popup'],
-      [class*='smartsize-backdrop']
-    )
-    #shopify-section-header,
-  body:has(
-      .smartsize-modal,
-      .smartsize-popup,
-      [class*='smartsize-modal'],
-      [class*='smartsize-popup'],
-      [class*='smartsize-backdrop']
-    )
-    .section-header,
-  body:has(
-      .smartsize-modal,
-      .smartsize-popup,
-      [class*='smartsize-modal'],
-      [class*='smartsize-popup'],
-      [class*='smartsize-backdrop']
-    )
-    header {
-    z-index: 1 !important;
-  }
-
-  /* Main SmartSize Outer Dialog Card */
-  /* SmartSize Responsive Modal Container */
-  .smartsize-modal,
-  .smartsize-popup,
-  div[class*='smartsize-modal-wrapper'],
-  div[class*='smartsize-popup'],
-  div[class*='smartsize-modal'],
-  #smartsize-dialog .MuiDialog-paper,
-  div[class*='smartsize'] .MuiDialog-paper {
-    z-index: 2147483647 !important;
-    width: min(92vw, 500px) !important;
-    min-width: min(92vw, 500px) !important;
-    max-width: 500px !important;
-    height: 65vh !important;
-    height: 65dvh !important;
-    max-height: 65vh !important;
-    max-height: 65dvh !important;
-    border-radius: 20px !important;
-    background: #ffffff !important;
-    background-color: #ffffff !important;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35) !important;
-    position: fixed !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    box-sizing: border-box !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    -webkit-overflow-scrolling: touch !important;
-    margin: 0 !important;
-    padding: 36px 16px 20px 16px !important;
-    scrollbar-width: thin !important;
-  }
-
-  .smartsize-modal::-webkit-scrollbar,
-  .smartsize-popup::-webkit-scrollbar,
-  div[class*='smartsize-modal']::-webkit-scrollbar,
-  div[class*='smartsize-popup']::-webkit-scrollbar {
-    width: 4px !important;
-  }
-
-  .smartsize-modal::-webkit-scrollbar-thumb,
-  .smartsize-popup::-webkit-scrollbar-thumb,
-  div[class*='smartsize-modal']::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2) !important;
-    border-radius: 4px !important;
-  }
-
-  /* Mobile Adjustments for Touchscreen Devices */
-  @media screen and (max-width: 749px) {
-    .smartsize-modal,
-    .smartsize-popup,
-    div[class*='smartsize-modal-wrapper'],
-    div[class*='smartsize-popup'],
-    div[class*='smartsize-modal'],
-    #smartsize-dialog .MuiDialog-paper,
-    div[class*='smartsize'] .MuiDialog-paper {
-      width: 90vw !important;
-      min-width: 90vw !important;
-      max-width: 90vw !important;
-      height: 65vh !important;
-      height: 65dvh !important;
-      max-height: 65vh !important;
-      max-height: 65dvh !important;
-      top: 50% !important;
-      left: 50% !important;
-      transform: translate(-50%, -50%) !important;
-      padding: 36px 16px 20px 16px !important;
-      border-radius: 20px !important;
-    }
-  }
-
-  /* SmartSize Modal Header & Close Button (Top-Right Circular Pill) */
-  .smartsize-modal [class*='close'],
-  .smartsize-popup [class*='close'],
-  [class*='smartsize-modal'] [class*='close'],
-  [class*='smartsize-popup'] [class*='close'],
-  [class*='smartsize'] button[class*='close'],
-  [class*='smartsize'] [aria-label*='close' i],
-  [class*='smartsize'] [aria-label*='Close'] {
-    position: absolute !important;
-    top: 12px !important;
-    right: 12px !important;
-    width: 30px !important;
-    height: 30px !important;
-    min-width: 30px !important;
-    min-height: 30px !important;
-    max-width: 30px !important;
-    max-height: 30px !important;
-    border-radius: 50% !important;
-    background: rgba(0, 0, 0, 0.08) !important;
-    background-color: rgba(0, 0, 0, 0.08) !important;
-    color: #1d1d1f !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    font-size: 15px !important;
-    line-height: 1 !important;
-    cursor: pointer !important;
-    z-index: 999999999 !important;
-    pointer-events: auto !important;
-    transition: background-color 0.2s !important;
-    box-shadow: none !important;
-    outline: none !important;
-  }
-
-  .smartsize-modal [class*='close']:hover,
-  .smartsize-popup [class*='close']:hover,
-  [class*='smartsize'] button[class*='close']:hover {
-    background: rgba(0, 0, 0, 0.16) !important;
-    background-color: rgba(0, 0, 0, 0.16) !important;
-    color: #000000 !important;
   }
 
   .variants-grid {
@@ -1713,37 +1440,11 @@
     const sizeGuideBtn = e.target.closest('.size-guide-btn');
     if (sizeGuideBtn) {
       e.preventDefault();
-      if (window.SmartSize && typeof window.SmartSize.open === 'function') {
-        window.SmartSize.open();
-        return;
-      }
-      const appTrigger = document.querySelector(
-        '.product-app-block-wrapper a, .product-app-block-wrapper button, .smartsize-trigger-link, [data-smartsize-chart], a[href*="smartsize"], .smartsize-block a'
-      );
-      if (appTrigger && appTrigger !== sizeGuideBtn) {
-        appTrigger.click();
-        return;
-      }
       const modal = document.getElementById('size-guide-modal');
       if (modal) {
         modal.classList.add('active');
       }
       return;
-    }
-
-    // 4. SmartSize Close Buttons
-    const closeElem = e.target.closest(
-      '[class*="close"], [class*="dismiss"], [aria-label*="close" i], [aria-label*="Close"]'
-    );
-    if (closeElem && closeElem.closest('[class*="smartsize"], [id*="smartsize"]')) {
-      if (window.SmartSize && typeof window.SmartSize.close === 'function') {
-        window.SmartSize.close();
-      } else {
-        document.querySelectorAll('[class*="smartsize"], [id*="smartsize"]').forEach((m) => {
-          m.style.display = 'none';
-          m.classList.remove('active');
-        });
-      }
     }
   });
 
