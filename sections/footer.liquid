@@ -182,7 +182,12 @@
         {%- if section.settings.show_footer_logo and section.settings.footer_logo != blank -%}
           {%- assign logo_width_style = 'max-width: ' | append: section.settings.footer_logo_width | append: 'px;' -%}
           <div class="custom-footer-middle-logo">
-            <a href="{{ routes.root_url }}" class="custom-footer-logo-link" aria-label="{{ shop.name }}">
+            <a
+              href="#"
+              onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); return false;"
+              class="custom-footer-logo-link{% if section.settings.enable_logo_heartbeat != false %} has-heartbeat-animation{% endif %}"
+              aria-label="{{ shop.name }}"
+            >
               {{
                 section.settings.footer_logo
                 | image_url: width: 600
@@ -299,6 +304,13 @@
       "unit": "px",
       "label": "Footer logo width",
       "default": 160
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_logo_heartbeat",
+      "label": "Enable logo heartbeat animation",
+      "default": true,
+      "info": "Continuously animates the footer logo with a 60 bpm heartbeat pulse."
     },
     {
       "type": "header",
