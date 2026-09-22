@@ -204,11 +204,92 @@
         "image_fit": "cover",
         "container_radius": 12
       }
+    },
+    "instagram_reels_carousel_hQk7d9": {
+      "type": "instagram-reels-carousel",
+      "blocks": {
+        "reel_HR87BV": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/SaveClip.App_AQNitYRB8t5us1TaS4u2garVBAB6Z-_4dbKriSGgZmNqB-jsfKiC-zzwZIU-TPP_w-sEdT1K4wn7f3pZpcw_y9egPnVXqv5q5J9_p_A.mp4",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_U6FwY9": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Z6_V3.mp4",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_UqNGTg": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Shadow, black oversized sweatpants.webm",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_QVVeme": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Phantom Black barrel fit.webm",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_LAgFdY": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Deep ocean barrel, fit.webm",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_HXQT8a": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Bloodline waffle black.webm",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "reel_HR87BV",
+        "reel_U6FwY9",
+        "reel_UqNGTg",
+        "reel_QVVeme",
+        "reel_LAgFdY",
+        "reel_HXQT8a"
+      ],
+      "settings": {
+        "heading": "INSTAGRAM REELS",
+        "autoplay": true,
+        "autoplay_interval": 6500,
+        "show_arrows": false,
+        "container_radius": 12
+      }
     }
   },
   "order": [
     "main",
     "people-also-buy",
-    "image_slider_centered_UEUtrM"
+    "image_slider_centered_UEUtrM",
+    "instagram_reels_carousel_hQk7d9"
   ]
 }
