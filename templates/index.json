@@ -106,6 +106,7 @@
     },
     "custom_collection_row_mqgCDc": {
       "type": "custom-collection-row",
+      "disabled": true,
       "name": "Custom Collection Row",
       "settings": {
         "title": "",
@@ -134,6 +135,7 @@
     },
     "custom_collection_row_EeiVwN": {
       "type": "custom-collection-row",
+      "disabled": true,
       "name": "Custom Collection Row",
       "settings": {
         "title": "",
