@@ -132,10 +132,83 @@
         "show_on_all": true,
         "target_products": []
       }
+    },
+    "image_slider_centered_UEUtrM": {
+      "type": "image-slider-centered",
+      "blocks": {
+        "slide_tmC7TA": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_15.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_gAw3D8": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_10.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_Jbxkfg": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_03.jpg",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_fHfAq8": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_14.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_WJgLBY": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_11.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_CDY9aN": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_13.webp",
+            "link": "",
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_tmC7TA",
+        "slide_gAw3D8",
+        "slide_Jbxkfg",
+        "slide_fHfAq8",
+        "slide_WJgLBY",
+        "slide_CDY9aN"
+      ],
+      "settings": {
+        "heading": "AS SEEN ON",
+        "autoplay": true,
+        "autoplay_interval": 5000,
+        "show_arrows": false,
+        "show_dots": false,
+        "aria_label": "Image slider carousel",
+        "adapt_height": true,
+        "image_fit": "cover",
+        "container_radius": 12
+      }
     }
   },
   "order": [
     "main",
-    "people-also-buy"
+    "people-also-buy",
+    "image_slider_centered_UEUtrM"
   ]
 }
