@@ -83,6 +83,17 @@
             "target_products": []
           }
         },
+        "accordion_row_mHMxjW": {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Exchange Policy",
+            "content": "<p><strong>Returns</strong> – Accepted only for defective, damaged, incorrect, or undelivered products. Must be requested within 24 hours.</p><p><strong>Refunds</strong> – Approved returns get a store credit coupon code (valid 50 days).</p><p><strong>Exchanges</strong> – Exchanges are strictly allowed only for size-related issues.</p><ul><li>If the requested size is out of stock, no store credit or alternative compensation will be provided.</li><li>Exchange requests must be raised within 24–48 hours of delivery.</li><li>Only a one-time exchange is allowed per order, subject to a ₹150 exchange fee.</li></ul><p><strong>Important Notes</strong> – Exchanges depend on stock availability. If unavailable, we won't be able to proceed with the exchange.</p>",
+            "page": "",
+            "show_description": false,
+            "show_on_all": true,
+            "target_products": []
+          }
+        },
         "trust_benefits_card": {
           "type": "trust_benefits_card",
           "settings": {
@@ -113,6 +124,7 @@
         "accordion_details",
         "accordion_washcare",
         "accordion_shipping",
+        "accordion_row_mHMxjW",
         "trust_benefits_card"
       ],
       "settings": {
