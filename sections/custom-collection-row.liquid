@@ -217,7 +217,7 @@
     }
   }
 
-  /* Sold Out Badge */
+  /* Sold Out & Discount Badges */
   .card-badge-soldout {
     position: absolute;
     top: 1.5rem;
@@ -233,6 +233,29 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  .card-badge-discount {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: #ffffff;
+    color: #1d1d1f;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    z-index: 8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .custom-product-discount-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #e02020;
+    margin-left: 4px;
   }
 
   /* Product Metadata */
@@ -405,8 +428,16 @@
 -%}
 {%- assign collection_url = featured_collection.url | default: '/collections/all' -%}
 
+{%- assign max_products = section.settings.products_to_show | default: 4 -%}
+{%- assign recommendation_intent = 'related' -%}
+{%- if section.settings.product_source == 'complementary' -%}
+  {%- assign recommendation_intent = 'complementary' -%}
+{%- endif -%}
+
 {%- assign products_to_render = null -%}
-{%- if section.settings.product_source == 'related_products' and product != null -%}
+{%- if recommendations.performed and recommendations.products_count > 0 -%}
+  {%- assign products_to_render = recommendations.products -%}
+{%- elsif section.settings.product_source == 'related_products' and product != null -%}
   {%- assign products_to_render = product.metafields['shopify--discovery--product_recommendation'].related_products.value -%}
 {%- endif -%}
 
@@ -418,7 +449,20 @@
   {%- assign products_to_render = collections.all.products -%}
 {%- endif -%}
 
-<div class="custom-collection-outer">
+{%- if section.settings.product_source == 'recommendations' or section.settings.product_source == 'complementary' -%}
+  {%- if product != null and recommendations.performed == false -%}
+    <product-recommendations
+      class="custom-collection-outer"
+      data-url="{{ routes.product_recommendations_url }}?limit={{ max_products }}&intent={{ recommendation_intent }}"
+      data-section-id="{{ section.id }}"
+      data-product-id="{{ product.id }}"
+    >
+  {%- else -%}
+    <div class="custom-collection-outer">
+  {%- endif -%}
+{%- else -%}
+  <div class="custom-collection-outer">
+{%- endif -%}
   <div class="custom-collection-container" style="--container-radius: {{ section.settings.container_radius }}px">
     <div class="custom-collection-header">
       <h3 class="custom-collection-name">{{ collection_title }}</h3>
@@ -438,7 +482,11 @@
             {%- assign rendered_count = rendered_count | plus: 1 -%}
             <div class="custom-product-card">
               <div class="card-image-slider-wrapper">
-                {%- if item.available == false -%}
+                {%- if section.settings.show_discount_badge and item.compare_at_price > item.price -%}
+                  {%- assign saving = item.compare_at_price | minus: item.price -%}
+                  {%- assign discount_percentage = saving | times: 100.0 | divided_by: item.compare_at_price | round -%}
+                  <span class="card-badge-discount">{{ discount_percentage }}% OFF</span>
+                {%- elsif item.available == false -%}
                   <span class="card-badge-soldout">Sold Out</span>
                 {%- endif -%}
 
@@ -503,13 +551,18 @@
                       <span class="custom-product-price">{{ item.price | money }}</span>
                       {%- if item.compare_at_price > item.price -%}
                         <span class="custom-product-compare">{{ item.compare_at_price | money }}</span>
+                        {%- if section.settings.show_discount_badge -%}
+                          {%- assign saving = item.compare_at_price | minus: item.price -%}
+                          {%- assign discount_percentage = saving | times: 100.0 | divided_by: item.compare_at_price | round -%}
+                          <span class="custom-product-discount-text">{{ discount_percentage }}% OFF</span>
+                        {%- endif -%}
                       {%- endif -%}
                     </div>
                   </div>
                 </a>
               </div>
             </div>
-            {%- if rendered_count >= 4 -%}
+            {%- if rendered_count >= max_products -%}
               {%- break -%}
             {%- endif -%}
           {%- endif -%}
@@ -586,7 +639,15 @@
       {%- endif -%}
     </div>
   </div>
-</div>
+{%- if section.settings.product_source == 'recommendations' or section.settings.product_source == 'complementary' -%}
+  {%- if product != null and recommendations.performed == false -%}
+    </product-recommendations>
+  {%- else -%}
+    </div>
+  {%- endif -%}
+{%- else -%}
+  </div>
+{%- endif -%}
 {%- endif -%}
 
 {%- javascript -%}
@@ -711,17 +772,34 @@
       "type": "select",
       "id": "product_source",
       "label": "Product Source",
-      "default": "collection",
+      "default": "recommendations",
       "options": [
+        {
+          "value": "recommendations",
+          "label": "Shopify Recommendations (Related)"
+        },
+        {
+          "value": "complementary",
+          "label": "Shopify Complementary (Search & Discovery)"
+        },
         {
           "value": "collection",
           "label": "Selected Collection"
         },
         {
           "value": "related_products",
-          "label": "Dynamic Related Products (Metafield)"
+          "label": "Dynamic Related (Metafield)"
         }
       ]
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "default": 4,
+      "label": "Maximum products to show"
     },
     {
       "type": "text",
@@ -733,6 +811,12 @@
       "type": "checkbox",
       "id": "hide_discover_more",
       "label": "Hide button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount_badge",
+      "label": "Show discount badge",
       "default": false
     },
     {
