@@ -482,7 +482,7 @@
             {%- assign rendered_count = rendered_count | plus: 1 -%}
             <div class="custom-product-card">
               <div class="card-image-slider-wrapper">
-                {%- if item.compare_at_price > item.price -%}
+                {%- if section.settings.show_discount_badge and item.compare_at_price > item.price -%}
                   {%- assign saving = item.compare_at_price | minus: item.price -%}
                   {%- assign discount_percentage = saving | times: 100.0 | divided_by: item.compare_at_price | round -%}
                   <span class="card-badge-discount">{{ discount_percentage }}% OFF</span>
@@ -551,7 +551,11 @@
                       <span class="custom-product-price">{{ item.price | money }}</span>
                       {%- if item.compare_at_price > item.price -%}
                         <span class="custom-product-compare">{{ item.compare_at_price | money }}</span>
-                        <span class="custom-product-discount-text">{{ discount_percentage }}% OFF</span>
+                        {%- if section.settings.show_discount_badge -%}
+                          {%- assign saving = item.compare_at_price | minus: item.price -%}
+                          {%- assign discount_percentage = saving | times: 100.0 | divided_by: item.compare_at_price | round -%}
+                          <span class="custom-product-discount-text">{{ discount_percentage }}% OFF</span>
+                        {%- endif -%}
                       {%- endif -%}
                     </div>
                   </div>
@@ -807,6 +811,12 @@
       "type": "checkbox",
       "id": "hide_discover_more",
       "label": "Hide button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount_badge",
+      "label": "Show discount badge",
       "default": false
     },
     {
