@@ -138,7 +138,8 @@
       "settings": {
         "title": "PEOPLE ALSO BUY",
         "collection": "all-products-2",
-        "product_source": "related_products",
+        "product_source": "recommendations",
+        "products_to_show": 8,
         "button_label": "Discover more",
         "hide_discover_more": true,
         "container_radius": 12,
