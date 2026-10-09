@@ -95,7 +95,7 @@
       "name": "Custom Collection Row",
       "settings": {
         "title": "Waffle T-Shirts",
-        "collection": "bloodline-essentials",
+        "collection": "waffle-tees",
         "product_source": "collection",
         "button_label": "Discover more",
         "hide_discover_more": false,
@@ -223,7 +223,7 @@
       "name": "Custom Collection Row",
       "settings": {
         "title": "",
-        "collection": "bloodline-essentials",
+        "collection": "waffle-tees",
         "product_source": "collection",
         "button_label": "Discover more",
         "hide_discover_more": false,
