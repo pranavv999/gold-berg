@@ -137,11 +137,12 @@
       "type": "custom-collection-row",
       "settings": {
         "title": "PEOPLE ALSO BUY",
-        "collection": "all-products-2",
+        "collection": "",
         "product_source": "recommendations",
         "products_to_show": 8,
         "button_label": "Discover more",
         "hide_discover_more": true,
+        "show_discount_badge": false,
         "container_radius": 12,
         "show_on_all": true,
         "target_products": []
