@@ -137,6 +137,9 @@
       "type": "custom-product-reviews",
       "settings": {
         "heading": "CUSTOMER REVIEWS",
+        "show_summary_badge": true,
+        "summary_rating": "4.9",
+        "summary_text": "Rated 4.9/5 based on +2,046 Total Ratings",
         "container_radius": 12,
         "card_radius": 16,
         "speed": 2,

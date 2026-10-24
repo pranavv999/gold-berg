@@ -44,6 +44,10 @@
 
     .product-reviews-header {
       text-align: center;
+      margin-bottom: 1.4rem;
+    }
+
+    .product-reviews-header.no-summary-badge {
       margin-bottom: 2.5rem;
     }
 
@@ -55,6 +59,47 @@
       margin: 0;
       letter-spacing: 0.06em !important;
       text-transform: uppercase !important;
+    }
+
+    .product-reviews-summary-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .product-reviews-summary-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #ffffff;
+      border: 1px solid #ebebed;
+      border-radius: 9999px;
+      padding: 8px 24px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    }
+
+    .product-reviews-summary-stars {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .product-reviews-summary-star {
+      width: 17px;
+      height: 17px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .product-reviews-summary-text {
+      font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #111111;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      white-space: nowrap;
     }
 
     .product-reviews-carousel-wrapper {
@@ -158,7 +203,24 @@
         border-radius: var(--container-radius, 24px) !important;
       }
       .product-reviews-header {
+        margin-bottom: 1rem !important;
+      }
+      .product-reviews-header.no-summary-badge {
         margin-bottom: 1.8rem !important;
+      }
+      .product-reviews-summary-wrap {
+        margin-bottom: 1.8rem !important;
+      }
+      .product-reviews-summary-badge {
+        padding: 6px 16px !important;
+        gap: 8px !important;
+      }
+      .product-reviews-summary-star {
+        width: 14px !important;
+        height: 14px !important;
+      }
+      .product-reviews-summary-text {
+        font-size: 11px !important;
       }
       .product-reviews-carousel-wrapper {
         mask-image: none;
@@ -186,8 +248,47 @@
   <div class="product-reviews-outer" id="ProductReviews-{{ section.id }}">
     <div class="product-reviews-container" style="--container-radius: {{ section.settings.container_radius }}px;">
       {%- if section.settings.heading != blank -%}
-        <div class="product-reviews-header">
+        <div class="product-reviews-header{% unless section.settings.show_summary_badge %} no-summary-badge{% endunless %}">
           <h2 class="product-reviews-heading">{{ section.settings.heading | escape }}</h2>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_summary_badge -%}
+        <div class="product-reviews-summary-wrap">
+          <div class="product-reviews-summary-badge">
+            <div class="product-reviews-summary-stars" aria-label="{{ section.settings.summary_rating | default: '4.9' }} out of 5 stars">
+              {%- assign summary_rating = section.settings.summary_rating | default: '4.9' | times: 1.0 -%}
+              {%- for s_idx in (1..5) -%}
+                {%- assign s_diff = summary_rating | minus: s_idx -%}
+                {%- if s_diff >= 0 -%}
+                  {%- comment -%} Full Star {%- endcomment -%}
+                  <svg class="product-reviews-summary-star" viewBox="0 0 24 24" fill="{{ section.settings.star_color | default: '#f59e0b' }}" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                {%- elsif s_diff > -1.0 -%}
+                  {%- comment -%} Fractional / Half Star {%- endcomment -%}
+                  {%- assign frac = s_diff | plus: 1.0 | times: 100 | round -%}
+                  <svg class="product-reviews-summary-star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="summary-star-{{ section.id }}-{{ s_idx }}">
+                        <stop offset="{{ frac }}%" stop-color="{{ section.settings.star_color | default: '#f59e0b' }}"/>
+                        <stop offset="{{ frac }}%" stop-color="#e5e5ea"/>
+                      </linearGradient>
+                    </defs>
+                    <path fill="url(#summary-star-{{ section.id }}-{{ s_idx }})" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                {%- else -%}
+                  {%- comment -%} Empty Star {%- endcomment -%}
+                  <svg class="product-reviews-summary-star" viewBox="0 0 24 24" fill="#e5e5ea" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            {%- if section.settings.summary_text != blank -%}
+              <span class="product-reviews-summary-text">{{ section.settings.summary_text | escape }}</span>
+            {%- endif -%}
+          </div>
         </div>
       {%- endif -%}
 
@@ -439,6 +540,29 @@
       "id": "heading",
       "label": "Heading",
       "default": "CUSTOMER REVIEWS"
+    },
+    {
+      "type": "header",
+      "content": "Rating Summary Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_summary_badge",
+      "label": "Show rating summary badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "summary_rating",
+      "label": "Rating score (e.g. 4.3, 4.5, 4.9)",
+      "default": "4.9",
+      "info": "Controls filled stars (supports decimals)"
+    },
+    {
+      "type": "text",
+      "id": "summary_text",
+      "label": "Rating summary text",
+      "default": "Rated 4.9/5 based on +2,046 Total Ratings"
     },
     {
       "type": "range",
