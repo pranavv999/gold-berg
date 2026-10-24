@@ -133,6 +133,19 @@
         "container_radius": 24
       }
     },
+    "customer_reviews": {
+      "type": "custom-product-reviews",
+      "settings": {
+        "heading": "CUSTOMER REVIEWS",
+        "container_radius": 12,
+        "card_radius": 16,
+        "speed": 2,
+        "pause_on_hover": true,
+        "card_bg": "#fafafa",
+        "card_border": "#e8e8ed",
+        "star_color": "#f59e0b"
+      }
+    },
     "people-also-buy": {
       "type": "custom-collection-row",
       "settings": {
@@ -303,6 +316,7 @@
   },
   "order": [
     "main",
+    "customer_reviews",
     "people-also-buy",
     "image_slider_centered_UEUtrM",
     "instagram_reels_carousel_hQk7d9"
