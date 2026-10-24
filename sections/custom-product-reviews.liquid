@@ -1,0 +1,627 @@
+{%- doc -%}
+  Renders an auto-scrolling customer reviews carousel from the product's "Product Reviews" JSON metafield.
+  Auto-hides if the metafield is not set or empty.
+{%- enddoc -%}
+
+{%- assign reviews_array = product.metafields.custom.product_reviews.value -%}
+{%- if reviews_array == blank -%}
+  {%- assign reviews_array = product.metafields.custom.product_reviews -%}
+{%- endif -%}
+{%- if reviews_array == blank -%}
+  {%- assign reviews_array = product.metafields.custom.reviews.value -%}
+{%- endif -%}
+{%- if reviews_array == blank -%}
+  {%- assign reviews_array = product.metafields.custom.reviews -%}
+{%- endif -%}
+
+{%- assign has_valid_reviews = false -%}
+{%- if reviews_array != blank and reviews_array.size > 0 -%}
+  {%- assign has_valid_reviews = true -%}
+{%- endif -%}
+
+{%- if has_valid_reviews -%}
+  {%- style -%}
+    .product-reviews-outer {
+      background: transparent !important;
+      padding: 11px 24px !important;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .product-reviews-container {
+      background: #ffffff;
+      border-radius: var(--container-radius, 24px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto;
+      padding: 3.5rem 4rem;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    .product-reviews-header {
+      text-align: center;
+      margin-bottom: 1.4rem;
+    }
+
+    .product-reviews-header.no-summary-badge {
+      margin-bottom: 2.5rem;
+    }
+
+    .product-reviews-heading {
+      font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      color: #1d1d1f !important;
+      margin: 0;
+      letter-spacing: 0.06em !important;
+      text-transform: uppercase !important;
+    }
+
+    .product-reviews-summary-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .product-reviews-summary-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #ffffff;
+      border: 1px solid #ebebed;
+      border-radius: 9999px;
+      padding: 8px 24px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    }
+
+    .product-reviews-summary-stars {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .product-reviews-summary-star {
+      width: 17px;
+      height: 17px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .product-reviews-summary-text {
+      font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #111111;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .product-reviews-carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      touch-action: pan-y;
+      mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+    }
+
+    .product-reviews-track {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      will-change: transform;
+      padding: 6px 0;
+    }
+
+    .product-review-card {
+      width: 360px;
+      flex-shrink: 0;
+      background: {{ section.settings.card_bg | default: '#fafafa' }};
+      border: 1px solid {{ section.settings.card_border | default: '#e8e8ed' }};
+      border-radius: {{ section.settings.card_radius | default: 16 }}px;
+      padding: 24px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      user-select: none;
+    }
+
+    .product-review-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      border-color: #d1d1d6;
+    }
+
+    .product-review-stars {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+
+    .product-review-star-icon {
+      width: 18px;
+      height: 18px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .product-review-author-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .product-review-author-name {
+      font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #111111;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .product-review-separator {
+      color: #8e8e93;
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .product-review-verified-text {
+      font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #16a34a;
+      line-height: 1.2;
+    }
+
+    .product-review-body {
+      font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #2c2c2e;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    @media screen and (max-width: 749px) {
+      .product-reviews-outer {
+        padding: 6px 5px !important;
+      }
+      .product-reviews-container {
+        padding: 1.8rem 1.2rem !important;
+        border-radius: var(--container-radius, 24px) !important;
+      }
+      .product-reviews-header {
+        margin-bottom: 1rem !important;
+      }
+      .product-reviews-header.no-summary-badge {
+        margin-bottom: 1.8rem !important;
+      }
+      .product-reviews-summary-wrap {
+        margin-bottom: 1.8rem !important;
+      }
+      .product-reviews-summary-badge {
+        padding: 6px 16px !important;
+        gap: 8px !important;
+      }
+      .product-reviews-summary-star {
+        width: 14px !important;
+        height: 14px !important;
+      }
+      .product-reviews-summary-text {
+        font-size: 11px !important;
+      }
+      .product-reviews-carousel-wrapper {
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
+      .product-reviews-track {
+        gap: 1rem;
+      }
+      .product-review-card {
+        width: 290px;
+        padding: 18px;
+      }
+      .product-reviews-heading {
+        font-size: 11px !important;
+      }
+      .product-review-author-name,
+      .product-review-verified-text,
+      .product-review-body,
+      .product-review-separator {
+        font-size: 11px !important;
+      }
+    }
+  {%- endstyle -%}
+
+  <div class="product-reviews-outer" id="ProductReviews-{{ section.id }}">
+    <div class="product-reviews-container" style="--container-radius: {{ section.settings.container_radius }}px;">
+      {%- if section.settings.heading != blank -%}
+        <div class="product-reviews-header{% unless section.settings.show_summary_badge %} no-summary-badge{% endunless %}">
+          <h2 class="product-reviews-heading">{{ section.settings.heading | escape }}</h2>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_summary_badge -%}
+        <div class="product-reviews-summary-wrap">
+          <div class="product-reviews-summary-badge">
+            <div class="product-reviews-summary-stars" aria-label="{{ section.settings.summary_rating | default: '4.9' }} out of 5 stars">
+              {%- assign summary_rating = section.settings.summary_rating | default: '4.9' | times: 1.0 -%}
+              {%- for s_idx in (1..5) -%}
+                {%- assign s_diff = summary_rating | minus: s_idx -%}
+                {%- if s_diff >= 0 -%}
+                  {%- comment -%} Full Star {%- endcomment -%}
+                  <svg class="product-reviews-summary-star" viewBox="0 0 24 24" fill="{{ section.settings.star_color | default: '#f59e0b' }}" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                {%- elsif s_diff > -1.0 -%}
+                  {%- comment -%} Fractional / Half Star {%- endcomment -%}
+                  {%- assign frac = s_diff | plus: 1.0 | times: 100 | round -%}
+                  <svg class="product-reviews-summary-star" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="summary-star-{{ section.id }}-{{ s_idx }}">
+                        <stop offset="{{ frac }}%" stop-color="{{ section.settings.star_color | default: '#f59e0b' }}"/>
+                        <stop offset="{{ frac }}%" stop-color="#e5e5ea"/>
+                      </linearGradient>
+                    </defs>
+                    <path fill="url(#summary-star-{{ section.id }}-{{ s_idx }})" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                {%- else -%}
+                  {%- comment -%} Empty Star {%- endcomment -%}
+                  <svg class="product-reviews-summary-star" viewBox="0 0 24 24" fill="#e5e5ea" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            {%- if section.settings.summary_text != blank -%}
+              <span class="product-reviews-summary-text">{{ section.settings.summary_text | escape }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div
+        class="product-reviews-carousel-wrapper"
+        id="ReviewsWrapper-{{ section.id }}"
+        data-speed="{{ section.settings.speed | default: 2 }}"
+        data-pause-on-hover="{{ section.settings.pause_on_hover }}"
+        role="region"
+        aria-label="{{ section.settings.heading | escape }}"
+      >
+        <div class="product-reviews-track" id="ReviewsTrack-{{ section.id }}">
+          {%- comment -%}
+            Check if reviews_array is an array of objects or a raw JSON string
+          {%- endcomment -%}
+          {%- if reviews_array.first.name != blank or reviews_array.first.review != blank -%}
+            {%- for rev in reviews_array -%}
+              {%- assign r_rating = rev.rating | times: 1.0 -%}
+              <div class="product-review-card">
+                <div class="product-review-stars" aria-label="{{ r_rating }} out of 5 stars">
+                  {%- for star_idx in (1..5) -%}
+                    {%- assign diff = r_rating | minus: star_idx -%}
+                    {%- if diff >= 0 -%}
+                      {%- comment -%} Full Star {%- endcomment -%}
+                      <svg class="product-review-star-icon" viewBox="0 0 24 24" fill="{{ section.settings.star_color | default: '#f59e0b' }}" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    {%- elsif diff >= -0.5 -%}
+                      {%- comment -%} Half Star {%- endcomment -%}
+                      <svg class="product-review-star-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                          <linearGradient id="half-star-{{ section.id }}-{{ forloop.parentloop.index }}-{{ star_idx }}">
+                            <stop offset="50%" stop-color="{{ section.settings.star_color | default: '#f59e0b' }}"/>
+                            <stop offset="50%" stop-color="#e5e5ea"/>
+                          </linearGradient>
+                        </defs>
+                        <path fill="url(#half-star-{{ section.id }}-{{ forloop.parentloop.index }}-{{ star_idx }})" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    {%- else -%}
+                      {%- comment -%} Empty Star {%- endcomment -%}
+                      <svg class="product-review-star-icon" viewBox="0 0 24 24" fill="#e5e5ea" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+
+                <div class="product-review-author-row">
+                  <span class="product-review-author-name">{{ rev.name | escape }}</span>
+                  <span class="product-review-separator">•</span>
+                  <span class="product-review-verified-text">Verified Buyer</span>
+                </div>
+
+                <p class="product-review-body">{{ rev.review | escape }}</p>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+
+        {%- comment -%}
+          If reviews_array was passed as a string or needs JS hydration fallback
+        {%- endcomment -%}
+        <script type="application/json" id="ReviewsData-{{ section.id }}">
+          {{ reviews_array | json }}
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const sectionId = {{ section.id | json }};
+      const track = document.getElementById('ReviewsTrack-' + sectionId);
+      const wrapper = document.getElementById('ReviewsWrapper-' + sectionId);
+      const dataScript = document.getElementById('ReviewsData-' + sectionId);
+      if (!track || !wrapper) return;
+
+      const starColor = {{ section.settings.star_color | default: '#f59e0b' | json }};
+
+      // Helper to generate star SVG string
+      function getStarSvg(rating, starIdx, reviewIdx) {
+        const diff = rating - starIdx;
+        if (diff >= 0) {
+          return `<svg class="product-review-star-icon" viewBox="0 0 24 24" fill="${starColor}" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+        } else if (diff >= -0.5) {
+          const gradId = `js-half-star-${sectionId}-${reviewIdx}-${starIdx}`;
+          return `<svg class="product-review-star-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="${gradId}"><stop offset="50%" stop-color="${starColor}"/><stop offset="50%" stop-color="#e5e5ea"/></linearGradient></defs><path fill="url(#${gradId})" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+        } else {
+          return `<svg class="product-review-star-icon" viewBox="0 0 24 24" fill="#e5e5ea" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+        }
+      }
+
+      // Check if server-side rendered items exist; if not, parse and render from JSON
+      let existingItems = Array.from(track.children).filter(el => !el.classList.contains('is-clone'));
+      if (existingItems.length === 0 && dataScript) {
+        try {
+          let raw = JSON.parse(dataScript.textContent);
+          if (typeof raw === 'string') {
+            raw = JSON.parse(raw);
+          }
+          if (Array.isArray(raw) && raw.length > 0) {
+            raw.forEach((item, idx) => {
+              const rating = parseFloat(item.rating || 5);
+              let starsHtml = '';
+              for (let s = 1; s <= 5; s++) {
+                starsHtml += getStarSvg(rating, s, idx);
+              }
+              const card = document.createElement('div');
+              card.className = 'product-review-card';
+              card.innerHTML = `
+                <div class="product-review-stars" aria-label="${rating} out of 5 stars">
+                  ${starsHtml}
+                </div>
+                <div class="product-review-author-row">
+                  <span class="product-review-author-name">${escapeHtml(item.name || '')}</span>
+                  <span class="product-review-separator">•</span>
+                  <span class="product-review-verified-text">Verified Buyer</span>
+                </div>
+                <p class="product-review-body">${escapeHtml(item.review || '')}</p>
+              `;
+              track.appendChild(card);
+            });
+            existingItems = Array.from(track.children);
+          }
+        } catch (e) {
+          console.warn('Could not parse reviews JSON:', e);
+        }
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      if (existingItems.length === 0) return;
+
+      const speedSetting = parseFloat(wrapper.getAttribute('data-speed') || '2');
+      // Smooth speed: between 0.6 and 2.5 px per frame
+      const speed = Math.max(0.4, speedSetting * 0.55);
+      const pauseOnHover = wrapper.getAttribute('data-pause-on-hover') !== 'false';
+
+      function getOriginalWidth() {
+        let total = 0;
+        const gap = parseFloat(window.getComputedStyle(track).gap || '24');
+        existingItems.forEach(el => {
+          total += el.offsetWidth + gap;
+        });
+        return total;
+      }
+
+      let originalWidth = 0;
+
+      function setupClones() {
+        Array.from(track.children).forEach(child => {
+          if (child.classList.contains('is-clone')) child.remove();
+        });
+
+        originalWidth = getOriginalWidth();
+        if (originalWidth <= 0) return;
+
+        // Ensure track is long enough to fill screen + original width seamlessly
+        const targetWidth = originalWidth + wrapper.clientWidth + 800;
+        let loops = 0;
+        while (track.scrollWidth < targetWidth && loops < 12) {
+          existingItems.forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.classList.add('is-clone');
+            clone.setAttribute('aria-hidden', 'true');
+            track.appendChild(clone);
+          });
+          loops++;
+        }
+      }
+
+      setupClones();
+      window.addEventListener('load', setupClones);
+      window.addEventListener('resize', () => {
+        setupClones();
+      });
+
+      let currentX = 0;
+      let isPaused = false;
+      let animFrame = null;
+
+      function step() {
+        if (!isPaused && originalWidth > 0) {
+          currentX -= speed;
+          if (Math.abs(currentX) >= originalWidth) {
+            currentX += originalWidth;
+          }
+          track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+        }
+        animFrame = requestAnimationFrame(step);
+      }
+
+      animFrame = requestAnimationFrame(step);
+
+      if (pauseOnHover) {
+        wrapper.addEventListener('mouseenter', () => { isPaused = true; });
+        wrapper.addEventListener('mouseleave', () => { isPaused = false; });
+      }
+
+      // Touch drag / swipe support
+      let isTouch = false;
+      let touchStartX = 0;
+      let touchLastX = 0;
+
+      wrapper.addEventListener('touchstart', (e) => {
+        isTouch = true;
+        isPaused = true;
+        touchStartX = e.touches[0].clientX;
+        touchLastX = touchStartX;
+      }, { passive: true });
+
+      wrapper.addEventListener('touchmove', (e) => {
+        if (!isTouch || originalWidth <= 0) return;
+        const x = e.touches[0].clientX;
+        const delta = x - touchLastX;
+        touchLastX = x;
+        currentX += delta;
+        if (currentX > 0) {
+          currentX -= originalWidth;
+        } else if (Math.abs(currentX) >= originalWidth) {
+          currentX += originalWidth;
+        }
+        track.style.transform = `translate3d(${currentX}px, 0, 0)`;
+      }, { passive: true });
+
+      wrapper.addEventListener('touchend', () => {
+        isTouch = false;
+        isPaused = false;
+      }, { passive: true });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Customer Reviews",
+  "tag": "section",
+  "class": "section-customer-reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "CUSTOMER REVIEWS"
+    },
+    {
+      "type": "header",
+      "content": "Rating Summary Badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_summary_badge",
+      "label": "Show rating summary badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "summary_rating",
+      "label": "Rating score (e.g. 4.3, 4.5, 4.9)",
+      "default": "4.9",
+      "info": "Controls filled stars (supports decimals)"
+    },
+    {
+      "type": "text",
+      "id": "summary_text",
+      "label": "Rating summary text",
+      "default": "Rated 4.9/5 based on +2,046 Total Ratings"
+    },
+    {
+      "type": "range",
+      "id": "container_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 24,
+      "label": "Container corner radius"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 4,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "label": "Card corner radius"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 2,
+      "label": "Scroll speed"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card background",
+      "default": "#fafafa"
+    },
+    {
+      "type": "color",
+      "id": "card_border",
+      "label": "Card border color",
+      "default": "#e8e8ed"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star rating color",
+      "default": "#f59e0b"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Reviews"
+    }
+  ]
+}
+{% endschema %}
