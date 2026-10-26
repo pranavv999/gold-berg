@@ -1235,6 +1235,18 @@
           <div class="cta-buttons-row">
             <button type="submit" name="add" class="cta-btn cta-btn--outline">Add to bag</button>
             <button type="button" class="cta-btn cta-btn--solid" onclick="location.href='/checkout'">Buy now</button>
+            {%- unless product.selected_or_first_available_variant.available -%}
+         <style>
+          .sr-headless-checkout{
+           opacity:0.5;
+           cursor: not-allowed;
+           pointer-events: none;
+          }
+         </style>
+        {%- endunless -%}
+<input type="hidden" value="true" id="fastrrCollectionPage" />
+<input type="hidden" value={{ product.url }} name="productUrl" />
+<div class="shiprocket-headless" data-type="product"></div>
           </div>
         {%- endform -%}
       </div>
