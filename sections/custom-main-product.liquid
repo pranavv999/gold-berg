@@ -971,6 +971,97 @@
       padding: 15px !important;
     }
   }
+
+  /* PREORDER COMPONENT */
+  .preorder-card-wrap {
+    width: 100%;
+    background: #e2e2e4;
+    border-radius: 16px;
+    padding: 12px 10px 10px 10px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: var(--preorder-margin-top, 14px);
+    margin-bottom: var(--preorder-margin-bottom, 14px);
+  }
+
+  .preorder-card-heading {
+    font-family: var(--font-heading-family), var(--font-body-family), -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #111111;
+    margin: 0 0 10px 0;
+    line-height: 1.2;
+  }
+
+  .preorder-card-inner {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 22px 18px 20px 18px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  }
+
+  .preorder-offer-title {
+    font-family: var(--font-body-family), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: #000000;
+    letter-spacing: 0.02em;
+    margin: 0 0 10px 0;
+    line-height: 1.25;
+  }
+
+  .preorder-main-text {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #4a4a4a;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .preorder-dispatch-note {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 11.5px;
+    line-height: 1.45;
+    color: #717176;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed #e5e5e7;
+    letter-spacing: 0.01em;
+  }
+
+  @media (max-width: 768px) {
+    .preorder-card-wrap {
+      border-radius: 14px;
+      padding: 10px 8px 8px 8px;
+    }
+    .preorder-card-heading {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      margin-bottom: 8px;
+    }
+    .preorder-card-inner {
+      border-radius: 10px;
+      padding: 16px 12px 15px 12px;
+    }
+    .preorder-offer-title {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+    .preorder-main-text {
+      font-size: 11px !important;
+      line-height: 1.55;
+    }
+    .preorder-dispatch-note {
+      font-size: 10.5px !important;
+      margin-top: 10px;
+      padding-top: 8px;
+    }
+  }
 {%- endstyle -%}
 
 {%- assign product_images = product.media | where: 'media_type', 'image' -%}
@@ -1097,82 +1188,127 @@
             {%- endif -%}
           </div>
 
-          <!-- AVAILABLE OFFERS BLOCKS -->
+          <!-- AVAILABLE OFFERS BLOCKS / PREORDER COMPONENT -->
+          {%- assign preorder_data = product.metafields.custom.preorder.value
+            | default: product.metafields.custom.preorder
+            | default: product.metafields.custom.preoder.value
+            | default: product.metafields.custom.preoder
+          -%}
+          {%- assign has_preorder = false -%}
+          {%- if preorder_data != blank -%}
+            {%- if preorder_data.offer != blank or preorder_data.main_text != blank or preorder_data.title != blank or preorder_data.dispatch_note != blank -%}
+              {%- assign has_preorder = true -%}
+            {%- endif -%}
+          {%- endif -%}
+
           {%- assign available_offers_blocks = section.blocks | where: 'type', 'available_offers' -%}
-          {%- for block in available_offers_blocks -%}
-            {%- assign is_offers_visible = false -%}
-            {%- if block.settings.show_on_all -%}
-              {%- assign is_offers_visible = true -%}
-            {%- elsif product != null and block.settings.target_products != blank -%}
-              {%- for target in block.settings.target_products -%}
-                {%- if target.handle == product.handle or target.id == product.id -%}
-                  {%- assign is_offers_visible = true -%}
-                  {%- break -%}
-                {%- endif -%}
-              {%- endfor -%}
-            {%- elsif product == null -%}
-              {%- assign is_offers_visible = true -%}
-            {%- endif -%}
 
-            {%- if is_offers_visible -%}
-              <div
-                class="available-offers-wrap"
-                style="
-                  --offers-margin-top: {{ block.settings.margin_top }}px;
-                  --offers-margin-bottom: {{ block.settings.margin_bottom }}px;
-                  --offers-heading-size: {{ block.settings.heading_font_size }}px;
-                  --offers-heading-color: {{ block.settings.heading_color }};
-                  --offers-card-bg: {{ block.settings.card_bg }};
-                  --offers-card-border: {{ block.settings.card_border_color }};
-                  --offers-card-accent: {{ block.settings.card_accent_color }};
-                  --offers-title-size: {{ block.settings.title_font_size }}px;
-                  --offers-title-color: {{ block.settings.title_color }};
-                  --offers-badge-bg: {{ block.settings.badge_bg }};
-                  --offers-badge-color: {{ block.settings.badge_text_color }};
-                  --offers-code-color: {{ block.settings.code_text_color }};
-                "
-                {{ block.shopify_attributes }}
-              >
-                {%- if block.settings.heading != blank -%}
-                  <div class="available-offers-heading">{{ block.settings.heading }}</div>
+          {%- if has_preorder -%}
+            {%- assign offers_margin_top = available_offers_blocks.first.settings.margin_top | default: 14 -%}
+            {%- assign offers_margin_bottom = available_offers_blocks.first.settings.margin_bottom | default: 14 -%}
+            <div
+              class="preorder-card-wrap"
+              style="
+                --preorder-margin-top: {{ offers_margin_top }}px;
+                --preorder-margin-bottom: {{ offers_margin_bottom }}px;
+              "
+            >
+              {%- if preorder_data.title != blank -%}
+                <div class="preorder-card-heading">{{ preorder_data.title | escape }}</div>
+              {%- else -%}
+                <div class="preorder-card-heading">PREORDER</div>
+              {%- endif -%}
+
+              <div class="preorder-card-inner">
+                {%- if preorder_data.offer != blank -%}
+                  <div class="preorder-offer-title">{{ preorder_data.offer | escape }}</div>
                 {%- endif -%}
 
-                <div class="available-offers-grid{% if block.settings.offer_1_enable and block.settings.offer_2_enable == false %} available-offers-grid--single{% endif %}{% if block.settings.offer_1_enable == false and block.settings.offer_2_enable %} available-offers-grid--single{% endif %}">
-                  {%- if block.settings.offer_1_enable -%}
-                    <div class="available-offers-card">
-                      {%- if block.settings.offer_1_text != blank -%}
-                        <div class="available-offers-subtitle">{{ block.settings.offer_1_text }}</div>
-                      {%- endif -%}
-                      <div class="available-offers-bottom">
-                        {%- if block.settings.offer_1_badge != blank -%}
-                          <div class="available-offers-prepaid">{{ block.settings.offer_1_badge }}</div>
-                        {%- endif -%}
-                        {%- if block.settings.offer_1_code != blank -%}
-                          <div class="available-offers-applied">{{ block.settings.offer_1_code }}</div>
-                        {%- endif -%}
-                      </div>
-                    </div>
-                  {%- endif -%}
+                {%- if preorder_data.main_text != blank -%}
+                  <div class="preorder-main-text">{{ preorder_data.main_text | escape }}</div>
+                {%- endif -%}
 
-                  {%- if block.settings.offer_2_enable -%}
-                    <div class="available-offers-card">
-                      {%- if block.settings.offer_2_text != blank -%}
-                        <div class="available-offers-subtitle">{{ block.settings.offer_2_text }}</div>
-                      {%- endif -%}
-                      <div class="available-offers-bottom">
-                        {%- if block.settings.offer_2_badge != blank -%}
-                          <div class="available-offers-prepaid">{{ block.settings.offer_2_badge }}</div>
-                        {%- endif -%}
-                        {%- if block.settings.offer_2_code != blank -%}
-                          <div class="available-offers-applied">{{ block.settings.offer_2_code }}</div>
-                        {%- endif -%}
-                      </div>
-                    </div>
-                  {%- endif -%}
-                </div>
+                {%- if preorder_data.dispatch_note != blank -%}
+                  <div class="preorder-dispatch-note">{{ preorder_data.dispatch_note | escape }}</div>
+                {%- endif -%}
               </div>
-            {%- endif -%}
-          {%- endfor -%}
+            </div>
+          {%- else -%}
+            {%- for block in available_offers_blocks -%}
+              {%- assign is_offers_visible = false -%}
+              {%- if block.settings.show_on_all -%}
+                {%- assign is_offers_visible = true -%}
+              {%- elsif product != null and block.settings.target_products != blank -%}
+                {%- for target in block.settings.target_products -%}
+                  {%- if target.handle == product.handle or target.id == product.id -%}
+                    {%- assign is_offers_visible = true -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- elsif product == null -%}
+                {%- assign is_offers_visible = true -%}
+              {%- endif -%}
+
+              {%- if is_offers_visible -%}
+                <div
+                  class="available-offers-wrap"
+                  style="
+                    --offers-margin-top: {{ block.settings.margin_top }}px;
+                    --offers-margin-bottom: {{ block.settings.margin_bottom }}px;
+                    --offers-heading-size: {{ block.settings.heading_font_size }}px;
+                    --offers-heading-color: {{ block.settings.heading_color }};
+                    --offers-card-bg: {{ block.settings.card_bg }};
+                    --offers-card-border: {{ block.settings.card_border_color }};
+                    --offers-card-accent: {{ block.settings.card_accent_color }};
+                    --offers-title-size: {{ block.settings.title_font_size }}px;
+                    --offers-title-color: {{ block.settings.title_color }};
+                    --offers-badge-bg: {{ block.settings.badge_bg }};
+                    --offers-badge-color: {{ block.settings.badge_text_color }};
+                    --offers-code-color: {{ block.settings.code_text_color }};
+                  "
+                  {{ block.shopify_attributes }}
+                >
+                  {%- if block.settings.heading != blank -%}
+                    <div class="available-offers-heading">{{ block.settings.heading }}</div>
+                  {%- endif -%}
+
+                  <div class="available-offers-grid{% if block.settings.offer_1_enable and block.settings.offer_2_enable == false %} available-offers-grid--single{% endif %}{% if block.settings.offer_1_enable == false and block.settings.offer_2_enable %} available-offers-grid--single{% endif %}">
+                    {%- if block.settings.offer_1_enable -%}
+                      <div class="available-offers-card">
+                        {%- if block.settings.offer_1_text != blank -%}
+                          <div class="available-offers-subtitle">{{ block.settings.offer_1_text }}</div>
+                        {%- endif -%}
+                        <div class="available-offers-bottom">
+                          {%- if block.settings.offer_1_badge != blank -%}
+                            <div class="available-offers-prepaid">{{ block.settings.offer_1_badge }}</div>
+                          {%- endif -%}
+                          {%- if block.settings.offer_1_code != blank -%}
+                            <div class="available-offers-applied">{{ block.settings.offer_1_code }}</div>
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    {%- endif -%}
+
+                    {%- if block.settings.offer_2_enable -%}
+                      <div class="available-offers-card">
+                        {%- if block.settings.offer_2_text != blank -%}
+                          <div class="available-offers-subtitle">{{ block.settings.offer_2_text }}</div>
+                        {%- endif -%}
+                        <div class="available-offers-bottom">
+                          {%- if block.settings.offer_2_badge != blank -%}
+                            <div class="available-offers-prepaid">{{ block.settings.offer_2_badge }}</div>
+                          {%- endif -%}
+                          {%- if block.settings.offer_2_code != blank -%}
+                            <div class="available-offers-applied">{{ block.settings.offer_2_code }}</div>
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
 
           {%- unless product.has_only_default_variant -%}
             {%- for option in product.options_with_values -%}
