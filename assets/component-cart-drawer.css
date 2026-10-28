@@ -473,7 +473,7 @@ cart-drawer,
 }
 
 body.overflow-hidden > *:not(cart-drawer):not(#CartDrawer) {
-  filter: blur(2.5px) !important;
+  filter: blur(2.5px);
   transition: filter 0.3s ease !important;
 }
 
