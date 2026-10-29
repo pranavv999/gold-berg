@@ -37,8 +37,8 @@
         "button"
       ],
       "settings": {
-        "image": "shopify://shop_images/d-1_7a21b503-49a4-473e-bee6-d1d97f0e315e.webp",
-        "mobile_image": "shopify://shop_images/m-1_9f8edfba-7557-4df1-a18c-2aced91adbf3.webp",
+        "image": "shopify://shop_images/f-w-1_957e5cfb-080e-4633-a655-cbdc8a2e2a2c_1.webp",
+        "mobile_image": "shopify://shop_images/f-m-1_f2763e89-e257-45ca-9488-3301037f2a2d_1.webp",
         "image_overlay_opacity": 40,
         "image_height": "adapt",
         "image_behavior": "none",
@@ -49,6 +49,39 @@
         "stack_images_on_mobile": false,
         "mobile_content_alignment": "center",
         "show_text_below": false
+      }
+    },
+    "custom_collection_row_mqgCDc": {
+      "type": "custom-collection-row",
+      "disabled": true,
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "the-fan-jersey",
+        "product_source": "collection",
+        "products_to_show": 4,
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "show_discount_badge": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
+    "custom_collection_row_D38Wef": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "Waffle T-Shirts",
+        "collection": "waffle-tees",
+        "product_source": "collection",
+        "products_to_show": 4,
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "show_discount_badge": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
       }
     },
     "custom_collection_row": {
@@ -66,11 +99,12 @@
         "target_products": []
       }
     },
-    "custom_collection_row_F4wj48": {
+    "custom_collection_row_HE3JcL": {
       "type": "custom-collection-row",
+      "name": "Custom Collection Row",
       "settings": {
         "title": "",
-        "collection": "deep-wave-denim-collection",
+        "collection": "dark-mode-collection",
         "product_source": "collection",
         "products_to_show": 4,
         "button_label": "Discover more",
@@ -136,60 +170,26 @@
         "show_overlay": true
       }
     },
+    "custom_collection_row_F4wj48": {
+      "type": "custom-collection-row",
+      "settings": {
+        "title": "",
+        "collection": "deep-wave-denim-collection",
+        "product_source": "collection",
+        "products_to_show": 4,
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "show_discount_badge": false,
+        "container_radius": 12,
+        "show_on_all": false,
+        "target_products": []
+      }
+    },
     "custom_collection_row_nN6nge": {
       "type": "custom-collection-row",
       "settings": {
         "title": "",
         "collection": "manga-archives",
-        "product_source": "collection",
-        "products_to_show": 4,
-        "button_label": "Discover more",
-        "hide_discover_more": false,
-        "show_discount_badge": false,
-        "container_radius": 12,
-        "show_on_all": false,
-        "target_products": []
-      }
-    },
-    "custom_collection_row_D38Wef": {
-      "type": "custom-collection-row",
-      "name": "Custom Collection Row",
-      "settings": {
-        "title": "Waffle T-Shirts",
-        "collection": "waffle-tees",
-        "product_source": "collection",
-        "products_to_show": 4,
-        "button_label": "Discover more",
-        "hide_discover_more": false,
-        "show_discount_badge": false,
-        "container_radius": 12,
-        "show_on_all": false,
-        "target_products": []
-      }
-    },
-    "custom_collection_row_mqgCDc": {
-      "type": "custom-collection-row",
-      "disabled": true,
-      "name": "Custom Collection Row",
-      "settings": {
-        "title": "",
-        "collection": "the-fan-jersey",
-        "product_source": "collection",
-        "products_to_show": 4,
-        "button_label": "Discover more",
-        "hide_discover_more": false,
-        "show_discount_badge": false,
-        "container_radius": 12,
-        "show_on_all": false,
-        "target_products": []
-      }
-    },
-    "custom_collection_row_HE3JcL": {
-      "type": "custom-collection-row",
-      "name": "Custom Collection Row",
-      "settings": {
-        "title": "",
-        "collection": "dark-mode-collection",
         "product_source": "collection",
         "products_to_show": 4,
         "button_label": "Discover more",
