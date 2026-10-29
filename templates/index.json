@@ -19,22 +19,10 @@
             "heading": "Browse our latest products",
             "heading_size": "h2"
           }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop Now",
-            "button_link_1": "shopify://products/arcane-vanguard-jacket",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_font_size": 15
-          }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "heading"
       ],
       "settings": {
         "image": "shopify://shop_images/f-w-1_957e5cfb-080e-4633-a655-cbdc8a2e2a2c_1.webp",
@@ -350,32 +338,56 @@
     "instagram_reels_carousel": {
       "type": "instagram-reels-carousel",
       "blocks": {
-        "reel_4X6BWP": {
+        "reel_DkMYXy": {
           "type": "reel",
           "settings": {
-            "video": "shopify://files/videos/SaveClip.App_AQNitYRB8t5us1TaS4u2garVBAB6Z-_4dbKriSGgZmNqB-jsfKiC-zzwZIU-TPP_w-sEdT1K4wn7f3pZpcw_y9egPnVXqv5q5J9_p_A.mp4",
+            "video": "shopify://files/videos/IMG_2721 (1).mov",
             "video_url": "",
-            "poster_image": "shopify://shop_images/thumbnail.webp",
             "link": "",
             "caption": ""
           }
         },
-        "reel_iQ6nbk": {
+        "reel_DVPRrj": {
           "type": "reel",
           "settings": {
-            "video": "shopify://files/videos/Z6_V3.mp4",
+            "video": "shopify://files/videos/Strength arch.webm",
             "video_url": "",
-            "poster_image": "shopify://shop_images/thumbnail.webp",
             "link": "",
             "caption": ""
           }
         },
-        "reel_RAEcjr": {
+        "reel_DcikCY": {
           "type": "reel",
           "settings": {
-            "video": "shopify://files/videos/Shadow, black oversized sweatpants.webm",
+            "video": "shopify://files/videos/IMG_6107.mp4",
             "video_url": "",
-            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_MMcizb": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/IMG_3047 (1).mov",
+            "video_url": "",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_JMJBMi": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/For manga collection.webm",
+            "video_url": "",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_diagJz": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/IMG_4703 (2).mov",
+            "video_url": "",
             "link": "",
             "caption": ""
           }
@@ -384,16 +396,6 @@
           "type": "reel",
           "settings": {
             "video": "shopify://files/videos/Phantom Black barrel fit.webm",
-            "video_url": "",
-            "poster_image": "shopify://shop_images/thumbnail.webp",
-            "link": "",
-            "caption": ""
-          }
-        },
-        "reel_qTEfCD": {
-          "type": "reel",
-          "settings": {
-            "video": "shopify://files/videos/Deep ocean barrel, fit.webm",
             "video_url": "",
             "poster_image": "shopify://shop_images/thumbnail.webp",
             "link": "",
@@ -412,11 +414,13 @@
         }
       },
       "block_order": [
-        "reel_4X6BWP",
-        "reel_iQ6nbk",
-        "reel_RAEcjr",
+        "reel_DkMYXy",
+        "reel_DVPRrj",
+        "reel_DcikCY",
+        "reel_MMcizb",
+        "reel_JMJBMi",
+        "reel_diagJz",
         "reel_gjULT7",
-        "reel_qTEfCD",
         "reel_X9i7Hh"
       ],
       "settings": {
