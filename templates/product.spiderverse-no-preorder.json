@@ -1,0 +1,327 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "custom-main-product",
+      "blocks": {
+        "product_video_naRtPr": {
+          "type": "product_video",
+          "settings": {
+            "label": "EXPERIMENTAL REFERENCE",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "show_on_all": false,
+            "target_products": []
+          }
+        },
+        "available_offers_P6yEz7": {
+          "type": "available_offers",
+          "settings": {
+            "show_on_all": true,
+            "target_products": [],
+            "heading": "AVAILABLE OFFERS",
+            "offer_1_enable": true,
+            "offer_1_text": "Buy 1 product & get 10% off",
+            "offer_1_badge": "PREPAID ONLY",
+            "offer_1_code": "⚡ Auto Applied",
+            "offer_2_enable": true,
+            "offer_2_text": "Buy 2 or more & get 15% off",
+            "offer_2_badge": "PREPAID ONLY",
+            "offer_2_code": "⚡ Auto Applied",
+            "heading_font_size": 10,
+            "heading_color": "#111111",
+            "title_font_size": 10,
+            "title_color": "#111111",
+            "card_bg": "#fafafa",
+            "card_border_color": "#e5e5e5",
+            "card_accent_color": "#111111",
+            "badge_bg": "#f2f2f2",
+            "badge_text_color": "#555555",
+            "code_text_color": "#16a34a",
+            "margin_top": 14,
+            "margin_bottom": 14
+          }
+        },
+        "accordion_details": {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Details & Description",
+            "content": "",
+            "page": "",
+            "show_description": true,
+            "show_on_all": true,
+            "target_products": []
+          }
+        },
+        "accordion_washcare": {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Washcare",
+            "content": "<p>Washcare Instructions:</p><ul><li>Reverse wash only</li><li>Do not iron on the print</li><li>Steam iron recommended</li><li>Dry in shade</li></ul>",
+            "page": "",
+            "show_description": false,
+            "show_on_all": true,
+            "target_products": []
+          }
+        },
+        "accordion_shipping": {
+          "type": "accordion_row",
+          "settings": {
+            "heading": "Shipping",
+            "content": "<p>Shipping & Delivery Details:</p><ul><li>Orders will be dispatched in within 24 - 48 hours</li><li>Standard delivery: 4-7 business days</li><li>Free shipping on prepaid orders</li><li>Cash on delivery available</li></ul>",
+            "page": "",
+            "show_description": false,
+            "show_on_all": true,
+            "target_products": []
+          }
+        },
+        "accordion_row_mHMxjW": {
+          "type": "accordion_row",
+          "disabled": true,
+          "settings": {
+            "heading": "Exchange Policy",
+            "content": "<p><strong>Returns</strong> – Accepted only for defective, damaged, incorrect, or undelivered products. Must be requested within 24 hours.</p><p><strong>Refunds</strong> – Approved returns get a store credit coupon code (valid 50 days).</p><p><strong>Exchanges</strong> – Exchanges are strictly allowed only for size-related issues.</p><ul><li>If the requested size is out of stock, no store credit or alternative compensation will be provided.</li><li>Exchange requests must be raised within 3 to 5 days of delivery.</li><li>Only a one-time exchange is allowed per order, subject to a ₹150 exchange fee.</li></ul><p><strong>Important Notes</strong> – Exchanges depend on stock availability. If unavailable, we won't be able to proceed with the exchange.</p>",
+            "page": "",
+            "show_description": false,
+            "show_on_all": true,
+            "target_products": []
+          }
+        },
+        "trust_benefits_card": {
+          "type": "trust_benefits_card",
+          "settings": {
+            "heading": "CRAFTED FOR COMFORT. BUILT TO LAST.",
+            "show_lines": true,
+            "card_bg_color": "#000000",
+            "card_text_color": "#ffffff",
+            "card_padding_vertical": 24,
+            "card_padding_horizontal": 20,
+            "item_1_icon": "support",
+            "item_1_title": "24/7 Support",
+            "item_1_custom_svg": "",
+            "item_2_icon": "secure_payment",
+            "item_2_title": "Secure Payments",
+            "item_2_custom_svg": "",
+            "item_3_icon": "free_shipping",
+            "item_3_title": "Free Shipping",
+            "item_3_custom_svg": "",
+            "item_4_icon": "premium_quality",
+            "item_4_title": "Premium Quality",
+            "item_4_custom_svg": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_video_naRtPr",
+        "available_offers_P6yEz7",
+        "accordion_details",
+        "accordion_washcare",
+        "accordion_shipping",
+        "accordion_row_mHMxjW",
+        "trust_benefits_card"
+      ],
+      "settings": {
+        "size_guide_note": "Note : All sizes are in inches.",
+        "container_radius": 24
+      }
+    },
+    "customer_reviews": {
+      "type": "custom-product-reviews",
+      "settings": {
+        "heading": "CUSTOMER REVIEWS",
+        "show_summary_badge": true,
+        "summary_rating": "4.9",
+        "summary_text": "Rated 4.9/5 based on +2,046 Total Ratings",
+        "container_radius": 12,
+        "card_radius": 16,
+        "speed": 2,
+        "pause_on_hover": true,
+        "card_bg": "#fafafa",
+        "card_border": "#e8e8ed",
+        "star_color": "#f59e0b"
+      }
+    },
+    "people-also-buy": {
+      "type": "custom-collection-row",
+      "settings": {
+        "title": "PEOPLE ALSO BUY",
+        "collection": "",
+        "product_source": "recommendations",
+        "products_to_show": 8,
+        "button_label": "Discover more",
+        "hide_discover_more": true,
+        "show_discount_badge": false,
+        "container_radius": 12,
+        "show_on_all": true,
+        "target_products": []
+      }
+    },
+    "image_slider_centered_UEUtrM": {
+      "type": "image-slider-centered",
+      "blocks": {
+        "slide_tmC7TA": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_15.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_gAw3D8": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_10.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_Jbxkfg": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_03.jpg",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_fHfAq8": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_14.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_WJgLBY": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_11.webp",
+            "link": "",
+            "alt": ""
+          }
+        },
+        "slide_CDY9aN": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/vijay_13.webp",
+            "link": "",
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_tmC7TA",
+        "slide_gAw3D8",
+        "slide_Jbxkfg",
+        "slide_fHfAq8",
+        "slide_WJgLBY",
+        "slide_CDY9aN"
+      ],
+      "settings": {
+        "heading": "AS SEEN ON",
+        "autoplay": true,
+        "autoplay_interval": 5000,
+        "show_arrows": false,
+        "show_dots": false,
+        "aria_label": "Image slider carousel",
+        "adapt_height": true,
+        "image_fit": "cover",
+        "container_radius": 12
+      }
+    },
+    "instagram_reels_carousel_hQk7d9": {
+      "type": "instagram-reels-carousel",
+      "blocks": {
+        "reel_HR87BV": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/SaveClip.App_AQNitYRB8t5us1TaS4u2garVBAB6Z-_4dbKriSGgZmNqB-jsfKiC-zzwZIU-TPP_w-sEdT1K4wn7f3pZpcw_y9egPnVXqv5q5J9_p_A.mp4",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_U6FwY9": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Z6_V3.mp4",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_UqNGTg": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Shadow, black oversized sweatpants.webm",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_QVVeme": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Phantom Black barrel fit.webm",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_LAgFdY": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Deep ocean barrel, fit.webm",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        },
+        "reel_HXQT8a": {
+          "type": "reel",
+          "settings": {
+            "video": "shopify://files/videos/Bloodline waffle black.webm",
+            "video_url": "",
+            "poster_image": "shopify://shop_images/thumbnail.webp",
+            "link": "",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "reel_HR87BV",
+        "reel_U6FwY9",
+        "reel_UqNGTg",
+        "reel_QVVeme",
+        "reel_LAgFdY",
+        "reel_HXQT8a"
+      ],
+      "settings": {
+        "heading": "INSTAGRAM REELS",
+        "autoplay": true,
+        "autoplay_interval": 6500,
+        "show_arrows": false,
+        "container_radius": 12
+      }
+    }
+  },
+  "order": [
+    "main",
+    "customer_reviews",
+    "people-also-buy",
+    "image_slider_centered_UEUtrM",
+    "instagram_reels_carousel_hQk7d9"
+  ]
+}
