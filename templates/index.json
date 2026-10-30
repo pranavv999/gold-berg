@@ -430,15 +430,32 @@
         "show_arrows": false,
         "container_radius": 12
       }
+    },
+    "custom_collection_row_N3dkNP": {
+      "type": "custom-collection-row",
+      "name": "Custom Collection Row",
+      "settings": {
+        "title": "",
+        "collection": "hoodies-sweats",
+        "product_source": "recommendations",
+        "products_to_show": 4,
+        "button_label": "Discover more",
+        "hide_discover_more": false,
+        "show_discount_badge": false,
+        "container_radius": 24,
+        "show_on_all": false,
+        "target_products": []
+      }
     }
   },
   "order": [
     "image_banner",
     "custom_collection_row_mqgCDc",
+    "custom_collection_row_N3dkNP",
     "custom_collection_row_D38Wef",
     "custom_collection_row",
-    "custom_collection_row_HE3JcL",
     "featured_collection_grid_banners",
+    "custom_collection_row_HE3JcL",
     "custom_collection_row_F4wj48",
     "custom_collection_row_nN6nge",
     "custom_collection_row_EeiVwN",
